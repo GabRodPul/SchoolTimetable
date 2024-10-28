@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 // import { db } from "./models";
 import cors from "cors";
+import { UserRoutes } from "./routes/user.routes";
 
 const app = express();
 const corsOptions = {
@@ -22,6 +23,7 @@ app.get("/", (req: Request, res: Response) => {
     res.json({ message: "Welcome to notes application." })
 });
 
+UserRoutes.init(app);
 
 const PORT = process.env.PORT ?? 8080;
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
