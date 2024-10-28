@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-// import { db } from "./models";
+import { DB } from "./models";
 import cors from "cors";
 import { UserRoutes } from "./routes/user.routes";
 
@@ -14,9 +14,9 @@ app.use(express.urlencoded({ extended: true })); // content-type: application/x-
 app.use(cors(corsOptions));
 
 // DB
-// db.sequelize.sync({ force: true }).then(() => {
-//     console.log("Drop and re-sync db.")
-// })
+DB.sequelize.sync({ force: true }).then(() => {
+    console.log("Drop and re-sync db.")
+})
 
 // Routes
 app.get("/", (req: Request, res: Response) => {

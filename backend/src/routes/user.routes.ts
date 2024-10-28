@@ -11,7 +11,7 @@ const UserRoutes = { init: ( app: Express ) => {
     router.get( "/", UserController.findAll );
     
     // Retrive a single User with id
-    router.get( "/:id", UserController.findOne );
+    router.get( "/:id", UserController.findByPk );
     
     // Update a User with id
     router.put( "/:id", UserController.update );

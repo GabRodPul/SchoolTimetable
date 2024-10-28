@@ -1,8 +1,6 @@
 // 'e' as an abbreviation of "export"
 declare namespace e {
-    type ControllerResponse 
-        = { code: 400, errors: string[] }
-        | { code: 500, message: string  }
+    type Id = { id: number }
     
     type UserData = {
         name:        string,

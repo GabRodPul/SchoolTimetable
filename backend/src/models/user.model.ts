@@ -1,10 +1,12 @@
-import { Sequelize, DataType, DataTypes, Model } from "sequelize";
-import { UserData } from "../../../common/@types/data"
+import { Sequelize, DataTypes, Model } from "sequelize";
+import { Id, UserData } from "../../../common/@types/models"
+import { defineId } from "../utils/id";
 
 // The only purpose of extending Model is getting
 // warnings when types are modified, as to keep our
 // models updated.
-interface UserInstance extends Model<UserData> {}
+// & Id is required to pass id to where.
+interface UserInstance extends Model<UserData & Id> {}
 
 // https://sequelize.org/docs/v6/core-concepts/validations-and-constraints/
 const UserModel = { init: (sequelize: Sequelize) =>
@@ -24,7 +26,8 @@ const UserModel = { init: (sequelize: Sequelize) =>
             type: DataTypes.STRING(15),
             allowNull: false,
             validate: { is:  /^\+(?:[0-9] ?){6,14}[0-9]$/ }
-        }
+        },
+        ...defineId
     })};
 
 export { UserModel };

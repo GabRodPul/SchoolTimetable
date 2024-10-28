@@ -1,0 +1,45 @@
+import { 
+    Identifier, 
+    Sequelize, 
+    ValidationError, 
+    UniqueConstraintError 
+} from "sequelize";
+import express, { Request, Response } from "express";
+import { DB } from "../models"
+import { TemplateModel } from "../models/template.model";
+import { ResponseData } from "../../../common/@types/data";
+
+const Templates = DB.template;
+const TemplateController = Object.freeze({
+    create: async(req: Request, res: Response) => {
+        try {
+            const data = await Templates.create(req.body);
+            res.send(data);
+        } catch (err: any) {
+            res.send(computeError( err ));
+        }
+    },
+
+    findAll: async(req: Request, res: Response) => {
+        try {
+            const data = await Templates.findAll();
+            res.send(data);
+        } catch (err: any) {
+            res.send(resMsg(500, err.message));
+        }
+    },
+
+    findOne: async(req: Request, res: Response) => {
+        res.send(resMsg(500, "UNIMPLEMENTED"));
+    },
+
+    update: async(req: Request, res: Response) => {
+        res.send(resMsg(500, "UNIMPLEMENTED"));
+    },
+
+    delete: async(req: Request, res: Response) => {
+        res.send(resMsg(500, "UNIMPLEMENTED"));
+    },
+});
+
+export { TemplateController };
