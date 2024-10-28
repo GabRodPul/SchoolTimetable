@@ -11,6 +11,7 @@ interface UserInstance extends Model<UserData & Id> {}
 // https://sequelize.org/docs/v6/core-concepts/validations-and-constraints/
 const UserModel = { init: (sequelize: Sequelize) =>
     sequelize.define<UserInstance>("users", {
+        ...defineId,
         name:   { type: DataTypes.STRING(255) },
         email:  {
             type: DataTypes.STRING(255),
@@ -27,7 +28,6 @@ const UserModel = { init: (sequelize: Sequelize) =>
             allowNull: false,
             validate: { is:  /^\+(?:[0-9] ?){6,14}[0-9]$/ }
         },
-        ...defineId
     })};
 
 export { UserModel };
