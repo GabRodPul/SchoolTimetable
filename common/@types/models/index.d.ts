@@ -12,6 +12,9 @@ declare namespace e {
     type CourseData = {
         code:        string
     }
+    type GroupData = {
+        code:       string
+    }
 }
 
 export = e;

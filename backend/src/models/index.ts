@@ -2,8 +2,6 @@ import { Sequelize } from "sequelize";
 import { dbConfig } from "../config/db.config";
 import { read } from "fs";
 import { UserModel } from "./user.model";
-import { CourseModel } from "./course.model";
-
 
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     host:               dbConfig.HOST,
@@ -15,6 +13,7 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
 const DB = Object.freeze({
     sequelize,
     users:      UserModel.init(sequelize),
+    groups:     GroupModel.init(sequelize),
     courses:    CourseModel.init(sequelize)
 });
 
