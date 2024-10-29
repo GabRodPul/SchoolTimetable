@@ -3,7 +3,7 @@ import { Dialect } from "sequelize";
 const dbConfig = Object.freeze({
     HOST:       "localhost",
     USER:       "root",
-    PASSWORD:   "root",
+    PASSWORD:   "Alumno2425",
     DB:         "db_schooltimetable",
     dialect:    "mysql" as Dialect,
     pool:       {

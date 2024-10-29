@@ -8,6 +8,10 @@ declare namespace e {
         password:    string,
         phoneNumber: string
     }
+
+    type CourseData = {
+        code:        string
+    }
 }
 
 export = e;

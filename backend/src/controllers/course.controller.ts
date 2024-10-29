@@ -3,11 +3,11 @@ import { DB } from "../models"
 import { resMsg } from "../utils/response";
 import { computeError } from "../utils/error";
 
-const Users = DB.users;
-const UserController = Object.freeze({
+const Courses = DB.courses;
+const CourseController = Object.freeze({
     create: async(req: Request, res: Response) => {
         try {
-            const data = await Users.create(req.body);
+            const data = await Courses.create(req.body);
             res.send(data);
         } catch (err: any) {
             res.send(computeError( err ));
@@ -16,7 +16,7 @@ const UserController = Object.freeze({
 
     findAll: async(req: Request, res: Response) => {
         try {
-            const data = await Users.findAll();
+            const data = await Courses.findAll();
             res.send(data);
         } catch (err: any) {
             res.send(resMsg(500, err.message));
@@ -25,7 +25,7 @@ const UserController = Object.freeze({
 
     findByPk: async(req: Request, res: Response) => {
         try {
-            const data = await Users.findByPk(req.params.id);       
+            const data = await Courses.findByPk(req.params.id);       
             res.send(data);
         } catch (err: any) {
             res.send(computeError( err ));
@@ -35,7 +35,7 @@ const UserController = Object.freeze({
     update: async(req: Request, res: Response) => {
         const id = req.params.id;
         try {
-            const data = await Users.findByPk(id);
+            const data = await Courses.findByPk(id);
             if (!data)
                 throw new Error(`User with id ${id} not found`);
 
@@ -50,7 +50,7 @@ const UserController = Object.freeze({
     delete: async(req: Request, res: Response) => {
         const id = req.params.id;
         try {
-            const data = await Users.destroy({ where: { id } });
+            const data = await Courses.destroy({ where: { id } });
             if (!data)
                 throw new Error(`User with id ${id} not found`);
 
@@ -61,4 +61,4 @@ const UserController = Object.freeze({
     },
 });
 
-export { UserController };
+export { CourseController };
