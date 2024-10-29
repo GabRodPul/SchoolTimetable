@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import { DB } from "./models";
 import cors from "cors";
 import { UserRoutes } from "./routes/user.routes";
+import { GroupRoutes } from "./routes/group.routes"
 
 const app = express();
 const corsOptions = {
@@ -24,6 +25,8 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 UserRoutes.init(app);
+
+GroupRoutes.init(app);
 
 const PORT = process.env.PORT ?? 8080;
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
