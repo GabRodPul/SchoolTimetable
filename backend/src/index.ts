@@ -1,13 +1,14 @@
 import express, { Request, Response } from "express";
 import { DB } from "./models";
 import cors from "cors";
+import { envvars } from "./env";
 import { UserRoutes } from "./routes/user.routes";
 import { GroupRoutes } from "./routes/group.routes"
 import { CourseRoutes } from "./routes/course.routes";
 
 const app = express();
 const corsOptions = {
-    origin: 'http://localhost:8100',
+    origin: `http://localhost:${envvars.FEND_PORT}`,
 };
 
 // Config
