@@ -5,6 +5,7 @@ import { envvars } from "./env";
 import { UserRoutes } from "./routes/user.routes";
 import { GroupRoutes } from "./routes/group.routes"
 import { CourseRoutes } from "./routes/course.routes";
+import { initApiRoutes } from "./routes";
 
 const app = express();
 const corsOptions = {
@@ -23,13 +24,10 @@ DB.sequelize.sync({ force: true }).then(() => {
 
 // Routes
 app.get("/", (req: Request, res: Response) => {
-    res.json({ message: "Welcome to notes application." })
+    res.json({ message: "Welcome to SchoolTimetable application." })
 });
 
-UserRoutes.init(app);
-
-GroupRoutes.init(app);
-CourseRoutes.init(app);
+initApiRoutes(app);
 
 const PORT = process.env.PORT ?? 8080;
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));

@@ -1,6 +1,5 @@
 import { Sequelize } from "sequelize";
 import { dbConfig } from "../config/db.config";
-import { read } from "fs";
 import { UserModel } from "./user.model";
 import { GroupModel } from "./group.model";
 import { CourseModel } from "./course.model";
