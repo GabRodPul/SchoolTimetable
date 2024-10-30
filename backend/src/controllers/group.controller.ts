@@ -3,11 +3,11 @@ import { DB } from "../models"
 import { resMsg } from "../utils/response";
 import { computeError } from "../utils/error";
 
-const Group = DB.groups;
+const Groups = DB.groups;
 const GroupController = Object.freeze({
     create: async(req: Request, res: Response) => {
         try {
-            const data = await Group.create(req.body);
+            const data = await Groups.create(req.body);
             res.send(data);
         } catch (err: any) {
             res.send(computeError( err ));
@@ -16,7 +16,7 @@ const GroupController = Object.freeze({
 
     findAll: async(req: Request, res: Response) => {
         try {
-            const data = await Group.findAll();
+            const data = await Groups.findAll();
             res.send(data);
         } catch (err: any) {
             res.send(resMsg(500, err.message));
@@ -25,7 +25,7 @@ const GroupController = Object.freeze({
 
     findByPk: async(req: Request, res: Response) => {
         try {
-            const data = await Group.findByPk(req.params.id);
+            const data = await Groups.findByPk(req.params.id);
             res.send(data);
         } catch (err: any) {
             res.send(computeError( err ));
@@ -35,7 +35,7 @@ const GroupController = Object.freeze({
     update: async(req: Request, res: Response) => {
         const id = req.params.id;
         try {
-            const data = await Group.findByPk(id);
+            const data = await Groups.findByPk(id);
             if (!data)
                 throw new Error(`User with id ${id} not found`);
 
@@ -50,7 +50,7 @@ const GroupController = Object.freeze({
     delete: async(req: Request, res: Response) => {
         const id = req.params.id;
         try {
-            const data = await Group.destroy({ where: { id } });
+            const data = await Groups.destroy({ where: { id } });
             if (!data)
                 throw new Error(`User with id ${id} not found`);
 
