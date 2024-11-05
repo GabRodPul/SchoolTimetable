@@ -13,7 +13,7 @@ const GroupModel = { init: (sequelize: Sequelize) =>
     sequelize.define<GroupeInstance>("groups", {
         ...defineId,
         code:  {
-            type: DataTypes.STRING(255),
+            type: DataTypes.STRING(5),
             allowNull: false,
             validate: { len:[5,5] },
         },
