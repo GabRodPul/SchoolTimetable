@@ -1,4 +1,4 @@
-import "./CardStyle.css"
+import "./CourseCardStyle.css"
 
 // Definimos la interfaz para las propiedades del componente
 interface CourseCardProps {
@@ -7,19 +7,17 @@ interface CourseCardProps {
   }
   
   // Usamos la interfaz como tipo de las props en la definición de la función
-  const CourseCard: React.FC<CourseCardProps> = ({ title, description }) => {
+  const Card: React.FC<CourseCardProps> = ({ title, description }) => {
     return (
-        <div className="course-card">
-          <h2 className="course-title">{title}</h2>
-          <p className="course-description">{description}</p>
-          <div className="course-buttons">
+        <div className="card">
+          <h2 className="card-title">{title}</h2>
+          <p className="card-description">{description}</p>
+          <div className="card-buttons">
             <button className="edit-button">Editar</button>
             <button className="delete-button">Eliminar</button>
-            {/* <button className="add-button">Añadir</button> */}
           </div>
         </div>
     );
   };
   
-  
-  export default CourseCard;
+  export default Card;
