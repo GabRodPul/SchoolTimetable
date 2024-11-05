@@ -1,7 +1,7 @@
 import { config } from "dotenv";
 import * as path from "path"
 
-config({ path: path.resolve(`${__dirname}/../../.env`) });
+config({ path: path.resolve(`${__dirname}/../.env`) });
 const envvars = {
     BEND_DB_NAME:       process.env.BEND_DB_NAME,
     BEND_DB_USERNAME:   process.env.BEND_DB_USERNAME,
