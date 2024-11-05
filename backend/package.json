@@ -4,7 +4,7 @@
   "description": "\"# School Timetable\"",
   "main": "../dist/index.js",
   "scripts": {
-    "start": "npx tsc && node dist/index.js"
+    "start": "npx tsc && node --es-module-specifier-resolution=node dist/backend/index.js"
   },
   "author": "",
   "license": "ISC",
