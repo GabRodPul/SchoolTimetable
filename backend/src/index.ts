@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import { DB } from "./models";
 import cors from "cors";
-import { envvars } from "../../common/env";
+import { envvars } from "../env";
 import { UserRoutes } from "./routes/user.routes";
 import { GroupRoutes } from "./routes/group.routes"
 import { CourseRoutes } from "./routes/course.routes";
@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: true })); // content-type: application/x-
 app.use(cors(corsOptions));
 
 // DB
-DB.sequelize.sync({ force: true }).then(() => {
+DB.sequelize.sync({ force: true, alter: true }).then(() => {
     console.log("Drop and re-sync db.")
 })
 

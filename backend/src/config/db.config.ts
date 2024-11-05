@@ -1,5 +1,5 @@
 import { Dialect } from "sequelize";
-import { envvars } from "../../../common/env";
+import { envvars } from "../../env";
 
 const dbConfig = Object.freeze({
     HOST:       "localhost",
