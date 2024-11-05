@@ -11,6 +11,7 @@ declare namespace e {
 
     type CourseData = {
         code:        string
+        name:        string   
     }
     type GroupData = {
         code:       string

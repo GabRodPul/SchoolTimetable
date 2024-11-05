@@ -19,6 +19,13 @@ const CourseModel = { init: (sequelize: Sequelize) =>
                 isAlpha: true
             }
         },
+        name:{
+            type: DataTypes.STRING(64),
+            validate:{
+                notNull: true,
+                notEmpty: true
+            }
+        },
 
     })};
 
