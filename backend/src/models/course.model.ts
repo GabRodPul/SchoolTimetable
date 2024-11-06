@@ -22,7 +22,6 @@ const CourseModel = { init: (sequelize: Sequelize) =>
         name:{
             type: DataTypes.STRING(64),
             validate:{
-                notNull: true,
                 notEmpty: true
             }
         },

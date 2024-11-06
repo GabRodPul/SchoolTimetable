@@ -7,6 +7,8 @@ import { GroupRoutes } from "./routes/group.routes"
 import { CourseRoutes } from "./routes/course.routes";
 import { initApiRoutes } from "./routes";
 
+console.log(envvars)
+
 const app = express();
 const corsOptions = {
     origin: `http://localhost:${envvars.FEND_PORT}`,
