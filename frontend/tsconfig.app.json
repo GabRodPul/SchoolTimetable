@@ -19,7 +19,24 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+
+    "baseUrl": ".",
+    "paths": {
+      "#common/": [
+        "../common"
+      ],
+      "#common/*": [
+        "../common/*"
+      ],
+    },
+    "typeRoots": [
+      "./node_modules/@types/**/*.d.ts",
+      "../common/@types/**/*.d.ts"
+    ]
   },
-  "include": ["src"]
+  "include": ["src",
+    "./node_modules/@types/**/*.d.ts",
+    "../common/@types/**/*.d.ts"
+, "../common/@types/models/index.ts", "../common/@types/http/index.ts"  ]
 }
