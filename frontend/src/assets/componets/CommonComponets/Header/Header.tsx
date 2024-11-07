@@ -13,7 +13,7 @@ function Header() {
 
     return (
         <div className='header'>
-            <FontAwesomeIcon icon={faCalendar} />
+            <a href='/Home'><FontAwesomeIcon icon={faCalendar} /></a>
             <FontAwesomeIcon icon={faBars} onClick={toggleMenu} className="menu-icon" />
             {isMenuOpen && (
                 <div className="dropdown-menu">

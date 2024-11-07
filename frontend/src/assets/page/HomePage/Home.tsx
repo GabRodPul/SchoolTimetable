@@ -9,6 +9,8 @@ function Home() {
             <Header/>
             <FrontImg/>
             <HomeCard/>
+            {/* Quitar luego, es solo para pruebas */}
+            <button><a href='/Course'> Boton cursos provisional</a></button>
             <Footer/>
         </div>
     );
