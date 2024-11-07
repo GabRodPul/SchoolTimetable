@@ -18,10 +18,10 @@ const _fetch = async <TRes, TOpts extends FetchOptions<TRes>> (route: ApiRts, me
     })
     .then(res => res.json() as ResponseData<TRes>);
 
-type ApiArgs<T, F extends FetchOptions<T>> 
-    = T extends UserData    ? [ ApiRts.Users,    F ]
-    : T extends CourseData  ? [ ApiRts.Courses,  F ]
-    : T extends GroupData   ? [ ApiRts.Groups,   F ]
+type ApiArgs<T, F extends FetchOptions<T> | undefined> 
+    = T extends UserData    ? F extends undefined ? [ ApiRts.Users   ] : [ ApiRts.Users,    F ]
+    : T extends CourseData  ? F extends undefined ? [ ApiRts.Courses ] : [ ApiRts.Courses,  F ]
+    : T extends GroupData   ? F extends undefined ? [ ApiRts.Groups  ] : [ ApiRts.Groups,   F ]
     : never;
 
 
@@ -29,8 +29,8 @@ const API = {
     get:    <T>(args: ApiArgs<T, Id>) : Promise<ResponseData<T>> => 
                 _fetch<T, Id>(args[0], Method.GET, args[1]),
     
-    getAll: <T>(args: ApiArgs<T, never>) : Promise<ResponseData<T[]>> =>
-                _fetch<T[], never>(args[0], Method.GET, args[1]),
+    getAll: <T>(args: ApiArgs<T, undefined>) : Promise<ResponseData<T[]>> =>
+                _fetch<T[], never>(args[0], Method.GET, undefined),
     
     post:   <T>(args: ApiArgs<T, Body<T>>) : Promise<ResponseData<T>> => 
                 _fetch<T, Body<T>>(args[0], Method.POST, args[1]),
