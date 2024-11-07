@@ -7,17 +7,16 @@ import { GroupRoutes } from "./routes/group.routes"
 import { CourseRoutes } from "./routes/course.routes";
 import { initApiRoutes } from "./routes";
 
-console.log(envvars)
-
-const app = express();
-const corsOptions = {
-    origin: `http://localhost:${envvars.FEND_PORT}`,
-};
+const furl = `http://localhost:${envvars.FEND_PORT}`;
+// console.log(furl)
+// const corsOptions = { origin: furl };
 
 // Config
+const app = express();
 app.use(express.json()); // content-type: application/json
 app.use(express.urlencoded({ extended: true })); // content-type: application/x-www-form-urlencoded
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
+app.use(cors());
 
 // DB
 DB.sequelize.sync({ force: true, alter: true }).then(() => {
