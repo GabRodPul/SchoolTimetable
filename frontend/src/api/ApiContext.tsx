@@ -1,8 +1,8 @@
 import { ResponseData } from "#common/@types/http";
 import { createContext, useReducer, useContext, Reducer } from "react";
 import { ApiData, Id } from "#common/@types/models";
-import { ApiRts } from "#common/@enums/http";
 import { API } from "./api";
+import { ApiRouteType } from "src/@types/api";
 
 enum FetchState { NotStarted, Loading, Success, Error, }
 
@@ -43,15 +43,15 @@ const ApiResourceProvider = <T extends ApiData>(props) => {
     )
 }
 
-const useApi = <T extends ApiData>(route: ApiRts) => {
+const useApi = <T extends ApiData>(route: ApiRouteType<T>) => {
     const [apiResource, dispatch] = useReducer<Reducer<FetchData<T>, FetchData<T>>>(evalFetch<T>(), { state: FetchState.NotStarted });
     // const ctx = useContext(ApiCtx);
     // if (!ctx)
         // throw new Error(`useApiResource must be within an ApiResourceProvider`)
     
-    const get = (id: Id) => {
+    const get = async (id: Id) => {
         try {
-            API.get<T>([route, id]);
+            return await API.get<T>(route, id);
         } catch (e: unknown) {
             dispatch({
                 state: FetchState.Error,
