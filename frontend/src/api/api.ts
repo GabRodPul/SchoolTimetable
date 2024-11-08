@@ -7,7 +7,7 @@ import {
     FetchRes, 
     FetchOptions, 
     ApiRouteType
-} from "../@types/api"
+} from "../types/api"
 
 const BASE_URL = `http://localhost:8080/api`;
 

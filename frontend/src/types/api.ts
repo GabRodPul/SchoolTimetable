@@ -24,3 +24,12 @@ export type ApiFuncs = {
     put:    <TRes extends ApiData>  (rt: ApiRouteType<TRes>, opts: Body<TRes> & Id) => FetchRes<TRes>
     delete: <TRes extends ApiData>  (rt: ApiRouteType<TRes>, opts: Id)              => FetchRes<TRes>
 }
+
+
+export enum FetchState { NotStarted, Loading, Success, Error, }
+
+export type FetchData<T extends ApiData>
+    = { state: FetchState.NotStarted                            }
+    | { state: FetchState.Loading,                              }
+    | { state: FetchState.Success,      data: ResponseData<T>   }
+    | { state: FetchState.Error,        error: Error            }
