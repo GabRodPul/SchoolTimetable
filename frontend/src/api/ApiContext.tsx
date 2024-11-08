@@ -1,50 +1,64 @@
 import { ResponseData } from "#common/@types/http";
-import { createContext, useReducer, useContext } from "react";
-import { FetchState, FetchData, evalFetch } from "./api-context-def";
-import { Id } from "#common/@types/models";
+import { createContext, useReducer, useContext, Reducer } from "react";
+import { ApiData, Id } from "#common/@types/models";
+import { ApiRts } from "#common/@enums/http";
+import { API } from "./api";
 
 enum FetchState { NotStarted, Loading, Success, Error, }
-type FetchData<T>
-    = { state: FetchState.NotStarted                                    }
-    | { state: FetchState.Loading                                       }
-    | { state: FetchState.Success,  payload: { data:  ResponseData<T> } }
-    | { state: FetchState.Error,    payload: { error: Error           } }
 
-const evalFetch = <T,>(state, data: FetchData<T>) => {
+type FetchData<T extends ApiData>
+    = { state: FetchState.NotStarted                            }
+    | { state: FetchState.Loading,                              }
+    | { state: FetchState.Success,      data: ResponseData<T>   }
+    | { state: FetchState.Error,        error: Error            }
 
+const evalFetch = <T extends ApiData>() => (fetch: FetchData<T>, payload: FetchData<T>) => {
+    switch (payload.state) {
+        case FetchState.NotStarted: return {
+            ...fetch,
+            state: payload.state
+        };
+        
+        case FetchState.Loading: return {
+            ...fetch,
+            state: payload.state
+        };
+
+        case FetchState.Success:
+        case FetchState.Error: 
+            return { ...payload };
+    }
 }
 
-const ApiCtx = createContext<FetchData>({ state: FetchState.NotStarted });
+const ApiCtx = createContext<FetchData<ApiData>>({ state: FetchState.NotStarted });
 
-const ApiResourceProvider = <T,>(props) => {
-    const [apiResource, dispatchApiResource] = useReducer(
-        evalFetch, {
-            state: FetchState.NotStarted
-        }
-    );
+const ApiResourceProvider = <T extends ApiData>(props) => {
+    const [apiResource, dispatch] = useReducer<Reducer<FetchData<T>, FetchData<T>>>(evalFetch<T>(), { state: FetchState.NotStarted });
 
     return (
         <ApiCtx.Provider
-            value={[apiResource, dispatchApiResource]}
+            value={[apiResource, dispatch]}
             {...props}
         />
     )
 }
 
-const useApiResource = () => {
-    const ctx = useContext(ApiCtx);
-    if (!ctx)
-        throw new Error(`useApiResource must be within an ApiResourceProvider`)
+const useApi = <T extends ApiData>(route: ApiRts) => {
+    const [apiResource, dispatch] = useReducer<Reducer<FetchData<T>, FetchData<T>>>(evalFetch<T>(), { state: FetchState.NotStarted });
+    // const ctx = useContext(ApiCtx);
+    // if (!ctx)
+        // throw new Error(`useApiResource must be within an ApiResourceProvider`)
     
-    const [ctxState, ctxDispatch] = ctx;
     const get = (id: Id) => {
         try {
-            
-        } catch (error: any) {
-            ctxDispatch({
+            API.get<T>([route, id]);
+        } catch (e: unknown) {
+            dispatch({
                 state: FetchState.Error,
-                payload: { error } 
+                error: e as Error
             })
         }
     }
 }
+
+export { ApiResourceProvider, useApi };
