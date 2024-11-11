@@ -1,0 +1,38 @@
+  /* body {
+    background-color: #ffffff;
+    width: 100%;
+  } */
+
+  #root {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  .courseContainer{
+    margin-top: 30px;
+  }
+
+  .courseList {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  h1{
+    color: black;
+  } */
+
+  .add-button {
+    background-color: #2196F3;
+    color: #fff;
+  }
+
+  .titleText{
+    top: 0;
+    right: 28%;
+    position: absolute;
+    margin-top: 12px;
+  
+  }
