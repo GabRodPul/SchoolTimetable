@@ -2,7 +2,7 @@ import React from 'react';
 import CourseCard from '../../componets/CourseCard/CourseCard';
 import Header from '../../componets/CommonComponets/Header/Header';
 import './CourseStyles.css'
-import Modal from '../../componets/CourseFormModal/CourseFormModal';
+import LoremModal from 'src/assets/componets/CourseFormModal/CourseFormModal';
 
 
 function Course() {
@@ -21,7 +21,7 @@ function Course() {
         </header>
         <div className='courseContainer'>
           <h1>Añadir Curso</h1>
-          {/* <a href='/CourseFormPage'><button className="add-button" onClick={toggleModal}>Añadir</button></a> */}
+          <button className='add-button'><a href='/CourseFormPage'>Añadir</a></button>
           <div className='courseList'>
             {courses.map((course, index) => (
               <CourseCard key={index} title={course.title} description={course.description} />
