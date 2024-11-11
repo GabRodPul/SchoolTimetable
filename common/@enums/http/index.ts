@@ -1,8 +1,8 @@
 export enum ApiRts {
-        Users   = "users",
-        Courses = "courses",
-        Groups  = "groups",
-    }
+    Users   = "users",
+    Courses = "courses",
+    Groups  = "groups",
+}
 
 export enum Method {
     GET     = 'GET',
