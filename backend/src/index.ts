@@ -46,8 +46,8 @@ app.use(function (req: Request, res: Response, next: NextFunction) {
                 message: "Invalid user."
             });
         } else {
-            req.user = user; // Set the user to req so other routes can use it
-            req.token = token;
+            (req as any).user = user; // Temporarily cast req as any
+            (req as any).token = token;
             next();
         }
     });
