@@ -4,6 +4,7 @@ import Home from './assets/page/HomePage/Home'
 import Course from './assets/page/CoursePage/Course'
 import CourseFormPage from './assets/page/CourseFormPage/CourseFormPage'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import GroupPage from './assets/page/GroupPage/GroupPage'
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
           <Route path='/Home' element={<Home />} />
           <Route path='/Course' element={<Course />} />
           <Route path='/CourseFormPage' element={<CourseFormPage />} />
+          <Route path='/GroupPage' element={<GroupPage />} />
         </Routes>
       </BrowserRouter>
     </>

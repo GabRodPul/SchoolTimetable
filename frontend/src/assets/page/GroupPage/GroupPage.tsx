@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import CourseCard from '../../componets/CourseCard/CourseCard';
 import Header from '../../componets/CommonComponets/Header/Header';
-import './CourseStyles.css'
-import Modal from '../../componets/CourseFormModal/CourseFormModal';
+import './GroupPageStyles.css'
+// import Modal from '../../componets/CourseFormModal/CourseFormModal';
 import { ApiResourceProvider, useApi } from '../../../api/ApiContext';
 import { CourseData } from '#common/@types/models';
 import { ApiRts } from '#common/@enums/http';
@@ -26,7 +26,6 @@ function GroupPage() {
 
   return (
     <div>
-      <Header />
       <main>
         <header>
           <h2 className='groupPageTitleText'>Lista de Cursos</h2>
