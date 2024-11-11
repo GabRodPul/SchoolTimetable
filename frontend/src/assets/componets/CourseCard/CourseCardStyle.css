@@ -1,5 +1,5 @@
 /* CourseCard.css */
-.course-card {
+.courseCard {
     width: 300px;
     padding: 20px;
     border-radius: 8px;
@@ -9,26 +9,26 @@
     margin: 10px;
   }
   
-  .course-card:hover {
+  .courseCard:hover {
     transform: translateY(-5px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   }
   
-  .course-title {
+  .courseCard__title {
     font-size: 1.5rem;
     color: #333;
     margin-bottom: 10px;
   }
   
-  .course-description {
+  .courseCard__description {
     font-size: 1rem;
     color: #666;
     margin-bottom: 15px;
   }
   
-  .course-buttons {
+  .courseCard__buttons {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
   }
   
   button {
