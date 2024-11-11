@@ -11,9 +11,9 @@ import { FetchState } from '../../../types/api';
 
 function GroupPage() {
   const courses = [
-    { title: 'Curso de React', description: 'Aprende los fundamentos de React.' },
-    { title: 'Curso de JavaScript', description: 'Domina JavaScript desde cero.' },
-    { title: 'Curso de CSS', description: 'Mejora tus habilidades de diseño con CSS.' },
+    { title: 'DAW', description: 'Desarrollo de aplicaciones web' },
+    { title: 'DAM', description: 'Desarrollo de aplicaciones multiplataforma' },
+    { title: 'ASIR', description: 'Administracion de sistemas informáticon en red' },
   ];
 
 
@@ -29,14 +29,14 @@ function GroupPage() {
       <Header />
       <main>
         <header>
-          <h2 className='titleText'>Lista de Cursos</h2>
+          <h2 className='groupPageTitleText'>Lista de Cursos</h2>
         </header>
-        <div className='courseContainer'>
+        <div className='GroupContainer'>
           <h1>Añadir Curso</h1>
           {/* <a href='/CourseFormPage'><button className="add-button" onClick={toggleModal}>Añadir</button></a> */}
-          <div className='courseList'>
-            {courses.map((course, index) => (
-              <CourseCard key={index} title={course.title} description={course.description} />
+          <div className='GroupList'>
+            {courses.map((group, index) => (
+              <CourseCard key={index} title={group.title} description={group.description} />
             ))}
           </div>
         </div>
