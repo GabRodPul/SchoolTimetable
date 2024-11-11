@@ -13,5 +13,9 @@ export type CourseData = {
 }
 
 export type GroupData = {
-    code:       string
+    code:        string
 }
+
+export type ApiData = UserData
+                    | CourseData
+                    | GroupData
