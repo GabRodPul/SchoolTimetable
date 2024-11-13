@@ -12,15 +12,14 @@ export default defineConfig(({ mode }) => {
     plugins: [react()],
     resolve: {
       // alias: [ { find: '#common', replacement: fileURLToPath(new URL('../common', import.meta.url)) } ]
-      alias: { '#common': path.resolve(__dirname, './../common') }
+      alias: { 
+        '#common': path.resolve(__dirname, './../common'),
+        '#src':    path.resolve(__dirname, './src'      )
+      },
     },
     // envDir: "../",
     define: {
-<<<<<<< HEAD
       _APP_ENV_: env.APP_ENV
-=======
-      __APP_ENV__: env.APP_ENV
->>>>>>> 3c5792c754e893c36e7329d2ed998ab16fb75e19
     },
     server: {
       proxy: {
