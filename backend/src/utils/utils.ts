@@ -1,3 +1,5 @@
+import { UserData } from "../../../common/@types/models";
+
 var jwt = require('jsonwebtoken');
 
 // Función para generar un token y devolverlo
@@ -19,7 +21,7 @@ function generateToken(user: any) {
 }
 
 // Función para obtener un "usuario limpio", sin campos sensibles como contraseña
-function getCleanUser(user: any) {
+function cleanUser(user: UserData) {
     if (!user) return null;
 
     // Retorna un objeto con la información limpia del usuario, sin la contraseña
@@ -30,7 +32,7 @@ function getCleanUser(user: any) {
 // Crear un objeto que agrupe las funciones
 const utils = {
     generateToken,
-    getCleanUser
+    cleanUser: cleanUser
 };
 
 // Exportar el objeto utils
