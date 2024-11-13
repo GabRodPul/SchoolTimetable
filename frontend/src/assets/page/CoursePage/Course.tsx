@@ -31,7 +31,7 @@ function Course() {
         </header>
         <div className='courseContainer'>
           <h1>Añadir Curso</h1>
-          {/* <a href='/CourseFormPage'><button className="add-button" onClick={toggleModal}>Añadir</button></a> */}
+          <button className='add-button'><a href='/CourseFormPage'>Añadir</a></button>
           <div className='courseList'>
             {courses.map((course, index) => (
               <CourseCard key={index} title={course.title} description={course.description} />
