@@ -4,6 +4,14 @@ import jwt, { JwtPayload } from 'jsonwebtoken'; // Asegúrate de importar jwt
 import { UserModel } from '../models/user.model'; // Ajustado para importar UserModel
 import utils from '../utils/utils';
 
+// Define tipos para los datos de usuario, si es necesario, basados en tu esquema de UserModel
+interface UserData {
+  id: string; // O el tipo de ID que uses (number, etc.)
+  username: string;
+  password: string;
+  [key: string]: any; // Incluir otras propiedades que UserModel pueda tener
+}
+
 export const isAuthenticated = (req: Request, res: Response, next: NextFunction): void => {
   // Obtenemos el token del encabezado de autorización
   const authHeader = req.headers.authorization;
