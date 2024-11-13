@@ -1,5 +1,5 @@
 import _React from 'react';
-import LoginPageForm from 'src/assets/componets/LoginComponents/LoginForm/LoginPageForm';
+import LoginPageForm from '#src/assets/componets/LoginComponents/LoginForm/LoginPageForm';
 import './LoginPageStyles.css'
 
 function LogingPage() {

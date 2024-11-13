@@ -14,10 +14,7 @@ const UserController = Object.freeze({
             const user = { ...req.body, password: hashedPassword };
 
             const data = await Users.create(user);
-            const token = utils.generateToken(data);
-            const userObj = utils.getCleanUser(data);
-
-            res.json({ user: userObj, access_token: token });
+            res.send(data);
         } catch (err: any) {
             // Aseguramos que computeError retorne un ResponseData adecuado
             res.status(500).send(computeError(err, "Some error occurred while creating the User."));

@@ -1,105 +1,108 @@
 import { NextFunction, Request, Response } from 'express';
-import bcrypt from 'bcrypt';
-import jwt, { JwtPayload } from 'jsonwebtoken'; // Asegúrate de importar jwt
+import { compareSync } from 'bcrypt';
+import { verify, JwtPayload } from 'jsonwebtoken'; // Asegúrate de importar jwt
 import { UserModel } from '../models/user.model'; // Ajustado para importar UserModel
+import { Id, UserData } from '../../../common/@types/models';
 import utils from '../utils/utils';
+import { resMsg } from '../utils/response';
+import { DB } from '../models';
+import { computeError } from '../utils/error';
 
-// Define tipos para los datos de usuario, si es necesario, basados en tu esquema de UserModel
-interface UserData {
-  id: string; // O el tipo de ID que uses (number, etc.)
-  username: string;
-  password: string;
-  [key: string]: any; // Incluir otras propiedades que UserModel pueda tener
-}
+const Users = DB.users;
 
-export const isAuthenticated = (req: Request, res: Response, next: NextFunction): void => {
-  // Obtenemos el token del encabezado de autorización
-  const authHeader = req.headers.authorization;
-  const token = authHeader && authHeader.split(' ')[1]; // Obtiene el token sin el "Bearer"
+const validateUser = ( u: any ) => 
+    !!u.name     &&  // !u.name !== undefined
+    !!u.email    && 
+    !!u.password &&
+    !!u.phoneNumber
+    ? u as UserData
+    : undefined;
 
-  if (!token) {
-    res.status(400).json({
-      error: true,
-      message: "Token is required."
-    });
-    return;
-  }
+export const isAuthenticated = async (req: Request, res: Response, next: NextFunction) => {
+    // Obtenemos el token del encabezado de autorización
+    const authHeader = req.headers.authorization;
+    const token = authHeader && authHeader.split(' ')[1]; // Obtiene el token sin el "Bearer"
 
-  // Verifica el token usando el secreto JWT
-  jwt.verify(token, process.env.JWT_SECRET as string, (err, decoded) => {
-    if (err || !decoded) {
-      res.status(401).json({ error: true, message: "Invalid token." });
-      return;
+    if (!token) {
+        res.send(resMsg(400, "Token is required."));
+        return;
     }
 
-    // Asegúrate de que `decoded` tiene el tipo correcto y contiene `id`
-    const user = decoded as JwtPayload;
-
-    if (!user.id) {
-      res.status(401).json({ error: true, message: "Invalid token payload." });
-      return;
-    }
-
-    // Busca el usuario por ID
-    UserModel.findByPk(user.id)
-      .then((data: UserModel | null) => {
-        if (!data) {
-          res.status(401).json({ error: true, message: "Invalid user." });
-          return;
+    const vrfCallback = (err: any, decoded: any) => {
+        if (err || !decoded) {
+            res.send(resMsg(401, "Invalid token."));
+            return;
         }
 
-        // Continúa con el siguiente middleware si todo es válido
-        next();
-      })
-      .catch((err: any) => {
+        // Asegúrate de que `decoded` tiene el tipo correcto y contiene `id`
+        const user = decoded as JwtPayload;
+
+        if (!user.email) {
+            res.send(resMsg(401, "Invalid token payload."));
+            return;
+        }
+
+        // Busca el usuario con su correo
+        try {
+            const data = Users.findOne({ where: { email: user.email } });
+            if (!data) {
+                res.send(resMsg(401, "Invalid user."));
+                return;
+            }
+
+            next();
+        } catch (err: any) {
+            console.error("Database error:", err);
+            res.send(resMsg(500, `Error retrieving User with email=${user.email}`));
+            return;
+        }
+    }
+
+    // Verifica el token usando el secreto JWT
+    verify(token, process.env.JWT_SECRET as string, vrfCallback);
+};
+
+export const signin = async (req: Request, res: Response) => {
+    try {
+        const data          = (await Users.create(req.body)).get({ plain: true });
+        const accessToken   = utils.generateToken(data);
+        const user          = utils.cleanUser(data);
+        res.send({ user, accessToken });
+    } catch (err: any) {
+        res.status(500).send(computeError(err, "Some error occurred while signing in."))
+    }
+};
+
+export const login = async (req: Request, res: Response) => {
+    try {
+        const { email, password } = req.body;
+
+        if (!email || !password)
+            return res.send(resMsg(401, "Email & password are needed for login!"));
+
+        const data = (await Users.findOne({ where: { email }, raw: true })) as UserData | null;
+        if (!data) {
+            res.send(resMsg(401, "Password not valid!"));
+            return;
+        }
+        
+        // Compare the encrypted password
+        const result = compareSync(password, data.password);
+        if (!result) {
+            res.send(resMsg(401, "Password not valid!"));
+            return;
+        }
+
+        // Generate the token
+        const accessToken = utils.generateToken(data);
+
+        // Get the basic user details
+        const user = utils.cleanUser(data);
+
+        // Return the token along with user details
+        res.send({ user, accessToken });
+    } catch(err: any) {
         console.error("Database error:", err);
-        res.status(500).json({ message: `Error retrieving User with id=${user.id}` });
-      });
-  });
-};
-
-
-
-export const signin = (req: Request, res: Response): void => {
-  const user: string = req.body.username;
-  const pwd: string = req.body.password;
-
-  // Return 400 status if username or password is missing
-  if (!user || !pwd) {
-    res.status(400).json({
-      error: true,
-      message: "Username or Password required."
-    });
-    return;
-  }
-
-  // Find the user in the database using UserModel
-  UserModel.findOne({ where: { username: user } })
-    .then((data: UserModel | null) => {
-      if (!data) {
-        // Return 401 if user does not exist
-        return res.status(401).json({ error: true, message: "Password not valid!" });
-      }
-
-      // Compare the encrypted password
-      const result = bcrypt.compareSync(pwd, data.password);
-      if (!result) {
-        return res.status(401).json({ error: true, message: "Password not valid!" });
-      }
-
-      // Generate the token
-      const token = utils.generateToken(data);
-
-      // Get the basic user details
-      const userObj = utils.getCleanUser(data);
-
-      // Return the token along with user details
-      return res.json({ user: userObj, access_token: token });
-    })
-    .catch((err: Error) => {
-      console.error("Database error:", err);
-      return res.status(500).json({
-        message: err.message || "Some error occurred while retrieving user data."
-      });
-    });
-};
+        res.send(resMsg(500, "Some error occurred while retrieving user data."));
+    }
+}
