@@ -16,7 +16,7 @@ export default defineConfig(({ mode }) => {
     },
     // envDir: "../",
     define: {
-      __APP_ENV__: env.APP_ENV
+      _APP_ENV_: env.APP_ENV
     },
     server: {
       proxy: {

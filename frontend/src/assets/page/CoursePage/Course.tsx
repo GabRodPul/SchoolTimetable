@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import CourseCard from '../../componets/CourseCard/CourseCard';
-import Header from '../../componets/CommonComponets/Header/Header';
 import './CourseStyles.css'
-import Modal from '../../componets/CourseFormModal/CourseFormModal';
+// import Modal from '../../componets/CourseFormModal/CourseFormModal';
 import { ApiResourceProvider, useApi } from '../../../api/ApiContext';
 import { CourseData } from '#common/@types/models';
 import { ApiRts } from '#common/@enums/http';
@@ -17,16 +16,15 @@ function Course() {
   ];
 
 
-  const [ fetchRsrc, api ] = useApi<CourseData>(ApiRts.Courses);
+  const [fetchRsrc, api] = useApi<CourseData>(ApiRts.Courses);
   useEffect(() => {
-    if ( fetchRsrc.state == FetchState.NotStarted )
+    if (fetchRsrc.state == FetchState.NotStarted)
       api.get({ id: 1 });
   }, []);
   console.log(fetchRsrc);
 
   return (
     <div>
-      <Header />
       <main>
         <header>
           <h2 className='titleText'>Lista de Cursos</h2>
@@ -41,9 +39,9 @@ function Course() {
           </div>
         </div>
       </main>
-      { fetchRsrc.state == FetchState.Loading && <strong>Loading</strong> } 
-      { fetchRsrc.state == FetchState.Error   && <strong>Error  </strong> } 
-      { fetchRsrc.state == FetchState.Success && fetchRsrc.data.code    } 
+      {fetchRsrc.state == FetchState.Loading && <strong>Loading</strong>}
+      {fetchRsrc.state == FetchState.Error && <strong>Error</strong>}
+      {fetchRsrc.state == FetchState.Success && fetchRsrc.data.code}
     </div>
   );
 }

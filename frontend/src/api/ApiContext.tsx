@@ -2,7 +2,7 @@ import { ResponseData } from "#common/@types/http";
 import { createContext, useReducer, useContext, Reducer, PropsWithoutRef } from "react";
 import { ApiData, Id } from "#common/@types/models";
 import { API } from "./api";
-import { ApiRouteType, FetchData, FetchState } from "../types/api";
+import { ApiRouteType, FetchData, FetchState, OneOrArray } from "../types/api";
 
 const evalFetch = <T extends ApiData>() => (fetch: FetchData<T>, payload: FetchData<T>) => {
     switch (payload.state) {
@@ -38,15 +38,32 @@ const ApiResourceProvider = <T extends ApiData>(props: any) => {
 const useApi = <T extends ApiData>(route: ApiRouteType<T>)
 : [ FetchData<T>, { get: (id: Id) => Promise<void> } ] => {
     const [fetchRsrc, dispatch] = useReducer<Reducer<FetchData<T>, FetchData<T>>>(evalFetch<T>(), { state: FetchState.NotStarted });
-    // const ctx = useContext(ApiCtx);
-    // if (!ctx)
-        // throw new Error(`useApiResource must be within an ApiResourceProvider`)
+    const ctx = useContext(ApiCtx);
+    if (!ctx)
+        throw new Error(`useApiResource must be within an ApiResourceProvider`)
     
     const get = async (id: Id) => {
         try {
             const data = await API.get<T>(route, id);
             dispatch({
                 state: FetchState.Success,
+                data
+            });
+        } catch (e: unknown) {
+            dispatch({
+                state: FetchState.Error,
+                error: e as Error
+            })
+        }
+    };
+
+    const getAll = async () => {
+        try {
+            // @ts-expect-error
+            const data = await API.getAll<T[]>(route);
+            dispatch({
+                state: FetchState.Success,
+                // @ts-expect-error
                 data
             });
         } catch (e: unknown) {

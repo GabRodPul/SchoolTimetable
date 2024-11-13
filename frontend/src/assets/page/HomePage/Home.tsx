@@ -10,6 +10,7 @@ function Home() {
             <HomeCard/>
             {/* Quitar luego, es solo para pruebas */}
             <button><a href='/Course'> Boton cursos provisional</a></button>
+            <button><a href='/GroupPage'> Boton Grupos provisional</a></button>
             <Footer/>
         </div>
         </>

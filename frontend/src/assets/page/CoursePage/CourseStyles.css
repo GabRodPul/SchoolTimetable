@@ -1,28 +1,28 @@
-  body {
-    background-color: #ffffff;
-    width: 100%;
-  }
+ .courseContainer {
+   margin-top: 30px;
+ }
 
-  #root {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-  }
+ .courseList {
+   display: flex;
+   gap: 10px;
+   flex-wrap: wrap;
+   justify-content: center;
+ }
 
-  .courseContainer{
-    margin-top: 30px;
-  }
+ h1 {
+   color: black;
+ }
 
-  .courseList {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
+ */ .add-button {
+   background-color: #2196F3;
+   color: #fff;
+ }
 
-  h1{
-    color: black;
-  } */
+ .titleText {
+   top: 0;
+   right: 28%;
+   position: absolute;
+   margin-top: 12px;
 
   .add-button {
     background-color: #2196F3;
@@ -40,3 +40,4 @@
     margin-top: 12px;
   
   }
+ }
