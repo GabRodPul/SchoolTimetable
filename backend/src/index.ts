@@ -2,9 +2,9 @@ import express, { Request, Response, NextFunction } from "express";
 import { DB } from "./models";
 import cors from "cors";
 import { envvars } from "./env";
-import { UserRoutes } from "./routes/user.routes";
-import { GroupRoutes } from "./routes/group.routes"
-import { CourseRoutes } from "./routes/course.routes";
+// import { UserRoutes } from "./routes/user.routes";
+// import { GroupRoutes } from "./routes/group.routes"
+// import { CourseRoutes } from "./routes/course.routes";
 import { initApiRoutes } from "./routes";
 
 const furl = `http://localhost:${envvars.FEND_PORT}`;
