@@ -29,6 +29,13 @@
       "#common/*": [
         "../common/*"
       ],
+
+      "#src/": [
+        "./src"
+      ],
+      "#src/*": [
+        "./src/*"
+      ],
     },
     "typeRoots": [
       "./node_modules/@types/**/*.d.ts",

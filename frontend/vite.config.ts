@@ -12,7 +12,10 @@ export default defineConfig(({ mode }) => {
     plugins: [react()],
     resolve: {
       // alias: [ { find: '#common', replacement: fileURLToPath(new URL('../common', import.meta.url)) } ]
-      alias: { '#common': path.resolve(__dirname, './../common') }
+      alias: { 
+        '#common': path.resolve(__dirname, './../common'),
+        '#src':    path.resolve(__dirname, './src'      )
+      },
     },
     // envDir: "../",
     define: {
