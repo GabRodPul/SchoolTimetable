@@ -24,8 +24,8 @@ function LoginPageForm() {
         <p>Continuar con Google</p>
       </button>
 
-      <div className="divider">o Inicia sesión con su usuario</div>
 
+      <div className="divider">------------- o Inicia sesión con su usuario -------------</div>
       <form onSubmit={handleLogin}>
         <label className="LoginInputText">
           <p>Usuario</p>

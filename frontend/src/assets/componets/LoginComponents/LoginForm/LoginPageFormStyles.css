@@ -88,3 +88,20 @@
   .LoginPageButton:hover {
     background-color: #000000;
   }
+
+  /* Responsive */
+/* @media (max-width: 768px) {
+
+.LoginPageContainer{
+  margin-top: 70px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 1vw;
+}
+
+.divider{
+  font-size: smaller;
+}
+
+} */

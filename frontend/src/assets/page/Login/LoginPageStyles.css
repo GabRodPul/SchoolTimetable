@@ -5,3 +5,11 @@
     align-items: center;
 }
 
+/* Responsive */
+@media (max-width: 768px) {
+
+    .ImgComponent{
+        display: none;
+    }
+
+}
