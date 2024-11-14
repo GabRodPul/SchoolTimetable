@@ -1,6 +1,6 @@
 import { Sequelize, DataTypes, Model, Optional } from "sequelize";
 import { Id, UserData } from "../../../common/@types/models";
-import { defineId } from "../utils/id";
+import { defineId } from "../utils/data";
 
 // The only purpose of extending Model is getting
 // warnings when types are modified, as to keep our

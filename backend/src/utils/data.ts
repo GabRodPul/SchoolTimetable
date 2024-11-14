@@ -8,4 +8,9 @@ const defineId = {
     }
 }
 
-export { defineId };
+const currDate = () => {
+    const now = Date.now();
+    return { createdAt: now, updatedAt: now };
+}
+
+export { defineId, currDate };

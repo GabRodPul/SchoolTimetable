@@ -8,7 +8,8 @@ const initApiRoutes = ( app: Express ) => {
     [
         UserRoutes,
         CourseRoutes,
-        GroupRoutes
+        GroupRoutes,
+
     ].forEach( r => r.init(app) );
 }
 

@@ -7,6 +7,7 @@ import utils from '../utils/utils';
 import { resMsg } from '../utils/response';
 import { DB } from '../models';
 import { computeError } from '../utils/error';
+import { envvars } from '../env';
 
 const Users = DB.users;
 
@@ -36,7 +37,6 @@ export const isAuthenticated = async (req: Request, res: Response, next: NextFun
 
         // Asegúrate de que `decoded` tiene el tipo correcto y contiene `id`
         const user = decoded as JwtPayload;
-
         if (!user.email) {
             res.send(resMsg(401, "Invalid token payload."));
             return;
@@ -53,13 +53,13 @@ export const isAuthenticated = async (req: Request, res: Response, next: NextFun
             next();
         } catch (err: any) {
             console.error("Database error:", err);
-            res.send(resMsg(500, `Error retrieving User with email=${user.email}`));
+            res.send(computeError(err, `Error retrieving User with email=${user.email}`));
             return;
         }
     }
 
     // Verifica el token usando el secreto JWT
-    verify(token, process.env.JWT_SECRET as string, vrfCallback);
+    verify(token, envvars.JWT_SECRET as string, vrfCallback);
 };
 
 export const signin = async (req: Request, res: Response) => {
@@ -69,7 +69,7 @@ export const signin = async (req: Request, res: Response) => {
         const user          = utils.cleanUser(data);
         res.send({ user, accessToken });
     } catch (err: any) {
-        res.status(500).send(computeError(err, "Some error occurred while signing in."))
+        res.send(computeError(err, "Some error occurred while signing in."))
     }
 };
 
@@ -77,9 +77,11 @@ export const login = async (req: Request, res: Response) => {
     try {
         const { email, password } = req.body;
 
-        if (!email || !password)
-            return res.send(resMsg(401, "Email & password are needed for login!"));
-
+        if (!email || !password) {
+            res.send(resMsg(401, "Email & password are needed for login!"));
+            return;
+        }
+            
         const data = (await Users.findOne({ where: { email }, raw: true })) as UserData | null;
         if (!data) {
             res.send(resMsg(401, "Password not valid!"));
@@ -103,6 +105,6 @@ export const login = async (req: Request, res: Response) => {
         res.send({ user, accessToken });
     } catch(err: any) {
         console.error("Database error:", err);
-        res.send(resMsg(500, "Some error occurred while retrieving user data."));
+        res.send(computeError(err, "Some error occurred while retrieving user data."));
     }
 }

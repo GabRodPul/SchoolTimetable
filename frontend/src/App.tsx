@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import GroupPage from './assets/page/GroupPage/GroupPage'
 import NoticesPage from './assets/page/NoticesPage/NoticesPage'
 import LogingPage from './assets/page/Login/LogingPage'
+import SigninPage from "./assets/page/Signin/SigninPage"
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
         <Routes>
           <Route path='/' element={<LogingPage />} />
           <Route path='/LogingPage' element={<LogingPage />} />
+          <Route path='/Signin' element={<SigninPage />} />
           <Route path='/Home' element={<Home />} />
           <Route path='/NoticesPage' element={<NoticesPage />} />
           <Route path='/Course' element={<Course />} />
