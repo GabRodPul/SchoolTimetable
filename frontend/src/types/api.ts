@@ -20,11 +20,11 @@ export type ApiFuncs = {
 
 
 export enum FetchState { 
-    NotStarted, 
-    Loading, 
-    Success, 
-    SuccessMany, 
-    Error, 
+    NotStarted      = "FSTATE_NOTSTARTED", 
+    Loading         = "FSTATE_LOADING", 
+    Success         = "FSTATE_SUCCESS",
+    SuccessMany     = "FSTATE_SUCCESSMANY", 
+    Error           = "FSTATE_ERROR", 
 }
 
 export type FetchData<T>

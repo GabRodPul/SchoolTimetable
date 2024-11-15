@@ -1,7 +1,10 @@
-import { UserData } from "#common/@types/models";
-import { useState } from "react";
+import { AuthData, UserData } from "#common/@types/models";
+import { useEffect, useState } from "react";
 
 import './SigninPage.css'
+import { useApi } from "#src/api/ApiContext";
+import { ApiRts } from "#common/@enums/http";
+import { FetchState } from "#src/types/api";
 
 const SigninPage = () => {
     const [name,        setName       ]  = useState('');
@@ -11,6 +14,7 @@ const SigninPage = () => {
     const [phoneNumber, setPhoneNumber]  = useState('')
     const [password,    setPassword   ]  = useState('');
     const [rememberMe,  setRememberMe ]  = useState(false);
+    const [fetchRsrc,   api           ]  = useApi<AuthData>(ApiRts.Signin);
 
     const handleLogin = (event: React.FormEvent) => {
         event.preventDefault();
@@ -21,9 +25,24 @@ const SigninPage = () => {
             password,
         } as UserData;
 
-        console.log(user);
-        console.log('Recuérdame:', rememberMe);
+        if (fetchRsrc.state == FetchState.NotStarted)
+          api.authFunc!(user);
     };
+
+    useEffect(() => {
+      console.log(fetchRsrc)
+
+      switch (fetchRsrc.state) {
+        case FetchState.Success: {
+          if ((fetchRsrc.data as any).accessToken)
+            localStorage.setItem("currentUser", JSON.stringify(fetchRsrc.data));
+        } break;
+
+        case FetchState.Error: {
+          api.resetRsrc();
+        }
+      }
+    }, [fetchRsrc])
 
     return (
         <div className="LoginPageContainer">

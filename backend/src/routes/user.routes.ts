@@ -1,6 +1,5 @@
 import { Express, Router } from "express";
 import { UserController } from "../controllers/user.controller";
-import { login, signin } from "../controllers/auth";
 
 const UserRoutes = { init: ( app: Express ) => {
     const router = Router();
@@ -20,8 +19,6 @@ const UserRoutes = { init: ( app: Express ) => {
     // Update a User with id
     router.delete( "/:id", UserController.delete );
 
-    router.post("/singin", signin);
-    router.get( "/login" , login);
     app.use("/api/users", router);
 
 }};

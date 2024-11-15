@@ -2,8 +2,8 @@ export enum ApiRts {
     Users   = "users",
     Courses = "courses",
     Groups  = "groups",
-    Login   = "users/login",
-    Signin  = "users/signin",
+    Login   = "login",
+    Signin  = "signin",
 }
 
 export enum Method {
