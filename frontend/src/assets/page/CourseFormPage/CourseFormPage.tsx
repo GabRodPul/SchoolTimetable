@@ -1,5 +1,4 @@
 import React, { useState, FormEvent } from 'react';
-import Header from '../../componets/CommonComponets/Header/Header'
 import './CourseFormPageStyles.css';
 
 const CourseFormPage: React.FC = () => {
@@ -20,7 +19,6 @@ const CourseFormPage: React.FC = () => {
 
     return (
         <div className="CourseFormBody">
-            <Header />
             <div className="form-container">
                 <h2>Añadir Curso</h2>
                 <form onSubmit={handleSubmit}>
