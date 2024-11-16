@@ -7,6 +7,11 @@ export type UserData = {
     phoneNumber: string
 }
 
+export type AuthData = {
+    user: UserData,
+    accessToken: string,
+}
+
 export type CourseData = {
     code:        string,
     name:        string,   
@@ -15,7 +20,3 @@ export type CourseData = {
 export type GroupData = {
     code:        string
 }
-
-export type ApiData = UserData
-                    | CourseData
-                    | GroupData

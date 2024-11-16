@@ -29,7 +29,7 @@ input {
     border-radius: 4px;
 }
 
-buttonForm {
+.buttonForm {
     width: 50%;
     padding: 10px;
     background-color: #28a745;
@@ -39,7 +39,7 @@ buttonForm {
     cursor: pointer;
 }
 
-button:hover {
+.buttonForm button:hover {
     background-color: #218838;
 }
 

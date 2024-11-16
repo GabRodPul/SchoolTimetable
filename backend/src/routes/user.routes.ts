@@ -8,10 +8,10 @@ const UserRoutes = { init: ( app: Express ) => {
     router.post( "/", UserController.create );
     
     // Retrive all Users
-    router.get( "/", UserController.findAll );
+    router.get( "/", auth.isAuthenticated, UserController.findAll );
     
     // Retrive a single User with id
-    router.get( "/:id", UserController.findByPk );
+    router.get( "/:id", auth.isAuthenticated, UserController.findByPk );
     
     // Update a User with id
     router.put( "/:id", UserController.update );
@@ -20,6 +20,8 @@ const UserRoutes = { init: ( app: Express ) => {
     router.delete( "/:id", UserController.delete );
 
     app.use("/api/users", router);
+
+    router.post("/singin", auth.singin);
 }};
 
 export { UserRoutes };

@@ -1,5 +1,5 @@
-import { Sequelize, DataTypes, Model } from "sequelize";
-import { Id, UserData } from "../../../common/@types/models"
+import { Sequelize, DataTypes, Model, Optional } from "sequelize";
+import { Id, UserData } from "../../../common/@types/models";
 import { defineId } from "../utils/id";
 
 // The only purpose of extending Model is getting
