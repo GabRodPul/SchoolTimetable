@@ -24,7 +24,6 @@ function Home() {
                 <button><a href='/GroupPage'> Boton Grupos provisional</a></button>
             </div>
 
-            {/* Icono de ayuda */}
             <div
                 className="HomeHelpIconContainer"
                 onMouseEnter={handleMouseEnter}
@@ -32,7 +31,6 @@ function Home() {
             >
                 <div className="HomeHelpIcon">?</div>
 
-                {/* Tooltip permanece visible mientras el cursor esté en el tooltip o el ícono */}
                 {isHovered && (
                     <div
                         className="HomeHelpToolTip"
