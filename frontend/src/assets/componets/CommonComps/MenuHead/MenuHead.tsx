@@ -1,6 +1,6 @@
-import './HeaderStyles.css'
+import './MenuHeadStyles.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendar, faBars } from '@fortawesome/free-solid-svg-icons';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 
 function Header() {
@@ -12,8 +12,7 @@ function Header() {
     };
 
     return (
-        <div className='header'>
-            <a href='/Home'><FontAwesomeIcon icon={faCalendar} /></a>
+        <div className='menuHeader'>
             <FontAwesomeIcon icon={faBars} onClick={toggleMenu} className="menu-icon" />
             {isMenuOpen && (
                 <div className="dropdown-menu">

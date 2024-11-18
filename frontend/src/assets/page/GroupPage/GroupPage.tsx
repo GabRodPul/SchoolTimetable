@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import CourseCard from '../../componets/CourseCard/CourseCard';
-import Header from '../../componets/CommonComponets/Header/Header';
+import CourseCard from '../../componets/Cards/CourseCard/CourseCard';
+import Header from '../../componets/CommonComps/Header/Header';
 import './GroupPageStyles.css'
 // import Modal from '../../componets/CourseFormModal/CourseFormModal';
 import { ApiResourceProvider, useApi } from '../../../api/ApiContext';

@@ -1,7 +1,7 @@
 // import React from 'react';
 import { FaSearch } from "react-icons/fa";
 import './NoticesPageStyles.css'
-import NoticeCard from '../../componets/NoticeCard/NoticeCard'
+import NoticeCard from '../../componets/Cards/NoticeCard/NoticeCard'
 
 
 function NoticesPage() {
