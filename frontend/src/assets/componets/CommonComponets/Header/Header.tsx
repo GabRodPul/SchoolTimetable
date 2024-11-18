@@ -22,6 +22,7 @@ function Header() {
                     <button>Notificaciones</button>
                     <button>Trámites</button>
                     <button>Contacto</button>
+                    <button><a href='/UserPage'>Usuario</a></button>
                 </div>
             )}
         </div>

@@ -1,10 +1,12 @@
 import Footer from '../../componets/ComponentsHome/Footer/Footer';
 import FrontImg from '../../componets/ComponentsHome/FrontImg/FrontIng';
 import HomeCard from '../../componets/ComponentsHome/HomeCards/HomeCard';
+import Header from './assets/componets/CommonComponets/Header/Header'
 
 function Home() {
     return (
         <>
+
         <div className="body">
             <FrontImg/>
             <HomeCard/>
