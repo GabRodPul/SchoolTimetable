@@ -7,7 +7,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import GroupPage from './assets/page/GroupPage/GroupPage'
 import NoticesPage from './assets/page/NoticesPage/NoticesPage'
 import LogingPage from './assets/page/Login/LogingPage'
-import UserPage from './assets/page/UserPage/UserPage'
+import UserPageMobile from './assets/page/UserPageMobile/UserPageMobile'
 
 function App() {
 
@@ -23,7 +23,7 @@ function App() {
           <Route path='/Course' element={<Course />} />
           <Route path='/CourseFormPage' element={<CourseFormPage />} />
           <Route path='/GroupPage' element={<GroupPage />} />
-          <Route path='/UserPage' element={<UserPage />} />
+          <Route path='/UserPage' element={<UserPageMobile />} />
         </Routes>
       </BrowserRouter>
     </>

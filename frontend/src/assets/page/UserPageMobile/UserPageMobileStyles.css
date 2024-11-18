@@ -1,0 +1,78 @@
+@media only screen and (max-width: 800px) {
+
+    .UserPageContent {
+        display: flex;
+        flex-direction: column;
+        /* justify-content: center; */
+        background-color: #f5f5f5;
+    }
+
+    .profile {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+
+        .profile__title {
+            margin-right: 55%;
+        }
+    }
+
+
+    /* Cards Styles */
+    .profile__card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #005fae;
+        color: white;
+        border-radius: 10px;
+        padding: 16px;
+        width: 300px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* User Icon */
+    .profile__card svg:first-child {
+        font-size: 48px;
+        color: #dcdcdc;
+    }
+
+    /* Details */
+    .profile__card .profile__cardInfo {
+        margin-left: 10px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        text-align: left;
+    }
+
+    /* Name */
+    .profile__cardInfo p:nth-child(1) {
+        margin: 0;
+        font-size: 12pt;
+        font-weight: bold;
+    }
+
+    /* Email */
+    .profile__card .profile__cardInfo p:nth-child(2) {
+        margin: 4px 0 0;
+        font-size: 10pt;
+        color: #dcdcdc;
+    }
+
+    /* Edit Icon */
+    .profile__card svg:last-child {
+        font-size: 20px;
+        color: #ffffff;
+        cursor: pointer;
+        margin-right: 5px;
+    }
+
+    .options {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+}
