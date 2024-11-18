@@ -1,19 +1,92 @@
 import _React from 'react';
-import LoginPageForm from '#src/assets/componets/LoginComponents/LoginForm/LoginPageForm';
-import LoginPageImg from  '#src/assets/componets/LoginComponents/LoginPageImg/LoginPageImg'
-import './LoginPageStyles.css'
+import './LoginPageStyles.css';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-function LogingPage() {
-    return (
-        <div className="LoginComponents">
-            <div className="ImgComponent">
-                <LoginPageImg/>
+function LoginPageForm() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
+
+  const navigate = useNavigate(); // Hook de React Router para navegar
+
+  const handleLogin = (event: React.FormEvent) => {
+    event.preventDefault();
+
+    // Procesa los datos del formulario
+    console.log('Usuario:', username);
+    console.log('Contraseña:', password);
+    console.log('Recuérdame:', rememberMe);
+
+    // Navega a la página de inicio
+    navigate('/Home');
+  };
+
+  return (
+    <div className="LoginMainContainer">
+      <div className="LoginImgContainer">
+        <img src="/img/LoginImg.png" alt="" />
+      </div>
+      <div className="LoginPageContainer">
+        <div className="LoginPageContainerContent">
+          <h2>Inicia sesión con tu cuenta</h2>
+
+          <button className="LoginGoogleButton">
+            <img src="/img/LogoGoogle.png" alt="Google logo" />
+            <p>Continuar con Google</p>
+          </button>
+          
+          <div className="divider">o Inicia sesión con su usuario</div>
+
+          <form className="loginPageForm" onSubmit={handleLogin}>
+            <label className="LoginInputText">
+              <p>Usuario</p>
+              <input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Usuario"
+                required
+              />
+            </label>
+
+            <label className="LoginInputText">
+              <p>Contraseña</p>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="*****************"
+                required
+              />
+            </label>
+
+            <div className="LoginRememberForgot">
+              <label className="LoginRememberForgot__checkbox">
+                <input
+                  type="checkbox"
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
+                />
+                <p>Recuérdame</p>
+              </label>
+              <a href="/ForgotPasswordPage" className="ForgotPassword">
+                ¿Olvidó la contraseña?
+              </a>
             </div>
-            <div className="FormComponent">
-                <LoginPageForm />
-            </div>
+
+            {/* Botón con onClick para manejar el submit */}
+            <button
+              type="submit" // Se mantiene como botón de envío
+              className="LoginPageButton"
+            >
+              Entrar
+            </button>
+          </form>
         </div>
-    );
+      </div>
+    </div>
+  );
 }
 
-export default LogingPage;
+export default LoginPageForm;

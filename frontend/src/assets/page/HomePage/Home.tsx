@@ -1,20 +1,47 @@
-import Footer from '../../componets/ComponentsHome/Footer/Footer';
-import FrontImg from '../../componets/ComponentsHome/FrontImg/FrontIng';
+import './HomeStyles.css';
 import HomeCard from '../../componets/ComponentsHome/HomeCards/HomeCard';
-import Header from './assets/componets/CommonComponets/Header/Header'
+import { useState } from 'react';
 
 function Home() {
+    const [isHovered, setIsHovered] = useState(false);
+
+    const handleMouseEnter = () => {
+        setIsHovered(true);
+    };
+
+    const handleMouseLeave = () => {
+        setIsHovered(false);
+    };
+
     return (
         <>
+            <div className="HomeContainer">
+                <div className='imgDiv'></div>
+                <HomeCard />
 
-        <div className="body">
-            <FrontImg/>
-            <HomeCard/>
-            {/* Quitar luego, es solo para pruebas */}
-            <button><a href='/Course'> Boton cursos provisional</a></button>
-            <button><a href='/GroupPage'> Boton Grupos provisional</a></button>
-            <Footer/>
-        </div>
+                {/* Botones provisionales */}
+                <button><a href='/Course'> Boton cursos provisional</a></button>
+                <button><a href='/GroupPage'> Boton Grupos provisional</a></button>
+            </div>
+
+            <div
+                className="HomeHelpIconContainer"
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+            >
+                <div className="HomeHelpIcon">?</div>
+
+                {isHovered && (
+                    <div
+                        className="HomeHelpToolTip"
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                    >
+                        <p>¿Problemas con la aplicación?</p>
+                        <button className="HomeContactButton">Contáctanos</button>
+                    </div>
+                )}
+            </div>
         </>
     );
 }

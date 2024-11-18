@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import _React, { useEffect } from 'react';
 import CourseCard from '../../componets/CourseCard/CourseCard';
 import './CourseStyles.css'
 // import Modal from '../../componets/CourseFormModal/CourseFormModal';

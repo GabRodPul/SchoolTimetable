@@ -1,6 +1,5 @@
-import React from 'react';
-import '../../../../App'
-import CourseCard from '../../../componets/CourseCard/CourseCard'
+import _React from 'react';
+import CourseCard from '../componets/CourseCard/CourseCard'
 
 
 function Course() {
