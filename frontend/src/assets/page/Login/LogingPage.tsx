@@ -8,17 +8,15 @@ function LoginPageForm() {
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
 
-  const navigate = useNavigate(); // Hook de React Router para navegar
+  const navigate = useNavigate();
 
   const handleLogin = (event: React.FormEvent) => {
     event.preventDefault();
 
-    // Procesa los datos del formulario
     console.log('Usuario:', username);
     console.log('Contraseña:', password);
     console.log('Recuérdame:', rememberMe);
 
-    // Navega a la página de inicio
     navigate('/Home');
   };
 
@@ -41,23 +39,13 @@ function LoginPageForm() {
           <form className="loginPageForm" onSubmit={handleLogin}>
             <label className="LoginInputText">
               <p>Usuario</p>
-              <input
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                placeholder="Usuario"
-                required
+              <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Usuario" required
               />
             </label>
 
             <label className="LoginInputText">
               <p>Contraseña</p>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="*****************"
-                required
+              <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="*****************" required
               />
             </label>
 

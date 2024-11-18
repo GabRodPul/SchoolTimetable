@@ -1,0 +1,59 @@
+.HomeHelpIconContainer {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 100;
+}
+
+.HomeHelpIcon {
+    background-color: #333333;
+    color: #ffffff;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.HomeHelpToolTip {
+    position: absolute;
+    bottom: 35px;
+    margin-right: 20px;
+    right: 0;
+    background-color: #333333;
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 220px;
+    text-align: center;
+    animation: fadeInUp 0.3s ease-in-out;
+}
+
+.HomeContactButton {
+    margin-top: 10px;
+    background-color: #ffffff;
+    color: #333333;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.HomeContactButton:hover {
+    background-color: #e0e0e0;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
