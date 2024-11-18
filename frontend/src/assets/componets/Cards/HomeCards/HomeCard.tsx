@@ -1,4 +1,4 @@
-import './HomeCard.css';
+import './HomeCardStyles.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock, faBell, faFilePen } from '@fortawesome/free-solid-svg-icons';
 

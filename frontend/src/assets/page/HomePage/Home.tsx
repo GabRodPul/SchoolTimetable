@@ -1,5 +1,5 @@
 import './HomeStyles.css';
-import HomeCard from '../../componets/ComponentsHome/HomeCards/HomeCard';
+import HomeCard from '../../componets/Cards/HomeCards/HomeCard';
 
 function Home() {
     return (
