@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import _React, { useState } from 'react';
 import { FaArrowRight, FaArrowDown } from "react-icons/fa";
 import NoticeDay from '../../NoticeDayEjm/NoticeDay';
 import './NoticeCardStyles.css';
