@@ -1,0 +1,23 @@
+.dayHourContainer {
+    background-color: #29b6f6;
+    color: #ffffff;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, .3);
+    width: 80%;
+  }
+  
+  .dayHour__code {
+    font-size: 1.2em;
+    margin: 0;
+  }
+  
+  .dayHour__teacher,
+  .dayHour__classroom {
+    font-size: 10pt;
+    margin: 0;
+  }
+
+  .mainContainer{
+    gap: 10px;
+  }

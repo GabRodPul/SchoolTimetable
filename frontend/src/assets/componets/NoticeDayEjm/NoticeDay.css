@@ -1,0 +1,9 @@
+.dayHour__container{
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 15px;
+}
