@@ -13,9 +13,9 @@ const CourseModel = { init: (sequelize: Sequelize) =>
     sequelize.define<CourseInstance>("courses", {
         ...defineId,
         code:   { 
-            type: DataTypes.STRING(3),
+            type: DataTypes.STRING(5),
             validate: {
-                len: [3, 3],
+                len: [3, 5],
                 isAlpha: true
             }
         },

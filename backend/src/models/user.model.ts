@@ -1,12 +1,15 @@
 import { Sequelize, DataTypes, Model, Optional } from "sequelize";
 import { Id, UserData } from "../../../common/@types/models";
 import { defineId } from "../utils/data";
+import { UserRole } from "../../../common/@enums/models" 
 
 // The only purpose of extending Model is getting
 // warnings when types are modified, as to keep our
 // models updated.
 // & Id is required to pass id to where.
 interface UserInstance extends Model<UserData & Id> {}
+
+const roleVals = { values: Object.values(UserRole) } as const;
 
 // https://sequelize.org/docs/v6/core-concepts/validations-and-constraints/
 const UserModel = { init: (sequelize: Sequelize) =>
@@ -28,6 +31,14 @@ const UserModel = { init: (sequelize: Sequelize) =>
             allowNull: false,
             validate: { is:  /^\+(?:[0-9] ?){6,14}[0-9]$/ }
         },
+        roleMain: {
+            type: DataTypes.ENUM(roleVals),
+            allowNull: false
+        },
+        roleOther: {
+            type: DataTypes.ENUM(roleVals),
+            allowNull: true
+        }
     })};
 
 export { UserModel };

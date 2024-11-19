@@ -4,7 +4,9 @@ export type UserData = {
     name:        string,
     email:       string,
     password:    string,
-    phoneNumber: string
+    phoneNumber: string,
+    roleMain:    string,
+    roleOther:   string,
 }
 
 export type AuthData = {
@@ -19,4 +21,12 @@ export type CourseData = {
 
 export type GroupData = {
     code:        string
+    courseId:    number,
+}
+
+export type ModuleData = {
+    subjectCode: string,
+    groupId:     number,
+    teacherId:   number,
+    courseId:    number
 }
