@@ -4,7 +4,7 @@
         display: flex;
         flex-direction: column;
         /* justify-content: center; */
-        background-color: #f5f5f5;
+        background-color: #ffffff;
     }
 
     .profile {
@@ -14,10 +14,10 @@
         align-items: center;
 
         .profile__title {
-            margin-right: 55%;
+            font-size: 16pt;
+            margin-right: 53%;
         }
     }
-
 
     /* Cards Styles */
     .profile__card {
@@ -69,10 +69,66 @@
         margin-right: 5px;
     }
 
+    /* Parte de options */
     .options {
         display: flex;
         justify-content: center;
         flex-direction: column;
+        align-items: center;
+        gap: 30px;
+
+        .options__title {
+            font-size: 16pt;
+            margin-right: 45%;
+        }
+    }
+
+    /* Options */
+    .options__card {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: 10px;
+        padding: 16px;
+        width: 300px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.09);
+
+        .options__cardInfo {
+            margin-left: 10px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            text-align: left;
+        }
+    }
+
+    /* Options info Icon */
+    .options__card svg:first-child {
+        font-size: 35px;
+        color: #000000;
+        margin: 0;
+    }
+
+    /* Name */
+    .options__cardInfo p:nth-child(1) {
+        margin: 0;
+        font-size: 12pt;
+        font-weight: bold;
+    }
+
+    /* Subtext */
+    .options__cardInfo p:nth-child(2) {
+        margin: 4px 0 0;
+        font-size: 12pt;
+        color: #afafaf;
+    }
+
+    /* Arrows Icons */
+    .options__card svg:last-child {
+        font-size: 25px;
+        cursor: pointer;
+        margin-right: 5px;
     }
 
 }

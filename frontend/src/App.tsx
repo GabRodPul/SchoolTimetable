@@ -8,6 +8,7 @@ import GroupPage from './assets/page/GroupPage/GroupPage'
 import NoticesPage from './assets/page/NoticesPage/NoticesPage'
 import LogingPage from './assets/page/Login/LogingPage'
 import UserPageMobile from './assets/page/UserPageMobile/UserPageMobile'
+import UserFormPageM from './assets/page/UserFormPageMobile/UserFormPage'
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
           <Route path='/CourseFormPage' element={<CourseFormPage />} />
           <Route path='/GroupPage' element={<GroupPage />} />
           <Route path='/UserPage' element={<UserPageMobile />} />
+          <Route path='/UserFormPageM' element={<UserFormPageM />} />
         </Routes>
       </BrowserRouter>
     </>
