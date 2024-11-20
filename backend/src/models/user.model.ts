@@ -31,12 +31,12 @@ const UserModel = { init: (sequelize: Sequelize) =>
             allowNull: false,
             validate: { is:  /^\+(?:[0-9] ?){6,14}[0-9]$/ }
         },
-        roleMain: {
+        role: {
             type: DataTypes.ENUM(roleVals),
             allowNull: false
         },
-        roleOther: {
-            type: DataTypes.ENUM(roleVals),
+        image: {
+            type: DataTypes.STRING(255),
             allowNull: true
         }
     })};

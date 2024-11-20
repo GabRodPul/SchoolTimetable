@@ -23,17 +23,24 @@ const DB = Object.freeze({
 
 // Relationships
 // * Course-Groups
-relationship(DB.courses, { h: "hasMany"   },
-             DB.groups,  { b: "belongsTo" });
+relationship(
+    DB.courses, 
+    { h: "hasMany"   }, 
+    { 
+        others: [DB.groups], 
+        b:      "belongsTo" 
+    }
+);
 
 // * Module
-relationship(DB.modules, { h: "hasOne"    },  
-             DB.groups,  { b: "belongsTo" });
+relationship(
+    DB.modules, 
+    { h: "hasOne" },
+    {
+        others: [DB.groups, DB.users, DB.courses],
+        b: "belongsTo"
+    }
+);
 
-relationship(DB.modules, { h: "hasOne"    },  
-             DB.users,   { b: "belongsTo" });
-
-relationship(DB.modules, { h: "hasOne"    },  
-             DB.courses, { b: "belongsTo" });   
 
 export { DB };
