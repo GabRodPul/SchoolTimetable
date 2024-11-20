@@ -1,11 +1,12 @@
 import { Express, Router } from "express";
 import { UserController } from "../controllers/user.controller";
+import upload from "../multer/upload";
 
 const UserRoutes = { init: ( app: Express ) => {
     const router = Router();
     
     // Create a new User
-    router.post( "/", UserController.create );
+    router.post( "/", upload.single('file'), UserController.create );
     
     // Retrive all Users
     router.get( "/", UserController.findAll );

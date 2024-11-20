@@ -10,8 +10,11 @@ const Users = DB.users;
 const UserController = Object.freeze({
     create: async (req: Request, res: Response) => {
         try {
+
+            const image = req.file ? req.file.filename : null;
+
             const hashedPassword = bcrypt.hashSync(req.body.password, 10);
-            const user = { ...req.body, password: hashedPassword };
+            const user = { ...req.body, password: hashedPassword, image };
 
             const data = await Users.create(user);
             res.send(data);
