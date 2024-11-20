@@ -1,5 +1,6 @@
 import express, { Request, Response, NextFunction } from "express";
 import { DB } from "./models";
+import path from "path";
 import cors from "cors";
 import { envvars } from "./env";
 import { UserRoutes } from "./routes/user.routes";
@@ -18,6 +19,12 @@ app.use(express.json()); // content-type: application/json
 app.use(express.urlencoded({ extended: true })); // content-type: application/x-www-form-urlencoded
 // app.use(cors(corsOptions));
 app.use(cors());
+
+
+// Configuración de directorio público 
+app.use(express.static(path.join(__dirname, "public"))); // Exponer 'public' como ruta estática
+
+
 
 
 // Authorization middleware
