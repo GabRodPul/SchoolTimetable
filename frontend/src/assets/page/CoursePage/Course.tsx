@@ -16,10 +16,10 @@ function Course() {
   ];
 
 
-  const [fetchRsrc, api] = useApi<CourseData>(ApiRts.Courses);
+  const [fetchRsrc, api] = useApi<CourseData[]>(ApiRts.Courses);
   useEffect(() => {
     if (fetchRsrc.state == FetchState.NotStarted)
-      api.get({ id: 1 });
+      api.getAll();
   }, []);
   console.log(fetchRsrc);
 
@@ -32,16 +32,19 @@ function Course() {
         <div className='courseContainer'>
           <h1>Añadir Curso</h1>
           <button className='add-button'><a href='/CourseFormPage'>Añadir</a></button>
-          <div className='courseList'>
-            {courses.map((course, index) => (
-              <CourseCard key={index} title={course.title} description={course.description} />
+
+          {fetchRsrc.state == FetchState.Loading && <strong>Loading</strong>}
+          {fetchRsrc.state == FetchState.Error && <strong>Error</strong>}
+          {fetchRsrc.state == FetchState.Success && 
+            <div className='courseList'>
+            {(fetchRsrc.data as CourseData[]).map((course, index) => (
+              <CourseCard key={index} title={course.code} description={course.name} />
             ))}
-          </div>
+            </div>
+          }
+          
         </div>
       </main>
-      {fetchRsrc.state == FetchState.Loading && <strong>Loading</strong>}
-      {fetchRsrc.state == FetchState.Error && <strong>Error</strong>}
-      {fetchRsrc.state == FetchState.Success && fetchRsrc.data.code}
     </div>
   );
 }

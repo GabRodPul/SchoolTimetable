@@ -127,7 +127,6 @@ const useApi = <T,>(route: ApiRts)
         // ts(2353): Object literal may only specify known properties, and 'getAll' does 
         //           not exist in type '{ get: (id: Id) => Promise<void>; }'
         // Apparently this is a bug???
-        // @ts-expect-error
         getAll: async () => {
             try {
                 const data = await API.getAll<T>(route);

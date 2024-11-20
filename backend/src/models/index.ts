@@ -5,6 +5,7 @@ import { GroupModel } from "./group.model";
 import { CourseModel } from "./course.model";
 import { ModuleModel } from "./module.model";
 import { relationship } from "../utils/data";
+import { EnrollmentModel } from "./enrollment.model";
 
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     host:               dbConfig.HOST,
@@ -15,10 +16,11 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
 
 const DB = Object.freeze({
     sequelize,
-    users:      UserModel.init(sequelize),
-    groups:     GroupModel.init(sequelize),
-    courses:    CourseModel.init(sequelize),
-    modules:    ModuleModel.init(sequelize)
+    users:          UserModel.init(sequelize),
+    groups:         GroupModel.init(sequelize),
+    courses:        CourseModel.init(sequelize),
+    modules:        ModuleModel.init(sequelize),
+    enrollments:    EnrollmentModel.init(sequelize),
 });
 
 // Relationships
@@ -38,9 +40,19 @@ relationship(
     { h: "hasOne" },
     {
         others: [DB.groups, DB.users, DB.courses],
-        b: "belongsTo"
+        b:      "belongsTo"
     }
 );
 
+// * Enrollment
+relationship(
+    DB.users,
+    { h: "hasMany" },
+    {
+        others: [DB.modules],
+        b:      "belongsToMany",
+        opt:    { through: DB.enrollments }
+    }
+)
 
 export { DB };

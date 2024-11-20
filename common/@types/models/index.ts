@@ -1,5 +1,8 @@
 import { WorkDay } from "../../@enums/models"
 
+// Each model will have an ID in the database but
+// not all data received will have an "id" field inside
+// its JSON (i.e. update) 
 export type Id = { id: number }
     
 export type UserData = {
@@ -33,20 +36,19 @@ export type ModuleData = {
     courseId:    number
 }
 
-export type Enrollment = {
-    enrollCode: string,
+export type EnrollmentData = {
     studentId:  number,
     moduleId:   number
 }
 
 export type ClassHour = 1 | 2 | 3 | 4 | 5 | 6;
-export type AnnualDayGroup = {
+export type AnnualDayGroupData = { // what a mouthful...
     day:        WorkDay,
     hour:       ClassHour
     groupId:    number,
 }
 
-export type Change = {
+export type HourChangeData = {
     startDate:  Date,
     endDate:    Date,
     hour:       ClassHour,
@@ -54,7 +56,7 @@ export type Change = {
     groupId:    number,
 }
 
-export type Reminder = {
+export type ReminderData = {
     startDate:  Date,
     endDate:    Date,
     changeId:   number,

@@ -1,3 +1,4 @@
+import { EnumType } from "typescript";
 import { UserData } from "../../../common/@types/models";
 
 var jwt = require('jsonwebtoken');
