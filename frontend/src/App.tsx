@@ -6,7 +6,7 @@ import CourseFormPage from './assets/page/CourseFormPage/CourseFormPage'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import GroupPage from './assets/page/GroupPage/GroupPage'
 import NoticesPage from './assets/page/NoticesPage/NoticesPage'
-import LogingPage from './assets/page/Login/LogingPage'
+import LoginPage from './assets/page/Login/LoginPage'
 import SigninPage from "./assets/page/Signin/SigninPage"
 
 function App() {
@@ -16,8 +16,8 @@ function App() {
       <Header/>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<LogingPage />} />
-          <Route path='/LogingPage' element={<LogingPage />} />
+          <Route path='/' element={<LoginPage />} />
+          <Route path='/LogingPage' element={<LoginPage />} />
           <Route path='/Signin' element={<SigninPage />} />
           <Route path='/Home' element={<Home />} />
           <Route path='/NoticesPage' element={<NoticesPage />} />

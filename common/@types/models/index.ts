@@ -44,7 +44,7 @@ export type EnrollmentData = {
 export type ClassHour = 1 | 2 | 3 | 4 | 5 | 6;
 export type AnnualDayGroupData = { // what a mouthful...
     day:        WorkDay,
-    hour:       ClassHour
+    hour:       ClassHour,
     groupId:    number,
 }
 

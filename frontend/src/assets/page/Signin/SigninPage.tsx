@@ -5,6 +5,7 @@ import './SigninPage.css'
 import { useApi } from "#src/api/ApiContext";
 import { ApiRts } from "#common/@enums/http";
 import { FetchState } from "#src/types/api";
+import { useNavigate } from "react-router";
 
 const SigninPage = () => {
     const [name,        setName       ]  = useState('');
@@ -16,7 +17,9 @@ const SigninPage = () => {
     const [rememberMe,  setRememberMe ]  = useState(false);
     const [fetchRsrc,   api           ]  = useApi<AuthData>(ApiRts.Signin);
 
-    const handleLogin = (event: React.FormEvent) => {
+    const navigate = useNavigate();
+
+    const handleSignin = (event: React.FormEvent) => {
         event.preventDefault();
         const user = {
             name: [name, surname1, surname2].join(" "),
@@ -26,7 +29,7 @@ const SigninPage = () => {
         } as UserData;
 
         if (fetchRsrc.state == FetchState.NotStarted)
-          api.authFunc!(user);
+          api.signin!(user);
     };
 
     useEffect(() => {
@@ -34,8 +37,11 @@ const SigninPage = () => {
 
       switch (fetchRsrc.state) {
         case FetchState.Success: {
-          if ((fetchRsrc.data as any).accessToken)
+          if ((fetchRsrc.data as any).accessToken) {
             localStorage.setItem("currentUser", JSON.stringify(fetchRsrc.data));
+            navigate("/Home");
+            return;
+          }
         } break;
 
         case FetchState.Error: {
@@ -55,7 +61,7 @@ const SigninPage = () => {
         
         <div className="divider">o introduce tus datos</div>
         
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleSignin}>
           <label>
             Nombre
             <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Nombre" required />

@@ -46,10 +46,12 @@ const useApi = <T,>(route: ApiRts)
     post:   (body: T)            => Promise<void>,
     put:    (opts: Body<T> & Id) => Promise<void>,
     delete: (id: Id)             => Promise<void>,
-    authFunc:
+    signin:
             ((body: UserData)    => Promise<void>) |
-            ((body: UserLogin)   => Promise<void>) |
             undefined,
+    login:
+            ((body: UserLogin)   => Promise<void>) |
+            undefined
     resetRsrc: () => void
 } ] => {
     const [fetchRsrc, dispatch] = useReducer<Reducer<FetchData<T>, FetchData<T>>>(
@@ -61,10 +63,10 @@ const useApi = <T,>(route: ApiRts)
     if (!ctx)
         throw new Error(`useApiResource must be within an ApiResourceProvider`);
 
-    let authFunc;
+    let signin, login;
     switch (route) {
         case ApiRts.Signin: {
-            authFunc = async (body: UserData) => {
+            signin = async (body: UserData) => {
                 try {
                     const data = await myfetch<AuthData, UserData, Body<UserData>>(ApiRts.Signin, Method.POST, { body: body })
                     dispatch({
@@ -81,7 +83,7 @@ const useApi = <T,>(route: ApiRts)
         } break;
 
         case ApiRts.Login: {
-            authFunc = async (body: UserLogin) => {
+            login = async (body: UserLogin) => {
                 try {
                     const data = await myfetch<AuthData, UserLogin, Body<UserLogin>>(ApiRts.Login, Method.GET, { body: body })
                     dispatch({
@@ -98,7 +100,7 @@ const useApi = <T,>(route: ApiRts)
         } break;
 
         default: {
-            authFunc = undefined;
+            // authFunc = undefined;
             // authFunc = async (body: never) => {
             //     dispatch({
             //         state: FetchState.Error,
@@ -187,7 +189,8 @@ const useApi = <T,>(route: ApiRts)
             }
         },
         
-        authFunc: authFunc,
+        signin,
+        login,
 
         resetRsrc: () => dispatch({ state: FetchState.NotStarted })
     }];
