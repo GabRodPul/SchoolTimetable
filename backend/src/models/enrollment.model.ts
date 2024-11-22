@@ -7,16 +7,11 @@ import { defineId } from "../utils/data";
 // models updated.
 // & Id is required to pass id to where.
 // Omit = avoid having to define "courseId"
-interface EnrollmentInstance extends Model<
-    Omit<EnrollmentData, 
-    "studentId" |
-    "moduleId"
-    > & Id> {}
+interface EnrollmentInstance extends 
+    Model<Omit<EnrollmentData, "studentId" | "moduleId">> {}
 
-// https://sequelize.org/docs/v6/core-concepts/validations-and-constraints/
 const EnrollmentModel = { init: (sequelize: Sequelize) =>
     sequelize.define<EnrollmentInstance>("enrollments", {
-        ...defineId,
     })};
 
 export { EnrollmentModel };

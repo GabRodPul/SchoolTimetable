@@ -6,7 +6,6 @@ import { CourseModel } from "./course.model";
 import { ModuleModel } from "./module.model";
 import { relationship } from "../utils/data";
 import { EnrollmentModel } from "./enrollment.model";
-import { ReminderModel } from "./reminder.model";
 
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     host:               dbConfig.HOST,
@@ -23,7 +22,6 @@ const DB = Object.freeze({
     modules:        ModuleModel.init(sequelize),
     enrollments:    EnrollmentModel.init(sequelize),
     // ...
-    reminders:       ReminderModel.init(sequelize)
 });
 
 // Relationships
@@ -53,12 +51,12 @@ DB.users, { h: "hasMany" }, {
 )
 
 // * Reminder
-relationship(
-    DB.reminders, { h: "hasOne" }, { 
-        others: [DB.groups],
-        b:      "belongsToMany",
-        opt:    { through: "Reminder_Groups" }
-})
+// relationship(
+//     DB.reminders, { h: "hasOne" }, { 
+//         others: [DB.groups],
+//         b:      "belongsToMany",
+//         opt:    { through: "Reminder_Groups" }
+// })
 
 
 

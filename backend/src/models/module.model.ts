@@ -7,23 +7,27 @@ import { defineId } from "../utils/data";
 // models updated.
 // & Id is required to pass id to where.
 // Omit = avoid having to define ids
-interface ModuleInstance extends Model<
-    Omit<ModuleData,
-    "groupId"   | 
-    "teacherId" | 
-    "courseId" 
-    > & Id> {}
+interface ModuleInstance extends 
+    Model<Omit<ModuleData, "groupId"> & Id> {}
 
 // https://sequelize.org/docs/v6/core-concepts/validations-and-constraints/
 const ModuleModel = { init: (sequelize: Sequelize) =>
     sequelize.define<ModuleInstance>("modules", {
         ...defineId,
-        subjectCode:  {
-            type: DataTypes.STRING(3),
-            allowNull: false,
+        name:  {
+            type:       DataTypes.STRING(3),
+            allowNull:  false,
             validate: { len:[3,3] },
         },
-        // courseCode: reference(DataTypes.STRING(5), "courses", "code"),
+        weeklyHours: {
+            type:       DataTypes.INTEGER,
+            allowNull:  false,
+            // We should probably add some more validation to this 
+            // - Gabriel
+            validate: { 
+                min: 1 
+            }
+        }
     })};
 
 export { ModuleModel };

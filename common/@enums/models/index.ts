@@ -10,5 +10,11 @@ export enum WorkDay {
     Tuesday     = "TUESDAY",
     Wednesday   = "WEDNESDAY",
     Thursday    = "THURSDAY",
-    Friday      = "Friday"
+    Friday      = "FRIDAY"
+}
+
+export enum Turn {
+    Morning     = "MORNING",
+    Afternoon   = "AFTERNOON",
+    Evening     = "EVENING"
 }

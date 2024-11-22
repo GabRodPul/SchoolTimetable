@@ -9,6 +9,9 @@ import { defineId } from "../utils/data";
 interface CourseInstance extends Model<CourseData & Id> {}
 
 // https://sequelize.org/docs/v6/core-concepts/validations-and-constraints/
+/***
+ * @deprecated This model should be removed
+ */
 const CourseModel = { init: (sequelize: Sequelize) =>
     sequelize.define<CourseInstance>("courses", {
         ...defineId,

@@ -1,4 +1,4 @@
-import { WorkDay } from "../../@enums/models"
+import { Turn, WorkDay } from "../../@enums/models"
 
 // Each model will have an ID in the database but
 // not all data received will have an "id" field inside
@@ -19,21 +19,27 @@ export type AuthData = {
     accessToken:    string,
 }
 
+/***
+ * @deprecated This type should be removed
+ */
 export type CourseData = {
     code:        string,
     name:        string,   
 }
 
 export type GroupData = {
-    code:        string
-    courseId:    number,
+    name:       string,
 }
 
 export type ModuleData = {
-    subjectCode: string,
     groupId:     number,
-    teacherId:   number,
-    courseId:    number
+    name:        string,
+    weeklyHours: number,
+}
+
+export type TeacherModuleData = {
+    teacherId:  number,
+    moduleId:   number
 }
 
 export type EnrollmentData = {
@@ -41,24 +47,34 @@ export type EnrollmentData = {
     moduleId:   number
 }
 
-export type ClassHour = 1 | 2 | 3 | 4 | 5 | 6;
-export type AnnualDayGroupData = { // what a mouthful...
-    day:        WorkDay,
-    hour:       ClassHour,
-    groupId:    number,
+
+export type SessionHour   = 1 | 2 | 3 | 4 | 5 | 6;
+export type ClassHourData = {
+    turn:           Turn,
+    sessionHour:    SessionHour,
+    start:          string,
+    end:            string,
 }
 
-export type HourChangeData = {
-    startDate:  Date,
-    endDate:    Date,
-    hour:       ClassHour,
-    teacherId:  number,
-    groupId:    number,
+export type Session = {
+    classHourId:    number,
+    moduleId:       number,
+    day:            WorkDay,
 }
 
-export type ReminderData = {
-    startDate:  Date,
-    endDate:    Date,
-    changeId:   number,
-    groupId:    number,
+export type SessionChange = {
+    sessionId:      number,
+    classHourId:    number,
+    day:            WorkDay,
+    startDate:      Date,
+    endDate:        Date,
+}
+
+export type Warning = {
+    teacherId:      number,
+    description:    string,
+    startDate:      Date,
+    endDate:        Date,
+    startHour:      string, // MySQL TIME
+    endHour:        string, // MySQL TIME
 } 

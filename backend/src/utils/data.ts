@@ -1,4 +1,5 @@
 import { BelongsToManyOptions, BelongsToOptions, DataType, DataTypes, HasManyOptions, HasOneOptions, Model, ModelStatic } from "sequelize";
+import { EnumType } from "typescript";
 
 export const defineId = {
     id: {
@@ -37,4 +38,8 @@ export const relationship = <T1 extends Model, T2 extends Model>(
 export const currDate = () => {
     const now = Date.now();
     return { createdAt: now, updatedAt: now };
-}
+};
+
+
+export const enumStrVals = <T extends {[key: number]: string}>(e: T) =>
+    ({ values: Object.values(e) })
