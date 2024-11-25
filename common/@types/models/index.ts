@@ -56,13 +56,13 @@ export type ClassHourData = {
     end:            string,
 }
 
-export type Session = {
+export type SessionData = {
     classHourId:    number,
     moduleId:       number,
     day:            WorkDay,
 }
 
-export type SessionChange = {
+export type SessionChangeData = {
     sessionId:      number,
     classHourId:    number,
     day:            WorkDay,
@@ -70,7 +70,7 @@ export type SessionChange = {
     endDate:        Date,
 }
 
-export type Warning = {
+export type WarningData = {
     teacherId:      number,
     description:    string,
     startDate:      Date,
