@@ -1,5 +1,5 @@
 import { Sequelize, DataTypes, Model } from "sequelize";
-import { Id, ModuleData } from "../../../common/@types/models"
+import { Id, IGTModuleData, ModuleData } from "../../../common/@types/models"
 import { defineId } from "../utils/data";
 
 // The only purpose of extending Model is getting
@@ -7,18 +7,22 @@ import { defineId } from "../utils/data";
 // models updated.
 // & Id is required to pass id to where.
 // Omit = avoid having to define ids
-interface ModuleInstance extends 
-    Model<Omit<ModuleData, "groupId"> & Id> {}
+interface IGTModuleInstance extends 
+    Model<Omit<IGTModuleData, "groupId" | "moduleId"> & Id> {}
 
 // https://sequelize.org/docs/v6/core-concepts/validations-and-constraints/
 const ModuleModel = { init: (sequelize: Sequelize) =>
-    sequelize.define<ModuleInstance>("modules", {
+    sequelize.define<IGTModuleInstance>("modules", {
         ...defineId,
-        name:  {
-            type:       DataTypes.STRING(3),
+        weeklyHours: {
+            type:       DataTypes.INTEGER,
             allowNull:  false,
-            validate: { len:[3,3] },
-        },
+            // We should probably add some more validation to this 
+            // - Gabriel
+            validate: { 
+                min: 1 
+            }
+        }
     })};
 
 export { ModuleModel };

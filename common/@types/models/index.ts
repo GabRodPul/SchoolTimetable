@@ -32,14 +32,19 @@ export type GroupData = {
 }
 
 export type ModuleData = {
-    groupId:     number,
     name:        string,
-    weeklyHours: number,
+}
+
+export type IGTModuleData = {
+    groupId:    number,
+    moduleId:   number,
+    weeklyHours:number,
 }
 
 export type TeacherModuleData = {
-    teacherId:  number,
-    moduleId:   number
+    teacherId:   number,
+    moduleId:    number,
+    weeklyHours: number
 }
 
 export type EnrollmentData = {
