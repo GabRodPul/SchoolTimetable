@@ -45,7 +45,7 @@ relationship(
     }
 )
 
-// * Warming
+// * Warning
 relationship(
     DB.warnings, { h: "hasMany" }, { 
         others: [DB.users],

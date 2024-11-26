@@ -8,6 +8,7 @@ import { resMsg } from '../utils/response';
 import { DB } from '../models';
 import { computeError } from '../utils/error';
 import { envvars } from '../env';
+import { UserRole } from '../../../common/@enums/models';
 
 const Users = DB.users;
 
@@ -29,7 +30,7 @@ export const isAuthenticated = async (req: Request, res: Response, next: NextFun
         return;
     }
 
-    const vrfCallback = (err: any, decoded: any) => {
+    const vrfCallback = async (err: any, decoded: any) => {
         if (err || !decoded) {
             res.send(resMsg(401, "Invalid token."));
             return;
@@ -44,7 +45,7 @@ export const isAuthenticated = async (req: Request, res: Response, next: NextFun
 
         // Busca el usuario con su correo
         try {
-            const data = Users.findOne({ where: { email: user.email } });
+            const data = await Users.findOne({ where: { email: user.email } });
             if (!data) {
                 res.send(resMsg(401, "Invalid user."));
                 return;
@@ -108,3 +109,48 @@ export const login = async (req: Request, res: Response) => {
         res.send(computeError(err, "Some error occurred while retrieving user data."));
     }
 }
+export const hasRolePermissions = (role: UserRole) => {
+    return (req: Request, res: Response, next: NextFunction) => {
+    const authHeader = req.headers.authorization;
+    const token = authHeader && authHeader.split(' ')[1]; // Obtiene el token sin el "Bearer"
+
+    if (!token) {
+        res.send(resMsg(400, "Token is required."));
+        return;
+    }
+
+    const vrfCallback = async (err: any, decoded: any) => {
+        if (err || !decoded) {
+            res.send(resMsg(401, "Invalid token."));
+            return;
+        }
+
+        // Asegúrate de que `decoded` tiene el tipo correcto y contiene `id`
+        const user = decoded as JwtPayload;
+        if (!user.email) {
+            res.send(resMsg(401, "Invalid token payload."));
+            return;
+        }
+
+        // Busca el usuario con su correo
+        try {
+            const data = await Users.findOne({ where: { email: user.email }, raw: true }) as UserData | null;
+            if (!data) {
+                res.send(resMsg(401, "Invalid user."));
+                return;
+            }
+
+            if (data.role < role)
+                throw new Error(`Insufficient permissions: ${data.role}`);
+
+            next();
+        } catch (err: any) {
+            console.error("Database error:", err);
+            res.send(computeError(err, `Error retrieving User with email=${user.email}`));
+            return;
+        }
+    }
+
+    // Verifica el token usando el secreto JWT
+    verify(token, envvars.JWT_SECRET as string, vrfCallback);
+}};
