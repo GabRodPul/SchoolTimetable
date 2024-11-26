@@ -3,11 +3,11 @@ import { DB } from "../models"
 import { resMsg } from "../utils/response";
 import { computeError } from "../utils/error";
 
-const Warming = DB.warmings;
-const WarmingController = Object.freeze({
+const Warning = DB.warning;
+const WarningController = Object.freeze({
     create: async(req: Request, res: Response) => {
         try {
-            const data = await Warming.create(req.body);
+            const data = await Warning.create(req.body);
             res.send(data);
         } catch (err: any) {
             res.send(computeError( err ));
@@ -16,7 +16,7 @@ const WarmingController = Object.freeze({
 
     findAll: async(req: Request, res: Response) => {
         try {
-            const data = await Warming.findAll();
+            const data = await Warning.findAll();
             res.send(data);
         } catch (err: any) {
             res.send(resMsg(500, err.message));
@@ -36,4 +36,4 @@ const WarmingController = Object.freeze({
     },
 });
 
-export { WarmingController };
+export { WarningController };

@@ -22,7 +22,7 @@ const DB = Object.freeze({
     courses:        CourseModel.init(sequelize),
     modules:        ModuleModel.init(sequelize),
     enrollments:    EnrollmentModel.init(sequelize),
-    warmings:       WarningModel.init(sequelize),
+    warnings:       WarningModel.init(sequelize),
     // ...
 });
 
@@ -54,7 +54,7 @@ DB.users, { h: "hasMany" }, {
 
 // * Warming
 relationship(
-    DB.warmings, { h: "hasMany" }, { 
+    DB.warnings, { h: "hasMany" }, { 
         others: [DB.users],
         b:      "belongsTo",
 })
