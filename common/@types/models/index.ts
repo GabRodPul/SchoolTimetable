@@ -11,7 +11,7 @@ export type UserData = {
     password:       string,
     phoneNumber:    string,
     role:           string,
-    image:          string,
+    image?:         string,
 }
 
 export type AuthData = {

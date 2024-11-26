@@ -1,8 +1,9 @@
+// Enum values prefaced by 'URX_' for easy comparisons
 export enum UserRole {
-    Student = "STUDENT",
-    Teacher = "TEACHER",
-    Head    = "HEAD",
-    Admin   = "ADMIN"
+    Student = "UR0_STUDENT",
+    Teacher = "UR1_TEACHER",
+    Head    = "UR2_HEAD",
+    Admin   = "UR3_ADMIN"
 };
 
 export enum WorkDay {
