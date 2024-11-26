@@ -11,7 +11,7 @@ const ClassHourRoutes = { init: ( app: Express ) => {
     router.get( "/", ClassHourController.findAll );
     
     // Retrive a single User with id
-    // router.get( "/:id", ClassHourController.findByPk );
+    router.get( "/:id", ClassHourController.findOne );
     
     // Update a User with id
     router.put( "/:id", ClassHourController.update );
