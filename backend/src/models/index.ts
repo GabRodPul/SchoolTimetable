@@ -8,7 +8,8 @@ import { relationship } from "../utils/data";
 import { EnrollmentModel } from "./enrollment.model";
 import { WarningModel } from "./warning.model";
 import { IGTModuleModel } from "./igt-module.model";
-import { SessionModel } from "./session.model"
+import { SessionModel } from "./session.model";
+import { ClassHourModel } from "./classHour.model";
 
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     host:               dbConfig.HOST,
@@ -27,6 +28,7 @@ const DB = Object.freeze({
     enrollments:    EnrollmentModel.init(sequelize),
     warnings:       WarningModel.init(sequelize),
     sessions:       SessionModel.init(sequelize),
+    classHour:      ClassHourModel.init(sequelize),
     // ...
 });
 
