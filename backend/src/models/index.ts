@@ -9,6 +9,7 @@ import { EnrollmentModel } from "./enrollment.model";
 import { WarningModel } from "./warning.model";
 import { IGTModuleModel } from "./igt-module.model";
 import { SessionModel } from "./session.model"
+import { SessionChangedModel } from "./session-changed.model"
 
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     host:               dbConfig.HOST,
@@ -19,14 +20,15 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
 
 const DB = Object.freeze({
     sequelize,
-    users:          UserModel.init(sequelize),
-    groups:         GroupModel.init(sequelize),
-    courses:        CourseModel.init(sequelize),
-    modules:        ModuleModel.init(sequelize),
-    igt_modules:    IGTModuleModel.init(sequelize),
-    enrollments:    EnrollmentModel.init(sequelize),
-    warnings:       WarningModel.init(sequelize),
-    sessions:       SessionModel.init(sequelize),
+    users:           UserModel.init(sequelize),
+    groups:          GroupModel.init(sequelize),
+    courses:         CourseModel.init(sequelize),
+    modules:         ModuleModel.init(sequelize),
+    igt_modules:     IGTModuleModel.init(sequelize),
+    enrollments:     EnrollmentModel.init(sequelize),
+    warnings:        WarningModel.init(sequelize),
+    sessions:        SessionModel.init(sequelize),
+    sessionsChanged: SessionChangedModel.init(sequelize),
     // ...
 });
 
@@ -61,6 +63,14 @@ relationship(
 //         others:  [ DB.igt ],
 //         b:      "belongsToMany",
 //         opt:    { through: DB.enrollments }
+//     }
+// )
+
+// * SessionsChanged
+// relationship(
+//     DB.session, { h: "hasOne" }, {
+//         others:  [ DB.sessions, DB.classHour ],
+//         b:      "belongsToMany",
 //     }
 // )
 
