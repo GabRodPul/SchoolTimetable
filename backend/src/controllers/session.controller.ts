@@ -3,11 +3,11 @@ import { DB } from "../models"
 import { resMsg } from "../utils/response";
 import { computeError } from "../utils/error";
 
-const IGTModules = DB.igt_modules;
-const IGTModuleController = Object.freeze({
+const Sessions = DB.sessions;
+const SessionController = Object.freeze({
     create: async(req: Request, res: Response) => {
         try {
-            const data = await IGTModules.create(req.body);
+            const data = await Sessions.create(req.body);
             res.send(data);
         } catch (err: any) {
             res.send(computeError( err ));
@@ -16,7 +16,7 @@ const IGTModuleController = Object.freeze({
 
     findAll: async(req: Request, res: Response) => {
         try {
-            const data = await IGTModules.findAll();
+            const data = await Sessions.findAll();
             res.send(data);
         } catch (err: any) {
             res.send(resMsg(500, err.message));
@@ -25,7 +25,7 @@ const IGTModuleController = Object.freeze({
 
     findByPk: async(req: Request, res: Response) => {
         try {
-            const data = await IGTModules.findByPk(req.params.id);       
+            const data = await Sessions.findByPk(req.params.id);       
             res.send(data);
         } catch (err: any) {
             res.send(computeError( err ));
@@ -35,7 +35,7 @@ const IGTModuleController = Object.freeze({
     update: async(req: Request, res: Response) => {
         const id = req.params.id;
         try {
-            const data = await IGTModules.findByPk(id);
+            const data = await Sessions.findByPk(id);
             if (!data)
                 throw new Error(`Module with id ${id} not found`);
 
@@ -50,7 +50,7 @@ const IGTModuleController = Object.freeze({
     delete: async(req: Request, res: Response) => {
         const id = req.params.id;
         try {
-            const data = await IGTModules.destroy({ where: { id } });
+            const data = await Sessions.destroy({ where: { id } });
             if (!data)
                 throw new Error(`Module with id ${id} not found`);
 
@@ -61,4 +61,4 @@ const IGTModuleController = Object.freeze({
     },
 });
 
-export { IGTModuleController };
+export { SessionController };

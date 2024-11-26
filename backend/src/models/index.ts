@@ -7,6 +7,7 @@ import { ModuleModel } from "./module.model";
 import { relationship } from "../utils/data";
 import { EnrollmentModel } from "./enrollment.model";
 import { IGTModuleModel } from "./igt-module.model";
+import { SessionModel } from "./session.model"
 
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     host:               dbConfig.HOST,
@@ -23,6 +24,7 @@ const DB = Object.freeze({
     modules:        ModuleModel.init(sequelize),
     igt_modules:    IGTModuleModel.init(sequelize),
     enrollments:    EnrollmentModel.init(sequelize),
+    sessions:       SessionModel.init(sequelize),
     // ...
 });
 
@@ -50,6 +52,16 @@ relationship(
 //         b:      "belongsToMany",
 //         opt:    { through: "Reminder_Groups" }
 // })
+
+
+// * Sessions
+// relationship(
+//     DB.session, { h: "hasMany" }, {
+//         others:  [ DB.igt ],
+//         b:      "belongsToMany",
+//         opt:    { through: DB.enrollments }
+//     }
+// )
 
 
 
