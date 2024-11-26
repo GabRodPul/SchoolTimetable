@@ -37,13 +37,13 @@ const SessionController = Object.freeze({
         try {
             const data = await Sessions.findByPk(id);
             if (!data)
-                throw new Error(`Module with id ${id} not found`);
+                throw new Error(`Session with id ${id} not found`);
 
             req.body.updatedAt = Date.now();
             await data.update(req.body);
             await data.save();
         } catch (err: any) {
-            res.send(computeError(err, `Some error occurred while updating module with id ${id}`));
+            res.send(computeError(err, `Some error occurred while updating session with id ${id}`));
         }
     },
 
@@ -52,11 +52,11 @@ const SessionController = Object.freeze({
         try {
             const data = await Sessions.destroy({ where: { id } });
             if (!data)
-                throw new Error(`Module with id ${id} not found`);
+                throw new Error(`Session with id ${id} not found`);
 
             res.send(resMsg(204, "Succesfully deleted!"));
         } catch(err: any) {
-            res.send(computeError(err, `Some error occurred while deleting module with id ${id}`));
+            res.send(computeError(err, `Some error occurred while deleting session with id ${id}`));
         }
     },
 });
