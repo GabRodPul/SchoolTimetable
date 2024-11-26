@@ -4,6 +4,7 @@ import { CourseRoutes } from "./course.routes";
 import { GroupRoutes } from "./group.routes";
 import { LoginRoutes } from "./login.routes";
 import { SigninRoutes } from "./signin.routes";
+import {WarningRoutes} from "./warning.routes"
 
 type Routes = { init: (app: Express) => void };
 const initApiRoutes = ( app: Express ) => {
@@ -11,6 +12,7 @@ const initApiRoutes = ( app: Express ) => {
         UserRoutes,
         CourseRoutes,
         GroupRoutes,
+        WarningRoutes,
 
         // Auth, given ApiRts enum we better use separate routes
         SigninRoutes,

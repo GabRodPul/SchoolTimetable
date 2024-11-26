@@ -1,50 +1,51 @@
 import { NextFunction, Request, Response } from 'express';
 import { compareSync } from 'bcrypt';
-import { verify, JwtPayload } from 'jsonwebtoken'; // Asegúrate de importar jwt
-import { UserModel } from '../models/user.model'; // Ajustado para importar UserModel
+import { verify, JwtPayload } from 'jsonwebtoken';
+import { UserModel } from '../models/user.model';
 import { Id, UserData } from '../../../common/@types/models';
 import utils from '../utils/utils';
 import { resMsg } from '../utils/response';
 import { DB } from '../models';
 import { computeError } from '../utils/error';
 import { envvars } from '../env';
+import { UserRole } from '../../../common/@enums/models';
 
 const Users = DB.users;
 
-const validateUser = ( u: any ) => 
-    !!u.name     &&  // !u.name !== undefined
-    !!u.email    && 
-    !!u.password &&
-    !!u.phoneNumber
-    ? u as UserData
-    : undefined;
+const validateUser = (u: any) =>
+    !!u.name &&  // !u.name !== undefined
+        !!u.email &&
+        !!u.password &&
+        !!u.phoneNumber
+        ? u as UserData
+        : undefined;
 
 export const isAuthenticated = async (req: Request, res: Response, next: NextFunction) => {
-    // Obtenemos el token del encabezado de autorización
+    // We get the authorization header token
     const authHeader = req.headers.authorization;
-    const token = authHeader && authHeader.split(' ')[1]; // Obtiene el token sin el "Bearer"
+    const token = authHeader && authHeader.split(' ')[1]; // Get the token without the "Bearer"
 
     if (!token) {
         res.send(resMsg(400, "Token is required."));
         return;
     }
 
-    const vrfCallback = (err: any, decoded: any) => {
+    const vrfCallback = async (err: any, decoded: any) => {
         if (err || !decoded) {
             res.send(resMsg(401, "Invalid token."));
             return;
         }
 
-        // Asegúrate de que `decoded` tiene el tipo correcto y contiene `id`
+        // `decoded` has the correct type and contains `id`
         const user = decoded as JwtPayload;
         if (!user.email) {
             res.send(resMsg(401, "Invalid token payload."));
             return;
         }
 
-        // Busca el usuario con su correo
+        // Search for the user with their email
         try {
-            const data = Users.findOne({ where: { email: user.email } });
+            const data = await Users.findOne({ where: { email: user.email } });
             if (!data) {
                 res.send(resMsg(401, "Invalid user."));
                 return;
@@ -58,15 +59,15 @@ export const isAuthenticated = async (req: Request, res: Response, next: NextFun
         }
     }
 
-    // Verifica el token usando el secreto JWT
+    // Verify token using JWT secret
     verify(token, envvars.JWT_SECRET as string, vrfCallback);
 };
 
 export const signin = async (req: Request, res: Response) => {
     try {
-        const data          = (await Users.create(req.body)).get({ plain: true });
-        const accessToken   = utils.generateToken(data);
-        const user          = utils.cleanUser(data);
+        const data = (await Users.create(req.body)).get({ plain: true });
+        const accessToken = utils.generateToken(data);
+        const user = utils.cleanUser(data);
         res.send({ user, accessToken });
     } catch (err: any) {
         res.send(computeError(err, "Some error occurred while signing in."))
@@ -81,13 +82,13 @@ export const login = async (req: Request, res: Response) => {
             res.send(resMsg(401, "Email & password are needed for login!"));
             return;
         }
-            
+
         const data = (await Users.findOne({ where: { email }, raw: true })) as UserData | null;
         if (!data) {
             res.send(resMsg(401, "Password not valid!"));
             return;
         }
-        
+
         // Compare the encrypted password
         const result = compareSync(password, data.password);
         if (!result) {
@@ -103,8 +104,52 @@ export const login = async (req: Request, res: Response) => {
 
         // Return the token along with user details
         res.send({ user, accessToken });
-    } catch(err: any) {
+    } catch (err: any) {
         console.error("Database error:", err);
         res.send(computeError(err, "Some error occurred while retrieving user data."));
     }
 }
+export const hasRolePermissions = (role: UserRole) => {
+    return (req: Request, res: Response, next: NextFunction) => {
+        const authHeader = req.headers.authorization;
+        const token = authHeader && authHeader.split(' ')[1];
+
+        if (!token) {
+            res.send(resMsg(400, "Token is required."));
+            return;
+        }
+
+        const vrfCallback = async (err: any, decoded: any) => {
+            if (err || !decoded) {
+                res.send(resMsg(401, "Invalid token."));
+                return;
+            }
+
+            const user = decoded as JwtPayload;
+            if (!user.email) {
+                res.send(resMsg(401, "Invalid token payload."));
+                return;
+            }
+
+            try {
+                const data = await Users.findOne({ where: { email: user.email }, raw: true }) as UserData | null;
+                if (!data) {
+                    res.send(resMsg(401, "Invalid user."));
+                    return;
+                }
+
+                // We check the user's role to see if it has sufficient permissions
+                if (data.role < role)
+                    throw new Error(`Insufficient permissions: ${data.role}`);
+
+                next();
+            } catch (err: any) {
+                console.error("Database error:", err);
+                res.send(computeError(err, `Error retrieving User with email=${user.email}`));
+                return;
+            }
+        }
+
+        verify(token, envvars.JWT_SECRET as string, vrfCallback);
+    }
+};

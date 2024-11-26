@@ -6,6 +6,7 @@ import { CourseModel } from "./course.model";
 import { ModuleModel } from "./module.model";
 import { relationship } from "../utils/data";
 import { EnrollmentModel } from "./enrollment.model";
+import { WarningModel } from "./warning.model";
 import { IGTModuleModel } from "./igt-module.model";
 import { SessionModel } from "./session.model"
 
@@ -24,12 +25,13 @@ const DB = Object.freeze({
     modules:        ModuleModel.init(sequelize),
     igt_modules:    IGTModuleModel.init(sequelize),
     enrollments:    EnrollmentModel.init(sequelize),
+    warnings:       WarningModel.init(sequelize),
     sessions:       SessionModel.init(sequelize),
     // ...
 });
 
 // Relationships
-// * Module
+// * Module 
 relationship(
     DB.modules, { h: "hasMany" }, {
         others: [ DB.igt_modules ],
@@ -45,13 +47,12 @@ relationship(
     }
 )
 
-// * Reminder
-// relationship(
-//     DB.reminders, { h: "hasOne" }, { 
-//         others: [DB.groups],
-//         b:      "belongsToMany",
-//         opt:    { through: "Reminder_Groups" }
-// })
+// * Warning
+relationship(
+    DB.warnings, { h: "hasMany" }, { 
+        others: [DB.users],
+        b:      "belongsTo",
+})
 
 
 // * Sessions
