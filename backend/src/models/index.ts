@@ -6,6 +6,7 @@ import { CourseModel } from "./course.model";
 import { ModuleModel } from "./module.model";
 import { relationship } from "../utils/data";
 import { EnrollmentModel } from "./enrollment.model";
+import { WarningModel } from "./warning.model";
 
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     host:               dbConfig.HOST,
@@ -21,6 +22,7 @@ const DB = Object.freeze({
     courses:        CourseModel.init(sequelize),
     modules:        ModuleModel.init(sequelize),
     enrollments:    EnrollmentModel.init(sequelize),
+    warmings:       WarningModel.init(sequelize),
     // ...
 });
 
@@ -33,7 +35,7 @@ relationship(
     }
 );
 
-// * Module
+// * Module 
 relationship(
     DB.modules, { h: "hasOne" }, {
         others: [DB.groups, DB.users, DB.courses],
@@ -50,13 +52,12 @@ DB.users, { h: "hasMany" }, {
     }
 )
 
-// * Reminder
-// relationship(
-//     DB.reminders, { h: "hasOne" }, { 
-//         others: [DB.groups],
-//         b:      "belongsToMany",
-//         opt:    { through: "Reminder_Groups" }
-// })
+// * Warming
+relationship(
+    DB.warmings, { h: "hasMany" }, { 
+        others: [DB.users],
+        b:      "belongsTo",
+})
 
 
 
