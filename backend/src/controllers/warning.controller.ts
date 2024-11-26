@@ -5,16 +5,16 @@ import { computeError } from "../utils/error";
 
 const Warning = DB.warnings;
 const WarningController = Object.freeze({
-    create: async(req: Request, res: Response) => {
+    create: async (req: Request, res: Response) => {
         try {
             const data = await Warning.create(req.body);
             res.send(data);
         } catch (err: any) {
-            res.send(computeError( err ));
+            res.send(computeError(err));
         }
     },
 
-    findAll: async(req: Request, res: Response) => {
+    findAll: async (req: Request, res: Response) => {
         try {
             const data = await Warning.findAll();
             res.send(data);
@@ -23,15 +23,15 @@ const WarningController = Object.freeze({
         }
     },
 
-    findOne: async(req: Request, res: Response) => {
+    findOne: async (req: Request, res: Response) => {
         res.send(resMsg(500, "Couldn't find one"));
     },
 
-    update: async(req: Request, res: Response) => {
+    update: async (req: Request, res: Response) => {
         res.send(resMsg(500, "Couldn't update"));
     },
 
-    delete: async(req: Request, res: Response) => {
+    delete: async (req: Request, res: Response) => {
         res.send(resMsg(500, "Couldn't delete"));
     },
 });
