@@ -37,13 +37,13 @@ const GroupController = Object.freeze({
         try {
             const data = await Groups.findByPk(id);
             if (!data)
-                throw new Error(`User with id ${id} not found`);
+                throw new Error(`Group with id ${id} not found`);
 
             req.body.updatedAt = Date.now();
             await data.update(req.body);
             await data.save();
         } catch (err: any) {
-            res.send(computeError(err, `Some error occurred while updating user with id ${id}`));
+            res.send(computeError(err, `Some error occurred while updating group with id ${id}`));
         }
     },
 
@@ -52,11 +52,11 @@ const GroupController = Object.freeze({
         try {
             const data = await Groups.destroy({ where: { id } });
             if (!data)
-                throw new Error(`User with id ${id} not found`);
+                throw new Error(`Group with id ${id} not found`);
 
             res.send(resMsg(204, "Succesfully deleted!"));
         } catch(err: any) {
-            res.send(computeError(err, `Some error occurred while deleting user with id ${id}`));
+            res.send(computeError(err, `Some error occurred while deleting group with id ${id}`));
         }
     },
 });

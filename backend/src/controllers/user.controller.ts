@@ -46,6 +46,7 @@ const UserController = Object.freeze({
             const data = await Users.findByPk(id);
             if (!data) throw new Error(`User with id ${id} not found`);
 
+            req.body.password  = bcrypt.hashSync(req.body.password, 10);
             req.body.updatedAt = Date.now();
             await data.update(req.body);
             await data.save();

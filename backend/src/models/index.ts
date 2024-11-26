@@ -6,7 +6,6 @@ import { CourseModel } from "./course.model";
 import { ModuleModel } from "./module.model";
 import { relationship } from "../utils/data";
 import { EnrollmentModel } from "./enrollment.model";
-import { WarningModel } from "./warning.model";
 
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     host:               dbConfig.HOST,
@@ -21,32 +20,24 @@ const DB = Object.freeze({
     groups:         GroupModel.init(sequelize),
     courses:        CourseModel.init(sequelize),
     modules:        ModuleModel.init(sequelize),
+    igt_modules:    IGTModuleModel.init(sequelize),
     enrollments:    EnrollmentModel.init(sequelize),
     warnings:       WarningModel.init(sequelize),
     // ...
 });
 
 // Relationships
-// * Course-Groups
-relationship(
-    DB.courses, { h: "hasMany" }, { 
-        others: [DB.groups], 
-        b:      "belongsTo" 
-    }
-);
-
 // * Module 
 relationship(
-    DB.modules, { h: "hasOne" }, {
-        others: [DB.groups, DB.users, DB.courses],
+    DB.modules, { h: "hasMany" }, {
+        others: [ DB.igt_modules ],
         b:      "belongsTo"
     }
 );
 
-// * Enrollment
 relationship(
-DB.users, { h: "hasMany" }, {
-        others: [DB.modules],
+    DB.modules, { h: "hasMany" }, {
+        others:  [ DB.users ],
         b:      "belongsToMany",
         opt:    { through: DB.enrollments }
     }

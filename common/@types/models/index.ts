@@ -11,7 +11,7 @@ export type UserData = {
     password:       string,
     phoneNumber:    string,
     role:           string,
-    image:          string,
+    image?:         string,
 }
 
 export type AuthData = {
@@ -44,7 +44,6 @@ export type IGTModuleData = {
 export type TeacherModuleData = {
     teacherId:   number,
     moduleId:    number,
-    weeklyHours: number
 }
 
 export type EnrollmentData = {

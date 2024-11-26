@@ -1,6 +1,6 @@
 import { Sequelize, DataTypes, Model } from "sequelize";
 import { Id, IGTModuleData, ModuleData } from "../../../common/@types/models"
-import { defineId } from "../utils/data";
+import { defineId, namedFkId } from "../utils/data";
 
 // The only purpose of extending Model is getting
 // warnings when types are modified, as to keep our
@@ -11,9 +11,14 @@ interface IGTModuleInstance extends
     Model<Omit<IGTModuleData, "groupId" | "moduleId"> & Id> {}
 
 // https://sequelize.org/docs/v6/core-concepts/validations-and-constraints/
-const ModuleModel = { init: (sequelize: Sequelize) =>
-    sequelize.define<IGTModuleInstance>("modules", {
+const IGTModuleModel = { init: (sequelize: Sequelize) =>
+    sequelize.define<IGTModuleInstance>("igt_modules", {
         ...defineId,
+
+        // We still need to define this because of the 'indexes' field.
+        ...namedFkId("groupId"),
+        ...namedFkId("moduleId"),
+
         weeklyHours: {
             type:       DataTypes.INTEGER,
             allowNull:  false,
@@ -23,6 +28,11 @@ const ModuleModel = { init: (sequelize: Sequelize) =>
                 min: 1 
             }
         }
+    }, {
+        indexes: [{
+            unique: true,
+            fields: [ "groupId", "moduleId" ]
+        }]
     })};
 
-export { ModuleModel };
+export { IGTModuleModel };

@@ -6,7 +6,7 @@ interface TeacherModuleInstance extends
     Model<Omit<TeacherModuleData, "teacherId" | "moduleId">> {}
 
 // https://sequelize.org/docs/v6/core-concepts/validations-and-constraints/
-const ModuleModel = { init: (sequelize: Sequelize) =>
+const TeacherModuleModel = { init: (sequelize: Sequelize) =>
     sequelize.define<TeacherModuleInstance>("teacher_modules", {})};
 
-export { ModuleModel };
+export { TeacherModuleModel };
