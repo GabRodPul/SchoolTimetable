@@ -9,6 +9,13 @@ export const defineId = {
     }
 }
 
+export const namedFkId = (name: string) => Object.fromEntries(new Map([[
+    name, {
+        type: DataTypes.INTEGER,
+        primaryKey: true
+    }
+]]));
+
 export const reference = (type: DataType, model: string, key: string) => ({ 
     type,
     references: { model, key }
