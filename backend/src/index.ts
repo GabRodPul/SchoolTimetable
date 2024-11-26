@@ -6,6 +6,9 @@ import { UserRoutes } from "./routes/user.routes";
 import { GroupRoutes } from "./routes/group.routes"
 import { CourseRoutes } from "./routes/course.routes";
 import { initApiRoutes } from "./routes";
+import { UserRole } from "../../common/@enums/models";
+import { hashSync } from "bcrypt";
+import { dbInit } from "./utils/debug";
 
 const furl = `http://localhost:${envvars.FEND_PORT}`;
 // console.log(furl)
@@ -54,9 +57,7 @@ app.use(cors());
 // });
 
 // DB
-DB.sequelize.sync({ force: true, alter: true }).then(() => {
-    console.log("Drop and re-sync db.")
-})
+dbInit( true );
 
 // Routes
 app.get("/", (req: Request, res: Response) => {
