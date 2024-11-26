@@ -6,6 +6,8 @@ import { CourseModel } from "./course.model";
 import { ModuleModel } from "./module.model";
 import { relationship } from "../utils/data";
 import { EnrollmentModel } from "./enrollment.model";
+import { WarningModel } from "./warning.model";
+import { IGTModuleModel } from "./igt-module.model";
 
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     host:               dbConfig.HOST,
