@@ -3,7 +3,7 @@ import { DB } from "../models"
 import { resMsg } from "../utils/response";
 import { computeError } from "../utils/error";
 
-const Warning = DB.warning;
+const Warning = DB.warnings;
 const WarningController = Object.freeze({
     create: async(req: Request, res: Response) => {
         try {
@@ -24,15 +24,15 @@ const WarningController = Object.freeze({
     },
 
     findOne: async(req: Request, res: Response) => {
-        res.send(resMsg(500, "UNIMPLEMENTED"));
+        res.send(resMsg(500, "Couldn't find one"));
     },
 
     update: async(req: Request, res: Response) => {
-        res.send(resMsg(500, "UNIMPLEMENTED"));
+        res.send(resMsg(500, "Couldn't update"));
     },
 
     delete: async(req: Request, res: Response) => {
-        res.send(resMsg(500, "UNIMPLEMENTED"));
+        res.send(resMsg(500, "Couldn't delete"));
     },
 });
 
