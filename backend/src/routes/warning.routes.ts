@@ -11,7 +11,7 @@ const WarningRoutes = { init: ( app: Express ) => {
     router.get( "/", WarningController.findAll );
     
     // Retrive a single User with id
-    // router.get( "/:id", WarningController.findByPk );
+    router.get( "/:id", WarningController.findOne );
     
     // Update a User with id
     router.put( "/:id", WarningController.update );
