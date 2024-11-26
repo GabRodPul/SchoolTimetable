@@ -57,7 +57,7 @@ relationship(
 // * Sessions
 // relationship(
 //     DB.session, { h: "hasMany" }, {
-//         others:  [ DB.igt ],
+//         others:  [ DB.classHour, DB.igt_module],
 //         b:      "belongsToMany",
 //         opt:    { through: DB.enrollments }
 //     }
