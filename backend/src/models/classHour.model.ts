@@ -1,8 +1,4 @@
-import { 
-    Sequelize, 
-    DataTypes, 
-    Model,
-} from "sequelize";
+import { Sequelize, DataTypes, Model } from "sequelize";
 import { Id, ClassHourData } from "../../../common/@types/models"
 import { defineId, enumStrVals } from "../utils/data";
 import { Turn } from "../../../common/@enums/models";
@@ -16,7 +12,7 @@ interface ClassHourInstance extends Model<ClassHourData & Id> {}
 
 // https://sequelize.org/docs/v6/core-concepts/validations-and-constraints/
 const ClassHourModel = { init: (sequelize: Sequelize) =>
-    sequelize.define<ClassHourInstance>("warnings", {
+    sequelize.define<ClassHourInstance>("classHour", {
         ...defineId,
         turn: {
             type: DataTypes.ENUM(enumStrVals(Turn)),
