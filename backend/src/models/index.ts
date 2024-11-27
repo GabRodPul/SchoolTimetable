@@ -10,6 +10,7 @@ import { WarningModel } from "./warning.model";
 import { IGTModuleModel } from "./igt-module.model";
 import { SessionModel } from "./session.model"
 import { SessionChangedModel } from "./session-changed.model"
+import { ClassHourModel } from "./classHour.model";
 
 
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
@@ -28,6 +29,7 @@ const DB = Object.freeze({
     igt_modules:     IGTModuleModel.init(sequelize),
     enrollments:     EnrollmentModel.init(sequelize),
     warnings:        WarningModel.init(sequelize),
+    classHour:       ClassHourModel.init(sequelize),
     sessions:        SessionModel.init(sequelize),
     sessionsChanged: SessionChangedModel.init(sequelize),
     // ...
@@ -59,22 +61,19 @@ relationship(
 
 
 // * Sessions
-// relationship(
-//     DB.session, { h: "hasMany" }, {
-//         others:  [ DB.classHour, DB.igt_module],
-//         b:      "belongsToMany",
-//         opt:    { through: DB.enrollments }
-//     }
-// )
+relationship(
+    DB.sessions, { h: "hasMany" }, {
+        others:  [ DB.classHour, DB.igt_modules],
+        b:      "belongsTo",
+    }
+)
 
-// * SessionsChanged
-// relationship(
-//     DB.session, { h: "hasOne" }, {
-//         others:  [ DB.sessions, DB.classHour ],
-//         b:      "belongsToMany",
-//     }
-// )
-
-
+//* SessionsChanged
+relationship(
+    DB.sessionsChanged, { h: "hasMany" }, {
+        others: [ DB.sessions, DB.classHour],
+        b: "belongsTo",
+    }
+)
 
 export { DB };
