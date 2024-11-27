@@ -2,14 +2,14 @@ import { hashSync } from "bcrypt";
 import { UserRole } from "../../../common/@enums/models";
 import { DB } from "../models";
 
-export const dbInit = ( debug: boolean ) => {
-    DB.sequelize.sync({ force: debug, alter: debug }).then(() => {
+export const dbInit = async ( debug: boolean ) => {
+    await DB.sequelize.sync({ force: debug, alter: debug }).then(() => {
         console.log("Drop and re-sync db.");
     });
     
     if (!debug) return;
 
-    DB.users.bulkCreate([
+    await DB.users.bulkCreate([
         {
             id:             1,
             name:           "Profe Número 1",
