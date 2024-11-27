@@ -8,7 +8,7 @@ import { defineId, namedFkId } from "../utils/data";
 // & Id is required to pass id to where.
 // Omit = avoid having to define "courseId"
 interface EnrollmentInstance extends 
-    Model<Omit<EnrollmentData, "studentId" | "moduleId">> {}
+    Model<Omit<EnrollmentData, "studentId" | "moduleId"> & Id> {}
 
 const EnrollmentModel = { init: (sequelize: Sequelize) =>
     sequelize.define<EnrollmentInstance>("enrollments", {
@@ -16,6 +16,7 @@ const EnrollmentModel = { init: (sequelize: Sequelize) =>
 
         ...namedFkId("classHourId"),
         ...namedFkId("sessionId"),
+        
     })};
 
 export { EnrollmentModel };

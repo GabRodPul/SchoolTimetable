@@ -7,6 +7,7 @@ import { SigninRoutes } from "./signin.routes";
 import {WarningRoutes} from "./warning.routes"
 import {SessionRoutes} from "./session.routes"
 import {SessionsChangedRoutes} from "./sessions-changed.routes"
+import {EnrollmentRoutes} from "./enrollment.routes"
 
 type Routes = { init: (app: Express) => void };
 const initApiRoutes = ( app: Express ) => {
@@ -17,6 +18,7 @@ const initApiRoutes = ( app: Express ) => {
         WarningRoutes,
         SessionRoutes,
         SessionsChangedRoutes,
+        EnrollmentRoutes,
 
         // Auth, given ApiRts enum we better use separate routes
         SigninRoutes,
