@@ -17,7 +17,7 @@ const DayVals = { values: Object.values(WorkDay) } as const;
 
 // https://sequelize.org/docsSessionDatav6/core-concepts/validations-and-constraints/
 const SessionModel = { init: (sequelize: Sequelize) =>
-    sequelize.define<SessionInstance>("Session", {
+    sequelize.define<SessionInstance>("session", {
         ...defineId,
         
         ...namedFkId("classHourId"),
