@@ -11,7 +11,7 @@ const SessionRoutes = { init: ( app: Express ) => {
     router.get( "/", SessionController.findAll );
     
     // Retrive a single Session with id
-    router.get( "/:id", SessionController.findByPk );
+    router.get( "/:id", SessionController.findByPk);
     
     // Update a Session with id
     router.put( "/:id", SessionController.update );
