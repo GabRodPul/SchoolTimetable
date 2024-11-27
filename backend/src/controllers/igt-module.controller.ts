@@ -3,7 +3,7 @@ import { DB } from "../models"
 import { resMsg } from "../utils/response";
 import { computeError } from "../utils/error";
 
-const IGTModules = DB.modules;
+const IGTModules = DB.igt_modules;
 const IGTModuleController = Object.freeze({
     create: async(req: Request, res: Response) => {
         try {

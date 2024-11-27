@@ -36,6 +36,15 @@ relationship(
 );
 
 relationship(
+    DB.groups, { h: "hasMany" }, {
+        others: [ DB.igt_modules ],
+        b:      "belongsTo"
+    }
+)
+
+DB.igt_modules.
+
+relationship(
     DB.modules, { h: "hasMany" }, {
         others:  [ DB.users ],
         b:      "belongsToMany",

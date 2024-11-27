@@ -57,7 +57,7 @@ app.use(cors());
 // });
 
 // DB
-dbInit( true );
+dbInit( true ).then();
 
 // Routes
 app.get("/", (req: Request, res: Response) => {

@@ -9,10 +9,17 @@ export const defineId = {
     }
 }
 
+export const fkId = {
+    type:       DataTypes.INTEGER,
+    allowNull:  false
+}
+
+/***
+ * @deprecated This should be removed
+ */
 export const namedFkId = (name: string) => Object.fromEntries(new Map([[
     name, {
         type: DataTypes.INTEGER,
-        primaryKey: true
     }
 ]]));
 

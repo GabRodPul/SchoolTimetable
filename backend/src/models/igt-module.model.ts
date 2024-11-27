@@ -1,14 +1,13 @@
 import { Sequelize, DataTypes, Model } from "sequelize";
 import { Id, IGTModuleData, ModuleData } from "../../../common/@types/models"
-import { defineId, namedFkId } from "../utils/data";
+import { defineId, fkId } from "../utils/data";
 
 // The only purpose of extending Model is getting
 // warnings when types are modified, as to keep our
 // models updated.
 // & Id is required to pass id to where.
 // Omit = avoid having to define ids
-interface IGTModuleInstance extends 
-    Model<Omit<IGTModuleData, "groupId" | "moduleId"> & Id> {}
+interface IGTModuleInstance extends Model<IGTModuleData & Id> {}
 
 // https://sequelize.org/docs/v6/core-concepts/validations-and-constraints/
 const IGTModuleModel = { init: (sequelize: Sequelize) =>
@@ -16,8 +15,8 @@ const IGTModuleModel = { init: (sequelize: Sequelize) =>
         ...defineId,
 
         // We still need to define this because of the 'indexes' field.
-        ...namedFkId("groupId"),
-        ...namedFkId("moduleId"),
+        groupId:    fkId,
+        moduleId:   fkId,
 
         weeklyHours: {
             type:       DataTypes.INTEGER,
@@ -28,11 +27,13 @@ const IGTModuleModel = { init: (sequelize: Sequelize) =>
                 min: 1 
             }
         }
-    }, {
-        indexes: [{
-            unique: true,
-            fields: [ "groupId", "moduleId" ]
-        }]
-    })};
+    }, 
+    // {
+    //     indexes: [{
+    //         unique: true,
+    //         fields: [ "groupId", "moduleId" ]
+    //     }]
+    // }
+)};
 
 export { IGTModuleModel };

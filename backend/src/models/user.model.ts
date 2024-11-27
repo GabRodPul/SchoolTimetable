@@ -1,6 +1,6 @@
 import { Sequelize, DataTypes, Model, Optional } from "sequelize";
 import { Id, UserData } from "../../../common/@types/models";
-import { defineId } from "../utils/data";
+import { defineId, enumStrVals } from "../utils/data";
 import { UserRole } from "../../../common/@enums/models" 
 
 // The only purpose of extending Model is getting
@@ -32,7 +32,7 @@ const UserModel = { init: (sequelize: Sequelize) =>
             validate: { is:  /^\+(?:[0-9] ?){6,14}[0-9]$/ }
         },
         role: {
-            type: DataTypes.ENUM(roleVals),
+            type: DataTypes.ENUM(enumStrVals(UserRole)),
             allowNull: false
         },
         image: {
