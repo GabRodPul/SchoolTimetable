@@ -102,6 +102,53 @@ export const dbInit = async ( debug: boolean ) => {
         dbgGrp.DAM2N,
     ]);
 
+    // Storing these for clearer data creation
+    await DB.classHour.bulkCreate([
+        {
+            id:             1,
+            turn:           "MORNING",
+            sessionHour:    "profe1@email.com",
+            start:          undefined,
+            end:            hashSync("profenum1", 10),
+        },
+        {
+            id:             2,
+            turn:           "MORNING",
+            sessionHour:    "profe1@email.com",
+            start:          undefined,
+            end:            hashSync("profenum1", 10),
+        },
+        {
+            id:             3,
+            turn:           "MORNING",
+            sessionHour:    "profe1@email.com",
+            start:          undefined,
+            end:            hashSync("profenum1", 10),
+        },
+        {
+            id:             4,
+            turn:           "MORNING",
+            sessionHour:    "profe1@email.com",
+            start:          undefined,
+            end:            hashSync("profenum1", 10),
+        },
+        {
+            id:             5,
+            turn:           "MORNING",
+            sessionHour:    "profe1@email.com",
+            start:          undefined,
+            end:            hashSync("profenum1", 10),
+        },
+        {
+            id:             6,
+            turn:           "MORNING",
+            sessionHour:    "profe1@email.com",
+            start:          undefined,
+            end:            hashSync("profenum1", 10),
+        },
+    ]);
+
+
     const dbgMod = {
         FCT: { id:   1,  name: "FCT" },
         PRW: { id:   2,  name: "PRW" },
