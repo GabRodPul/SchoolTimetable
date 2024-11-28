@@ -20,6 +20,7 @@ const UserRoutes = { init: ( app: Express ) => {
     router.delete( "/:id", UserController.delete );
 
     app.use("/api/users", router);
+
 }};
 
 export { UserRoutes };

@@ -6,7 +6,7 @@ const dbConfig = Object.freeze({
     USER:       envvars.BEND_DB_USERNAME!,
     PASSWORD:   envvars.BEND_DB_PASSWORD!,
     DB:         envvars.BEND_DB_NAME!,
-    dialect:    "mysql" as Dialect,
+    dialect:    envvars.BEND_DB_DIALECT! as Dialect,
     pool:       {
         max:        5,
         min:        0,

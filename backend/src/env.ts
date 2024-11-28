@@ -1,14 +1,7 @@
 import { config } from "dotenv";
 import * as path from "path"
+import { getEnv } from "../../common/get-env"
 
-config({ path: path.resolve(`${__dirname}/../../.env`) });
-const envvars = {
-    BEND_DB_NAME:       process.env.BEND_DB_NAME,
-    BEND_DB_USERNAME:   process.env.BEND_DB_USERNAME,
-    BEND_DB_PASSWORD:   process.env.BEND_DB_PASSWORD,
-    BEND_PORT:          process.env.BEND_PORT,
-    
-    FEND_PORT:          process.env.FEND_PORT
-};
-
+config({ path: `${__dirname}/../../../../.env` });
+const envvars = getEnv( process );
 export { envvars };
