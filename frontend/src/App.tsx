@@ -1,5 +1,5 @@
 import './App.css'
-import Header from './assets/componets/CommonComponets/Header/Header'
+import Header from './assets/componets/CommonComps/Header/Header'
 import Home from './assets/page/HomePage/Home'
 import Course from './assets/page/CoursePage/Course'
 // import CourseFormPage from './assets/page/CourseFormPage/CourseFormPage'
