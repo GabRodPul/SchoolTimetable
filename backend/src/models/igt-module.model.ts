@@ -15,6 +15,7 @@ const IGTModuleModel = { init: (sequelize: Sequelize) =>
         ...defineId,
 
         // We still need to define this because of the 'indexes' field.
+        teacherId:  fkId,
         groupId:    fkId,
         moduleId:   fkId,
 

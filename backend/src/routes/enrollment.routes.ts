@@ -22,7 +22,7 @@ const EnrollmentRoutes = { init: ( app: Express ) => {
     // Update a Changed Session with id
     router.delete( "/:id", EnrollmentController.delete );
 
-    app.use("/api/session-changed", router);
+    app.use("/api/enrollment", router);
 }};
 
 export { EnrollmentRoutes };

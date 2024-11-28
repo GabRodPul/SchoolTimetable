@@ -36,6 +36,7 @@ export type ModuleData = {
 }
 
 export type IGTModuleData = {
+    teacherId:  number,
     groupId:    number,
     moduleId:   number,
     weeklyHours:number,
