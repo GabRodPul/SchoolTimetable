@@ -1,28 +1,28 @@
 import { Express, Router } from "express";
-import { WarningController } from "../controllers/warning.controller";
+import { ModuleController } from "../controllers/module.controller";
 import {hasRolePermissions} from "../controllers/auth"
 import { UserRole } from "../../../common/@enums/models";
 
-const WarningRoutes = { init: ( app: Express ) => {
+const ModuleRoutes = { init: ( app: Express ) => {
     const router = Router();
     
     // Create a new warning, with a middleware to filter, only allowing teachers
-    router.post( "/", hasRolePermissions(UserRole.Teacher), WarningController.create );
+    router.post( "/", ModuleController.create );
     
     // Retrive all warnings
-    router.get( "/", WarningController.findAll );
+    router.get( "/", ModuleController.findAll );
     
     // Retrive a warning with id
-    router.get( "/:id", WarningController.findOne );
+    router.get( "/:id", ModuleController.findByPk );
     
     // Update a Warning with id
-    router.put( "/:id", WarningController.update );
+    router.put( "/:id", ModuleController.update );
     
     // Delete a Warning with id
-    router.delete( "/:id", WarningController.delete );
+    router.delete( "/:id", ModuleController.delete );
 
     app.use("/api/warnings", router);
 
 }};
 
-export { WarningRoutes };
+export { ModuleRoutes };
