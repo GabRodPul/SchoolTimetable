@@ -1,24 +1,56 @@
-import _React from 'react';
+import _React, { useEffect } from 'react';
 import './LoginPageStyles.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AuthData } from '#common/@types/models';
+import { ApiRts } from '#common/@enums/http';
+import { useApi } from '#src/api/ApiContext';
+import { FetchState } from '#src/types/api';
 
 function LoginPageForm() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [rememberMe, setRememberMe] = useState(false);
+  const [email,      setEmail       ] = useState('');
+  const [password,   setPassword    ] = useState('');
+  const [rememberMe, setRememberMe  ] = useState(false);
+  const [fetchRsrc,  api            ] = useApi<AuthData>(ApiRts.Login);
 
   const navigate = useNavigate();
 
   const handleLogin = (event: React.FormEvent) => {
     event.preventDefault();
 
-    console.log('Usuario:', username);
+    if (fetchRsrc.state == FetchState.NotStarted)
+        api.login!({ email, password });
+
+    console.log('Correo:', email);
     console.log('Contraseña:', password);
     console.log('Recuérdame:', rememberMe);
 
     navigate('/Home');
   };
+
+  useEffect(() => {
+    console.log(fetchRsrc)
+
+    switch (fetchRsrc.state) {
+      case FetchState.Success: {
+        if ((fetchRsrc.data as any).accessToken !== undefined) {
+          localStorage.setItem("currentUser", JSON.stringify(fetchRsrc.data));
+          navigate("/Home");
+          return;
+        }
+
+        console.log((fetchRsrc.data as any).errors)
+        console.log((fetchRsrc.data as any).message)
+      } break;
+
+      case FetchState.Error: {
+        api.resetRsrc();
+      }
+    }
+  }, [fetchRsrc])
+
+  if (localStorage.getItem("currentUser"))
+    navigate("/Home");
 
   return (
     <div className="LoginMainContainer">
@@ -39,7 +71,7 @@ function LoginPageForm() {
           <form className="loginPageForm" onSubmit={handleLogin}>
             <label className="LoginInputText">
               <p>Usuario</p>
-              <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Usuario" required
+              <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Usuario" required
               />
             </label>
 

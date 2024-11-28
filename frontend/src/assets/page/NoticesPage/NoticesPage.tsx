@@ -1,4 +1,4 @@
-import { FaSearch } from "react-icons/fa";
+// import React from 'react';
 import './NoticesPageStyles.css'
 import NoticeCard from '../../componets/Cards/NoticeCard/NoticeCard'
 

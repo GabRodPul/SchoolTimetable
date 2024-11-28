@@ -6,6 +6,15 @@
     background-color: #F3F2ED;
 }
 
+.headerIconsContainer{
+    display: flex;
+    gap: 15px;
+}
+
 .header a{
-    margin: 10px;
+    margin-left: 25px;
+}
+
+.headerIcon{
+    width: 20px;
 }

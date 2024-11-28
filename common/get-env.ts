@@ -4,6 +4,7 @@ const getEnv = (process: NodeJS.Process) => ({ // It may complay that NodeJS.Pro
     BEND_DB_USERNAME:   process.env.BEND_DB_USERNAME,
     BEND_DB_PASSWORD:   process.env.BEND_DB_PASSWORD,
     BEND_PORT:          process.env.BEND_PORT,
+    JWT_SECRET:         process.env.JWT_SECRET,
     
     FEND_PORT:          process.env.FEND_PORT
 });

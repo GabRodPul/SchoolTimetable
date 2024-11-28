@@ -16,7 +16,7 @@ const UserController = Object.freeze({
             const data = await Users.create(user);
             res.send(data);
         } catch (err: any) {
-            // Aseguramos que computeError retorne un ResponseData adecuado
+            // We make sure that computeError return ResponseData
             res.status(500).send(computeError(err, "Some error occurred while creating the User."));
         }
     },
@@ -26,7 +26,7 @@ const UserController = Object.freeze({
             const data = await Users.findAll();
             res.send(data);
         } catch (err: any) {
-            res.send(computeError(err));  // Usamos computeError para asegurar el tipo adecuado
+            res.send(computeError(err));
         }
     },
 
@@ -36,7 +36,7 @@ const UserController = Object.freeze({
             if (!data) throw new Error(`User with id ${req.params.id} not found`);
             res.send(data);
         } catch (err: any) {
-            res.send(computeError(err));  // Usamos computeError para asegurar el tipo adecuado
+            res.send(computeError(err));
         }
     },
 
@@ -46,11 +46,12 @@ const UserController = Object.freeze({
             const data = await Users.findByPk(id);
             if (!data) throw new Error(`User with id ${id} not found`);
 
+            req.body.password  = bcrypt.hashSync(req.body.password, 10);
             req.body.updatedAt = Date.now();
             await data.update(req.body);
             await data.save();
 
-            res.send(resMsg(200, `User with id ${id} updated successfully`)); // Respuesta exitosa
+            res.send(resMsg(200, `User with id ${id} updated successfully`));
         } catch (err: any) {
             res.send(computeError(err, `Some error occurred while updating user with id ${id}`));
         }
@@ -62,7 +63,7 @@ const UserController = Object.freeze({
             const data = await Users.destroy({ where: { id } });
             if (!data) throw new Error(`User with id ${id} not found`);
 
-            res.send(resMsg(204, "Successfully deleted!")); // Respuesta exitosa
+            res.send(resMsg(204, "Successfully deleted!"));
         } catch (err: any) {
             res.send(computeError(err, `Some error occurred while deleting user with id ${id}`));
         }

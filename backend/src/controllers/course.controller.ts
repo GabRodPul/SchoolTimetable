@@ -4,6 +4,9 @@ import { resMsg } from "../utils/response";
 import { computeError } from "../utils/error";
 
 const Courses = DB.courses;
+/***
+ * @deprecated This should be removed
+ */
 const CourseController = Object.freeze({
     create: async(req: Request, res: Response) => {
         try {

@@ -9,7 +9,7 @@ function HomeCard() {
                 <FontAwesomeIcon icon={faClock} />
                 <h5>Página de Horarios</h5>
                 <p>Vea sus horarios</p>
-                <a href="http://"><button>Acceder</button></a>
+                <a href="/timetable"><button>Acceder</button></a>
             </div>
             <div className="card">
                 <FontAwesomeIcon icon={faBell} />

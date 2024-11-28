@@ -1,6 +1,6 @@
 import { Sequelize, DataTypes, Model } from "sequelize";
 import { Id, CourseData } from "../../../common/@types/models"
-import { defineId } from "../utils/id";
+import { defineId } from "../utils/data";
 
 // The only purpose of extending Model is getting
 // warnings when types are modified, as to keep our
@@ -9,13 +9,16 @@ import { defineId } from "../utils/id";
 interface CourseInstance extends Model<CourseData & Id> {}
 
 // https://sequelize.org/docs/v6/core-concepts/validations-and-constraints/
+/***
+ * @deprecated This model should be removed
+ */
 const CourseModel = { init: (sequelize: Sequelize) =>
     sequelize.define<CourseInstance>("courses", {
         ...defineId,
         code:   { 
-            type: DataTypes.STRING(3),
+            type: DataTypes.STRING(5),
             validate: {
-                len: [3, 3],
+                len: [3, 5],
                 isAlpha: true
             }
         },

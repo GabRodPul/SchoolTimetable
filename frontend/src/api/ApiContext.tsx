@@ -1,9 +1,9 @@
 import { Body } from "#common/@types/http";
 import { createContext, useReducer, useContext, Reducer, PropsWithoutRef } from "react";
-import { Id, UserData } from "#common/@types/models";
-import { API } from "./api";
+import { AuthData, Id, UserData } from "#common/@types/models";
+import { API, myfetch } from "./api";
 import { FetchData, FetchState } from "../types/api";
-import { ApiRts } from "#common/@enums/http";
+import { ApiRts, Method } from "#common/@enums/http";
 
 const evalFetch = <T,>() => (fetch: FetchData<T>, payload: FetchData<T>) => {
     switch (payload.state) {
@@ -38,8 +38,22 @@ const ApiResourceProvider = <T,>(props: any) => {
     )
 }
 
+type UserLogin = { email: string, password: string };
 const useApi = <T,>(route: ApiRts)
-: [ FetchData<T>, { get: (id: Id) => Promise<void> } ] => {
+: [ FetchData<T>, { 
+    get:    (id: Id)             => Promise<void>,
+    getAll: ()                   => Promise<void>,
+    post:   (body: T)            => Promise<void>,
+    put:    (opts: Body<T> & Id) => Promise<void>,
+    delete: (id: Id)             => Promise<void>,
+    signin:
+            ((body: UserData)    => Promise<void>) |
+            undefined,
+    login:
+            ((body: UserLogin)   => Promise<void>) |
+            undefined
+    resetRsrc: () => void
+} ] => {
     const [fetchRsrc, dispatch] = useReducer<Reducer<FetchData<T>, FetchData<T>>>(
         evalFetch<T>(), 
         { state: FetchState.NotStarted }
@@ -48,6 +62,53 @@ const useApi = <T,>(route: ApiRts)
     const ctx = useContext(createApiCtx<T>());
     if (!ctx)
         throw new Error(`useApiResource must be within an ApiResourceProvider`);
+
+    let signin, login;
+    switch (route) {
+        case ApiRts.Signin: {
+            signin = async (body: UserData) => {
+                try {
+                    const data = await myfetch<AuthData, UserData, Body<UserData>>(ApiRts.Signin, Method.POST, { body: body })
+                    dispatch({
+                        state: FetchState.Success,
+                        data: data as T // xddd
+                    });
+                } catch(e: unknown) {
+                    dispatch({
+                        state: FetchState.Error,
+                        error: e as Error
+                    })
+                }
+            }
+        } break;
+
+        case ApiRts.Login: {
+            login = async (body: UserLogin) => {
+                try {
+                    const data = await myfetch<AuthData, UserLogin, Body<UserLogin>>(ApiRts.Login, Method.GET, { body: body })
+                    dispatch({
+                        state: FetchState.Success,
+                        data: data as T // xddd
+                    });
+                } catch(e: unknown) {
+                    dispatch({
+                        state: FetchState.Error,
+                        error: e as Error
+                    })
+                }
+            }
+        } break;
+
+        default: {
+            // authFunc = undefined;
+            // authFunc = async (body: never) => {
+            //     dispatch({
+            //         state: FetchState.Error,
+            //         error: new Error(`authFunc used without ApitRts.Signin or ApiRts.Login`)
+            //     })
+            // };
+        } break;
+    }
 
     return [fetchRsrc, {
         get: async (id: Id) => {
@@ -68,7 +129,7 @@ const useApi = <T,>(route: ApiRts)
         // ts(2353): Object literal may only specify known properties, and 'getAll' does 
         //           not exist in type '{ get: (id: Id) => Promise<void>; }'
         // Apparently this is a bug???
-        // @ts-expect-error
+        
         getAll: async () => {
             try {
                 const data = await API.getAll<T>(route);
@@ -128,7 +189,12 @@ const useApi = <T,>(route: ApiRts)
                 })
             }
         },
-    }]
+        
+        signin,
+        login,
+
+        resetRsrc: () => dispatch({ state: FetchState.NotStarted })
+    }];
 }
 
 export { ApiResourceProvider, useApi };

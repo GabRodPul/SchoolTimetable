@@ -1,3 +1,4 @@
+import { EnumType } from "typescript";
 import { UserData } from "../../../common/@types/models";
 
 var jwt = require('jsonwebtoken');
@@ -11,7 +12,8 @@ function generateToken(user: any) {
         name: user.name,
         email: user.email,
         password: user.password,
-        phoneNumber: user.phoneNumber
+        phoneNumber: user.phoneNumber,
+        image: user.image
     };
 
     // Genera el token
