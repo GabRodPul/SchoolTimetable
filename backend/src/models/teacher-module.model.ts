@@ -10,3 +10,6 @@ const TeacherModuleModel = { init: (sequelize: Sequelize) =>
     sequelize.define<TeacherModuleInstance>("teacher_modules", {})};
 
 export { TeacherModuleModel };
+
+
+//Esta sobra, la tabla existia ante pero ya no
