@@ -10,7 +10,7 @@ import { WorkDay } from "../../../common/@enums/models"
 // & Id is required to pass id to where.
 // Omit = avoid having to define "courseId"
 interface SessionInstance extends 
-    Model<Omit<SessionData, "classHourId" | "moduleId"> & Id> {}
+    Model<Omit<SessionData, "classHourId" | "igtModuleId"> & Id> {}
 
 const DayVals = { values: Object.values(WorkDay) } as const;
 
@@ -21,7 +21,7 @@ const SessionModel = { init: (sequelize: Sequelize) =>
         ...defineId,
         
         ...namedFkId("classHourId"),
-        ...namedFkId("moduleId"),
+        ...namedFkId("igtModuleId"),
 
         day: {
             type: DataTypes.ENUM(DayVals),

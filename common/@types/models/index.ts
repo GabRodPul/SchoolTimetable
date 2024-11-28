@@ -63,7 +63,7 @@ export type ClassHourData = {
 
 export type SessionData = {
     classHourId:    number,
-    moduleId:       number,
+    igtModuleId:    number,
     day:            WorkDay,
 }
 
