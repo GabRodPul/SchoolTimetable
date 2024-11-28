@@ -17,7 +17,9 @@ const ModuleModel = { init: (sequelize: Sequelize) =>
         name:  {
             type:       DataTypes.STRING(3),
             allowNull:  false,
-            validate: { len:[3,3] },
+            validate: { 
+                len:[3,3],
+            },
         },
     })};
 
