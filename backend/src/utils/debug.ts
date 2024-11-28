@@ -1,5 +1,5 @@
 import { hashSync } from "bcrypt";
-import { UserRole } from "../../../common/@enums/models";
+import { Turn, UserRole } from "../../../common/@enums/models";
 import { DB } from "../models";
 
 export const dbInit = async ( debug: boolean ) => {
@@ -124,45 +124,52 @@ export const dbInit = async ( debug: boolean ) => {
     await DB.classHour.bulkCreate([
         {
             id:             1,
-            turn:           "MORNING",
-            sessionHour:    "profe1@email.com",
-            start:          undefined,
-            end:            hashSync("profenum1", 10),
+            turn:           Turn.Afternoon,
+            sessionHour:    1,
+            start:          "15:00:00",
+            end:            "15:55:00",
         },
         {
             id:             2,
-            turn:           "MORNING",
-            sessionHour:    "profe1@email.com",
-            start:          undefined,
-            end:            hashSync("profenum1", 10),
+            turn:           Turn.Afternoon,
+            sessionHour:    2,
+            start:          "15:55:01",
+            end:            "16:50:00",
         },
         {
             id:             3,
-            turn:           "MORNING",
-            sessionHour:    "profe1@email.com",
-            start:          undefined,
-            end:            hashSync("profenum1", 10),
+            turn:           Turn.Afternoon,
+            sessionHour:    3,
+            start:          "16:50:01",
+            end:            "17:45:00",
         },
         {
             id:             4,
-            turn:           "MORNING",
-            sessionHour:    "profe1@email.com",
-            start:          undefined,
-            end:            hashSync("profenum1", 10),
+            turn:           Turn.Afternoon,
+            sessionHour:    4,
+            start:          "18:00:01",
+            end:            "18:55:00",
         },
         {
             id:             5,
-            turn:           "MORNING",
-            sessionHour:    "profe1@email.com",
-            start:          undefined,
-            end:            hashSync("profenum1", 10),
+            turn:           Turn.Afternoon,
+            sessionHour:    5,
+            start:          "18:55:01",
+            end:            "19:50:00",
         },
         {
             id:             6,
-            turn:           "MORNING",
-            sessionHour:    "profe1@email.com",
-            start:          undefined,
-            end:            hashSync("profenum1", 10),
+            turn:           Turn.Afternoon,
+            sessionHour:    6,
+            start:          "19:50:01",
+            end:            "20:45:00",
+        },
+        {
+            id:             7,
+            turn:           Turn.Morning,
+            sessionHour:    1,
+            start:          "08:00:00",
+            end:            "08:55:00",
         },
     ]);
 
