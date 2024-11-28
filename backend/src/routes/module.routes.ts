@@ -21,7 +21,7 @@ const ModuleRoutes = { init: ( app: Express ) => {
     // Delete a Warning with id
     router.delete( "/:id", ModuleController.delete );
 
-    app.use("/api/warnings", router);
+    app.use("/api/modules", router);
 
 }};
 
