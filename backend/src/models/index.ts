@@ -59,11 +59,18 @@ relationship(
         b:      "belongsTo",
 })
 
+// * ModuleIGP
+relationship(
+    DB.igt_modules, { h: "hasMany" }, { 
+        others: [DB.groups],
+        b:      "belongsTo",
+})
+
 
 // * Sessions
 relationship(
     DB.sessions, { h: "hasMany" }, {
-        others:  [ DB.classHour, DB.igt_modules],
+        others:  [DB.classHour, DB.igt_modules],
         b:      "belongsTo",
     }
 )
@@ -71,9 +78,16 @@ relationship(
 //* SessionsChanged
 relationship(
     DB.sessionsChanged, { h: "hasMany" }, {
-        others: [ DB.sessions, DB.classHour],
+        others: [DB.sessions, DB.classHour],
         b: "belongsTo",
     }
 )
+
+// * Enrrollment
+relationship(
+    DB.enrollments, { h: "hasMany" }, { 
+        others: [DB.users, DB.modules],
+        b:      "belongsTo",
+})
 
 export { DB };
