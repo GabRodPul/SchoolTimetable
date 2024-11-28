@@ -14,7 +14,7 @@ const SessionsChangedRoutes = { init: ( app: Express ) => {
     router.get( "/", SessionChangedController.findAll );
     
     // Retrive a single Changed Session with id
-    router.get( "/:id", SessionChangedController.findOne );
+    router.get( "/:id", SessionChangedController.findByPk );
     
     // Update a Changed Session with id
     router.put( "/:id", SessionChangedController.update );
