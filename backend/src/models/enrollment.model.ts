@@ -14,8 +14,8 @@ const EnrollmentModel = { init: (sequelize: Sequelize) =>
     sequelize.define<EnrollmentInstance>("enrollments", {
         ...defineId,
 
-        ...namedFkId("classHourId"),
-        ...namedFkId("sessionId"),
+        ...namedFkId("studentId"),
+        ...namedFkId("moduleId"),
         
     })};
 
