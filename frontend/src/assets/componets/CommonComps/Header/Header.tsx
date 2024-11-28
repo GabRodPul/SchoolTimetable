@@ -1,21 +1,29 @@
 import './HeaderStyles.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendar, faClock, faBell, faPenClip, faHelmetSafety } from '@fortawesome/free-solid-svg-icons';
-import MenuHeader from '../MenuHead/MenuHead';
-
+import { faCalendar, faBars } from '@fortawesome/free-solid-svg-icons';
+import { useState } from 'react';
 
 function Header() {
 
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
+    };
+
     return (
         <div className='header'>
-            <div className="headerIconsContainer">
-                <a href='/Home'><FontAwesomeIcon className='headerIcon' icon={faCalendar} /></a>
-                <a href="http://"><FontAwesomeIcon className='headerIcon' icon={faClock} /></a>
-                <a href="http://"><FontAwesomeIcon className='headerIcon' icon={faBell} /></a>
-                <a href="http://"><FontAwesomeIcon className='headerIcon' icon={faPenClip} /></a>
-                <a href="http://"><FontAwesomeIcon className='headerIcon' icon={faHelmetSafety} /></a>
-            </div>
-            <MenuHeader />
+            <a href='/Home'><FontAwesomeIcon icon={faCalendar} /></a>
+            <FontAwesomeIcon icon={faBars} onClick={toggleMenu} className="menu-icon" />
+            {isMenuOpen && (
+                <div className="dropdown-menu">
+                    <button>Inicio</button>
+                    <button>Horarios</button>
+                    <button>Notificaciones</button>
+                    <button>Trámites</button>
+                    <button>Contacto</button>
+                </div>
+            )}
         </div>
     );
 }
