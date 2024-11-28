@@ -51,8 +51,6 @@ relationship(
     }
 )
 
-DB.igt_modules.
-
 relationship(
     DB.modules, { h: "hasMany" }, {
         others:  [ DB.users ],
@@ -71,7 +69,7 @@ relationship(
 // * ModuleIGP
 relationship(
     DB.igt_modules, { h: "hasMany" }, { 
-        others: [DB.groups],
+        others: [DB.groups, DB.modules, DB.users],
         b:      "belongsTo",
 })
 
