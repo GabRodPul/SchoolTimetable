@@ -19,8 +19,8 @@
     border-bottom: 1px solid #E3E6EC;
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-family: Lexend, sans-serif;
+    gap: 15px;
+    font-family: Lexend, sans-serif;    
 }
 
 .navigationTab__side-menuContent{
