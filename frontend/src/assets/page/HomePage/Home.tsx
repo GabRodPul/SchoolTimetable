@@ -1,6 +1,5 @@
-import Footer from '../../componets/ComponentsHome/Footer/Footer';
 import FrontImg from '../../componets/ComponentsHome/FrontImg/FrontIng';
-import HomeCard from '../../componets/ComponentsHome/HomeCards/HomeCard';
+import HomeCard from '../../componets/Cards/HomeCards/HomeCard';
 
 function Home() {
     return (
@@ -9,9 +8,7 @@ function Home() {
             <FrontImg/>
             <HomeCard/>
             {/* Quitar luego, es solo para pruebas */}
-            <button><a href='/Course'> Boton cursos provisional</a></button>
             <button><a href='/GroupPage'> Boton Grupos provisional</a></button>
-            <Footer/>
         </div>
         </>
     );
