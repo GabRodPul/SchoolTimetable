@@ -24,7 +24,7 @@ a:hover {
 
 body {
   margin: 0;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  padding: 0;
   /* display: flex;
   place-items: center;
   min-width: 320px;
@@ -67,3 +67,11 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 } */
+
+@font-face {
+  font-family: 'Lexend';
+  src: local('Lexend'), url(./assets/fonts/Lexend-Regular.ttf);
+
+  font-family: 'MerriweatherSans';
+  src: local('MerriweatherSans'), url(./assets/fonts/MerriweatherSans-VariableFont_wght.ttf);
+}

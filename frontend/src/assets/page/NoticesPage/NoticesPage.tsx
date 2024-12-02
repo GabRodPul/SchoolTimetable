@@ -1,4 +1,5 @@
 // import React from 'react';
+import { FaSearch } from "react-icons/fa";
 import './NoticesPageStyles.css'
 import NoticeCard from '../../componets/Cards/NoticeCard/NoticeCard'
 import { FaSearch } from 'react-icons/fa';
@@ -43,7 +44,7 @@ function NoticesPage() {
         <div>
             <div className="notifications">
                 <h2>Notificaciones</h2>
-                { notices.forEach(n => n) }
+                {/* { notices.forEach(n => n) } */}
             </div>
         </div>
     );

@@ -1,3 +1,13 @@
-.body{
-    padding: 0;
+.homepage__mobile {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .homepage__desktop {
+        display: none;
+    }
+
+    .homepage__mobile{
+        display: block;
+    }
 }

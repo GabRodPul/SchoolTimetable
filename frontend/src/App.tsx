@@ -1,5 +1,5 @@
 import './App.css'
-import Header from './assets/componets/CommonComps/Header/Header'
+// import Header from './assets/componets/CommonComps/Header/Header'
 import Home from './assets/page/HomePage/Home'
 // import CourseFormPage from './assets/page/CourseFormPage/CourseFormPage'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
@@ -13,7 +13,7 @@ function App() {
 
   return (
     <>
-      <Header/>
+      {/* <Header/> */}
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<LoginPage />} />
