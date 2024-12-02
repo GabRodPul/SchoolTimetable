@@ -1,25 +1,13 @@
-.HomeContainer{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.homepage__mobile {
+    display: none;
 }
 
-.imgDiv {
-    background-image: url(/img/FrontImg2.png);
-    height: 250px;
-    width: 700px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-
-@media only screen and (max-width: 700px) {
-
-    .imgDiv {
-        background-image: url(/img/FrontImg.png);
-        height: 300px;
-        width: 400px;
+@media (max-width: 768px) {
+    .homepage__desktop {
+        display: none;
     }
 
+    .homepage__mobile{
+        display: block;
+    }
 }

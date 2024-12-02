@@ -37,50 +37,72 @@ const DB = Object.freeze({
 
 // Relationships
 // * Module 
-relationship(
-    DB.modules, { h: "hasMany" }, {
-        others: [ DB.igt_modules ],
-        b:      "belongsTo"
-    }
-);
+// relationship(
+    // DB.modules, { h: "hasMany" }, {
+        // others: [ DB.igt_modules ],
+        // b:      "belongsTo"
+    // }
+// );
+DB.modules.hasMany(DB.igt_modules,   { foreignKey: "moduleId" });
+DB.igt_modules.belongsTo(DB.modules, { foreignKey: "moduleId" });
 
-relationship(
-    DB.groups, { h: "hasMany" }, {
-        others: [ DB.igt_modules ],
-        b:      "belongsTo"
-    }
-)
+// relationship(
+    // DB.groups, { h: "hasMany" }, {
+        // others: [ DB.igt_modules ],
+        // b:      "belongsTo"
+    // }
+// )
+DB.groups.hasMany(DB.igt_modules  , { foreignKey: "groupId" });
+DB.igt_modules.belongsTo(DB.groups, { foreignKey: "groupId" });
 
-relationship(
-    DB.modules, { h: "hasMany" }, {
-        others:  [ DB.users ],
-        b:      "belongsToMany",
-        opt:    { through: DB.enrollments }
-    }
-)
+// relationship(
+    // DB.modules, { h: "hasMany" }, {
+        // others:  [ DB.users ],
+        // b:      "belongsToMany",
+        // opt:    { through: DB.enrollments }
+    // }
+// )
+DB.users.hasMany(DB.enrollments,   { foreignKey: "studentId" });
+DB.enrollments.belongsTo(DB.users, { foreignKey: "studentId" });
+
+DB.modules.hasMany(DB.enrollments  , { foreignKey: "moduleId" });
+DB.enrollments.belongsTo(DB.modules, { foreignKey: "moduleId" });
+// DB.users.belongsTo(DB.modules, { through: DB.enrollments });
+
 
 // * Warning
-relationship(
-    DB.warnings, { h: "hasMany" }, { 
-        others: [DB.users],
-        b:      "belongsTo",
-})
+// Esta está mal. Es al revés.
+// - Gabriel
+// relationship(
+    // DB.warnings, { h: "hasMany" }, { 
+        // others: [DB.users],
+        // b:      "belongsTo",
+// })
+DB.warnings.hasOne(DB.users);
+DB.users.hasMany(DB.warnings);
 
 // * ModuleIGP
-relationship(
-    DB.igt_modules, { h: "hasMany" }, { 
-        others: [DB.groups, DB.modules, DB.users],
-        b:      "belongsTo",
-})
+// Estas ya están arriba, realmente.
+// relationship(
+    // DB.igt_modules, { h: "hasMany" }, { 
+        // others: [DB.groups, DB.modules, DB.users],
+        // b:      "belongsTo",
+// })
 
 
 // * Sessions
-relationship(
-    DB.sessions, { h: "hasMany" }, {
-        others:  [DB.classHour, DB.igt_modules],
-        b:      "belongsTo",
-    }
-)
+// Esta está mal. Una sesión es para un módulo
+// y una hora de clase concretas.
+// relationship(
+    // DB.sessions, { h: "hasMany" }, {
+        // others:  [DB.classHour, DB.igt_modules],
+        // b:      "belongsTo",
+    // }
+// )
+DB.classHour.hasMany(DB.sessions,     { foreignKey: "classHourId" });
+DB.sessions.belongsTo(DB.classHour,   { foreignKey: "classHourId" });
+DB.igt_modules.hasMany(DB.sessions,   { foreignKey: "igtModuleId" });
+DB.sessions.belongsTo(DB.igt_modules, { foreignKey: "igtModuleId" });
 
 //* SessionsChanged
 relationship(
@@ -89,12 +111,14 @@ relationship(
         b: "belongsTo",
     }
 )
+// DB.sessionsChanged.hasMany(DB.sessions);
+// DB.se
 
 // * Enrrollment
-relationship(
-    DB.enrollments, { h: "hasMany" }, { 
-        others: [DB.users, DB.modules],
-        b:      "belongsTo",
-})
+// relationship(
+    // DB.enrollments, { h: "hasMany" }, { 
+        // others: [DB.users, DB.modules],
+        // b:      "belongsTo",
+// })
 
-export { DB };
+export { DB }; 
