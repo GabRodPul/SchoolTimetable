@@ -72,26 +72,26 @@
 
 
 /* Header */
-/* .navigationTab__profile {
+.navigationTab__profile {
     display: flex;
     align-items: center;
     justify-content: flex-end;
     padding: 0 20px;
-    height: 60px;
+    height: 84px;
     background-color: #fff;
     border-bottom: 1px solid #e0e0e0;
     font-family: MerriweatherSans, sans-serif;
     font-size: 14px;
     color: #6c757d;
-} */
+}
 
-/* .navigationTab__profileInfo {
+.navigationTab__profileInfo {
     display: flex;
     align-items: center;
     margin-right: 5%;
-} */
+}
 
-/* .navigationTab__profileIcon {
+.navigationTab__profileIcon {
     width: 40px;
     height: 40px;
     margin-right: 10px;
@@ -100,25 +100,25 @@
     display: flex;
     align-items: center;
     justify-content: center;
-} */
+}
 
-/* .navigationTab__profileIcon img {
+.navigationTab__profileIcon img {
     width: 70%;
     height: 70%;
     object-fit: cover;
-} */
+}
 
 
-/* .navigationTab__side-menuContent {
+.navigationTab__side-menuContent {
     padding-left: 10px;
-} */
+}
 
-/* .navigationTab__content {
+.navigationTab__content {
     margin-left: 250px; 
     padding: 20px;
     overflow-x: hidden;
     font-family: MerriweatherSans, sans-serif;
-} */
+}
 
 
 /* .navigationTab__header {
