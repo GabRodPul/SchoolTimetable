@@ -14,16 +14,20 @@ function SideMenu() {
     };
 
     return (
-        <div className='header'>
+        <div className='body'>
             <div className="side-menu__body">
+                <h1 className='side-menu__header'>
+                    Menú
+                </h1>
                 <a href="#home">
                     <button
-                        className={`side-menu__header ${active === "home" ? "active" : ""}`}
+                        className={`side-menu__content ${active === "home" ? "active" : ""}`}
                         onClick={() => handleSetActive("home")}
                     >
-                        <RiHome2Line /> Menú
+                        <RiHome2Line /> Inicio
                     </button>
                 </a>
+
                 <a href="#horarios">
                     <button
                         className={`side-menu__content ${active === "horarios" ? "active" : ""}`}
@@ -56,13 +60,14 @@ function SideMenu() {
                         <FaRegUser /> Perfil
                     </button>
                 </a>
-            </div>
-            <div className='side-menu__footer'>
-                <a href="#logout">
-                    <button className='side-menu__foot'>
-                        <MdOutlineLogin /> Cerrar sesión
-                    </button>
-                </a>
+
+                <div className='side-menu__footer'>
+                    <a href="#logout">
+                        <button className='side-menu__foot'>
+                            <MdOutlineLogin /> Cerrar sesión
+                        </button>
+                    </a>
+                </div>
             </div>
         </div>
     );
