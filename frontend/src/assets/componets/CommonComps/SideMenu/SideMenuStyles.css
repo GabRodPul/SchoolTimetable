@@ -7,7 +7,9 @@
     border-right: 2px 0 5px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
 }
+
 
 
 .side-menu__body a,
@@ -17,7 +19,7 @@
 
 .side-menu__header{
     width: 100%;
-    padding: 15px 20px;
+    padding: 15px 30px;
     border: none;
     background: none;
     text-align: left;
@@ -26,11 +28,12 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    font-family: Lexend, sans-serif;
 }
 .side-menu__content,
 .side-menu__foot {
     width: 100%;
-    padding: 15px 20px;
+    padding: 15px 25px;
     border: none;
     background: none;
     text-align: left;
@@ -38,9 +41,10 @@
     color: #495057;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 30px;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
+    font-family: MerriweatherSans, sans-serif;
 }
 
 

@@ -16,55 +16,54 @@ function SideMenu() {
     return (
         <div className='body'>
             <div className="side-menu__body">
-                <h1 className='side-menu__header'>
-                    Menú
-                </h1>
-                <a href="#home">
-                    <button
-                        className={`side-menu__content ${active === "home" ? "active" : ""}`}
-                        onClick={() => handleSetActive("home")}
-                    >
-                        <RiHome2Line /> Inicio
-                    </button>
-                </a>
-
-                <a href="#horarios">
-                    <button
-                        className={`side-menu__content ${active === "horarios" ? "active" : ""}`}
-                        onClick={() => handleSetActive("horarios")}
-                    >
-                        <RiCalendarScheduleLine /> Horarios
-                    </button>
-                </a>
-                <a href="#notificaciones">
-                    <button
-                        className={`side-menu__content ${active === "notificaciones" ? "active" : ""}`}
-                        onClick={() => handleSetActive("notificaciones")}
-                    >
-                        <LuBell /> Notificaciones
-                    </button>
-                </a>
-                <a href="#tramites">
-                    <button
-                        className={`side-menu__content ${active === "tramites" ? "active" : ""}`}
-                        onClick={() => handleSetActive("tramites")}
-                    >
-                        <BsPencilSquare /> Trámites
-                    </button>
-                </a>
-                <a href="#perfil">
-                    <button
-                        className={`side-menu__content ${active === "perfil" ? "active" : ""}`}
-                        onClick={() => handleSetActive("perfil")}
-                    >
-                        <FaRegUser /> Perfil
-                    </button>
-                </a>
+                <div>
+                    <h1 className='side-menu__header'>Menú</h1>
+                    <a href="#home">
+                        <button
+                            className={`side-menu__content ${active === "home" ? "active" : ""}`}
+                            onClick={() => handleSetActive("home")}
+                        >
+                            <RiHome2Line className='homeIcon' size={30}/> Inicio
+                        </button>
+                    </a>
+                    <a href="#horarios">
+                        <button
+                            className={`side-menu__content ${active === "horarios" ? "active" : ""}`}
+                            onClick={() => handleSetActive("horarios")}
+                        >
+                            <RiCalendarScheduleLine  className='scheduleIcon' size={30}/> Horarios
+                        </button>
+                    </a>
+                    <a href="#notificaciones">
+                        <button
+                            className={`side-menu__content ${active === "notificaciones" ? "active" : ""}`}
+                            onClick={() => handleSetActive("notificaciones")}
+                        >
+                            <LuBell className='notificationIcon' size={30}/> Notificaciones
+                        </button>
+                    </a>
+                    <a href="#tramites">
+                        <button
+                            className={`side-menu__content ${active === "tramites" ? "active" : ""}`}
+                            onClick={() => handleSetActive("tramites")}
+                        >
+                            <BsPencilSquare className='formalitiesIcon' size={30}/> Trámites
+                        </button>
+                    </a>
+                    <a href="#perfil">
+                        <button
+                            className={`side-menu__content ${active === "perfil" ? "active" : ""}`}
+                            onClick={() => handleSetActive("perfil")}
+                        >
+                            <FaRegUser className='profileIcon' size={30}/> Perfil
+                        </button>
+                    </a>
+                </div>
 
                 <div className='side-menu__footer'>
                     <a href="#logout">
                         <button className='side-menu__foot'>
-                            <MdOutlineLogin /> Cerrar sesión
+                            <MdOutlineLogin className='logoutIcon' size={30}/> Cerrar sesión
                         </button>
                     </a>
                 </div>
