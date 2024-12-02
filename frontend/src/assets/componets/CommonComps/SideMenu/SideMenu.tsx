@@ -5,13 +5,16 @@ function SideMenu() {
 
     return (
         <div className='header'>
-            <div className="dropdown-menu">
-                <button>Inicio</button>
+            <div className="side-menu">
+                <button>Menú</button>
                 <button>Horarios</button>
                 <button>Notificaciones</button>
                 <button>Trámites</button>
-                <button>Contacto</button>
+                <button>Perfil</button>
             </div>
+        <div className='side-menu__footer'>
+            <button>Cerrar sesión</button>
+        </div>
         </div>
     );
 }
