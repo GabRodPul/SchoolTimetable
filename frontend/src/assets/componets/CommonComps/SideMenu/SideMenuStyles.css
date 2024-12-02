@@ -4,13 +4,11 @@
     background-color: #ECF2FE;
     top: 0;
     left: 0;
-    border-right: 2px 0 5px rgba(0, 0, 0, 0.1);
+    border-right: 1px solid #e0e0e0;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
-
-
 
 .side-menu__body a,
 .side-menu__footer a {
@@ -54,7 +52,7 @@
     color: white;
 }
 
-*/ .side-menu__content:hover,
+.side-menu__content:hover,
 .side-menu__header:hover {
     background-color: #e9ecef;
 }

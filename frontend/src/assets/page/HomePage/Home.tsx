@@ -1,22 +1,33 @@
 import FrontImg from '../../componets/ComponentsHome/FrontImg/FrontIng';
 import HomeCard from '../../componets/Cards/HomeCards/HomeCard';
-import SideMenu from '../../componets/CommonComps/SideMenu/SideMenu';
 import './HomeStyles.css'
 import Header from '#src/assets/componets/CommonComps/Header/Header';
+import HeaderDesktop from '../../componets/CommonComps/HeaderDesktop/HeaderDesktop'
+import SideMenu from '../../componets/CommonComps/SideMenu/SideMenu';
+import NavigationTab from '#src/assets/componets/CommonComps/navigationTab/NavigationTab';
 
 function Home() {
     return (
         <>
             <div className="body">
                 <div className='homepage__mobile'>
-                    <Header/>
+                    <Header />
                     <FrontImg />
                     <HomeCard />
                     <button><a href='/GroupPage'> Boton Grupos provisional</a></button>
                 </div>
 
                 <div className='homepage__desktop'>
-                    <SideMenu />
+                    {/* <div className='homepage__sidemenu'>
+                        <HeaderDesktop />
+                    </div>
+                    <div className='homepage__sidemenu'>
+                        <SideMenu />
+                    </div> */}
+                    <div className='homepage_navigationTabs'>
+                        <NavigationTab />
+                    </div>
+                    {/* Content */}
                 </div>
             </div>
         </>
