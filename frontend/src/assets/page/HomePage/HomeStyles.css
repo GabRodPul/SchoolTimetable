@@ -3,7 +3,7 @@
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: 1439px) {
     .homepage__desktop {
         display: none;
     }

@@ -64,19 +64,19 @@ function NavigationTab() {
                                 </button>
                             </a>
 
+                            <a className='navigationLink' href="#tramites">
+                                <button
+                                    className={`navigationTab__side-menuButton ${active === "tramites" ? "active" : ""}`}
+                                    onClick={() => handleSetActive("tramites")}
+                                >
+                                    <BsPencilSquare className='formalitiesIcon' size={30} /> Trámites
+                                </button>
+                            </a>
+
                             <a className='navigationLink' href="#perfil">
                                 <button
                                     className={`navigationTab__side-menuButton ${active === "perfil" ? "active" : ""}`}
                                     onClick={() => handleSetActive("perfil")}
-                                >
-                                    <FaRegUser className='profileIcon' size={30} /> Perfil
-                                </button>
-                            </a>
-
-                            <a className='navigationLink' href="#Configuración">
-                                <button
-                                    className={`navigationTab__side-menuButton ${active === "Configuración" ? "active" : ""}`}
-                                    onClick={() => handleSetActive("Configuración")}
                                 >
                                     <FaRegUser className='profileIcon' size={30} /> Perfil
                                 </button>
