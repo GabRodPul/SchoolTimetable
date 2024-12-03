@@ -1,0 +1,46 @@
+.horario-table {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 150px repeat(5, 1fr);
+    gap: 1px;
+    background-color: #ccc;
+  }
+  
+  .header-row {
+    display: contents;
+  }
+  
+  .time-slot-header,
+  .day-column-header {
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    background-color: #f4f4f4;
+  }
+  
+  .row {
+    display: contents;
+  }
+  
+  .time-slot {
+    text-align: center;
+    padding: 10px;
+    background-color: white;
+  }
+  
+  .time-slot.class {
+    background-color: #4caf50; /* Verde para clases */
+    color: white;
+  }
+  
+  .time-slot.no-class {
+    background-color: #f4f4f4; /* Gris claro para "Sin Clase" */
+    color: #666;
+  }
+  
+  .day-column {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
