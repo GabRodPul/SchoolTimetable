@@ -1,8 +1,10 @@
 import { DB } from "../models"; // Importa tu modelo de base de datos
-import { WorkDay } from "../../../common/@enums/models" 
+import { WorkDay } from "../../../common/@enums/models"; 
+import { SessionHour, ScheduleCell } from "../../../common/@types/models";
 
 export const buildScheduleData = async () => {
-  const scheduleData: Record<WorkDay, any[]> = {
+  // Estructura para organizar el horario por día
+  const scheduleData: Record<WorkDay, ScheduleCell[]> = {
     [WorkDay.Monday]: [],
     [WorkDay.Tuesday]: [],
     [WorkDay.Wednesday]: [],
@@ -10,34 +12,52 @@ export const buildScheduleData = async () => {
     [WorkDay.Friday]: [],
   };
 
-  // Obtén datos de las clases y módulos desde la base de datos
-  const classHours = await DB.classHour.findAll();
+  // Obtén los datos de las clases (classHours) y módulos (igt_modules) desde la base de datos
+  const classHours = await DB.classHour.findAll({
+    attributes: ['id', 'sessionHour', 'start', 'end', 'turn'], // Aseguramos que solo traemos lo que necesitamos
+  });
+
   const modules = await DB.igt_modules.findAll({
     include: [
-      { model: DB.modules, as: "module" },
-      { model: DB.users, as: "teacher" },
-      { model: DB.groups, as: "group" },
+      { model: DB.modules, as: "module", attributes: ["name"] },
+      { model: DB.users, as: "teacher", attributes: ["name"] },
+      { model: DB.groups, as: "group", attributes: ["name"] },
     ],
   });
 
-  // Recorre los días laborales y organiza los datos
-  for (const day of Object.values(WorkDay)) {
-    for (const classHour of classHours) {
-      const moduleData = modules.find(
-        (mod: any) => mod.classHourId === classHour.id && mod.day === day
-      );
+  // Creamos un mapa para acceso rápido de módulos por clase y día
+  const modulesMap = modules.reduce((acc, moduleData) => {
+    const { sessionHour, day } = moduleData; // Assuming these properties exist
+    if (!acc[day]) acc[day] = {};
+    acc[day][sessionHour] = moduleData;
+    return acc;
+  }, {} as Record<WorkDay, Record<SessionHour, any>>);
+
+  // Rellenamos el horario con los datos
+  classHours.forEach((classHour) => {
+    const { sessionHour, start, end, turn } = classHour;
+    
+    Object.values(WorkDay).forEach((day) => {
+      const moduleData = modulesMap[day]?.[sessionHour]; // Obtenemos el módulo correspondiente para ese día y hora
 
       if (moduleData) {
         scheduleData[day].push({
-          time: `${classHour.start} - ${classHour.end}`,
+          sessionHour: sessionHour,
           module: moduleData.module.name,
-          teacher: moduleData.teacher.name,
           group: moduleData.group.name,
-          room: moduleData.classroom || "Sin Aula",
+          teacher: moduleData.teacher.name,
+        });
+      } else {
+        // Si no hay datos del módulo, se añade "Sin Clase" para ese horario
+        scheduleData[day].push({
+          sessionHour: sessionHour,
+          module: "Sin Clase",
+          group: null,
+          teacher: null,
         });
       }
-    }
-  }
+    });
+  });
 
   return scheduleData;
 };

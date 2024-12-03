@@ -61,6 +61,23 @@ export type ClassHourData = {
     end:            string,
 }
 
+export type ScheduleCell = {
+    sessionHour:    SessionHour;
+    module:         string;
+    group:          string | null;
+    teacher:        string | null;
+};
+
+
+export type FullSessionData = {
+    sessionHour:    SessionHour; // La hora de la clase (1 a 6)
+    time:           string; // Intervalo de tiempo (inicio - fin)
+    module:         string; // Nombre del módulo
+    group:          string; // Nombre del grupo
+    teacher:        string; // Nombre del profesor
+};
+
+
 export type SessionData = {
     classHourId:    number,
     igtModuleId:    number,
