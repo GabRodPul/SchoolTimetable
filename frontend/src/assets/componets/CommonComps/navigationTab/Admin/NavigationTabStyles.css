@@ -20,10 +20,10 @@
     display: flex;
     align-items: center;
     gap: 15px;
-    font-family: Lexend, sans-serif;    
+    font-family: Lexend, sans-serif;
 }
 
-.navigationTab__side-menuContent{
+.navigationTab__side-menuContent {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -108,34 +108,9 @@
     object-fit: cover;
 }
 
-
-.navigationTab__side-menuContent {
-    padding-left: 10px;
-}
-
 .navigationTab__content {
-    margin-left: 250px; 
+    margin-left: 250px;
     padding: 20px;
     overflow-x: hidden;
     font-family: MerriweatherSans, sans-serif;
 }
-
-
-/* .navigationTab__header {
-    width: 100%;
-    padding: 15px 30px;
-    background-color: #fff;
-    border-bottom: 1px solid #e0e0e0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    z-index: 100;
-} */
-
-/* .navigationTab__header h1 {
-    font-size: 24px;
-    color: #495057;
-    margin-left: 20px;
-} */

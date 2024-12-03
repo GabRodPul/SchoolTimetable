@@ -4,7 +4,10 @@ import './HomeStyles.css'
 import Header from '#src/assets/componets/CommonComps/Header/Header';
 import HeaderDesktop from '../../componets/CommonComps/HeaderDesktop/HeaderDesktop'
 import SideMenu from '../../componets/CommonComps/SideMenu/SideMenu';
-import NavigationTab from '#src/assets/componets/CommonComps/navigationTab/NavigationTab';
+// Desktops
+import NavigationTabTeacher from '#src/assets/componets/CommonComps/navigationTab/Teacher/NavigationTab';
+import HomeContent from '#src/assets/componets/ComponentsHome/HomeContentDesktop/HomeContent';
+
 
 function Home() {
     return (
@@ -25,7 +28,10 @@ function Home() {
                         <SideMenu />
                     </div> */}
                     <div className='homepage_navigationTabs'>
-                        <NavigationTab />
+                        <NavigationTabTeacher />
+                    </div>
+                    <div className="homepage__deskContent">
+                        <HomeContent />
                     </div>
                     {/* Content */}
                 </div>
