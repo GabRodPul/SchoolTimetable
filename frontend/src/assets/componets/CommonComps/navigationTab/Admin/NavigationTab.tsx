@@ -5,6 +5,8 @@ import { LuBell } from "react-icons/lu";
 import { BsPencilSquare } from "react-icons/bs";
 import { FaRegUser } from "react-icons/fa";
 import { MdOutlineLogin } from "react-icons/md";
+import { FaHelmetSafety } from "react-icons/fa6";
+
 
 function NavigationTab() {
 
@@ -79,6 +81,15 @@ function NavigationTab() {
                                     onClick={() => handleSetActive("perfil")}
                                 >
                                     <FaRegUser className='profileIcon' size={30} /> Perfil
+                                </button>
+                            </a>
+
+                            <a className='navigationLink' href="#Admin">
+                                <button
+                                    className={`navigationTab__side-menuButton ${active === "Admin" ? "active" : ""}`}
+                                    onClick={() => handleSetActive("Admin")}
+                                >
+                                    <FaHelmetSafety  className='AdminIcon' size={30} /> Admin
                                 </button>
                             </a>
 

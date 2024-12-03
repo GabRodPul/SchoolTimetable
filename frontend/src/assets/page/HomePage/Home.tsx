@@ -4,6 +4,7 @@ import './HomeStyles.css'
 import Header from '#src/assets/componets/CommonComps/Header/Header';
 // Desktops
 import NavigationTabTeacher from '#src/assets/componets/CommonComps/navigationTab/Teacher/NavigationTab';
+import NavigationTabAdmin from '#src/assets/componets/CommonComps/navigationTab/Admin/NavigationTab';
 import HomeContent from '#src/assets/componets/ComponentsHome/HomeContentDesktop/HomeContent';
 
 
@@ -19,7 +20,8 @@ function Home() {
 
                 <div className='homepage__desktop'>
                     <div className='homepage_navigationTabs'>
-                        <NavigationTabTeacher />
+                        {/* <NavigationTabTeacher /> */}
+                        <NavigationTabAdmin/>
                     </div>
                     <div className="homepage__deskContent">
                         <HomeContent />
