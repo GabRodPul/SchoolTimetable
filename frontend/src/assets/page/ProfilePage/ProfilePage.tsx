@@ -12,15 +12,21 @@ import NavigationTabTeacher from '#src/assets/componets/CommonComps/navigationTa
 
 function profile() {
 
+    const [name, setname] = useState<string>(""); // Estado para el rol del usuario
+    const [email, seteEmail] = useState<string>(""); // Estado para el rol del usuario
+    const [phoneNumber, setPhoneNum] = useState<string>(""); // Estado para el rol del usuario
     const [role, setRole] = useState<string>(""); // Estado para el rol del usuario
 
     useEffect(() => {
-        const authData = JSON.parse(localStorage.getItem('currentuser') ?? "null") as AuthData; // Cambia 'currentuser' al nombre de la clave que usas en localStorage
+        const authData = JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData; // Cambia 'currentuser' al nombre de la clave que usas en localStorage
         if (authData) {
+            setname(authData.user.name);
+            seteEmail(authData.user.email);
+            setPhoneNum(authData.user.phoneNumber);
             setRole(authData.user.role);
         } else {
-            console.warn('No se encontró un rol en localStorage');
-            setRole(""); // O manejarlo de otra forma
+            // console.warn('No se encontró un rol en localStorage');
+            // setRole(""); // O manejarlo de otra forma
         }
     }, []);
 
@@ -58,9 +64,15 @@ function profile() {
                             <div className="ProfileCard__info">
                                 <div className="Info__name">
                                     {/* name */}
+                                    <div className='nameUser'>
+                                        {name}
+                                    </div>
                                 </div>
                                 <div className="Info_email">
                                     {/* email */}
+                                    <div className='emailUser'>
+                                        {email}
+                                    </div>
                                 </div>
                             </div>
                             {/* iconos si eso */}
@@ -73,7 +85,18 @@ function profile() {
 
                             <div className="generalInfo__userdata">
                                 <div className="userdata__Info">
-
+                                <div className='Info__nameUser'>
+                                        {name}
+                                    </div>
+                                    <div className='Info__emailUser'>
+                                        {email}
+                                    </div>
+                                    <div className='Info__phonelUser'>
+                                        {phoneNumber}
+                                    </div>
+                                    <div className='Info__rolelUser'>
+                                        {role}
+                                    </div>
                                 </div>
                                 <div className="userdata__form">
 
