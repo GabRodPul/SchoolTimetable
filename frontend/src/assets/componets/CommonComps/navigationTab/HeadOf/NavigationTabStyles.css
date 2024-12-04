@@ -1,0 +1,117 @@
+/* Menu */
+.navigationTab__side-menu {
+    width: 250px;
+    height: 100vh;
+    background-color: #ECF2FE;
+    top: 0;
+    left: 0;
+    border-right: 1px solid #E3E6EC;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: fixed;
+}
+
+.navigationTab__side-menuHeader {
+    font-size: 24px;
+    padding: 20px;
+    color: #495057;
+    border-bottom: 1px solid #E3E6EC;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-family: Lexend, sans-serif;
+}
+
+.navigationTab__side-menuContent {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.navigationTab__side-menuButton,
+.navigationTab__side-menuFoot {
+    width: 100%;
+    padding: 15px 25px;
+    border: none;
+    background: none;
+    text-align: left;
+    font-size: 18px;
+    color: #495057;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    font-family: MerriweatherSans, sans-serif;
+}
+
+.navigationLink {
+    text-decoration: none;
+}
+
+.navigationTab__side-menuButton.active,
+.navigationTab__side-menuHeader.active {
+    background-color: #007bff;
+    color: white;
+}
+
+
+.navigationTab__side-menuFooter {
+    margin-bottom: 10px;
+}
+
+.navigationTab__side-menuFoot {
+    font-size: 16px;
+    color: #dc3545;
+}
+
+.navigationTab__side-menuFoot:hover {
+    background-color: #f8d7da;
+}
+
+
+/* Header */
+.navigationTab__profile {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 20px;
+    height: 84px;
+    background-color: #fff;
+    border-bottom: 1px solid #e0e0e0;
+    font-family: MerriweatherSans, sans-serif;
+    font-size: 14px;
+    color: #6c757d;
+}
+
+.navigationTab__profileInfo {
+    display: flex;
+    align-items: center;
+    margin-right: 5%;
+    cursor: pointer;
+}
+
+.navigationTab__profileIcon {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navigationTab__profileIcon img {
+    width: 70%;
+    height: 70%;
+    object-fit: cover;
+}
+
+.navigationTab__content {
+    margin-left: 250px;
+    padding: 20px;
+    overflow-x: hidden;
+    font-family: MerriweatherSans, sans-serif;
+}
