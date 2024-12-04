@@ -23,7 +23,7 @@ function Home() {
     const [role, setRole] = useState<string>(""); // Estado para el rol del usuario
 
     useEffect(() => {
-        const authData = JSON.parse(localStorage.getItem('currentuser') ?? "null") as AuthData; // Cambia 'currentuser' al nombre de la clave que usas en localStorage
+        const authData = JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData; // Cambia 'currentuser' al nombre de la clave que usas en localStorage
         if (authData) {
             setRole(authData.user.role);
         } else {
@@ -76,8 +76,7 @@ function Home() {
 
                 <div className='homepage__desktop'>
                     <div className='homepage_navigationTabs'>
-                        {/* {renderNavigationTab()} */}
-                        <NavigationTabTeacher />
+                        {renderNavigationTab()}
                     </div>
                     <div className="homepage__deskContent">
                         <HomeContent />

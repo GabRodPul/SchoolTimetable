@@ -45,10 +45,56 @@ function profile() {
             <div className="body">
 
                 <div className='profilepage__desktop'>
-                    <div className='profilepage_navigationTabs'>
+
+                    <div className='P_navigationTabs'>
                         {renderNavigationTab()}
                     </div>
-                    {/* Content */}
+
+                    <div className="PflContent">
+                        <div className="PflContent__ProfileCard">
+                            <div className="ProfileCard__icon">
+                                {/* imagen */}
+                            </div>
+                            <div className="ProfileCard__info">
+                                <div className="Info__name">
+                                    {/* name */}
+                                </div>
+                                <div className="Info_email">
+                                    {/* email */}
+                                </div>
+                            </div>
+                            {/* iconos si eso */}
+                        </div>
+
+                        <div className="PflContent__GeneralInfo">
+                            <div className="generalInfo__title">
+
+                            </div>
+
+                            <div className="generalInfo__userdata">
+                                <div className="userdata__Info">
+
+                                </div>
+                                <div className="userdata__form">
+
+                                </div>
+                            </div>
+
+                            <div className="generalInfo__title">
+
+                            </div>
+
+                            <div className="generalInfo__data">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div className="P_rightsidemenu">
+                        {/* Right Side Menu */}
+                    </div>
                 </div>
             </div>
         </>
