@@ -86,6 +86,7 @@ function NoticesPage(prop: null) {
             <div className="notificationContainer">
                 <h2>Notificaciones</h2>
                 { notices.map(n => (
+                    // <NoticeCard 
                     <div key={n.id}>
                         <h3>{ 
                         `Cambio de Hora ${
