@@ -43,7 +43,7 @@ function Home() {
             case UserRole.Teacher:
                 return <HomeCardTeacher />;
             default:
-                return <div>Error</div>;
+                return <HomeCardTeacher />;
         }
     };
 
@@ -59,7 +59,7 @@ function Home() {
             case UserRole.Teacher:
                 return <NavigationTabTeacher />;
             default:
-                return <NavigationTabStudent />;
+                return <NavigationTabTeacher />;
         }
     };
 

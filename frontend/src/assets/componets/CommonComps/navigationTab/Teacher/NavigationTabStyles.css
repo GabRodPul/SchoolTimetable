@@ -72,17 +72,19 @@
 
 
 /* Header */
-.navigationTab__profile {
+.navigationTab__header {
     display: flex;
-    align-items: center;
-    justify-content: flex-end;
+    flex-direction: row;
+    justify-content: space-between;
     padding: 0 20px;
     height: 84px;
-    background-color: #fff;
-    border-bottom: 1px solid #e0e0e0;
     font-family: MerriweatherSans, sans-serif;
     font-size: 14px;
     color: #6c757d;
+}
+
+.navigationTab__currentPage {
+    margin-left: 250px;
 }
 
 .navigationTab__profileInfo {

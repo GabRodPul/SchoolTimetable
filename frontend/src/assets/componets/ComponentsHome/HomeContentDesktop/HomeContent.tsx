@@ -32,7 +32,7 @@ function HomeContent() {
             case UserRole.Teacher:
                 return <HomeCardTeacher />;
             default:
-                return <div>Error</div>;
+                return <HomeCardStudent />;
         }
     };
 
