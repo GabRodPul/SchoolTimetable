@@ -36,10 +36,12 @@
     }
 
     .notificationContainer{
+        display: none;
         width: 100%;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         gap: 1px;
+        color: red;
     }
 
 
