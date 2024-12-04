@@ -5,6 +5,7 @@ import { LuBell } from "react-icons/lu";
 import { BsPencilSquare } from "react-icons/bs";
 import { FaRegUser } from "react-icons/fa";
 import { MdOutlineLogin } from "react-icons/md";
+import { GoGear } from "react-icons/go";
 
 function NavigationTab() {
 

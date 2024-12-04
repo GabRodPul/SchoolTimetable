@@ -5,6 +5,7 @@ import { LuBell } from "react-icons/lu";
 import { BsPencilSquare } from "react-icons/bs";
 import { FaRegUser } from "react-icons/fa";
 import { MdOutlineLogin } from "react-icons/md";
+import { GoGear } from 'react-icons/go';
 
 function NavigationTab() {
 
@@ -87,7 +88,7 @@ function NavigationTab() {
                                     className={`navigationTab__side-menuButton ${active === "configuracion" ? "active" : ""}`}
                                     onClick={() => handleSetActive("perfil")}
                                 >
-                                    <FaRegUser className='configuracion' size={30} /> Perfil
+                                    <GoGear className='configuracion' size={30} /> Perfil
                                 </button>
                             </a>
 
