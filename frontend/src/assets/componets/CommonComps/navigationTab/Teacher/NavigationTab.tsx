@@ -26,15 +26,15 @@ function NavigationTab() {
     function usePageTitle() {
         const location = useLocation();
         switch (location.pathname) {
-            case '/home':
+            case '/Home':
                 return '';
-            case '/horarios':
+            case '/Horarios':
                 return 'Mi Horario';
-            case '/notificaciones':
+            case '/Notificaciones':
                 return <SearchBar />;
-            case '/tramites':
+            case '/Tramites':
                 return <SearchBar />;
-            case '/perfil':
+            case '/Perfil':
                 return 'Mi Perfil';
             default:
                 return 'Página Desconocida';
