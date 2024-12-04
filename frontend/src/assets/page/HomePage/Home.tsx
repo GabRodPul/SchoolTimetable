@@ -1,55 +1,76 @@
 import __React, { useEffect, useState } from 'react';
+import { UserRole } from '#common/@enums/models';
+import { AuthData } from '#common/@types/models';
 import './HomeStyles.css'
 
 //Mobile
 import FrontImg from '../../componets/ComponentsHome/FrontImg/FrontIng';
 import Header from '#src/assets/componets/CommonComps/Header/Header';
-import HomeCard from '../../componets/Cards/HomeCards/HomeCard';
+import HomeCardAdmin from '../../componets/Cards/HomeCards/Admin/HomeCard';
+import HomeCardHeadOf from '../../componets/Cards/HomeCards/HeadOf/HomeCard';
+import HomeCardStudent from '../../componets/Cards/HomeCards/Student/HomeCard';
+import HomeCardTeacher from '../../componets/Cards/HomeCards/Teacher/HomeCard';
 
 // Desktops
 import HomeContent from '#src/assets/componets/ComponentsHome/HomeContentDesktop/HomeContent';
-import NavigationTabTeacher from '#src/assets/componets/CommonComps/navigationTab/Teacher/NavigationTab';
 import NavigationTabAdmin from '#src/assets/componets/CommonComps/navigationTab/Admin/NavigationTab';
 import NavigationTabHeadOf from '#src/assets/componets/CommonComps/navigationTab/HeadOf/NavigationTab';
 import NavigationTabStudent from '#src/assets/componets/CommonComps/navigationTab/Student/NavigationTab';
-
+import NavigationTabTeacher from '#src/assets/componets/CommonComps/navigationTab/Teacher/NavigationTab';
 
 function Home() {
-    const [role, setRole] = useState<string | null>(null); // Estado para el rol del usuario
+    const [role, setRole] = useState<string>(""); // Estado para el rol del usuario
 
     useEffect(() => {
-        const storedRole = localStorage.getItem('currentuser'); // Cambia 'userRole' al nombre de la clave que usas en localStorage
-        if (storedRole) {
-            setRole(storedRole);
+        const authData = JSON.parse(localStorage.getItem('currentuser') ?? "null") as AuthData; // Cambia 'currentuser' al nombre de la clave que usas en localStorage
+        if (authData) {
+            setRole(authData.user.role);
         } else {
             console.warn('No se encontró un rol en localStorage');
-            setRole(null); // O manejarlo de otra forma
+            setRole(""); // O manejarlo de otra forma
         }
     }, []);
 
     // Renderizar el componente de navegación según el rol
-    const renderNavigationTab = () => {
+    const renderHomeCard = () => {
         switch (role) {
-            case 'admin':
-                return <NavigationTabAdmin />;
-            case 'headof':
-                return <NavigationTabHeadOf />;
-            case 'teacher':
-                return <NavigationTabTeacher />;
-            case 'student':
-                return <NavigationTabStudent />;
+            case UserRole.Admin:
+                return <HomeCardAdmin />;
+            case UserRole.Head:
+                return <HomeCardHeadOf />;
+            case UserRole.Student:
+                return <HomeCardStudent />;
+            case UserRole.Teacher:
+                return <HomeCardTeacher />;
             default:
-                return null; // O un componente de fallback si no hay rol
+                return <div>Error</div>;
         }
     };
+
+    // Renderizar el contenido de la tarjeta según el rol
+    const renderNavigationTab = () => {
+        switch (role) {
+            case UserRole.Admin:
+                return <NavigationTabAdmin />;
+            case UserRole.Head:
+                return <NavigationTabHeadOf />;
+            case UserRole.Student:
+                return <NavigationTabStudent />;
+            case UserRole.Teacher:
+                return <NavigationTabTeacher />;
+            default:
+                return <NavigationTabStudent />;
+        }
+    };
+
 
     return (
         <>
             <div className="body">
-                <div className='homepage__mobile'>
+                <div className="homepage__mobile">
                     <Header />
                     <FrontImg />
-                    <HomeCard />
+                    {renderHomeCard()}
                 </div>
 
                 <div className='homepage__desktop'>

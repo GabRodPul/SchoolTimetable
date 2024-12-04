@@ -25,7 +25,7 @@ function LoginPageForm() {
     console.log('Contraseña:', password);
     console.log('Recuérdame:', rememberMe);
 
-    navigate('/Home');
+    // navigate('/Home');
   };
 
   useEffect(() => {
@@ -39,8 +39,7 @@ function LoginPageForm() {
           return;
         }
 
-        console.log((fetchRsrc.data as any).errors)
-        console.log((fetchRsrc.data as any).message)
+        console.log((fetchRsrc))
       } break;
 
       case FetchState.Error: {
