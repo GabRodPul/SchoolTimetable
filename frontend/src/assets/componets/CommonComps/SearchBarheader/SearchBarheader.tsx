@@ -26,6 +26,7 @@ const SearchBar = () => {
                 className="search-input"
             />
         </div>
+        
     );
 };
 
