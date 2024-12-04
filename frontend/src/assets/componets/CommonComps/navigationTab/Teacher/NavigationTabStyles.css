@@ -1,3 +1,66 @@
+/* Header */
+.navigationTab__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 20px;
+    height: 84px;
+    font-family: MerriweatherSans, sans-serif;
+    font-size: 14px;
+    color: #6c757d;
+    border-bottom: 1px solid #e0e0e0;
+    margin-left: 250px;
+}
+
+.navigationTab__currentPage {
+    height: 50px;
+    margin-left: 20px;
+    font-size: 40px;
+    margin-top: 20px;
+    font-family: Lexend, sans-serif;
+}
+
+.navigationTab__profile{
+    width: 200px;
+    margin-top: 15px;
+    margin-right: 5%;
+}
+
+.navigationTab__profileInfo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    margin-right: 5%;
+    cursor: pointer;
+}
+
+.navigationTab__profileIcon {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navigationTab__profileIcon img {
+    width: 70%;
+    height: 70%;
+    object-fit: cover;
+}
+
+.navigationTab__content {
+    margin-left: 250px;
+    padding: 20px;
+    overflow-x: hidden;
+    font-family: MerriweatherSans, sans-serif;
+}
+
+
+
 /* Menu */
 .navigationTab__side-menu {
     width: 250px;
@@ -68,52 +131,4 @@
 
 .navigationTab__side-menuFoot:hover {
     background-color: #f8d7da;
-}
-
-
-/* Header */
-.navigationTab__header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 0 20px;
-    height: 84px;
-    font-family: MerriweatherSans, sans-serif;
-    font-size: 14px;
-    color: #6c757d;
-}
-
-.navigationTab__currentPage {
-    margin-left: 250px;
-}
-
-.navigationTab__profileInfo {
-    display: flex;
-    align-items: center;
-    margin-right: 5%;
-    cursor: pointer;
-}
-
-.navigationTab__profileIcon {
-    width: 40px;
-    height: 40px;
-    margin-right: 10px;
-    border-radius: 50%;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.navigationTab__profileIcon img {
-    width: 70%;
-    height: 70%;
-    object-fit: cover;
-}
-
-.navigationTab__content {
-    margin-left: 250px;
-    padding: 20px;
-    overflow-x: hidden;
-    font-family: MerriweatherSans, sans-serif;
 }

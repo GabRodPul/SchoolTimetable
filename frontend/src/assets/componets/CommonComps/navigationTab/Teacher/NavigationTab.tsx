@@ -8,6 +8,7 @@ import { MdOutlineLogin } from "react-icons/md";
 import { GoGear } from "react-icons/go";
 import { Link, useLocation } from 'react-router-dom'; // Importar Link de react-router-dom
 import NoticesPage from '../../../../page/NoticesPage/NoticesPage'
+import SearchBar from '#src/assets/componets/CommonComps/SearchBarheader/SearchBarheader';
 
 function NavigationTab() {
 
@@ -23,13 +24,13 @@ function NavigationTab() {
             case '/home':
                 return 'Home';
             case '/horarios':
-                return 'Horarios';
+                return 'Mi Horario';
             case '/notificaciones':
-                return 'Notificaciones';
+                return <SearchBar/>;
             case '/tramites':
-                return 'Trámites';
+                return <SearchBar/>;
             case '/perfil':
-                return 'Perfil';
+                return 'Mi Perfil';
             default:
                 return 'Página Desconocida';
         }
