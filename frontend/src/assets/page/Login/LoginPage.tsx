@@ -40,6 +40,7 @@ function LoginPageForm() {
         }
 
         console.log((fetchRsrc))
+        api.resetRsrc();
       } break;
 
       case FetchState.Error: {
@@ -69,8 +70,8 @@ function LoginPageForm() {
 
           <form className="loginPageForm" onSubmit={handleLogin}>
             <label className="LoginInputText">
-              <p>Usuario</p>
-              <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Usuario" required
+              <p>Email</p>
+              <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required
               />
             </label>
 

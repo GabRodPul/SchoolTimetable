@@ -12,7 +12,7 @@ export const dbInit = async ( debug: boolean ) => {
         {
             id:             1,
             name:           "Profe Número 1",
-            email:          "profe1@email.com",
+            email:          "profe1@gmail.com",
             image:          undefined,
             password:       hashSync("profenum1", 10),
             phoneNumber:    "+34987654321",
@@ -21,7 +21,7 @@ export const dbInit = async ( debug: boolean ) => {
         {
             id:             2,
             name:           "Profe Número 2",
-            email:          "profe2@email.com",
+            email:          "profe2@gmail.com",
             image:          undefined,
             password:       hashSync("profenum2", 10),
             phoneNumber:    "+34922222222",
@@ -30,7 +30,7 @@ export const dbInit = async ( debug: boolean ) => {
         {
             id:             3,
             name:           "Cabeza De Estudios",
-            email:          "cabezaestudios@email.com",
+            email:          "cabezaestudios@gmail.com",
             image:          undefined,
             password:       hashSync("cabezaestudios", 10),
             phoneNumber:    "+34933333333",
@@ -39,7 +39,7 @@ export const dbInit = async ( debug: boolean ) => {
         {
             id:             4,
             name:           "Cabeza De Estudios",
-            email:          "cabezaestudios@email.com",
+            email:          "cabezaestudios@gmail.com",
             image:          undefined,
             password:       hashSync("cabezaestudios", 10),
             phoneNumber:    "+3490000000",
@@ -48,7 +48,7 @@ export const dbInit = async ( debug: boolean ) => {
         {
             id:             5,
             name:           "Alumnado Número 1",
-            email:          "alumnadonum1@email.com",
+            email:          "alumnadonum1@gmail.com",
             image:          undefined,
             password:       hashSync("alumnadonum1", 10),
             phoneNumber:    "+34611111111",
@@ -57,7 +57,7 @@ export const dbInit = async ( debug: boolean ) => {
         {
             id:             6,
             name:           "Alumnado Número 2",
-            email:          "alumnadonum2@email.com",
+            email:          "alumnadonum2@gmail.com",
             image:          undefined,
             password:       hashSync("alumnadonum2", 10),
             phoneNumber:    "+34622222222",
@@ -66,7 +66,7 @@ export const dbInit = async ( debug: boolean ) => {
         {
             id:             7,
             name:           "Alumnado Número 3",
-            email:          "alumnadonum3@email.com",
+            email:          "alumnadonum3@gmail.com",
             image:          undefined,
             password:       hashSync("alumnadonum3", 10),
             phoneNumber:    "+34633333333",
@@ -75,7 +75,7 @@ export const dbInit = async ( debug: boolean ) => {
         {
             id:             8,
             name:           "Alumnado Número 4",
-            email:          "alumnadonum4@email.com",
+            email:          "alumnadonum4@gmail.com",
             image:          undefined,
             password:       hashSync("alumnadonum4", 10),
             phoneNumber:    "+34644444444",
@@ -84,7 +84,7 @@ export const dbInit = async ( debug: boolean ) => {
         {
             id:             9,
             name:           "Profe Número 3",
-            email:          "profe1@email.com",
+            email:          "profe1@gmail.com",
             image:          undefined,
             password:       hashSync("profenum1", 10),
             phoneNumber:    "+34987654321",
@@ -93,7 +93,7 @@ export const dbInit = async ( debug: boolean ) => {
         {
             id:             10,
             name:           "Profe Número 4",
-            email:          "profe2@email.com",
+            email:          "profe2@gmail.com",
             image:          undefined,
             password:       hashSync("profenum2", 10),
             phoneNumber:    "+34922222222",
