@@ -15,6 +15,27 @@ function NavigationTab() {
         setActive(section);
     };
 
+    function usePageTitle() {
+        const location = useLocation();
+        switch (location.pathname) {
+            case '/home':
+                return '';
+            case '/horarios':
+                return 'Mi Horario';
+            case '/notificaciones':
+                return <SearchBar/>;
+            case '/tramites':
+                return <SearchBar/>;
+            case '/perfil':
+                return 'Mi Perfil';
+            default:
+                return 'Página Desconocida';
+        }
+    }
+
+    // Componente principal de navegación
+    const pageTitle = usePageTitle();
+
     return (
         <div className='body'>
             <div className='navigationTab__header'>
