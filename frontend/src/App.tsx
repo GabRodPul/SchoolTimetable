@@ -24,7 +24,7 @@ function App() {
           {/* <Route path='/GroupPage' element={<GroupPage />} /> */}
         </Routes>
       </BrowserRouter>
-      <HelpToolTip/>
+      <HelpToolTip />
     </>
   )
 }

@@ -17,6 +17,7 @@ import NavigationTabAdmin from '#src/assets/componets/CommonComps/navigationTab/
 import NavigationTabHeadOf from '#src/assets/componets/CommonComps/navigationTab/HeadOf/NavigationTab';
 import NavigationTabStudent from '#src/assets/componets/CommonComps/navigationTab/Student/NavigationTab';
 import NavigationTabTeacher from '#src/assets/componets/CommonComps/navigationTab/Teacher/NavigationTab';
+import SearchBar from '#src/assets/componets/CommonComps/SearchBarheader/SearchBarheader';
 
 function Home() {
     const [role, setRole] = useState<string>(""); // Estado para el rol del usuario
@@ -43,7 +44,7 @@ function Home() {
             case UserRole.Teacher:
                 return <HomeCardTeacher />;
             default:
-                return <div>Error</div>;
+                return <HomeCardTeacher />;
         }
     };
 
@@ -59,7 +60,7 @@ function Home() {
             case UserRole.Teacher:
                 return <NavigationTabTeacher />;
             default:
-                return <NavigationTabStudent />;
+                return <NavigationTabTeacher />;
         }
     };
 
@@ -75,7 +76,8 @@ function Home() {
 
                 <div className='homepage__desktop'>
                     <div className='homepage_navigationTabs'>
-                        {renderNavigationTab()}
+                        {/* {renderNavigationTab()} */}
+                        <NavigationTabTeacher />
                     </div>
                     <div className="homepage__deskContent">
                         <HomeContent />
