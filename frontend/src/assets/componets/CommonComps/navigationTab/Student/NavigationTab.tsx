@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import './NavigationTabStyles.css';
 import { RiCalendarScheduleLine, RiHome2Line } from "react-icons/ri";
 import { LuBell } from "react-icons/lu";
-import { BsPencilSquare } from "react-icons/bs";
 import { FaRegUser } from "react-icons/fa";
 import { MdOutlineLogin } from "react-icons/md";
 
@@ -61,15 +60,6 @@ function NavigationTab() {
                                     onClick={() => handleSetActive("notificaciones")}
                                 >
                                     <LuBell className='notificationIcon' size={30} /> Notificaciones
-                                </button>
-                            </a>
-
-                            <a className='navigationLink' href="#tramites">
-                                <button
-                                    className={`navigationTab__side-menuButton ${active === "tramites" ? "active" : ""}`}
-                                    onClick={() => handleSetActive("tramites")}
-                                >
-                                    <BsPencilSquare className='formalitiesIcon' size={30} /> Trámites
                                 </button>
                             </a>
 

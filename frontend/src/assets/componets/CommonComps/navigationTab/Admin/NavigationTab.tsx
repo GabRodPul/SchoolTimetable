@@ -82,6 +82,15 @@ function NavigationTab() {
                                 </button>
                             </a>
 
+                            <a className='navigationLink' href="#configuracion">
+                                <button
+                                    className={`navigationTab__side-menuButton ${active === "configuracion" ? "active" : ""}`}
+                                    onClick={() => handleSetActive("perfil")}
+                                >
+                                    <FaRegUser className='configuracion' size={30} /> Perfil
+                                </button>
+                            </a>
+
                         </div>
 
                     </div>
