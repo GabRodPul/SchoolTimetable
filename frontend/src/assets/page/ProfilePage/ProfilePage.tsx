@@ -79,13 +79,19 @@ function profile() {
                         </div>
 
                         <div className="PflContent__GeneralInfo">
+                            <h3>Información general</h3>
                             <div className="generalInfo__title">
-
+                                <div className="title__data">
+                                    <h5>Mis Datos</h5>
+                                </div>
+                                <div className="title__edit">
+                                    <h5>Editar Perfil</h5>
+                                </div>
                             </div>
 
                             <div className="generalInfo__userdata">
                                 <div className="userdata__Info">
-                                <div className='Info__nameUser'>
+                                    <div className='Info__nameUser'>
                                         {name}
                                     </div>
                                     <div className='Info__emailUser'>
@@ -104,7 +110,7 @@ function profile() {
                             </div>
 
                             <div className="generalInfo__title">
-
+                                <h5>Mis Modulos</h5>
                             </div>
 
                             <div className="generalInfo__data">
