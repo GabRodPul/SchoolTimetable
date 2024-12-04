@@ -18,11 +18,6 @@ function NavigationTab() {
         setActive(section);
     };
 
-
-
-    // Componente principal de navegación
-    const pageTitle = usePageTitle();
-
     function usePageTitle() {
         const location = useLocation();
         switch (location.pathname) {
@@ -30,16 +25,19 @@ function NavigationTab() {
                 return '';
             case '/Horarios':
                 return 'Mi Horario';
-            case '/Notificaciones':
-                return <SearchBar />;
+            case '/notificaciones':
+                return <SearchBar/>;
             case '/Tramites':
-                return <SearchBar />;
+                return <SearchBar/>;
             case '/Perfil':
                 return 'Mi Perfil';
             default:
                 return 'Página Desconocida';
         }
     }
+
+    // Componente principal de navegación
+    const pageTitle = usePageTitle();
 
     return (
         <div className='body'>
@@ -109,6 +107,16 @@ function NavigationTab() {
                                     <FaRegUser className='profileIcon' size={30} /> Perfil
                                 </button>
                             </Link>
+
+                            <Link className='navigationLink' to="/configuracion">
+                                <button
+                                    className={`navigationTab__side-menuButton ${active === "configuracion" ? "active" : ""}`}
+                                    onClick={() => handleSetActive("configuracion")}
+                                >
+                                    <GoGear className='settingsIcon' size={30} /> Configuración
+                                </button>
+                            </Link>
+                        
 
                         </div>
 

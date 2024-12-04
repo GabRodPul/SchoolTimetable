@@ -30,10 +30,10 @@ function NavigationTab() {
                 return '';
             case '/Horarios':
                 return 'Mi Horario';
-            case '/Notificaciones':
-                return <SearchBar />;
+            case '/notificaciones':
+                return <SearchBar/>;
             case '/Tramites':
-                return <SearchBar />;
+                return <SearchBar/>;
             case '/Perfil':
                 return 'Mi Perfil';
             default:
