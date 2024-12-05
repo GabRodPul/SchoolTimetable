@@ -1,4 +1,9 @@
 /* Desktop */
+
+.profilepage__desktop {
+    font-family: MerriweatherSans, sans-serif;
+}
+
 .PflContent {
     display: flex;
     flex-direction: column;
@@ -35,7 +40,6 @@
     text-align: left;
     margin-top: 100px;
     color: #ffffff;
-    font-family: MerriweatherSans, sans-serif;
     gap: 10px;
 }
 
@@ -48,6 +52,19 @@
     color: #fefefe;
 }
 
-.GeneralInfo__title h3 {
+.PflContent__GeneralInfo {
+    margin-left: 250px;
+}
+
+.GeneralInfo__title {
+    display: flex;
+    height: 50px;
     border-bottom: 1px solid #E3E6EC;
+}
+.GeneralInfo__title h3{
+    margin-left: 75px;
+}
+.generalInfo__titles{
+    display: flex;
+    justify-content: space-evenly;
 }

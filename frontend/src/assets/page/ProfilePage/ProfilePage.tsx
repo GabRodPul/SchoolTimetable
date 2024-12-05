@@ -16,6 +16,7 @@ function profile() {
     const [email, seteEmail] = useState<string>(""); // Estado para el rol del usuario
     const [phoneNumber, setPhoneNum] = useState<string>(""); // Estado para el rol del usuario
     const [role, setRole] = useState<string>(""); // Estado para el rol del usuario
+    let roleText: string = ""
 
     useEffect(() => {
         const authData = JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData; // Cambia 'currentuser' al nombre de la clave que usas en localStorage
@@ -34,15 +35,20 @@ function profile() {
     const renderNavigationTab = () => {
         switch (role) {
             case UserRole.Admin:
+                roleText = "Admin";
                 return <NavigationTabAdmin />;
             case UserRole.Head:
+                roleText = "Jefe de estudios";
                 return <NavigationTabHeadOf />;
             case UserRole.Student:
+                roleText = "Alumno";
                 return <NavigationTabStudent />;
             case UserRole.Teacher:
+                roleText = "Profesor";
                 return <NavigationTabTeacher />;
             default:
                 return <NavigationTabTeacher />;
+
         }
     };
 
@@ -80,10 +86,10 @@ function profile() {
                         </div>
 
                         <div className="PflContent__GeneralInfo">
-                            <div className="GeneralInfo__title">
+                            <div className="generalInfo__title">
                                 <h3>Información general</h3>
                             </div>
-                            <div className="generalInfo__title">
+                            <div className="generalInfo__titles">
                                 <div className="title__data">
                                     <h5>Mis Datos</h5>
                                 </div>
@@ -104,7 +110,7 @@ function profile() {
                                         {phoneNumber}
                                     </div>
                                     <div className='Info__rolelUser'>
-                                        {role}
+                                        {roleText}
                                     </div>
                                 </div>
                                 <div className="userdata__form">
