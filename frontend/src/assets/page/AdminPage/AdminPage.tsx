@@ -2,7 +2,7 @@
 import NavigationTab from "#src/assets/componets/CommonComps/navigationTab/Admin/NavigationTab";
 
 
-function Admin() {
+function admin() {
     return (
         <div>
             <NavigationTab/>
@@ -11,4 +11,4 @@ function Admin() {
     );
 }
 
-export default Admin;
+export default admin;

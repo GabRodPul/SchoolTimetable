@@ -80,7 +80,9 @@ function profile() {
                         </div>
 
                         <div className="PflContent__GeneralInfo">
-                            <h3>Información general</h3>
+                            <div className="GeneralInfo__title">
+                                <h3>Información general</h3>
+                            </div>
                             <div className="generalInfo__title">
                                 <div className="title__data">
                                     <h5>Mis Datos</h5>

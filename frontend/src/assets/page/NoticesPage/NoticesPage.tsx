@@ -20,7 +20,7 @@ type ReminderData = {
 
 const dateStr = (d: Date) => d.toJSON().slice(0, 10);
 
-function NoticesPage(prop: null) {
+function NoticesPage() {
     const notices: Omit<WarningData & Id, "teacherId">[] = [
         {
             id: 1,

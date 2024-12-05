@@ -9,7 +9,7 @@ import LoginPage from './assets/page/Login/LoginPage'
 import SigninPage from "./assets/page/Signin/SigninPage"
 import HelpToolTip from './assets/componets/CommonComps/HelpToolTip/HelpToolTip'
 import ProfilePage from './assets/page/ProfilePage/ProfilePage'
-import Admin from './assets/page/AdminPage/AdminPage'
+import admin from './assets/page/AdminPage/AdminPage'
 
 
 function App() {
@@ -20,12 +20,12 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<LoginPage />} />
-          <Route path='/LogingPage' element={<LoginPage />} />
-          <Route path='/Signin' element={<SigninPage />} />
-          <Route path='/Home' element={<Home />} />
-          <Route path='/NoticesPage' element={<NoticesPage />} />
-          <Route path='/ProfilePage' element={<ProfilePage />} />
-          <Route path='/Admin' element={<Admin />} />
+          <Route path='/login' element={<LoginPage />} />
+          <Route path='/signin' element={<SigninPage />} />
+          <Route path='/home' element={<Home />} />
+          <Route path='/notices' element={<NoticesPage />} />
+          <Route path='/profile' element={<ProfilePage />} />
+          <Route path='/admin' element={<admin />} />
           {/* <Route path='/GroupPage' element={<GroupPage />} /> */}
         </Routes>
       </BrowserRouter>

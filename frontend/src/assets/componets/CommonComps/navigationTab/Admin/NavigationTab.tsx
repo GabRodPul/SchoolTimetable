@@ -1,5 +1,5 @@
-// import React from 'react';
-import './NavigationTabStyles.css';
+import React from 'react';
+import '../NavigationTabStyles.css';
 import { RiCalendarScheduleLine, RiHome2Line } from "react-icons/ri";
 import { LuBell } from "react-icons/lu";
 import { BsPencilSquare } from "react-icons/bs";
@@ -27,7 +27,7 @@ function NavigationTab() {
             case '/tramites': return <SearchBar />;
             case '/ProfilePage': return 'Mi Perfil';
             case '/Admin': return 'Configuración';
-            default: return 'Página Desconocida';
+            default: '';
         }
     };
 
@@ -62,8 +62,8 @@ function NavigationTab() {
                                 </button>
                             </Link>
 
-                            <Link className='navigationLink' to="/NoticesPage">
-                                <button className={`navigationTab__side-menuButton ${location.pathname === "/notificaciones" ? "active" : ""}`}>
+                            <Link className='navigationLink' to="/notices">
+                                <button className={`navigationTab__side-menuButton ${location.pathname === "/notices" ? "active" : ""}`}>
                                     <LuBell className='notificationIcon' size={30} /> Notificaciones
                                 </button>
                             </Link>
@@ -74,8 +74,8 @@ function NavigationTab() {
                                 </button>
                             </Link>
 
-                            <Link className='navigationLink' to="/ProfilePage">
-                                <button className={`navigationTab__side-menuButton ${location.pathname === "/ProfilePage" ? "active" : ""}`}>
+                            <Link className='navigationLink' to="/profile">
+                                <button className={`navigationTab__side-menuButton ${location.pathname === "/profile" ? "active" : ""}`}>
                                     <FaRegUser className='profileIcon' size={30} /> Perfil
                                 </button>
                             </Link>
