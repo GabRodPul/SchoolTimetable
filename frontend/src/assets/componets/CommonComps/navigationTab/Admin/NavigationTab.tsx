@@ -15,7 +15,7 @@ function NavigationTab() {
     const handleLogout = () => {
         localStorage.removeItem('currentUser');
         localStorage.removeItem('accessToken');
-        navigate('/LogingPage');
+        navigate('/login');
     };
 
     const pageTitle = () => {
