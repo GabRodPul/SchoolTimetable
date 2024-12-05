@@ -99,6 +99,15 @@ export const dbInit = async ( debug: boolean ) => {
             phoneNumber:    "+34922222222",
             role:           UserRole.Teacher
         },
+        {
+            id:             11,
+            name:           "Admin Número 1",
+            email:          "Admin1@gmail.com",
+            image:          undefined,
+            password:       hashSync("Admin1", 10),
+            phoneNumber:    "+34922222221",
+            role:           UserRole.Admin
+        },
     ]);
 
     // Storing these for clearer data creation
