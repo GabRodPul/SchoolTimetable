@@ -85,7 +85,7 @@ export const login = async (req: Request, res: Response) => {
 
         const data = (await Users.findOne({ where: { email }, raw: true })) as UserData | null;
         if (!data) {
-            res.send(resMsg(401, "Password not valid!"));
+            res.send(resMsg(401, "Wrong email!"));
             return;
         }
 

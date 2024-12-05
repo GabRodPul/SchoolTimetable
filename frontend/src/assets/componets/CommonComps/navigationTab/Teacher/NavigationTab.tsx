@@ -18,6 +18,11 @@ function NavigationTab() {
         setActive(section);
     };
 
+
+
+    // Componente principal de navegación
+    const pageTitle = usePageTitle();
+
     function usePageTitle() {
         const location = useLocation();
         switch (location.pathname) {
@@ -35,9 +40,6 @@ function NavigationTab() {
                 return 'Página Desconocida';
         }
     }
-
-    // Componente principal de navegación
-    const pageTitle = usePageTitle();
 
     return (
         <div className='body'>

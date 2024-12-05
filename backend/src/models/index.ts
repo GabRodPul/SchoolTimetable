@@ -43,8 +43,8 @@ const DB = Object.freeze({
         // b:      "belongsTo"
     // }
 // );
-DB.modules.hasMany(DB.igt_modules);
-DB.igt_modules.belongsTo(DB.modules);
+DB.modules.hasMany(DB.igt_modules,   { foreignKey: "moduleId" });
+DB.igt_modules.belongsTo(DB.modules, { foreignKey: "moduleId" });
 
 // relationship(
     // DB.groups, { h: "hasMany" }, {
@@ -52,8 +52,8 @@ DB.igt_modules.belongsTo(DB.modules);
         // b:      "belongsTo"
     // }
 // )
-DB.groups.hasMany(DB.igt_modules);
-DB.igt_modules.belongsTo(DB.groups);
+DB.groups.hasMany(DB.igt_modules  , { foreignKey: "groupId" });
+DB.igt_modules.belongsTo(DB.groups, { foreignKey: "groupId" });
 
 // relationship(
     // DB.modules, { h: "hasMany" }, {
@@ -62,8 +62,12 @@ DB.igt_modules.belongsTo(DB.groups);
         // opt:    { through: DB.enrollments }
     // }
 // )
-DB.modules.hasMany(DB.users);
-DB.users.belongsToMany(DB.modules, { through: DB.enrollments });
+DB.users.hasMany(DB.enrollments,     { foreignKey: "studentId" });
+DB.enrollments.belongsTo(DB.users,   { foreignKey: "studentId" });
+
+DB.modules.hasMany(DB.enrollments  , { foreignKey: "moduleId" });
+DB.enrollments.belongsTo(DB.modules, { foreignKey: "moduleId" });
+// DB.users.belongsTo(DB.modules, { through: DB.enrollments });
 
 
 // * Warning
@@ -74,8 +78,8 @@ DB.users.belongsToMany(DB.modules, { through: DB.enrollments });
         // others: [DB.users],
         // b:      "belongsTo",
 // })
-DB.warnings.hasOne(DB.users);
 DB.users.hasMany(DB.warnings);
+DB.warnings.belongsTo(DB.users);
 
 // * ModuleIGP
 // Estas ya están arriba, realmente.
@@ -95,10 +99,10 @@ DB.users.hasMany(DB.warnings);
         // b:      "belongsTo",
     // }
 // )
-DB.sessions.hasOne(DB.classHour);
-DB.sessions.hasOne(DB.igt_modules);
-DB.classHour.belongsTo(DB.sessions);
-DB.igt_modules.belongsTo(DB.sessions);
+DB.classHour.hasMany(DB.sessions,     { foreignKey: "classHourId" });
+DB.sessions.belongsTo(DB.classHour,   { foreignKey: "classHourId" });
+DB.igt_modules.hasMany(DB.sessions,   { foreignKey: "igtModuleId" });
+DB.sessions.belongsTo(DB.igt_modules, { foreignKey: "igtModuleId" });
 
 //* SessionsChanged
 relationship(

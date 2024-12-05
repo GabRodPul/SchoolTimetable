@@ -37,11 +37,19 @@ const SigninPage = () => {
 
       switch (fetchRsrc.state) {
         case FetchState.Success: {
-          if ((fetchRsrc.data as any).accessToken) {
+          const data = fetchRsrc.data as any;
+          if (data.code) {
+            // TODO: ERROR CONTRASEÑA ETC
+          }
+          
+          if (data.accessToken !== undefined) {
             localStorage.setItem("currentUser", JSON.stringify(fetchRsrc.data));
             navigate("/Home");
             return;
           }
+  
+          console.log((fetchRsrc))
+          api.resetRsrc();
         } break;
 
         case FetchState.Error: {

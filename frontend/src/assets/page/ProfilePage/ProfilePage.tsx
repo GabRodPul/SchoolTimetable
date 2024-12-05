@@ -1,9 +1,6 @@
-<<<<<<< Updated upstream
-=======
 import __React, { useEffect, useState } from 'react';
 import { UserRole } from '#common/@enums/models';
 import { AuthData } from '#common/@types/models';
-import './ProfilePageStyles.css'
 
 //Mobile
 
@@ -63,7 +60,6 @@ function profile() {
                         <div className="PflContent__ProfileCard">
                             <div className="ProfileCard__icon">
                                 {/* imagen */}
-                                <img src="./img/userExample.png" alt="Imagen de perfil" />
                             </div>
                             <div className="ProfileCard__info">
                                 <div className="Info__name">
@@ -79,7 +75,7 @@ function profile() {
                                     </div>
                                 </div>
                             </div>
-                            {/* iconos cambiar foto*/}
+                            {/* iconos si eso */}
                         </div>
 
                         <div className="PflContent__GeneralInfo">
@@ -135,4 +131,3 @@ function profile() {
 }
 
 export default profile;
->>>>>>> Stashed changes
