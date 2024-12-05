@@ -9,7 +9,7 @@ import LoginPage from './assets/page/Login/LoginPage'
 import SigninPage from "./assets/page/Signin/SigninPage"
 import HelpToolTip from './assets/componets/CommonComps/HelpToolTip/HelpToolTip'
 import ProfilePage from './assets/page/ProfilePage/ProfilePage'
-import admin from './assets/page/AdminPage/AdminPage'
+import Admin from './assets/page/AdminPage/AdminPage'
 
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
           <Route path='/home' element={<Home />} />
           <Route path='/notices' element={<NoticesPage />} />
           <Route path='/profile' element={<ProfilePage />} />
-          <Route path='/admin' element={<admin />} />
+          <Route path='/admin' element={<Admin />} />
           {/* <Route path='/GroupPage' element={<GroupPage />} /> */}
         </Routes>
       </BrowserRouter>

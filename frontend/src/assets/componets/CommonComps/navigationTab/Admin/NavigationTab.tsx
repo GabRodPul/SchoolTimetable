@@ -1,4 +1,3 @@
-import React from 'react';
 import '../NavigationTabStyles.css';
 import { RiCalendarScheduleLine, RiHome2Line } from "react-icons/ri";
 import { LuBell } from "react-icons/lu";
@@ -26,7 +25,7 @@ function NavigationTab() {
             case '/notificaciones': return <SearchBar />;
             case '/tramites': return <SearchBar />;
             case '/ProfilePage': return 'Mi Perfil';
-            case '/Admin': return 'Configuración';
+            case '/admin': return 'Configuración';
             default: '';
         }
     };
@@ -80,7 +79,7 @@ function NavigationTab() {
                                 </button>
                             </Link>
 
-                            <Link className='navigationLink' to="/Admin">
+                            <Link className='navigationLink' to="/admin">
                                 <button className={`navigationTab__side-menuButton ${location.pathname === "/configuracion" ? "active" : ""}`}>
                                     <GoGear className='settingsIcon' size={30} /> Configuración
                                 </button>
