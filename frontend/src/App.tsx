@@ -17,10 +17,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<LoginPage />} />
-          <Route path='/LogingPage' element={<LoginPage />} />
-          <Route path='/Signin' element={<SigninPage />} />
-          <Route path='/Home' element={<Home />} />
-          <Route path='/NoticesPage' element={<NoticesPage />} />
+          <Route path='/login' element={<LoginPage />} />
+          <Route path='/signin' element={<SigninPage />} />
+          <Route path='/home' element={<Home />} />
+          <Route path='/notices' element={<NoticesPage />} />
           {/* <Route path='/GroupPage' element={<GroupPage />} /> */}
         </Routes>
       </BrowserRouter>
