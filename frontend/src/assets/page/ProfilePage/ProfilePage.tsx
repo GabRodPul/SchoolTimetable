@@ -90,27 +90,52 @@ function profile() {
                                 <h3>Información general</h3>
                             </div>
                             <div className="generalInfo__titles">
-                                <div className="title__data">
-                                    <h5>Mis Datos</h5>
-                                </div>
-                                <div className="title__edit">
-                                    <h5>Editar Perfil</h5>
+                                <div className="titles_content">
+                                    <div className="titles__data">
+                                        <h5>Mis Datos</h5>
+                                    </div>
+                                    <div className="titles__edit">
+                                        <h5>Editar Perfil</h5>
+                                    </div>
                                 </div>
                             </div>
 
                             <div className="generalInfo__userdata">
                                 <div className="userdata__Info">
-                                    <div className='Info__nameUser'>
-                                        {name}
+                                    <div className="info__userData">
+                                        <div className='userData__Tittle'>
+                                            <p>Nombre:</p>
+                                        </div>
+                                        <div className='userData__name'>
+                                            {name}
+                                        </div>
                                     </div>
-                                    <div className='Info__emailUser'>
-                                        {email}
+
+                                    <div className="info__userData">
+                                        <div className='userData__Tittle'>
+                                            <p>Email:</p>
+                                        </div>
+                                        <div className='userData__email'>
+                                            {email}
+                                        </div>
                                     </div>
-                                    <div className='Info__phonelUser'>
-                                        {phoneNumber}
+
+                                    <div className="info__userData">
+                                        <div className='userData__Tittle'>
+                                            <p>Teléfono:</p>
+                                        </div>
+                                        <div className='userData__phone'>
+                                            {phoneNumber}
+                                        </div>
                                     </div>
-                                    <div className='Info__rolelUser'>
-                                        {roleText}
+
+                                    <div className="info__userData">
+                                        <div className='userData__Tittle'>
+                                            <p>Rol:</p>
+                                        </div>
+                                        <div className='userData__roleText'>
+                                            {roleText}
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="userdata__form">
