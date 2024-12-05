@@ -1,5 +1,11 @@
 /* Desktop */
-/* ProfileCard */
+.PflContent {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+
 .PflContent__ProfileCard {
     display: flex;
     flex-direction: row;
@@ -40,4 +46,8 @@
 .emailUser {
     font-size: 16px;
     color: #fefefe;
+}
+
+.GeneralInfo__title h3 {
+    border-bottom: 1px solid #E3E6EC;
 }

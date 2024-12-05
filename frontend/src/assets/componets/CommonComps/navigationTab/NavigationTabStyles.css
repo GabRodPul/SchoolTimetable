@@ -15,9 +15,10 @@
 .navigationTab__currentPage {
     height: 50px;
     margin-left: 20px;
-    font-size: 40px;
+    font-size: 35px;
     margin-top: 20px;
     font-family: Lexend, sans-serif;
+    color: #000000;
 }
 
 .navigationTab__profile {
@@ -132,17 +133,13 @@
     background-color: #f8d7da;
 }
 
-/* Botones del menú lateral */
 .navigationTab__side-menuButton.active {
     background-color: #007bff;
-    /* Color de fondo para el botón activo */
     color: white;
-    /* Color del texto para el botón activo */
     font-weight: bold;
 }
 
 .navigationTab__side-menuButton:hover {
     background-color: #0056b3;
-    /* Color de fondo para el hover */
     color: white;
 }

@@ -5,7 +5,7 @@ import './HomeStyles.css'
 
 //Mobile
 import FrontImg from '../../componets/ComponentsHome/FrontImg/FrontIng';
-import Header from '#src/assets/componets/CommonComps/Header/Header';
+import Header from '#src/assets/componets/CommonComps/MenuheaderMobile/Header';
 import HomeCardAdmin from '../../componets/Cards/HomeCards/Admin/HomeCard';
 import HomeCardHeadOf from '../../componets/Cards/HomeCards/HeadOf/HomeCard';
 import HomeCardStudent from '../../componets/Cards/HomeCards/Student/HomeCard';

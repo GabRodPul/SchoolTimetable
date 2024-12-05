@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './NavigationTabStyles.css';
+import '../NavigationTabStyles.css';
 import { RiCalendarScheduleLine, RiHome2Line } from "react-icons/ri";
 import { LuBell } from "react-icons/lu";
 import { BsPencilSquare } from "react-icons/bs";
@@ -26,7 +26,7 @@ function NavigationTab() {
             case '/notificaciones': return <SearchBar />;
             case '/tramites': return <SearchBar />;
             case '/ProfilePage': return 'Mi Perfil';
-            default: return 'Página Desconocida';
+            default: '';
         }
     };
 
