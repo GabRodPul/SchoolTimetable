@@ -115,7 +115,7 @@
 
 .navigationTab__side-menuButton.active,
 .navigationTab__side-menuHeader.active {
-    background-color: #007bff;
+    background-color: #0056b3;
     color: white;
 }
 
@@ -134,7 +134,7 @@
 }
 
 .navigationTab__side-menuButton.active {
-    background-color: #007bff;
+    background-color: #0056b3;
     color: white;
     font-weight: bold;
 }

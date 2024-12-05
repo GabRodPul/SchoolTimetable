@@ -62,14 +62,14 @@ function NavigationTab() {
                                 </button>
                             </Link>
 
-                            <Link className='navigationLink' to="/NoticesPage">
-                                <button className={`navigationTab__side-menuButton ${location.pathname === "/notificaciones" ? "active" : ""}`}>
+                            <Link className='navigationLink' to="/notices">
+                                <button className={`navigationTab__side-menuButton ${location.pathname === "/notices" ? "active" : ""}`}>
                                     <LuBell className='notificationIcon' size={30} /> Notificaciones
                                 </button>
                             </Link>
 
-                            <Link className='navigationLink' to="/ProfilePage">
-                                <button className={`navigationTab__side-menuButton ${location.pathname === "/ProfilePage" ? "active" : ""}`}>
+                            <Link className='navigationLink' to="/profile">
+                                <button className={`navigationTab__side-menuButton ${location.pathname === "/profile" ? "active" : ""}`}>
                                     <FaRegUser className='profileIcon' size={30} /> Perfil
                                 </button>
                             </Link>
