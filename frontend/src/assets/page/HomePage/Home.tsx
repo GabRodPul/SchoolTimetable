@@ -17,7 +17,7 @@ import NavigationTabAdmin from '#src/assets/componets/CommonComps/navigationTab/
 import NavigationTabHeadOf from '#src/assets/componets/CommonComps/navigationTab/HeadOf/NavigationTab';
 import NavigationTabStudent from '#src/assets/componets/CommonComps/navigationTab/Student/NavigationTab';
 import NavigationTabTeacher from '#src/assets/componets/CommonComps/navigationTab/Teacher/NavigationTab';
-import SearchBar from '#src/assets/componets/CommonComps/SearchBarheader/SearchBarheader';
+import _SearchBar from '#src/assets/componets/CommonComps/SearchBarheader/SearchBarheader';
 
 function Home() {
 
