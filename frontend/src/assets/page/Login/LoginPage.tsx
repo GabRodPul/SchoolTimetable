@@ -25,7 +25,7 @@ function LoginPageForm() {
     console.log('Contraseña:', password);
     console.log('Recuérdame:', rememberMe);
 
-    navigate('/Home');
+    // navigate('/Home');
   };
 
   useEffect(() => {
@@ -33,14 +33,19 @@ function LoginPageForm() {
 
     switch (fetchRsrc.state) {
       case FetchState.Success: {
-        if ((fetchRsrc.data as any).accessToken !== undefined) {
+        const data = fetchRsrc.data as any;
+        if (data.code) {
+          // TODO: ERROR CONTRASEÑA ETC
+        }
+        
+        if (data.accessToken !== undefined) {
           localStorage.setItem("currentUser", JSON.stringify(fetchRsrc.data));
           navigate("/Home");
           return;
         }
 
-        console.log((fetchRsrc.data as any).errors)
-        console.log((fetchRsrc.data as any).message)
+        console.log((fetchRsrc))
+        api.resetRsrc();
       } break;
 
       case FetchState.Error: {
@@ -70,8 +75,8 @@ function LoginPageForm() {
 
           <form className="loginPageForm" onSubmit={handleLogin}>
             <label className="LoginInputText">
-              <p>Usuario</p>
-              <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Usuario" required
+              <p>Email</p>
+              <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required
               />
             </label>
 

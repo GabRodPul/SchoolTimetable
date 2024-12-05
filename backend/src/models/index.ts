@@ -62,8 +62,8 @@ DB.igt_modules.belongsTo(DB.groups, { foreignKey: "groupId" });
         // opt:    { through: DB.enrollments }
     // }
 // )
-DB.users.hasMany(DB.enrollments,   { foreignKey: "studentId" });
-DB.enrollments.belongsTo(DB.users, { foreignKey: "studentId" });
+DB.users.hasMany(DB.enrollments,     { foreignKey: "studentId" });
+DB.enrollments.belongsTo(DB.users,   { foreignKey: "studentId" });
 
 DB.modules.hasMany(DB.enrollments  , { foreignKey: "moduleId" });
 DB.enrollments.belongsTo(DB.modules, { foreignKey: "moduleId" });
@@ -78,8 +78,8 @@ DB.enrollments.belongsTo(DB.modules, { foreignKey: "moduleId" });
         // others: [DB.users],
         // b:      "belongsTo",
 // })
-DB.warnings.hasOne(DB.users);
 DB.users.hasMany(DB.warnings);
+DB.warnings.belongsTo(DB.users);
 
 // * ModuleIGP
 // Estas ya están arriba, realmente.

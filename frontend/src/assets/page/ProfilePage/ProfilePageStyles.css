@@ -1,0 +1,43 @@
+/* Desktop */
+/* ProfileCard */
+.PflContent__ProfileCard {
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    margin-left: 250px;
+    margin-top: 1px;
+    width: 1206px;
+    height: 264px;
+    background-color: #004B84;
+    gap: 30px;
+}
+
+.ProfileCard__icon {
+    margin-top: 50px;
+    padding-left: 40px;
+}
+
+.ProfileCard__icon img {
+    width: 150px;
+    height: 150px;
+}
+
+.ProfileCard__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: left;
+    margin-top: 100px;
+    color: #ffffff;
+    font-family: MerriweatherSans, sans-serif;
+    gap: 10px;
+}
+
+.nameUser {
+    font-size: 22px;
+}
+
+.emailUser {
+    font-size: 16px;
+    color: #fefefe;
+}

@@ -5,7 +5,7 @@ const LoginRoutes = { init: ( app: Express ) => {
     const router = Router();
     
     // Login
-    router.get( "/", login );
+    router.post( "/", login );
 
     app.use("/api/login", router);
 

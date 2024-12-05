@@ -85,7 +85,7 @@ const useApi = <T,>(route: ApiRts)
         case ApiRts.Login: {
             login = async (body: UserLogin) => {
                 try {
-                    const data = await myfetch<AuthData, UserLogin, Body<UserLogin>>(ApiRts.Login, Method.GET, { body: body })
+                    const data = await myfetch<AuthData, UserLogin, Body<UserLogin>>(ApiRts.Login, Method.POST, { body: body })
                     dispatch({
                         state: FetchState.Success,
                         data: data as T // xddd

@@ -74,6 +74,16 @@ export const signin = async (req: Request, res: Response) => {
     }
 };
 
+export const logout = async (req: Request, res: Response) => {
+    try {
+        // Respuesta sencilla para confirmar que el logout fue procesado
+        res.send(resMsg(200, "User successfully logged out."));
+    } catch (err: any) {
+        console.error("Logout error:", err);
+        res.send(computeError(err, "An error occurred while logging out."));
+    }
+};
+
 export const login = async (req: Request, res: Response) => {
     try {
         const { email, password } = req.body;
@@ -85,7 +95,7 @@ export const login = async (req: Request, res: Response) => {
 
         const data = (await Users.findOne({ where: { email }, raw: true })) as UserData | null;
         if (!data) {
-            res.send(resMsg(401, "Password not valid!"));
+            res.send(resMsg(401, "Wrong email!"));
             return;
         }
 
