@@ -10,6 +10,7 @@
     display: flex;
     justify-content: center;
     width: 50%;
+    max-width: 1000px;
 }
 
 .LoginPageContainerContent {
@@ -22,7 +23,7 @@
 }
 
 .LoginPageContainer h2 {
-    font-size: 24px;
+    font-size: 30px;
     margin-bottom: 30px;
 }
 
@@ -35,6 +36,7 @@
     cursor: pointer;
     width: 100%;
     padding: 3px;
+    font-size: 20px;
 }
 
 .LoginGoogleButton img {
@@ -62,12 +64,13 @@
 }
 
 .LoginInputText p {
+    font-size: 20px;
     margin-top: 0;
     margin-bottom: 5px;
-    margin-left: -10px;
 }
 
 .LoginInputText input {
+    font-size: 20px;
     width: 90%;
     padding: 15px;
     margin-bottom: 10px;
@@ -79,17 +82,17 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 12px;
+    font-size: 16px;
     width: 100%;
     margin-bottom: 20px;
 }
 
-.LoginRememberForgot label {
-    display: flex;
+.LoginRememberForgot__checkbox p{
+    font-size: 16px;
 }
 
-.LoginRememberForgot__checkbox {
-    margin-left: -10px;
+.LoginRememberForgot label {
+    display: flex;
 }
 
 .ForgotPassword {
@@ -118,6 +121,7 @@
 
 .LoginImgContainer {
     width: 50%;
+    max-width: 1000px;
 }
 
 .LoginImgContainer img {
@@ -172,6 +176,39 @@
         height: 80%;
         width: 80%;
     }
+}
 
+@media only screen and (max-width: 1100px) {
+
+    .LoginPageContainer h2 {
+        font-size: 22px;
+    }
     
+    .LoginGoogleButton {
+        font-size: 14px;
+    }
+
+    .divider {
+        font-size: 14px;
+    }
+
+    /* .LoginInputText {
+        font-size: 12px;
+    } */
+    
+    .LoginInputText p {
+        font-size: 14px;
+    }
+    
+    .LoginInputText input {
+        font-size: 14px;
+    }
+    
+    .LoginRememberForgot {
+        font-size: 12px;
+    }
+    
+    .LoginRememberForgot__checkbox p{
+        font-size: 12px;
+    }
 }

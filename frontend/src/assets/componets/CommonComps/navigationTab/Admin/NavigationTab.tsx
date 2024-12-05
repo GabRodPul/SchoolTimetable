@@ -1,11 +1,11 @@
-import React from 'react';
+// import React from 'react';
 import './NavigationTabStyles.css';
 import { RiCalendarScheduleLine, RiHome2Line } from "react-icons/ri";
 import { LuBell } from "react-icons/lu";
 import { BsPencilSquare } from "react-icons/bs";
 import { FaRegUser } from "react-icons/fa";
 import { MdOutlineLogin } from "react-icons/md";
-import { GoGear } from "react-icons/go"; // Icono de configuración
+import { GoGear } from "react-icons/go";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SearchBar from '#src/assets/componets/CommonComps/SearchBarheader/SearchBarheader';
 
@@ -26,7 +26,7 @@ function NavigationTab() {
             case '/notificaciones': return <SearchBar />;
             case '/tramites': return <SearchBar />;
             case '/ProfilePage': return 'Mi Perfil';
-            case '/configuracion': return 'Configuración';
+            case '/Admin': return 'Configuración';
             default: return 'Página Desconocida';
         }
     };
@@ -80,7 +80,7 @@ function NavigationTab() {
                                 </button>
                             </Link>
 
-                            <Link className='navigationLink' to="/configuracion">
+                            <Link className='navigationLink' to="/Admin">
                                 <button className={`navigationTab__side-menuButton ${location.pathname === "/configuracion" ? "active" : ""}`}>
                                     <GoGear className='settingsIcon' size={30} /> Configuración
                                 </button>
