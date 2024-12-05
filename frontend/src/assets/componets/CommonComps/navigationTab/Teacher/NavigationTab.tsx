@@ -29,7 +29,7 @@ function NavigationTab() {
                 return <SearchBar/>;
             case '/Tramites':
                 return <SearchBar/>;
-            case '/Perfil':
+            case '/ProfilePage':
                 return 'Mi Perfil';
             default:
                 return 'Página Desconocida';
@@ -81,7 +81,7 @@ function NavigationTab() {
                                 </button>
                             </Link>
 
-                            <Link className='navigationLink' to="/NoticesPage"> {/* Reemplazamos a href por Link */}
+                            <Link className='navigationLink' to="/NoticesPage">
                                 <button
                                     className={`navigationTab__side-menuButton ${active === "notificaciones" ? "active" : ""}`}
                                     onClick={() => handleSetActive("notificaciones")}
@@ -99,7 +99,7 @@ function NavigationTab() {
                                 </button>
                             </Link>
 
-                            <Link className='navigationLink' to="/perfil">
+                            <Link className='navigationLink' to="/ProfilePage">
                                 <button
                                     className={`navigationTab__side-menuButton ${active === "perfil" ? "active" : ""}`}
                                     onClick={() => handleSetActive("perfil")}

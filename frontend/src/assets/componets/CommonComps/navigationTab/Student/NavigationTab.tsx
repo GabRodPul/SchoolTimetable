@@ -88,7 +88,7 @@ function NavigationTab() {
                                 </button>
                             </Link>
 
-                            <Link className='navigationLink' to="/perfil">
+                            <Link className='navigationLink' to="/ProfilePage">
                                 <button
                                     className={`navigationTab__side-menuButton ${active === "perfil" ? "active" : ""}`}
                                     onClick={() => handleSetActive("perfil")}
