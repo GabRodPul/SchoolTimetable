@@ -17,9 +17,7 @@ import NavigationTab from '#src/assets/componets/CommonComps/navigationTab/Navig
 import _SearchBar from '#src/assets/componets/CommonComps/SearchBarheader/SearchBarheader';
 
 function Home() {
-
-        const role = (JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData).user.role; // Cambia 'currentuser' al nombre de la clave que usas en localStorage
-
+    const { role } = (JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData).user;
 
     // Renderizar el componente de navegación según el rol
     const renderHomeCard = () => {

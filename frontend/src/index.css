@@ -75,3 +75,7 @@ button:focus-visible {
   font-family: 'MerriweatherSans';
   src: local('MerriweatherSans'), url(./assets/fonts/MerriweatherSans-VariableFont_wght.ttf);
 }
+
+#root {
+  font-family: 'MerriweatherSans';
+}

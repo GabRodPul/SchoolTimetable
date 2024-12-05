@@ -5,6 +5,7 @@ import NoticeCard from '../../componets/Cards/NoticeCard/NoticeCard'
 import { FaSearch } from 'react-icons/fa';
 import { useState } from 'react';
 import { Id, WarningData } from '#common/@types/models';
+import NavigationTab from "#src/assets/componets/CommonComps/navigationTab/Admin/NavigationTab";
 
 enum ReminderKind {
   Exam        = "Exam",
@@ -82,9 +83,11 @@ function NoticesPage() {
     ];
 
     return (
-        <div>
-            <div className="notificationContainer">
-                <h2>Notificaciones</h2>
+        <>
+        <NavigationTab></NavigationTab>
+        <div className="noticesPage">
+            <div className="noticesPage__notifications">
+                <h2 class="noticesPage">Notificaciones</h2>
                 { notices.map(n => (
                     // <NoticeCard 
                     <div key={n.id}>
@@ -110,6 +113,7 @@ function NoticesPage() {
                 ))}
             </div>
         </div>
+        </>
     );
 }
 
