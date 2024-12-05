@@ -139,7 +139,13 @@ function profile() {
                                     </div>
                                 </div>
                                 <div className="userdata__form">
-                                    <div className="info__userData">
+                                    <div className="form__userForm">
+                                        <div className='userData__Tittle'>
+                                            <p>Rol:</p>
+                                        </div>
+                                        <div className='userData__roleText'>
+                                            <p>{roleText}</p>
+                                        </div>
                                         <div className='userData__Tittle'>
                                             <p>Rol:</p>
                                         </div>

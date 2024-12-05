@@ -101,3 +101,11 @@
     text-align: left;
     font-size: 20px;
 }
+
+.userdata__form{
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    text-align: left;
+    justify-content: space-between;
+}
