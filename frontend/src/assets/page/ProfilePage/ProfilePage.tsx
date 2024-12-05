@@ -1,7 +1,7 @@
 import __React, { useEffect, useState } from 'react';
 import { UserRole } from '#common/@enums/models';
 import { AuthData } from '#common/@types/models';
-
+import './ProfilePageStyles.css'
 //Mobile
 
 //Desktop
@@ -60,6 +60,7 @@ function profile() {
                         <div className="PflContent__ProfileCard">
                             <div className="ProfileCard__icon">
                                 {/* imagen */}
+                                <img src="./img/abstract-user-flat-4.png" alt="Imagen de perfil" />
                             </div>
                             <div className="ProfileCard__info">
                                 <div className="Info__name">

@@ -20,7 +20,7 @@
     font-family: Lexend, sans-serif;
 }
 
-.navigationTab__profile{
+.navigationTab__profile {
     width: 200px;
     margin-top: 15px;
     margin-right: 5%;
@@ -52,23 +52,22 @@
     object-fit: cover;
 }
 
+
+
+/* Menu */
 .navigationTab__content {
-    margin-left: 250px;
-    padding: 20px;
+    width: 250px;
     overflow-x: hidden;
     font-family: MerriweatherSans, sans-serif;
 }
 
-
-
-/* Menu */
 .navigationTab__side-menu {
     width: 250px;
     height: 100vh;
     background-color: #ECF2FE;
     top: 0;
     left: 0;
-    border-right: 1px solid #E3E6EC;
+    border-right: 0.5px solid #E3E6EC;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -131,4 +130,19 @@
 
 .navigationTab__side-menuFoot:hover {
     background-color: #f8d7da;
+}
+
+/* Botones del menú lateral */
+.navigationTab__side-menuButton.active {
+    background-color: #007bff;
+    /* Color de fondo para el botón activo */
+    color: white;
+    /* Color del texto para el botón activo */
+    font-weight: bold;
+}
+
+.navigationTab__side-menuButton:hover {
+    background-color: #0056b3;
+    /* Color de fondo para el hover */
+    color: white;
 }
