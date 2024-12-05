@@ -5,7 +5,7 @@ import './HomeStyles.css'
 
 //Mobile
 import FrontImg from '../../componets/ComponentsHome/FrontImg/FrontIng';
-import Header from '#src/assets/componets/CommonComps/Header/Header';
+import Header from '#src/assets/componets/CommonComps/MenuheaderMobile/Header';
 import HomeCardAdmin from '../../componets/Cards/HomeCards/Admin/HomeCard';
 import HomeCardHeadOf from '../../componets/Cards/HomeCards/HeadOf/HomeCard';
 import HomeCardStudent from '../../componets/Cards/HomeCards/Student/HomeCard';
@@ -17,19 +17,12 @@ import NavigationTabAdmin from '#src/assets/componets/CommonComps/navigationTab/
 import NavigationTabHeadOf from '#src/assets/componets/CommonComps/navigationTab/HeadOf/NavigationTab';
 import NavigationTabStudent from '#src/assets/componets/CommonComps/navigationTab/Student/NavigationTab';
 import NavigationTabTeacher from '#src/assets/componets/CommonComps/navigationTab/Teacher/NavigationTab';
+import SearchBar from '#src/assets/componets/CommonComps/SearchBarheader/SearchBarheader';
 
 function Home() {
-    const [role, setRole] = useState<string>(""); // Estado para el rol del usuario
 
-    useEffect(() => {
-        const authData = JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData; // Cambia 'currentuser' al nombre de la clave que usas en localStorage
-        if (authData) {
-            setRole(authData.user.role);
-        } else {
-            console.warn('No se encontró un rol en localStorage');
-            setRole(""); // O manejarlo de otra forma
-        }
-    }, []);
+        const role = (JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData).user.role; // Cambia 'currentuser' al nombre de la clave que usas en localStorage
+
 
     // Renderizar el componente de navegación según el rol
     const renderHomeCard = () => {
@@ -59,7 +52,7 @@ function Home() {
             case UserRole.Teacher:
                 return <NavigationTabTeacher />;
             default:
-                return <NavigationTabStudent />;
+                return <div>Error</div>;
         }
     };
 

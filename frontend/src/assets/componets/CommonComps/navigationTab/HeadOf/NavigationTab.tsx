@@ -1,22 +1,39 @@
 import React, { useState } from 'react';
-import './NavigationTabStyles.css';
+import '../NavigationTabStyles.css';
 import { RiCalendarScheduleLine, RiHome2Line } from "react-icons/ri";
 import { LuBell } from "react-icons/lu";
 import { BsPencilSquare } from "react-icons/bs";
 import { FaRegUser } from "react-icons/fa";
 import { MdOutlineLogin } from "react-icons/md";
+import { Link, useLocation, useNavigate } from 'react-router-dom'; // Importar Link de react-router-dom
+import SearchBar from '#src/assets/componets/CommonComps/SearchBarheader/SearchBarheader';
 
 function NavigationTab() {
+    const location = useLocation();
+    const navigate = useNavigate();
 
-    const [active, setActive] = useState("home");
+    const handleLogout = () => {
+        localStorage.removeItem('currentUser');
+        localStorage.removeItem('accessToken');
+        navigate('/LogingPage');
+    };
 
-    const handleSetActive = (section: React.SetStateAction<string>) => {
-        setActive(section);
+    // Obtener el título de la página basado en la ruta actual
+    const pageTitle = () => {
+        switch (location.pathname) {
+            case '/home': return '';
+            case '/horarios': return 'Mi Horario';
+            case '/notificaciones': return <SearchBar />;
+            case '/tramites': return <SearchBar />;
+            case '/ProfilePage': return 'Mi Perfil';
+            default: '';
+        }
     };
 
     return (
         <div className='body'>
             <div className='navigationTab__header'>
+                <h2 className="navigationTab__currentPage">{pageTitle()}</h2>
                 <div className='navigationTab__profile'>
                     <div className='navigationTab__profileInfo'>
                         <div className='navigationTab__profileIcon'>
@@ -29,81 +46,50 @@ function NavigationTab() {
 
             <div className='navigationTab__content'>
                 <div className="navigationTab__side-menu">
-
                     <div className='navigationTab__side-menuBody'>
-
-                        <h1 className='navigationTab__side-menuHeader'>
-                            Menú
-                        </h1>
-
+                        <h1 className='navigationTab__side-menuHeader'>Menú</h1>
                         <div className="navigationTab__side-menuContent">
-                            <a className='navigationLink' href="#home">
-                                <button
-                                    className={`navigationTab__side-menuButton ${active === "home" ? "active" : ""}`}
-                                    onClick={() => handleSetActive("home")}
-                                >
+                            {/* Cada botón cambia dinámicamente su clase activa */}
+                            <Link className='navigationLink' to="/home">
+                                <button className={`navigationTab__side-menuButton ${location.pathname === "/home" ? "active" : ""}`}>
                                     <RiHome2Line className='homeIcon' size={30} /> Inicio
                                 </button>
-                            </a>
+                            </Link>
 
-                            <a className='navigationLink' href="#horarios">
-                                <button
-                                    className={`navigationTab__side-menuButton ${active === "horarios" ? "active" : ""}`}
-                                    onClick={() => handleSetActive("horarios")}
-                                >
+                            <Link className='navigationLink' to="/horarios">
+                                <button className={`navigationTab__side-menuButton ${location.pathname === "/horarios" ? "active" : ""}`}>
                                     <RiCalendarScheduleLine className='scheduleIcon' size={30} /> Horarios
                                 </button>
-                            </a>
+                            </Link>
 
-                            <a className='navigationLink' href="#notificaciones">
-                                <button
-                                    className={`navigationTab__side-menuButton ${active === "notificaciones" ? "active" : ""}`}
-                                    onClick={() => handleSetActive("notificaciones")}
-                                >
+                            <Link className='navigationLink' to="/NoticesPage">
+                                <button className={`navigationTab__side-menuButton ${location.pathname === "/notificaciones" ? "active" : ""}`}>
                                     <LuBell className='notificationIcon' size={30} /> Notificaciones
                                 </button>
-                            </a>
+                            </Link>
 
-                            <a className='navigationLink' href="#tramites">
-                                <button
-                                    className={`navigationTab__side-menuButton ${active === "tramites" ? "active" : ""}`}
-                                    onClick={() => handleSetActive("tramites")}
-                                >
+                            <Link className='navigationLink' to="/tramites">
+                                <button className={`navigationTab__side-menuButton ${location.pathname === "/tramites" ? "active" : ""}`}>
                                     <BsPencilSquare className='formalitiesIcon' size={30} /> Trámites
                                 </button>
-                            </a>
+                            </Link>
 
-                            <a className='navigationLink' href="#perfil">
-                                <button
-                                    className={`navigationTab__side-menuButton ${active === "perfil" ? "active" : ""}`}
-                                    onClick={() => handleSetActive("perfil")}
-                                >
+                            <Link className='navigationLink' to="/ProfilePage">
+                                <button className={`navigationTab__side-menuButton ${location.pathname === "/ProfilePage" ? "active" : ""}`}>
                                     <FaRegUser className='profileIcon' size={30} /> Perfil
                                 </button>
-                            </a>
-
+                            </Link>
                         </div>
-
                     </div>
 
                     <div className='navigationTab__side-menuFooter'>
-
-                        <a className='navigationLink' href="#logout">
-
-                            <button className='navigationTab__side-menuFoot'>
-                                <MdOutlineLogin className='logoutIcon' size={30} /> Cerrar sesión
-                            </button>
-
-                        </a>
-
+                        <button className='navigationTab__side-menuFoot' onClick={handleLogout}>
+                            <MdOutlineLogin className='logoutIcon' size={30} /> Cerrar sesión
+                        </button>
                     </div>
-
                 </div>
-
-            </div >
-
+            </div>
         </div>
-
     );
-};
+}
 export default NavigationTab;

@@ -1,4 +1,4 @@
-import './HomeCardStyles.css';
+import '../HomeCardStyles.css';
 import { FaRegClock } from "react-icons/fa6";
 import { FaRegBell } from "react-icons/fa";
 import { HiMiniPencilSquare } from "react-icons/hi2";

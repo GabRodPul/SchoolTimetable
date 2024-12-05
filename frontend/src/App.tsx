@@ -8,6 +8,7 @@ import NoticesPage from './assets/page/NoticesPage/NoticesPage'
 import LoginPage from './assets/page/Login/LoginPage'
 import SigninPage from "./assets/page/Signin/SigninPage"
 import HelpToolTip from './assets/componets/CommonComps/HelpToolTip/HelpToolTip'
+import ProfilePage from './assets/page/ProfilePage/ProfilePage'
 
 function App() {
 
@@ -21,10 +22,11 @@ function App() {
           <Route path='/signin' element={<SigninPage />} />
           <Route path='/home' element={<Home />} />
           <Route path='/notices' element={<NoticesPage />} />
+          <Route path='/profile' element={<ProfilePage />} />
           {/* <Route path='/GroupPage' element={<GroupPage />} /> */}
         </Routes>
       </BrowserRouter>
-      <HelpToolTip/>
+      <HelpToolTip />
     </>
   )
 }
