@@ -5,10 +5,8 @@ import './ProfilePageStyles.css'
 //Mobile
 
 //Desktop
-import NavigationTabAdmin from '#src/assets/componets/CommonComps/navigationTab/Admin/NavigationTab';
-import NavigationTabHeadOf from '#src/assets/componets/CommonComps/navigationTab/HeadOf/NavigationTab';
-import NavigationTabStudent from '#src/assets/componets/CommonComps/navigationTab/Student/NavigationTab';
-import NavigationTabTeacher from '#src/assets/componets/CommonComps/navigationTab/Teacher/NavigationTab';
+import NavigationTab from '#src/assets/componets/CommonComps/navigationTab/NavigationTab';
+
 
 function profile() {
 
@@ -31,27 +29,6 @@ function profile() {
         }
     }, []);
 
-    // Renderizar el contenido de la tarjeta según el rol
-    const renderNavigationTab = () => {
-        switch (role) {
-            case UserRole.Admin:
-                roleText = "Admin";
-                return <NavigationTabAdmin />;
-            case UserRole.Head:
-                roleText = "Jefe de estudios";
-                return <NavigationTabHeadOf />;
-            case UserRole.Student:
-                roleText = "Alumno";
-                return <NavigationTabStudent />;
-            case UserRole.Teacher:
-                roleText = "Profesor";
-                return <NavigationTabTeacher />;
-            default:
-                return <NavigationTabTeacher />;
-
-        }
-    };
-
     return (
         <>
             <div className="body">
@@ -59,7 +36,7 @@ function profile() {
                 <div className='profilepage__desktop'>
 
                     <div className='P_navigationTabs'>
-                        {renderNavigationTab()}
+                        <NavigationTab />
                     </div>
 
                     <div className="PflContent">
@@ -144,14 +121,18 @@ function profile() {
                                             <p>Rol:</p>
                                         </div>
                                         <div className='userData__roleText'>
-                                            <p>{roleText}</p>
+                                            <input type="text" placeholder='Cambie Su Nombre' />
                                         </div>
                                         <div className='userData__Tittle'>
                                             <p>Rol:</p>
                                         </div>
                                         <div className='userData__roleText'>
-                                            <p>{roleText}</p>
+                                            <input type="text" placeholder='Cambie Su Teléfono' />
                                         </div>
+
+                                        <button>
+                                            <p>Rol:</p>
+                                        </button>
                                     </div>
                                 </div>
                             </div>

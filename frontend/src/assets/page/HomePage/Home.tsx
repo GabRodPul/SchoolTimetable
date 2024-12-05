@@ -13,10 +13,7 @@ import HomeCardTeacher from '../../componets/Cards/HomeCards/Teacher/HomeCard';
 
 // Desktops
 import HomeContent from '#src/assets/componets/ComponentsHome/HomeContentDesktop/HomeContent';
-import NavigationTabAdmin from '#src/assets/componets/CommonComps/navigationTab/Admin/NavigationTab';
-import NavigationTabHeadOf from '#src/assets/componets/CommonComps/navigationTab/HeadOf/NavigationTab';
-import NavigationTabStudent from '#src/assets/componets/CommonComps/navigationTab/Student/NavigationTab';
-import NavigationTabTeacher from '#src/assets/componets/CommonComps/navigationTab/Teacher/NavigationTab';
+import NavigationTab from '#src/assets/componets/CommonComps/navigationTab/NavigationTab';
 import _SearchBar from '#src/assets/componets/CommonComps/SearchBarheader/SearchBarheader';
 
 function Home() {
@@ -40,22 +37,6 @@ function Home() {
         }
     };
 
-    // Renderizar el contenido de la tarjeta según el rol
-    const renderNavigationTab = () => {
-        switch (role) {
-            case UserRole.Admin:
-                return <NavigationTabAdmin />;
-            case UserRole.Head:
-                return <NavigationTabHeadOf />;
-            case UserRole.Student:
-                return <NavigationTabStudent />;
-            case UserRole.Teacher:
-                return <NavigationTabTeacher />;
-            default:
-                return <div>Error</div>;
-        }
-    };
-
 
     return (
         <>
@@ -68,7 +49,7 @@ function Home() {
 
                 <div className='homepage__desktop'>
                     <div className='homepage_navigationTabs'>
-                        {renderNavigationTab()}
+                    <NavigationTab/>
                     </div>
                     <div className="homepage__deskContent">
                         <HomeContent />

@@ -1,5 +1,5 @@
 // import React from 'react';
-import NavigationTab from "#src/assets/componets/CommonComps/navigationTab/Admin/NavigationTab";
+import NavigationTab from "#src/assets/componets/CommonComps/navigationTab/NavigationTab";
 
 
 function Admin() {
