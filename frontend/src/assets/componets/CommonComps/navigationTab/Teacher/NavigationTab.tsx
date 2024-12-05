@@ -22,7 +22,7 @@ function NavigationTab() {
     const pageTitle = () => {
         switch (location.pathname) {
             case '/home': return '';
-            case '/horarios': return 'Mi Horario';
+            case '/timetable': return 'Mi Horario';
             case '/notices': return <SearchBar />;
             case '/tramites': return <SearchBar />;
             case '/profile': return 'Mi Perfil';
@@ -56,7 +56,7 @@ function NavigationTab() {
                                 </button>
                             </Link>
 
-                            <Link className='navigationLink' to="/horarios">
+                            <Link className='navigationLink' to="/timetable">
                                 <button className={`navigationTab__side-menuButton ${location.pathname === "/horarios" ? "active" : ""}`}>
                                     <RiCalendarScheduleLine className='scheduleIcon' size={30} /> Horarios
                                 </button>
