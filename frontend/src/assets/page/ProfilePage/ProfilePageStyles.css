@@ -61,20 +61,43 @@
     height: 60px;
     border-bottom: 1px solid #E3E6EC;
 }
-.generalInfo__title h3{
+
+.generalInfo__title h3 {
     margin-left: 5%;
     text-align: left;
     font-size: 24px;
 }
-.generalInfo__titles{
+
+.generalInfo__titles {
     display: flex;
     justify-content: center;
     font-size: 22px;
 }
 
-.titles_content{
+.titles_content {
     display: flex;
     flex-direction: row;
-    gap 
+    gap: 550px;
 
+}
+
+.generalInfo__userdata {
+    display: flex;
+    flex-direction: row;
+    gap: 470px;
+    margin-left: 20%;
+}
+
+.info__userData {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    text-align: left;
+    justify-content: space-between;
+}
+
+.generalInfo__title h5{
+    margin-left: 5%;
+    text-align: left;
+    font-size: 20px;
 }

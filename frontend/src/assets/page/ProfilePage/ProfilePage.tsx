@@ -107,7 +107,7 @@ function profile() {
                                             <p>Nombre:</p>
                                         </div>
                                         <div className='userData__name'>
-                                            {name}
+                                            <p>{name}</p>
                                         </div>
                                     </div>
 
@@ -116,7 +116,7 @@ function profile() {
                                             <p>Email:</p>
                                         </div>
                                         <div className='userData__email'>
-                                            {email}
+                                            <p>{email}</p>
                                         </div>
                                     </div>
 
@@ -125,7 +125,7 @@ function profile() {
                                             <p>Teléfono:</p>
                                         </div>
                                         <div className='userData__phone'>
-                                            {phoneNumber}
+                                            <p>{phoneNumber}</p>
                                         </div>
                                     </div>
 
@@ -134,12 +134,19 @@ function profile() {
                                             <p>Rol:</p>
                                         </div>
                                         <div className='userData__roleText'>
-                                            {roleText}
+                                            <p>{roleText}</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="userdata__form">
-
+                                    <div className="info__userData">
+                                        <div className='userData__Tittle'>
+                                            <p>Rol:</p>
+                                        </div>
+                                        <div className='userData__roleText'>
+                                            <p>{roleText}</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
