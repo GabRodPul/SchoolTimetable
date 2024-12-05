@@ -23,9 +23,9 @@ function NavigationTab() {
         switch (location.pathname) {
             case '/home': return '';
             case '/horarios': return 'Mi Horario';
-            case '/notificaciones': return <SearchBar />;
+            case '/notices': return <SearchBar />;
             case '/tramites': return <SearchBar />;
-            case '/ProfilePage': return 'Mi Perfil';
+            case '/profile': return 'Mi Perfil';
             default: '';
         }
     };
