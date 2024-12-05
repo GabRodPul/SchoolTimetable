@@ -99,12 +99,11 @@ function NavigationTab() {
 
                             </div>
                         </div>
-
-                        <div className='navigationTab__side-menuFooter'>
-                            <button className='navigationTab__side-menuFoot' onClick={handleLogout}>
-                                <MdOutlineLogin className='logoutIcon' size={30} /> Cerrar sesión
-                            </button>
-                        </div>
+                    </div>
+                    <div className='navigationTab__side-menuFooter'>
+                        <button className='navigationTab__side-menuFoot' onClick={handleLogout}>
+                            <MdOutlineLogin className='logoutIcon' size={30} /> Cerrar sesión
+                        </button>
                     </div>
                 </div >
             </div >
