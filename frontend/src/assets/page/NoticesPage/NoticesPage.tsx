@@ -5,7 +5,8 @@ import NoticeCard from '../../componets/Cards/NoticeCard/NoticeCard'
 import { FaSearch } from 'react-icons/fa';
 import { useState } from 'react';
 import { Id, WarningData } from '#common/@types/models';
-import NavigationTab from "#src/assets/componets/CommonComps/navigationTab/Admin/NavigationTab";
+import NavigationTab from "#src/assets/componets/CommonComps/navigationTab/NavigationTab";
+import { FaRegBell } from "react-icons/fa";
 
 enum ReminderKind {
   Exam        = "Exam",
@@ -87,29 +88,34 @@ function NoticesPage() {
         <NavigationTab></NavigationTab>
         <div className="noticesPage">
             <div className="noticesPage__notifications">
-                <h2 class="noticesPage">Notificaciones</h2>
+                <h2>Notificaciones</h2>
                 { notices.map(n => (
                     // <NoticeCard 
-                    <div key={n.id}>
-                        <h3>{ 
+                    <div className="notifications__entry" key={n.id}>
+                        <p className="entry__title">{ 
                         `Cambio de Hora ${
                             n.startDate < n.endDate 
                             ? dateStr(n.startDate) 
                             + " - " 
                             + dateStr( n.endDate ) 
                             : dateStr(n.startDate) }`
-                        }</h3>
+                        }</p>
                         <p>{ n.description }</p>
                     </div>
                 ))}
             </div>
-            <div className="reminders">
+            <div className="noticesPage__reminders">
                 <h2>Recordatorios</h2>
-                { reminders.map((r, i) => (
-                    <div key={i}>
-                        <p>{ r.kind }</p>
-                        <p>{ r.description + ", " + dateStr(r.date) }</p>
+                { reminders.map((r, i) => 
+                (<div className="reminders__remEntry" key={i}>
+                    <div {...{kind: r.kind}} className="remEntry__icon remEntry--color">
+                      <FaRegBell size={24} />
                     </div>
+                    <div className="remEntry__textContainer">
+                      <p className="remEntry--color" {...{kind: r.kind}}>{ r.kind }</p>
+                      <p>{ r.description + ", " + dateStr(r.date) }</p>
+                    </div>
+                </div>
                 ))}
             </div>
         </div>
