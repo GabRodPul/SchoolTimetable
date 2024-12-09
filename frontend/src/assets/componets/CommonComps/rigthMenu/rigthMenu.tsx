@@ -51,7 +51,7 @@ const RigthMenu: React.FC = () => {
             <option value="Examen">Examen</option>
             <option value="Cambio de Hora">Cambio de Hora</option>
             <option value="Tarea">Tarea</option>
-            <option value="Tarea">Algo más</option>
+            <option value="Tarea">otra prueba</option>
             <option value="Entrega">Entrega</option>
           </select>
         </label>
