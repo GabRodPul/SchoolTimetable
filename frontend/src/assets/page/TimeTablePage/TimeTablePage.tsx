@@ -1,4 +1,4 @@
-import NavigationTab from '#src/assets/componets/CommonComps/navigationTab/Teacher/NavigationTab';
+import NavigationTab from '#src/assets/componets/CommonComps/navigationTab/NavigationTab';
 import RigthMenu from '#src/assets/componets/CommonComps/rigthMenu/rigthMenu';
 
 
