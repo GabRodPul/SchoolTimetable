@@ -33,7 +33,7 @@ function NavigationTab() {
     };
 
     return (
-        <div className='body'>
+        <div className='navigationTab__body'>
             <div className='navigationTab__header'>
                 <h2 className="navigationTab__currentPage">{pageTitle()}</h2>
                 <div className='navigationTab__profile'>

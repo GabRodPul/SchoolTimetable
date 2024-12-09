@@ -1,3 +1,49 @@
+h2 {
+    font-weight: 400;
+    border-bottom: 1px solid #DDD6D6;
+}
+
+.noticesPage__notifications, 
+.noticesPage__reminders {
+    text-align: left;
+    width: 420px;
+    margin-left: 300px;
+}
+
+.notifications__entry,
+.reminders__remEntry {
+    border: 1px solid #ccc;
+    padding-left: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, .3);  
+}
+
+.entry__title {
+    /* LO DE LA FUENTE NO FURULA */
+    /* font-family: 'Lexend'; */
+    color: #9B2BC7;
+    font-weight: 700;
+}
+
+.entry__text {
+
+}
+
+.reminders__remEntry {
+    display: flex;
+    flex-direction: row;
+}
+
+.remEntry__icon {
+    display: flex;
+    align-items: center;
+    padding-right: 20px;
+}
+
+.remEntry--color[kind="Exam"]       { color: #FB9318; }
+.remEntry--color[kind="Assignment"] { color: #30E578; }
+.remEntry--color[kind="Project"]    { color: #5A51F3; }
+
 @media (max-width: 768px) {
 
     .searchContainer {
@@ -35,16 +81,13 @@
         }
     }
 
-    .notificationContainer{
+    .noticesPage__notifications{
         display: none;
         width: 100%;
         display: flex;
         flex-direction: row;
         gap: 1px;
         color: red;
+        font-family: 'Lexend', sans-serif;
     }
-
-
-
-
 }
