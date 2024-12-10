@@ -14,6 +14,8 @@ export type UserData = {
     image?:         string,
 }
 
+export type UserWithId = UserData & { id: number };
+
 export type AuthData = {
     user:           UserData,
     accessToken:    string,
