@@ -32,9 +32,9 @@ function HomeCard() {
                 <a href="/NoticesPage"><button>Acceder</button></a>
             </div>
 
-            <div>
+            <div className='options_HomeCard'>
                 {role != 'UR0_STUDENT' &&
-                    <div className="card__content">
+                    <div className='card__content'>
                         <div className="card__icon">
                             <HiMiniPencilSquare />
                         </div>
@@ -46,9 +46,9 @@ function HomeCard() {
                     </div>
                 }
             </div>
-            <div>
+            <div className='options_HomeCard'>
                 {role == 'UR3_ADMIN' &&
-                    <div className="card__content">
+                    <div className='card__content'>
                         <div className="card__icon">
                             <FaGear />
                         </div>

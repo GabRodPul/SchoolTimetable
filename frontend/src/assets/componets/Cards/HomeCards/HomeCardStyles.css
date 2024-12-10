@@ -20,6 +20,13 @@
     gap: 5px;
 }
 
+.options_HomeCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .card__icon svg {
     font-size: 30px;
     color: #333333;
@@ -71,7 +78,7 @@
     box-shadow: 0 0 10px rgba(0, 75, 132, 0.5);
 }
 
-@media (max-width: 1439px)  {
+@media (max-width: 1439px) {
     .card__body {
         display: flex;
         flex-wrap: wrap;
@@ -93,6 +100,13 @@
         box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
         gap: 15px;
         text-align: center;
+    }
+
+    .options_HomeCard {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 
     .card__content svg {
