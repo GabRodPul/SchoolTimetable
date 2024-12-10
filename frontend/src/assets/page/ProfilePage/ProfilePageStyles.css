@@ -1,15 +1,26 @@
-/* Desktop */
+/* General */
+body {
+    font-family: 'MerriweatherSans', sans-serif;
+    margin: 0;
+    padding: 0;
+}
 
+/* --- Versión Desktop --- */
 .profilepage__desktop {
-    font-family: MerriweatherSans, sans-serif;
+    font-family: 'MerriweatherSans', sans-serif;
 }
 
 .PflContent {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 30px;
+    width: 1439px;
 }
 
+.PflContent__Info {
+    display: flex;
+    flex-direction: column;
+}
 
 .PflContent__ProfileCard {
     display: flex;
@@ -17,7 +28,7 @@
     justify-items: center;
     margin-left: 250px;
     margin-top: 1px;
-    width: 1206px;
+    width: 1242px;
     height: 264px;
     background-color: #004B84;
     gap: 30px;
@@ -78,13 +89,12 @@
     display: flex;
     flex-direction: row;
     gap: 550px;
-
 }
 
 .generalInfo__userdata {
     display: flex;
     flex-direction: row;
-    gap: 470px;
+    gap: 370px;
     margin-left: 20%;
 }
 
@@ -96,16 +106,126 @@
     justify-content: space-between;
 }
 
-.generalInfo__title h5{
+.generalInfo__title h5 {
     margin-left: 5%;
     text-align: left;
     font-size: 20px;
 }
 
-.userdata__form{
+.userdata__form {
+    text-align: left;
+    gap: 20px;
+}
+
+.form__userForm {
+    gap: 1px;
+}
+
+.userData__formText input {
+    width: 100%;
+    padding: 8px;
+    border: 0px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.userData__formButton {
+    padding: 10px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.userData__formButton:hover {
+    background-color: #0056b3;
+}
+
+.P_rightsidemenu {
+    height: 100vh;
+}
+
+/* --- Versión Móvil --- */
+.profilepage__mobile {
+    font-family: 'MerriweatherSans', sans-serif;
+    background-color: #f9f9f9;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.ProfileCard__mobileCard {
     display: flex;
     flex-direction: row;
-    gap: 50px;
+    justify-items: center;
+    align-items: center;
+    margin-top: 1px;
+    width: 90%;
+    height: 90px;
+    background-color: #004B84;
+    gap: 15px;
+}
+
+.mobileCard__icon img {
+    height: 50px;
+    width: 50px;
+}
+
+.mobileCard__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     text-align: left;
-    justify-content: space-between;
+    color: #ffffff;
+    gap: 5px;
+}
+
+.nameUser_mobile {
+    font-size: 16px;
+}
+
+.emailUser_mobile {
+    font-size: 14px;
+    color: #fefefe;
+}
+
+.iconMobile {
+    width: 1000px;
+    align-items: flex-end;
+}
+
+
+
+/* Botón de cierre de sesión */
+.logoutButton {
+    width: 90%;
+    padding: 8px;
+    background-color: #ff4d4f;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.logoutButton:hover {
+    background-color: #e04343;
+}
+
+/* --- Responsividad --- */
+@media (max-width: 1439px) {
+    .profilepage__desktop {
+        display: none;
+    }
+
+    .profilepage__mobile {
+        display: block;
+    }
+}
+
+@media (min-width: 1440px) {
+    .profilepage__mobile {
+        display: none;
+    }
 }

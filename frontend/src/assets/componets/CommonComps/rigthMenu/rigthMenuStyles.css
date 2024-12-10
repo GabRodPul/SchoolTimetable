@@ -4,6 +4,7 @@
     border-left: 1px solid #ddd;
     position: absolute;
     right: 0;
+    height: 100vh;
   }
   
   .rigthMenu h3{

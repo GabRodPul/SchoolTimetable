@@ -3,9 +3,13 @@ import { UserRole } from '#common/@enums/models';
 import { AuthData } from '#common/@types/models';
 import './ProfilePageStyles.css'
 //Mobile
+import { CiEdit } from "react-icons/ci";
+import { MdEdit } from "react-icons/md";
 
 //Desktop
 import NavigationTab from '#src/assets/componets/CommonComps/navigationTab/NavigationTab';
+import RigthMenu from '#src/assets/componets/CommonComps/rigthMenu/rigthMenu';
+import Header from '#src/assets/componets/CommonComps/MenuheaderMobile/Header';
 
 
 function profile() {
@@ -14,7 +18,7 @@ function profile() {
     const [email, seteEmail] = useState<string>(""); // Estado para el rol del usuario
     const [phoneNumber, setPhoneNum] = useState<string>(""); // Estado para el rol del usuario
     const [role, setRole] = useState<string>(""); // Estado para el rol del usuario
-    let roleText: string = ""
+    let roleText: string = "";
 
     useEffect(() => {
         const authData = JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData; // Cambia 'currentuser' al nombre de la clave que usas en localStorage
@@ -27,19 +31,59 @@ function profile() {
             // console.warn('No se encontró un rol en localStorage');
             // setRole(""); // O manejarlo de otra forma
         }
+
     }, []);
 
     return (
         <>
             <div className="body">
-
-                <div className='profilepage__desktop'>
-
-                    <div className='P_navigationTabs'>
-                        <NavigationTab />
+                {/* Mobile */}
+                <Header />
+                <div className="profilepage__mobile">
+                    {/* Tarjeta de Perfil */}
+                    <h2 className='PerfilMobile__Title'>Perfil</h2>
+                    <div className="ProfileCard__mobileCard">
+                        <div className="mobileCard__icon">
+                            {/* imagen */}
+                            <img src="./img/abstract-user-flat-4.png" alt="Imagen de perfil" />
+                        </div>
+                        <div className="mobileCard__info">
+                            <div className="MobileInfo__name">
+                                {/* name */}
+                                <div className='nameUser_mobile'>
+                                    {name}
+                                </div>
+                            </div>
+                            <div className="mobileInfo_email">
+                                {/* email */}
+                                <div className='emailUser_mobile'>
+                                    {email}
+                                </div>
+                            </div>
+                        </div>
+                        <div className="iconMobile">
+                            <CiEdit color='white' size={30}/>
+                        </div>
                     </div>
+                </div>
 
-                    <div className="PflContent">
+                {/* Opciones */}
+                <div className="mobile__options">
+                    <h2 className='OptionsMobile__Title'>Opciones</h2>
+                </div>
+
+                {/* Botón de Cierre de Sesión */}
+                <button className="logoutButton">Cerrar Sesión</button>
+            </div>
+
+            <div className='profilepage__desktop'>
+
+                <div className='P_navigationTabs'>
+                    <NavigationTab />
+                </div>
+
+                <div className="PflContent">
+                    <div className="PflContent__Info">
                         <div className="PflContent__ProfileCard">
                             <div className="ProfileCard__icon">
                                 {/* imagen */}
@@ -117,22 +161,20 @@ function profile() {
                                 </div>
                                 <div className="userdata__form">
                                     <div className="form__userForm">
-                                        <div className='userData__Tittle'>
+                                        <div className='userData__formTittle'>
                                             <p>Rol:</p>
                                         </div>
-                                        <div className='userData__roleText'>
+                                        <div className='userData__formText'>
                                             <input type="text" placeholder='Cambie Su Nombre' />
                                         </div>
-                                        <div className='userData__Tittle'>
+                                        <div className='userData__formTittle'>
                                             <p>Rol:</p>
                                         </div>
-                                        <div className='userData__roleText'>
+                                        <div className='userData__formText'>
                                             <input type="text" placeholder='Cambie Su Teléfono' />
                                         </div>
 
-                                        <button>
-                                            <p>Rol:</p>
-                                        </button>
+                                        <button className='userData__formButton'>Confirmar:</button>
                                     </div>
                                 </div>
                             </div>
@@ -146,13 +188,13 @@ function profile() {
                             </div>
 
                         </div>
-
                     </div>
 
                     <div className="P_rightsidemenu">
-                        {/* Right Side Menu */}
+                        <RigthMenu />
                     </div>
                 </div>
+
             </div>
         </>
     );
