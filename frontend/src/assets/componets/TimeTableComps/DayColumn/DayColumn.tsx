@@ -1,10 +1,11 @@
+// src/components/DayColumn/DayColumn.tsx
 import React from "react";
-import TimeSlot from "../HourSlot/HourSlot";
+import HourSlot from "../HourSlot/HourSlot";
 
 type DayColumnProps = {
   day: string;
   timeSlot: string;
-  schedule: Array<{ time: string; class?: string; teacher?: string; room?: string }>;
+  schedule: Array<{ time: string; module?: string; teacher?: string; group?: string }>;
 };
 
 const DayColumn: React.FC<DayColumnProps> = ({ day, timeSlot, schedule }) => {
@@ -12,10 +13,10 @@ const DayColumn: React.FC<DayColumnProps> = ({ day, timeSlot, schedule }) => {
 
   return (
     <div className="day-column">
-      <TimeSlot
-        class={slotData?.class || "Sin Clase"}
-        teacher={slotData?.teacher}
-        room={slotData?.room}
+      <HourSlot
+        module={slotData?.module || "Sin Clase"}
+        teacher={slotData?.teacher || "N/A"}
+        group={slotData?.group || "N/A"}
       />
     </div>
   );
