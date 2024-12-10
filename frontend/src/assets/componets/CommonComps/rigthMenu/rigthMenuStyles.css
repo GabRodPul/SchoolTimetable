@@ -1,15 +1,21 @@
 .rigthMenu {
     width: 250px;
-    padding: 60px;
+    padding: 20px 60px;
     border-left: 1px solid #ddd;
     position: absolute;
     right: 0;
+    font-family: MerriweatherSans, sans-serif;
+    font-size: 14px;
+    color: #6c757d;
+    height: 100vh;
   }
   
   .rigthMenu h3{
     text-align: left;
+    padding: 10px 0px;
     font-size: 20px;
     margin-bottom: 15px;
+    border-bottom: 1px solid #e0e0e0;
   }
   
   .rigthMenu__form {
@@ -31,16 +37,22 @@
     padding: 8px;
     border: 0px;
     border-bottom: 1px solid #e0e0e0;
-    
+    font-family: MerriweatherSans, sans-serif;
+    font-size: 14px;
+    color: #6c757d;
   }
   
   .rigthMenu__button {
     padding: 10px;
-    background-color: #007bff;
+    background-color: #004B84;
     color: #ffffff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-family: MerriweatherSans, sans-serif;
+    font-size: 14px;
+    width: 200px;
+    margin-bottom: 20px;
   }
   
   .rigthMenu__button:hover {
