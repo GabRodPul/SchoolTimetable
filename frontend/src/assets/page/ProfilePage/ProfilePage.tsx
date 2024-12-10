@@ -1,4 +1,4 @@
-import __React, { useEffect, useState } from 'react';
+import __React, { useState } from 'react';
 // import { UserRole } from '#common/@enums/models';
 import { AuthData } from '#common/@types/models';
 import './ProfilePageStyles.css'
@@ -13,31 +13,25 @@ import Header from '#src/assets/componets/CommonComps/MenuheaderMobile/Header';
 
 
 function profile() {
+    const name = (JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData).user.name; // Cambia 'currentuser' al nombre de la clave que usas en localStorage
+    const email = (JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData).user.email; // Cambia 'currentuser' al nombre de la clave que usas en localStorage
+    const phoneNumber = (JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData).user.phoneNumber; // Cambia 'currentuser' al nombre de la clave que usas en localStorage
+    const role = (JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData).user.role; // Cambia 'currentuser' al nombre de la clave que usas en localStorage
 
-    const [name, setname] = useState<string>(""); // Estado para el rol del usuario
-    const [email, seteEmail] = useState<string>(""); // Estado para el rol del usuario
-    const [phoneNumber, setPhoneNum] = useState<string>(""); // Estado para el rol del usuario
-    const [role, setRole] = useState<string>(""); // Estado para el rol del usuario
-    let roleText: string = "";
+    const roleTextInfo = () => {
+        switch (role) {
+            case 'UR0_STUDENT': return 'Estudiante';
+            case 'UR1_TEACHER': return 'Profesor';
+            case 'UR2_HEAD': return  'Jefe de estudios';
+            case 'UR3_ADMIN': return  'Admin';
+            default: '';
+        }
+    };
+
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
-
-    useEffect(() => {
-        const authData = JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData; // Cambia 'currentuser' al nombre de la clave que usas en localStorage
-        if (authData) {
-            setname(authData.user.name);
-            seteEmail(authData.user.email);
-            setPhoneNum(authData.user.phoneNumber);
-            setRole(authData.user.role);
-        } else {
-            // console.warn('No se encontró un rol en localStorage');
-            // setRole(""); // O manejarlo de otra forma
-        }
-
-    }, []);
 
     return (
         <>
@@ -70,25 +64,26 @@ function profile() {
                             <CiEdit color='white' size={30} />
                         </div>
                     </div>
-                </div>
 
-                {/* Opciones */}
-                <div className="mobile__options">
-                    <h2 className='OptionsMobile__Title'>Opciones</h2>
-                    <div className="mobileProfile__options">
-                        <h4>Mi perfil</h4>
-                        <CiMenuKebab
-                            onClick={toggleMenu}
-                            className="menu-icon"
-                        />
-                        {isMenuOpen && (
-                            <p>{name}</p>
-                        )}
+                    {/* Opciones */}
+                    <div className="mobile__options">
+                        <h2 className='OptionsMobile__Title'>Opciones</h2>
+                        <div className="mobileProfile__options">
+                            <h4>Mi perfil</h4>
+                            <CiMenuKebab
+                                onClick={toggleMenu}
+                                className="menu-icon"
+                            />
+                            {isMenuOpen && (
+                                <p>{name}</p>
+                            )}
+                        </div>
                     </div>
-                </div>
 
-                {/* Botón de Cierre de Sesión */}
-                <button className="logoutButton">Cerrar Sesión</button>
+
+                    {/* Botón de Cierre de Sesión */}
+                    <button className="logoutButton">Cerrar Sesión</button>
+                </div>
             </div>
 
             <div className='profilepage__desktop'>
@@ -170,20 +165,20 @@ function profile() {
                                             <p>Rol:</p>
                                         </div>
                                         <div className='userData__roleText'>
-                                            <p>{roleText}</p>
+                                            <p>{roleTextInfo()}</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="userdata__form">
                                     <div className="form__userForm">
                                         <div className='userData__formTittle'>
-                                            <p>Rol:</p>
+                                            <p>Nombre:</p>
                                         </div>
                                         <div className='userData__formText'>
                                             <input type="text" placeholder='Cambie Su Nombre' />
                                         </div>
                                         <div className='userData__formTittle'>
-                                            <p>Rol:</p>
+                                            <p>Telefono:</p>
                                         </div>
                                         <div className='userData__formText'>
                                             <input type="text" placeholder='Cambie Su Teléfono' />
