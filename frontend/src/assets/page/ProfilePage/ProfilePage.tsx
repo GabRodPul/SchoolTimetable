@@ -1,10 +1,10 @@
 import __React, { useEffect, useState } from 'react';
-import { UserRole } from '#common/@enums/models';
+// import { UserRole } from '#common/@enums/models';
 import { AuthData } from '#common/@types/models';
 import './ProfilePageStyles.css'
 //Mobile
 import { CiEdit } from "react-icons/ci";
-import { MdEdit } from "react-icons/md";
+import { CiMenuKebab } from "react-icons/ci";
 
 //Desktop
 import NavigationTab from '#src/assets/componets/CommonComps/navigationTab/NavigationTab';
@@ -19,6 +19,11 @@ function profile() {
     const [phoneNumber, setPhoneNum] = useState<string>(""); // Estado para el rol del usuario
     const [role, setRole] = useState<string>(""); // Estado para el rol del usuario
     let roleText: string = "";
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
+    };
 
     useEffect(() => {
         const authData = JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData; // Cambia 'currentuser' al nombre de la clave que usas en localStorage
@@ -62,7 +67,7 @@ function profile() {
                             </div>
                         </div>
                         <div className="iconMobile">
-                            <CiEdit color='white' size={30}/>
+                            <CiEdit color='white' size={30} />
                         </div>
                     </div>
                 </div>
@@ -70,6 +75,16 @@ function profile() {
                 {/* Opciones */}
                 <div className="mobile__options">
                     <h2 className='OptionsMobile__Title'>Opciones</h2>
+                    <div className="mobileProfile__options">
+                        <h4>Mi perfil</h4>
+                        <CiMenuKebab
+                            onClick={toggleMenu}
+                            className="menu-icon"
+                        />
+                        {isMenuOpen && (
+                            <p>{name}</p>
+                        )}
+                    </div>
                 </div>
 
                 {/* Botón de Cierre de Sesión */}
