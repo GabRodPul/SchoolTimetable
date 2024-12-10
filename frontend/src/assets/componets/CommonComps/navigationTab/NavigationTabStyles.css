@@ -1,3 +1,7 @@
+.navigationTab__body::after {
+ margin-left: 250px;
+}
+
 /* Header */
 .navigationTab__header {
     display: flex;
