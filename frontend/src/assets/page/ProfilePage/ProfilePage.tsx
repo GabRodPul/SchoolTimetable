@@ -1,5 +1,5 @@
 import __React, { useEffect, useState } from 'react';
-import { UserData } from "#common/@types/models";
+import { AuthData, UserData } from "#common/@types/models";
 import './ProfilePageStyles.css'
 import { useNavigate } from 'react-router-dom';
 import { useApi } from '#src/api/ApiContext';
@@ -31,14 +31,16 @@ function profile() {
     useEffect(() => {
         switch (fetchRsrc.state) {
             case FetchState.NotStarted:
-                api.get((localStorage.getItem("currentUser")! as any).id);
+                const authData = JSON.parse(localStorage.getItem("currentUser")!) as any;
+                api.get(authData["user"]["id"]);
                 break;
             case FetchState.Loading:
                 break;
 
             case FetchState.Success:
-                if ("name" in fetchRsrc.data) { }
-                setUserData(fetchRsrc.data as any as UserData);
+                if ("name" in fetchRsrc.data)
+        
+                    setUserData(fetchRsrc.data as UserData);
                 break;
 
             default:
