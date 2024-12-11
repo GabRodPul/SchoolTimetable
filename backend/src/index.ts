@@ -4,7 +4,6 @@ import cors from "cors";
 import { envvars } from "./env";
 import { UserRoutes } from "./routes/user.routes";
 import { GroupRoutes } from "./routes/group.routes"
-import { CourseRoutes } from "./routes/course.routes";
 import { initApiRoutes } from "./routes";
 import { UserRole } from "../../common/@enums/models";
 import { hashSync } from "bcrypt";
