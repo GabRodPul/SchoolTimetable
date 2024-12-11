@@ -5,21 +5,41 @@ import { SessionHour } from "../../../common/@types/models";
 import { computeError } from "../utils/error";
 import { Op } from "sequelize";
 
+
 export const ScheduleController = {
     getSchedule2: async (req: Request, res: Response): Promise<void> => {
         try {
-            const enrollments = await DB.enrollments.findAll({ 
+            const moduleId = (await DB.enrollments.findAll({ // ARRAY
                 attributes: [ "moduleId" ],
                 where: { studentId: req.params.studentId },
-            });
+            })).map(e => e.dataValues.moduleId);
 
-            const igtModules = await DB.igt_modules.findAll({
-                where: { moduleId: enrollments.map(e => e.dataValues.moduleId) }
-            });
+            const modules = (await DB.modules.findAll({
+                where: { id: moduleId }
+            })).map(m => m.dataValues);
 
-            const sessions = await DB.sessions.findAll({
-                where: { igtModuleId: igtModules.map(igt => igt.dataValues.id) }
-            });
+            const igtModules = (await DB.igt_modules.findAll({ // ARRAY
+                attributes: [ "id" ],
+                where: { moduleId }
+            })).map(igt => igt.dataValues);
+
+            const sessions   = (await DB.sessions.findAll({ 
+                where: { igtModuleId: igtModules.map(igt => igt.id) }
+            })).map(s => s.dataValues);
+
+            const classHours = (await DB.classHour.findAll({ 
+                where: { id: sessions.map(s => s.classHourId) } 
+            })).map(c => c.dataValues);
+
+            const data = sessions.map(s => ({
+                moduleName: modules
+                    .find(m => m.id === igtModules.find(igt => igt.id === s.igtModuleId)!.moduleId)!
+                    .name,
+                ...s,
+                ...classHours.find(c => c.id === s.classHourId),
+            }));
+
+            res.send(data);
         } catch(err: any) {
             res.send(computeError(err));
         }

@@ -1,5 +1,5 @@
 import __React, { useEffect, useState } from 'react';
-import { AuthData, UserDataResponse } from "#common/@types/models";
+import { AuthData, UserData, UserDataResponse } from "#common/@types/models";
 import './ProfilePageStyles.css'
 import { useNavigate } from 'react-router-dom';
 import { useApi } from '#src/api/ApiContext';
@@ -13,57 +13,42 @@ import { CiEdit, CiMenuKebab } from "react-icons/ci";
 import NavigationTab from '#src/assets/componets/CommonComps/navigationTab/NavigationTab';
 import RigthMenu from '#src/assets/componets/CommonComps/rigthMenu/rigthMenu';
 import Header from '#src/assets/componets/CommonComps/MenuheaderMobile/Header';
+import { UserRole } from '#common/@enums/models';
 
 function profile() {
 
     const navigate = useNavigate();
-    const [fetchRsrc, api] = useApi<UserDataResponse[]>(ApiRts.Users)
-    const [userData, setUserData] = useState<AuthData & { id: number } | null>(null);
-    const [currentUserId, setCurrentUserId] = useState<{ id: number } | null>(null);  // Almacenamos el id por separado
-    const [hasFetchedData, setHasFetchedData] = useState(false); // Control de si ya se hizo la llamada API
-    const [userDataFetch, setUserDataFetch] = useState<FetchData<UserDataResponse[]>>({
-        state: FetchState.NotStarted,
+    const [fetchRsrc, api] = useApi<UserData>(ApiRts.Users)
+    const [userData, setUserData] = useState<UserData>({ 
+        email:          "",
+        name:           "",
+        password:       "",
+        phoneNumber:    "",
+        role:           UserRole.Student,
+        image:          null
     });
 
-
-    // Obtener el userId desde localStorage
     useEffect(() => {
-        const storedUserId = JSON.parse(localStorage.getItem('currentUser') ?? '{}').user?.id;
-        if (storedUserId) {
-            setCurrentUserId(storedUserId); // Establecer el ID directamente
+        switch (fetchRsrc.state) {
+            case FetchState.NotStarted:
+                api.get((localStorage.getItem("currentUser")! as any).id);
+                break;
+            case FetchState.Loading:
+                break;
+
+            case FetchState.Success:
+                if ("name" in fetchRsrc.data) {}
+                    setUserData(fetchRsrc.data as any as UserData);
+                break;
+
+            default:
+                break;
         }
-    }, []);
-
-    // Este useEffect solo se ejecuta si `currentUserId` cambia y no hemos fetchado datos aún
-    // useEffect(() => {
-    //     if (currentUserId && !hasFetchedData) {
-    //         const fetchUserData = async () => {
-    //             try {
-    //                 const data = await get(currentUserId); // Aquí get debería devolver los datos
-    //                 console.log(data);
-    //                 setUserData(data);  // Se actualiza el estado con los datos
-    //                 setHasFetchedData(true); // Marcamos que los datos ya fueron obtenidos
-    //             } catch (error) {
-    //                 console.error('Error fetching user:', error);
-    //             }
-    //         };
-    //         fetchUserData();
-    //     }
-    // }, [currentUserId, get, hasFetchedData]);
-
-    // switch (fetchRsrc.state) {
-    //     case FetchState.NotStarted:
-    //         api.getAll();
-    //         break;
-
-    //     case FetchState.Loading:
-    //         break;
-
-    //     default:
-    //         setUserDataFetch({...fetchRsrc});
-    // }
-    // const currentUser = userDataFetch.get((user: { id: { id: number; } | null; }) => user.id === currentUserId);
-    // setUserData(currentUser);
+    }, [fetchRsrc]);
+    
+    
+    const currentUser = userData.get((user: { id: { id: number; } | null; }) => user.id === currentUserId);
+    setUserData(currentUser);
 
 
     const roleTextInfo = () => {
