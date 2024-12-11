@@ -19,28 +19,45 @@ function profile() {
 
     const navigate = useNavigate();
     const [fetchRsrc, api] = useApi<UserData>(ApiRts.Users)
-    const [userData, setUserData] = useState<UserData>({
-        email: "",
-        name: "",
-        password: "",
-        phoneNumber: "",
-        role: UserRole.Student,
-        image: undefined
-    });
+    const [userData, setUserData] = useState<UserData>(
+        {
+            email: "",
+            name: "",
+            password: "",
+            phoneNumber: "",
+            role: UserRole.Student,
+            image: undefined
+        }
+    );
 
     useEffect(() => {
         switch (fetchRsrc.state) {
             case FetchState.NotStarted:
+                //Sacar el usuario del local storage, como dato json, todos los valores
                 const authData = JSON.parse(localStorage.getItem("currentUser")!) as any;
-                api.get(authData["user"]["id"]);
+                //*console log de comprobacion
+                console.log("AuthData:", authData);
+                //buscando el usuario en la base de datos
+                api.get(authData);
                 break;
+
             case FetchState.Loading:
                 break;
 
             case FetchState.Success:
-                if ("name" in fetchRsrc.data)
-        
+                // Sacar nombre para buscar el usuario:
+                const nameUser = (JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData).user.name;
+                console.log("NombreUser:", nameUser);
+
+                //*console log de comprobacion
+                console.log("Hoa:", fetchRsrc.data);
+
+                //!Fallo
+                if ("name" in fetchRsrc.data) {
+                    //cambiamos los valores
                     setUserData(fetchRsrc.data as UserData);
+                }
+
                 break;
 
             default:
