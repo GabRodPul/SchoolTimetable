@@ -214,6 +214,32 @@ export const dbInit = async ( debug: boolean ) => {
     ]);
 
 
+    await DB.enrollments.bulkCreate([
+        //DAW
+        { id:  1, studentId: 5, moduleId: dbgMod.DOR.id, },
+        { id:  2, studentId: 6, moduleId: dbgMod.DOR.id, },
+        { id:  3, studentId: 7, moduleId: dbgMod.DOR.id, },
+        { id:  4, studentId: 8, moduleId: dbgMod.DOR.id, },
+
+        { id:  5, studentId: 5, moduleId: dbgMod.DPL.id, },
+        { id:  6, studentId: 6, moduleId: dbgMod.DPL.id, },
+        { id:  7, studentId: 7, moduleId: dbgMod.DPL.id, },
+        { id:  8, studentId: 8, moduleId: dbgMod.DPL.id, },
+
+        { id:  9, studentId: 5, moduleId:  dbgMod.DSW.id, },
+        { id:  10, studentId: 6, moduleId: dbgMod.DSW.id, },
+
+        { id:  11, studentId: 5, moduleId: dbgMod.DEW.id, },
+        { id:  12, studentId: 6, moduleId: dbgMod.DEW.id, },
+        { id:  13, studentId: 7, moduleId: dbgMod.DEW.id, },
+        { id:  14, studentId: 8, moduleId: dbgMod.DEW.id, },
+
+        { id:  15, studentId: 7, moduleId: dbgMod.EMR.id, },
+        { id:  16, studentId: 8, moduleId: dbgMod.EMR.id, },
+
+    ]);
+
+
     await DB.igt_modules.bulkCreate([
         // 2ºDAW
         // * DOR
