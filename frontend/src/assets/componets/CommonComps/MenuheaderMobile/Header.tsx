@@ -43,7 +43,7 @@ function Header() {
                     <a href="/Horarios">
                         <button>Horarios</button>
                     </a>
-                    <a href="/NoticePage">
+                    <a href="/notices">
                         <button>Notificaciones</button>
                     </a>
 
@@ -54,12 +54,12 @@ function Header() {
                     )}
 
                     {role === UserRole.Admin && (
-                        <a href="/Settings">
+                        <a href="/admin">
                             <button>Configuración</button>
                         </a>
                     )}
 
-                    <a href="/ProfilePage">
+                    <a href="/profile">
                         <button>Perfil</button>
                     </a>
                 </div>

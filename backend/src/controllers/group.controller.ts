@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import { DB } from "../models"
 import { resMsg } from "../utils/response";
 import { computeError } from "../utils/error";
+import { ValidationError, ValidationErrorItem } from "sequelize";
 
 const Groups = DB.groups;
 const GroupController = Object.freeze({

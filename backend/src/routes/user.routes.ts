@@ -1,11 +1,13 @@
 import { Express, Router } from "express";
 import { UserController } from "../controllers/user.controller";
+import { hasRolePermissions } from "../controllers/auth";
+import { UserRole } from "../../../common/@enums/models";
 
 const UserRoutes = { init: ( app: Express ) => {
     const router = Router();
     
     // Create a new User
-    router.post( "/", UserController.create );
+    router.post( "/", hasRolePermissions(UserRole.Admin), UserController.create );
     
     // Retrive all Users
     router.get( "/", UserController.findAll );
@@ -17,7 +19,7 @@ const UserRoutes = { init: ( app: Express ) => {
     router.put( "/:id", UserController.update );
     
     // Update a User with id
-    router.delete( "/:id", UserController.delete );
+    router.delete( "/:id", hasRolePermissions(UserRole.Admin), UserController.delete );
 
     app.use("/api/users", router);
 

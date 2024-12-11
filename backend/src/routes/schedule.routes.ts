@@ -5,7 +5,10 @@ const ScheduleRoutes = {
     init: (app: Express) => {
         const router = Router();
 
-        router.get("/", (req, res) => ScheduleController.getSchedule(req, res));
+        // Asocia el método del controlador al endpoint
+        router.get("/", ScheduleController.getSchedule);
+
+        // Registra la ruta en la aplicación principal
         app.use("/api/schedule", router);
     }
 };

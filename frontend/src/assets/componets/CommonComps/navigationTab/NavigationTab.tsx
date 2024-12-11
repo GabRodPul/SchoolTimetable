@@ -26,7 +26,7 @@ function NavigationTab() {
             case '/timetable': return 'Mi Horario';
             case '/notificaciones': return <SearchBar />;
             case '/tramites': return <SearchBar />;
-            case '/ProfilePage': return 'Mi Perfil';
+            case '/profile': return 'Mi Perfil';
             case '/admin': return 'Configuración';
             default: '';
         }
@@ -99,12 +99,11 @@ function NavigationTab() {
 
                             </div>
                         </div>
-
-                        <div className='navigationTab__side-menuFooter'>
-                            <button className='navigationTab__side-menuFoot' onClick={handleLogout}>
-                                <MdOutlineLogin className='logoutIcon' size={30} /> Cerrar sesión
-                            </button>
-                        </div>
+                    </div>
+                    <div className='navigationTab__side-menuFooter'>
+                        <button className='navigationTab__side-menuFoot' onClick={handleLogout}>
+                            <MdOutlineLogin className='logoutIcon' size={30} /> Cerrar sesión
+                        </button>
                     </div>
                 </div >
             </div >

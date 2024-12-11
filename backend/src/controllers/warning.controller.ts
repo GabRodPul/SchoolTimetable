@@ -23,6 +23,14 @@ const WarningController = Object.freeze({
         }
     },
 
+    findForStudent: async (req: Request, res: Response) => {
+        try {
+            res.send([]);
+        } catch (err: any) {
+            res.send(resMsg(500, err.message));
+        }
+    },
+
     findOne: async (req: Request, res: Response) => {
         try {
             const data = await Warning.findByPk(req.params.id);

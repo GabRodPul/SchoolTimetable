@@ -1,79 +1,80 @@
 .rigthMenu {
-    width: 250px;
-    padding: 20px 60px;
-    border-left: 1px solid #ddd;
-    position: absolute;
-    right: 0;
-    font-family: MerriweatherSans, sans-serif;
-    font-size: 14px;
-    color: #6c757d;
-    height: 100vh;
-  }
-  
-  .rigthMenu h3{
-    text-align: left;
-    padding: 10px 0px;
-    font-size: 20px;
-    margin-bottom: 15px;
-    border-bottom: 1px solid #e0e0e0;
-  }
-  
-  .rigthMenu__form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 20px;
-    text-align: left;
-    margin-bottom: 40px;
-  }
-  
-  .rigthMenu__form label {
-    font-size: 0.9rem;
-    color: #333;
-  }
-  
-  .rigthMenu__form select, .rigthMenu__form input {
-    width: 100%;
-    padding: 8px;
-    border: 0px;
-    border-bottom: 1px solid #e0e0e0;
-    font-family: MerriweatherSans, sans-serif;
-    font-size: 14px;
-    color: #6c757d;
-  }
-  
-  .rigthMenu__button {
-    padding: 10px;
-    background-color: #004B84;
-    color: #ffffff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-family: MerriweatherSans, sans-serif;
-    font-size: 14px;
-    width: 200px;
-    margin-bottom: 20px;
-  }
-  
-  .rigthMenu__button:hover {
-    background-color: #0056b3;
-  }
-  
-  .rigthMenu__reminders {
-    margin-top: 10px;
-  }
-  
-  .rigthMenu__reminder {
-    display: flex;
-    justify-content: left;
-    align-items: center; /* Asegura que el ícono y texto estén centrados verticalmente */
-    gap: 10px;
-    padding: 10px;
-    margin-bottom: 10px;
-    background-color: #fff;
-    border-radius: 24px;
-    border: 1px solid #787486;
-    font-size: 0.9rem;
-  }
-  
-  
+  width: 250px;
+  padding: 20px 60px;
+  border-left: 1px solid #ddd;
+  position: absolute;
+  right: 0;
+  font-family: MerriweatherSans, sans-serif;
+  font-size: 14px;
+  color: #6c757d;
+  height: 100vh;
+  background-color: #ffffff;
+}
+
+.rigthMenu h3 {
+  text-align: left;
+  padding: 10px 0px;  
+  font-size: 20px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.rigthMenu__form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+  text-align: left;
+  margin-bottom: 40px;
+}
+
+.rigthMenu__form label {
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.rigthMenu__form select,
+.rigthMenu__form input {
+  width: 100%;
+  padding: 8px;
+  border: 0px;
+  border-bottom: 1px solid #e0e0e0;
+  font-family: MerriweatherSans, sans-serif;
+  font-size: 14px;
+  color: #6c757d;
+}
+
+.rigthMenu__button {
+  padding: 10px;
+  background-color: #004B84;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: MerriweatherSans, sans-serif;
+  font-size: 14px;
+  width: 200px;
+  margin-bottom: 20px;
+}
+
+.rigthMenu__button:hover {
+  background-color: #0056b3;
+}
+
+.rigthMenu__reminders {
+  margin-top: 10px;
+}
+
+.rigthMenu__reminder {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  /* Asegura que el ícono y texto estén centrados verticalmente */
+  gap: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #fff;
+  border-radius: 24px;
+  border: 1px solid #787486;
+  font-size: 0.9rem;
+}
