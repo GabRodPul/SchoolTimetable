@@ -99,7 +99,12 @@ function LoginPageForm() {
                 ¿Olvidó la contraseña?
               </a>
             </div>
-
+            { fetchRsrc.state === FetchState.Success && 
+              (fetchRsrc.data as any).code !== undefined 
+              && <div>
+              <p color="red">(fetchRsrc.data as any).mess</p>
+            </div>
+            }
             {/* Botón con onClick para manejar el submit */}
             <button
               type="submit" // Se mantiene como botón de envío

@@ -9,6 +9,8 @@ type ScheduleProps = {
 };
 
 const Schedule: React.FC<ScheduleProps> = ({ scheduleData }) => {
+  console.log(scheduleData);
+  // Estado de carga
   if (scheduleData.state === FetchState.Loading) {
     return <div>Cargando horario...</div>;
   }
