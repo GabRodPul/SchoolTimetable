@@ -7,7 +7,7 @@ const ModuleRoutes = { init: ( app: Express ) => {
     const router = Router();
     
     // Create a new warning, with a middleware to filter, only allowing teachers
-    router.post( "/", ModuleController.create );
+    router.post( "/", hasRolePermissions(UserRole.Admin), ModuleController.create );
     
     // Retrive all warnings
     router.get( "/", ModuleController.findAll );
@@ -16,10 +16,10 @@ const ModuleRoutes = { init: ( app: Express ) => {
     router.get( "/:id", ModuleController.findByPk );
     
     // Update a Warning with id
-    router.put( "/:id", ModuleController.update );
+    router.put( "/:id", hasRolePermissions(UserRole.Admin), ModuleController.update );
     
     // Delete a Warning with id
-    router.delete( "/:id", ModuleController.delete );
+    router.delete( "/:id", hasRolePermissions(UserRole.Admin), ModuleController.delete );
 
     app.use("/api/modules", router);
 
