@@ -1,7 +1,9 @@
 export enum ApiRts {
     Users   = "users",
-    Courses = "courses",
+    TimeTables = "timetables",
+    Modules = "modules",
     Groups  = "groups",
+    Sessions  = "sessions",
     Login   = "login",
     Signin  = "signin",
 }

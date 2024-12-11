@@ -1,19 +1,19 @@
 import React from "react";
 
-type TimeSlotProps = {
-  class: string;
-  teacher?: string;
-  room?: string;
+type HourSlotProps = {
+  module: string;
+  group?: string | null;
+  teacher?: string | null;
 };
 
-const TimeSlot: React.FC<TimeSlotProps> = ({ class: className, teacher, room }) => {
+const HourSlot: React.FC<HourSlotProps> = ({ module, group, teacher }) => {
   return (
-    <div className={`time-slot ${className === "Sin Clase" ? "no-class" : "class"}`}>
-      {className !== "Sin Clase" ? (
+    <div className={`time-slot ${module === "Sin Clase" ? "no-class" : "class"}`}>
+      {module !== "Sin Clase" ? (
         <>
-          <p>{className}</p>
-          <p>{teacher}</p>
-          <p>{room}</p>
+          <p>{module}</p>
+          <p>{group || "N/A"}</p>
+          <p>{teacher || "N/A"}</p>
         </>
       ) : (
         <p>Sin Clase</p>
@@ -22,4 +22,4 @@ const TimeSlot: React.FC<TimeSlotProps> = ({ class: className, teacher, room }) 
   );
 };
 
-export default TimeSlot;
+export default HourSlot;
