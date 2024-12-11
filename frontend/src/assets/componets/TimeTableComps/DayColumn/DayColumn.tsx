@@ -1,14 +1,12 @@
-// src/components/DayColumn/DayColumn.tsx
 import React from "react";
 import HourSlot from "../HourSlot/HourSlot";
 
 type DayColumnProps = {
-  day: string;
   timeSlot: string;
   schedule: Array<{ time: string; module?: string; teacher?: string; group?: string }>;
 };
 
-const DayColumn: React.FC<DayColumnProps> = ({ day, timeSlot, schedule }) => {
+const DayColumn: React.FC<DayColumnProps> = ({ timeSlot, schedule }) => {
   const slotData = schedule.find((slot) => slot.time === timeSlot);
 
   return (

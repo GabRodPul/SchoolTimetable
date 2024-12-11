@@ -1,38 +1,49 @@
 import React from "react";
 import DayColumn from "../DayColumn/DayColumn";
-import { FetchState, FetchData } from "../../../../types/api";
+import { FetchData, FetchState } from "../../../../types/api";
+import { ScheduleResponse } from "#common/@types/models";
 
-type ScheduleResponse = {
-  day: string;
-  hours: Array<{ time: string; module?: string; teacher?: string; group?: string }>;
-};
 
 type ScheduleProps = {
-  scheduleData: FetchData<ScheduleResponse[]>;
+  scheduleData:   FetchData<ScheduleResponse[]>;
 };
 
 const Schedule: React.FC<ScheduleProps> = ({ scheduleData }) => {
+  // Estado de carga
   if (scheduleData.state === FetchState.Loading) {
     return <div>Cargando horario...</div>;
   }
 
+  // Estado de error
   if (scheduleData.state === FetchState.Error) {
     return <div>Error al cargar el horario</div>;
   }
 
-  if (
-    (scheduleData.state === FetchState.Success || scheduleData.state === FetchState.SuccessMany) &&
-    Array.isArray(scheduleData.data)
-  ) {
+  // Estado de éxito
+  if (scheduleData.state === FetchState.Success || scheduleData.state === FetchState.SuccessMany) {
+    // Manejo seguro del tipo de `scheduleData.data`
+    let schedule: ScheduleResponse[];
+
+    if (Array.isArray(scheduleData.data)) {
+      if (Array.isArray(scheduleData.data[0])) {
+        // Si `scheduleData.data` es un array de arrays, se aplana
+        schedule = (scheduleData.data as ScheduleResponse[][]).flat();
+      } else {
+        // Si es un array simple, se asigna directamente
+        schedule = scheduleData.data as ScheduleResponse[];
+      }
+    } else {
+      schedule = [];
+    }
+
     return (
       <div className="schedule">
-        {scheduleData.data.map((dayData: ScheduleResponse) => (
+        {schedule.map((dayData: ScheduleResponse) => (
           <div key={dayData.day} className="dia">
             <h3>{dayData.day}</h3>
             {[1, 2, 3, 4, 5, 6].map((hora) => (
               <DayColumn
                 key={`${dayData.day}-${hora}`}
-                day={dayData.day}
                 timeSlot={`${hora}`}
                 schedule={dayData.hours}
               />
@@ -43,7 +54,8 @@ const Schedule: React.FC<ScheduleProps> = ({ scheduleData }) => {
     );
   }
 
-  return <div>No hay datos disponibles</div>; // Manejo para otros casos inesperados
+  // Estado por defecto para `NotStarted`
+  return <div>No hay datos disponibles</div>;
 };
 
 export default Schedule;
