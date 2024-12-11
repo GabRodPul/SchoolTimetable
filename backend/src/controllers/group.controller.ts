@@ -5,17 +5,12 @@ import { computeError } from "../utils/error";
 
 const Groups = DB.groups;
 const GroupController = Object.freeze({
-    create: async (req: Request, res: Response) => {
+    create: async(req: Request, res: Response) => {
         try {
-            const { name } = req.body;
-            if (!name || name.length !== 5) {
-                return res.status(400).send(resMsg(400, "Name must be exactly 5 characters long"));
-            }
-
             const data = await Groups.create(req.body);
             res.send(data);
         } catch (err: any) {
-            res.send(computeError(err));
+            res.send(computeError( err ));
         }
     },
 

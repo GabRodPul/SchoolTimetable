@@ -63,21 +63,34 @@ export type ClassHourData = {
     end:            string,
 }
 
+
+
 // export type ScheduleCell = {
-//     sessionHour:    SessionHour;
-//     module:         string;
-//     group:          string | null;
-//     teacher:        string | null;
+//     sessionHour:    SessionHour,
+//     module:         string,
+//     group:          string | null,
+//     teacher:        string | null,
 // };
 
 
 // export type FullSessionData = {
-//     sessionHour:    SessionHour;
-//     time:           string;
-//     module:         string
-//     group:          string
-//     teacher:        string;
+//     sessionHour:    SessionHour,
+//     time:           string,
+//     module:         string,
+//     group:          string,
+//     teacher:        string,
 // };
+
+export type ScheduleResponse = {
+    day:    string;
+    hours:  Array<{ 
+        time:       string,
+        module?:    string,
+        teacher?:   string,
+        group?:     string,
+    }>;
+  };
+
 
 
 export type SessionData = {

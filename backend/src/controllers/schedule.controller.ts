@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { DB } from "../models";
-import { FullSessionData } from "../../../common/@types/models";
+// import { FullSessionData } from "../../../common/@types/models";
 import { SessionHour } from "../../../common/@types/models";
 
 export const ScheduleController = {
@@ -42,7 +42,7 @@ export const ScheduleController = {
         if (dayIndex !== -1) {
           const scheduleDay = defaultSchedule[dayIndex];
           const hourIndex = session.classHour.sessionHour - 1;
-
+      
           scheduleDay.hours[hourIndex] = {
             sessionHour: session.classHour.sessionHour,
             module: session.igtModule.module.name,
@@ -51,6 +51,8 @@ export const ScheduleController = {
           };
         }
       });
+      
+      console.log(defaultSchedule);  
 
       res.json(defaultSchedule);
     } catch (error) {
