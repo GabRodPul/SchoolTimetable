@@ -9,27 +9,21 @@ type ScheduleProps = {
 };
 
 const Schedule: React.FC<ScheduleProps> = ({ scheduleData }) => {
-  // Estado de carga
   if (scheduleData.state === FetchState.Loading) {
     return <div>Cargando horario...</div>;
   }
 
-  // Estado de error
   if (scheduleData.state === FetchState.Error) {
     return <div>Error al cargar el horario</div>;
   }
 
-  // Estado de éxito
   if (scheduleData.state === FetchState.Success || scheduleData.state === FetchState.SuccessMany) {
-    // Manejo seguro del tipo de `scheduleData.data`
     let schedule: ScheduleResponse[];
 
     if (Array.isArray(scheduleData.data)) {
       if (Array.isArray(scheduleData.data[0])) {
-        // Si `scheduleData.data` es un array de arrays, se aplana
         schedule = (scheduleData.data as ScheduleResponse[][]).flat();
       } else {
-        // Si es un array simple, se asigna directamente
         schedule = scheduleData.data as ScheduleResponse[];
       }
     } else {
@@ -54,7 +48,6 @@ const Schedule: React.FC<ScheduleProps> = ({ scheduleData }) => {
     );
   }
 
-  // Estado por defecto para `NotStarted`
   return <div>No hay datos disponibles</div>;
 };
 
