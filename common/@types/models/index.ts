@@ -13,6 +13,14 @@ export type UserData = {
     role:           string,
     image?:         string,
 }
+export type UserDataResponse = {
+    name:           string,
+    email:          string,
+    password:       string,
+    phoneNumber:    string,
+    role:           string,
+    image?:         string,
+}
 
 export type UserWithId = UserData & { id: number };
 

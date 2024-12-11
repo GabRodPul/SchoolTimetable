@@ -1,8 +1,3 @@
-/* General */
-body {
-    height: 100vh;
-}
-
 /* --- Versión Desktop --- */
 .profilepage__desktop {
     font-family: 'MerriweatherSans', sans-serif;
@@ -12,13 +7,12 @@ body {
     display: flex;
     flex-direction: row;
     gap: 30px;
-
 }
 
 .PflContent__Info {
     display: flex;
     flex-direction: column;
-    width: 131vh;
+    width: 137vh;
 }
 
 .PflContent__ProfileCard {
@@ -163,17 +157,10 @@ body {
 .profilepage__mobile {
     font-family: 'MerriweatherSans', sans-serif;
     background-color: #f9f9f9;
-    padding: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 20px;
-    height: 100vh;
-}
-
-
-.mobile__header {
-    margin-top: 10%;
 }
 
 .Mobile__Title {
@@ -296,7 +283,7 @@ body {
     color: #ABABAB;
 }
 
-.modulesInfo{
+.modulesInfo {
     font-size: .8em;
 }
 

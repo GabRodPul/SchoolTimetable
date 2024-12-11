@@ -1,10 +1,10 @@
 import __React, { useEffect, useState } from 'react';
-import { AuthData, Id } from "#common/@types/models";
+import { AuthData, UserDataResponse } from "#common/@types/models";
 import './ProfilePageStyles.css'
 import { useNavigate } from 'react-router-dom';
 import { useApi } from '#src/api/ApiContext';
 import { ApiRts } from '#common/@enums/http';
-import { FetchState } from '#src/types/api';
+import { FetchData, FetchState, ApiFuncs } from '#src/types/api';
 
 //Mobile
 import { CiEdit, CiMenuKebab } from "react-icons/ci";
@@ -16,11 +16,15 @@ import Header from '#src/assets/componets/CommonComps/MenuheaderMobile/Header';
 
 function profile() {
 
-    const [fetchRsrc, { getAll }] = useApi<AuthData & { id: number }>(ApiRts.Users);
+    const navigate = useNavigate();
+    const [fetchRsrc, api] = useApi<UserDataResponse[]>(ApiRts.Users)
     const [userData, setUserData] = useState<AuthData & { id: number } | null>(null);
     const [currentUserId, setCurrentUserId] = useState<{ id: number } | null>(null);  // Almacenamos el id por separado
     const [hasFetchedData, setHasFetchedData] = useState(false); // Control de si ya se hizo la llamada API
-    const navigate = useNavigate();
+    const [userDataFetch, setUserDataFetch] = useState<FetchData<UserDataResponse[]>>({
+        state: FetchState.NotStarted,
+    });
+
 
     // Obtener el userId desde localStorage
     useEffect(() => {
@@ -30,7 +34,7 @@ function profile() {
         }
     }, []);
 
-    // // Este useEffect solo se ejecuta si `currentUserId` cambia y no hemos fetchado datos aún
+    // Este useEffect solo se ejecuta si `currentUserId` cambia y no hemos fetchado datos aún
     // useEffect(() => {
     //     if (currentUserId && !hasFetchedData) {
     //         const fetchUserData = async () => {
@@ -47,29 +51,19 @@ function profile() {
     //     }
     // }, [currentUserId, get, hasFetchedData]);
 
-    useEffect(() => {
-        if (currentUserId && !hasFetchedData) {
-            const fetchUserData = async () => {
-                try {
-                    const users = await getAll();  // Obtener todos los usuarios
-                    console.log(users); // Verifica que esta respuesta sea un array
+    // switch (fetchRsrc.state) {
+    //     case FetchState.NotStarted:
+    //         api.getAll();
+    //         break;
 
-                    // Filtra el usuario actual por ID
-                    const currentUser = users?.find((user: { id: { id: number; }; }) => user.id === currentUserId);
+    //     case FetchState.Loading:
+    //         break;
 
-                    if (currentUser) {
-                        setUserData(currentUser);  // Actualizar el estado con los datos del usuario actual
-                        setHasFetchedData(true);
-                    } else {
-                        console.error("Usuario no encontrado");
-                    }
-                } catch (error) {
-                    console.error('Error fetching users:', error);
-                }
-            };
-            fetchUserData();
-        }
-    }, [currentUserId, getAll, hasFetchedData]);
+    //     default:
+    //         setUserDataFetch({...fetchRsrc});
+    // }
+    // const currentUser = userDataFetch.get((user: { id: { id: number; } | null; }) => user.id === currentUserId);
+    // setUserData(currentUser);
 
 
     const roleTextInfo = () => {
@@ -106,8 +100,9 @@ function profile() {
         <>
             <div className="body">
                 {/* Mobile */}
+
                 <div className="profilepage__mobile">
-                    <Header />
+                        <Header />
                     {/* Tarjeta de Perfil */}
                     <div className="mobile__header">
                         <h2 className='Mobile__Title'>Perfil</h2>
