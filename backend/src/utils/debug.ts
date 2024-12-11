@@ -1,5 +1,5 @@
 import { hashSync } from "bcrypt";
-import { Turn, UserRole } from "../../../common/@enums/models";
+import { Turn, UserRole, WorkDay } from "../../../common/@enums/models";
 import { DB } from "../models";
 
 export const dbInit = async ( debug: boolean ) => {
@@ -108,6 +108,78 @@ export const dbInit = async ( debug: boolean ) => {
             phoneNumber:    "+34922222221",
             role:           UserRole.Admin
         },
+        {
+            id:             12,
+            name:           "Alumnado Número 5",
+            email:          "alumnadonum5@gmail.com",
+            image:          undefined,
+            password:       hashSync("alumnadonum5", 10),
+            phoneNumber:    "+34611111105",
+            role:           UserRole.Student
+        },
+        {
+            id:             13,
+            name:           "Alumnado Número 6",
+            email:          "alumnadonum6@gmail.com",
+            image:          undefined,
+            password:       hashSync("alumnadonum6", 10),
+            phoneNumber:    "+34622222206",
+            role:           UserRole.Student
+        },
+        {
+            id:             14,
+            name:           "Alumnado Número 7",
+            email:          "alumnadonum7@gmail.com",
+            image:          undefined,
+            password:       hashSync("alumnadonum7", 10),
+            phoneNumber:    "+34633333307",
+            role:           UserRole.Student
+        },
+        {
+            id:             15,
+            name:           "Alumnado Número 8",
+            email:          "alumnadonum8@gmail.com",
+            image:          undefined,
+            password:       hashSync("alumnadonum8", 10),
+            phoneNumber:    "+34644444408",
+            role:           UserRole.Student
+        },
+        {
+            id:             16,
+            name:           "Alumnado Número 9",
+            email:          "alumnadonum9@gmail.com",
+            image:          undefined,
+            password:       hashSync("alumnadonum9", 10),
+            phoneNumber:    "+34611111109",
+            role:           UserRole.Student
+        },
+        {
+            id:             17,
+            name:           "Alumnado Número 10",
+            email:          "alumnadonum10@gmail.com",
+            image:          undefined,
+            password:       hashSync("alumnadonum10", 10),
+            phoneNumber:    "+34622222210",
+            role:           UserRole.Student
+        },
+        {
+            id:             18,
+            name:           "Alumnado Número 11",
+            email:          "alumnadonum11@gmail.com",
+            image:          undefined,
+            password:       hashSync("alumnadonum11", 10),
+            phoneNumber:    "+34633333311",
+            role:           UserRole.Student
+        },
+        {
+            id:             19,
+            name:           "Alumnado Número 12",
+            email:          "alumnadonum12@gmail.com",
+            image:          undefined,
+            password:       hashSync("alumnadonum12", 10),
+            phoneNumber:    "+34644444412",
+            role:           UserRole.Student
+        },
     ]);
 
     // Storing these for clearer data creation
@@ -214,28 +286,125 @@ export const dbInit = async ( debug: boolean ) => {
     ]);
 
 
+    await DB.sessions.bulkCreate([
+        
+        //Monday
+        { id:  1, classHourId: 1 , igtModuleId: 2, day:WorkDay.Monday,  },
+        { id:  2, classHourId: 2, igtModuleId: 2, day:WorkDay.Monday, },
+        { id:  3, classHourId: 3, igtModuleId: 5, day:WorkDay.Monday, },
+        { id:  4, classHourId: 4, igtModuleId: 5, day:WorkDay.Monday, },
+        { id:  5, classHourId: 4, igtModuleId: 8, day:WorkDay.Monday, },
+        { id:  6, classHourId: 4, igtModuleId: 8, day:WorkDay.Monday, },
+
+        //Tuesday
+        { id:  7, classHourId: 1 , igtModuleId: 11, day:WorkDay.Tuesday,  },
+        { id:  8, classHourId: 2, igtModuleId: 11, day:WorkDay.Tuesday, },
+        { id:  9, classHourId: 3, igtModuleId: 2, day:WorkDay.Tuesday, },
+        { id:  10, classHourId: 4, igtModuleId: 2, day:WorkDay.Tuesday, },
+        { id:  11, classHourId: 5, igtModuleId: 5, day:WorkDay.Tuesday, },
+        { id:  12, classHourId: 6, igtModuleId: 5, day:WorkDay.Tuesday, },
+
+        //Wensday
+        { id:  7, classHourId: 1 , igtModuleId: 8, day:WorkDay.Wednesday,  },
+        { id:  8, classHourId: 2, igtModuleId: 8, day:WorkDay.Wednesday, },
+        { id:  9, classHourId: 3, igtModuleId: 2, day:WorkDay.Wednesday, },
+        { id:  10, classHourId: 4, igtModuleId: 2, day:WorkDay.Wednesday, },
+        { id:  11, classHourId: 5, igtModuleId: 11, day:WorkDay.Wednesday, },
+        { id:  12, classHourId: 6, igtModuleId: 11, day:WorkDay.Wednesday, },
+
+        //thursday
+        { id:  7, classHourId: 1 , igtModuleId: 11, day:WorkDay.Thursday,  },
+        { id:  8, classHourId: 2, igtModuleId: 11, day:WorkDay.Thursday, },
+        { id:  9, classHourId: 3, igtModuleId: 11, day:WorkDay.Thursday, },
+        { id:  10, classHourId: 4, igtModuleId: 8, day:WorkDay.Thursday, },
+        { id:  11, classHourId: 5, igtModuleId: 8, day:WorkDay.Thursday, },
+        { id:  12, classHourId: 6, igtModuleId: 14, day:WorkDay.Thursday, },
+
+        //Friday
+        { id:  7, classHourId: 1 , igtModuleId: 5, day:WorkDay.Friday,  },
+        { id:  8, classHourId: 2, igtModuleId: 5, day:WorkDay.Friday, },
+        { id:  9, classHourId: 3, igtModuleId: 8, day:WorkDay.Friday, },
+        { id:  10, classHourId: 4, igtModuleId: 8, day:WorkDay.Friday, },
+        { id:  11, classHourId: 5, igtModuleId: 14, day:WorkDay.Friday, },
+        { id:  12, classHourId: 6, igtModuleId: 14, day:WorkDay.Friday, },
+    ]);
+
+
     await DB.enrollments.bulkCreate([
-        //DAW
+
+        //DOR
         { id:  1, studentId: 5, moduleId: dbgMod.DOR.id, },
         { id:  2, studentId: 6, moduleId: dbgMod.DOR.id, },
         { id:  3, studentId: 7, moduleId: dbgMod.DOR.id, },
         { id:  4, studentId: 8, moduleId: dbgMod.DOR.id, },
 
+        //DPL
         { id:  5, studentId: 5, moduleId: dbgMod.DPL.id, },
         { id:  6, studentId: 6, moduleId: dbgMod.DPL.id, },
         { id:  7, studentId: 7, moduleId: dbgMod.DPL.id, },
         { id:  8, studentId: 8, moduleId: dbgMod.DPL.id, },
 
+        //DSW
         { id:  9, studentId: 5, moduleId:  dbgMod.DSW.id, },
         { id:  10, studentId: 6, moduleId: dbgMod.DSW.id, },
 
+        //DEW
         { id:  11, studentId: 5, moduleId: dbgMod.DEW.id, },
         { id:  12, studentId: 6, moduleId: dbgMod.DEW.id, },
         { id:  13, studentId: 7, moduleId: dbgMod.DEW.id, },
         { id:  14, studentId: 8, moduleId: dbgMod.DEW.id, },
+        { id:  15, studentId: 9, moduleId: dbgMod.DEW.id, },
+        { id:  16, studentId: 10, moduleId: dbgMod.DEW.id, },
+        { id:  17, studentId: 11, moduleId: dbgMod.DEW.id, },
+        { id:  18, studentId: 12, moduleId: dbgMod.DEW.id, },
 
-        { id:  15, studentId: 7, moduleId: dbgMod.EMR.id, },
-        { id:  16, studentId: 8, moduleId: dbgMod.EMR.id, },
+        //ERM
+        { id:  19, studentId: 7, moduleId: dbgMod.EMR.id, },
+        { id:  20, studentId: 8, moduleId: dbgMod.EMR.id, },
+        { id:  21, studentId: 9, moduleId: dbgMod.EMR.id, },
+        { id:  22, studentId: 10, moduleId: dbgMod.EMR.id, },
+        { id:  23, studentId: 11, moduleId: dbgMod.EMR.id, },
+        { id:  24, studentId: 12, moduleId: dbgMod.EMR.id, },
+        { id:  25, studentId: 13, moduleId: dbgMod.EMR.id, },
+        { id:  26, studentId: 14, moduleId: dbgMod.EMR.id, },
+
+        //PGV
+        { id:  27, studentId: 14, moduleId: dbgMod.PGV.id, },
+        { id:  28, studentId: 15, moduleId: dbgMod.PGV.id, },
+        { id:  29, studentId: 16, moduleId: dbgMod.PGV.id, },
+        { id:  30, studentId: 17, moduleId: dbgMod.PGV.id, },
+        { id:  31, studentId: 18, moduleId: dbgMod.PGV.id, },
+        { id:  32, studentId: 19, moduleId: dbgMod.PGV.id, },
+
+        //AED
+        { id:  33, studentId: 15, moduleId: dbgMod.DEW.id, },
+        { id:  34, studentId: 19, moduleId: dbgMod.DEW.id, },
+        { id:  35, studentId: 17, moduleId: dbgMod.DEW.id, },
+
+        //DAD
+        { id:  36, studentId: 15, moduleId: dbgMod.DEW.id, },
+        { id:  37, studentId: 16, moduleId: dbgMod.DEW.id, },
+        { id:  38, studentId: 17, moduleId: dbgMod.DEW.id, },
+        { id:  39, studentId: 18, moduleId: dbgMod.DEW.id, },
+        { id:  40, studentId: 19, moduleId: dbgMod.DEW.id, },
+
+        // * SSG
+        { id:  41, studentId: 15, moduleId: dbgMod.SSG.id, },
+        { id:  42, studentId: 16, moduleId: dbgMod.SSG.id, },
+        { id:  43, studentId: 17, moduleId: dbgMod.SSG.id, },
+        { id:  44, studentId: 18, moduleId: dbgMod.SSG.id, },
+        { id:  45, studentId: 19, moduleId: dbgMod.SSG.id, },
+
+        //PGL
+        { id:  44, studentId: 15, moduleId: dbgMod.PGL.id, },
+        { id:  45, studentId: 17, moduleId: dbgMod.PGL.id, },
+        { id:  46, studentId: 19, moduleId: dbgMod.PGL.id, },
+
+        // * EMR
+        { id:  47, studentId: 15, moduleId: dbgMod.EMR.id, },
+        { id:  48, studentId: 16, moduleId: dbgMod.EMR.id, },
+        { id:  49, studentId: 17, moduleId: dbgMod.EMR.id, },
+        { id:  50, studentId: 18, moduleId: dbgMod.EMR.id, },
 
     ]);
 
