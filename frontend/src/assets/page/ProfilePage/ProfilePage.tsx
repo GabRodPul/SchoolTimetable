@@ -1,10 +1,10 @@
 import __React, { useEffect, useState } from 'react';
-import { AuthData, UserData, UserDataResponse } from "#common/@types/models";
+import { UserData } from "#common/@types/models";
 import './ProfilePageStyles.css'
 import { useNavigate } from 'react-router-dom';
 import { useApi } from '#src/api/ApiContext';
 import { ApiRts } from '#common/@enums/http';
-import { FetchData, FetchState, ApiFuncs } from '#src/types/api';
+import { FetchState } from '#src/types/api';
 
 //Mobile
 import { CiEdit, CiMenuKebab } from "react-icons/ci";
@@ -19,13 +19,13 @@ function profile() {
 
     const navigate = useNavigate();
     const [fetchRsrc, api] = useApi<UserData>(ApiRts.Users)
-    const [userData, setUserData] = useState<UserData>({ 
-        email:          "",
-        name:           "",
-        password:       "",
-        phoneNumber:    "",
-        role:           UserRole.Student,
-        image:          null
+    const [userData, setUserData] = useState<UserData>({
+        email: "",
+        name: "",
+        password: "",
+        phoneNumber: "",
+        role: UserRole.Student,
+        image: undefined
     });
 
     useEffect(() => {
@@ -37,22 +37,18 @@ function profile() {
                 break;
 
             case FetchState.Success:
-                if ("name" in fetchRsrc.data) {}
-                    setUserData(fetchRsrc.data as any as UserData);
+                if ("name" in fetchRsrc.data) { }
+                setUserData(fetchRsrc.data as any as UserData);
                 break;
 
             default:
                 break;
         }
     }, [fetchRsrc]);
-    
-    
-    const currentUser = userData.get((user: { id: { id: number; } | null; }) => user.id === currentUserId);
-    setUserData(currentUser);
 
 
     const roleTextInfo = () => {
-        switch (userData?.user.role) {
+        switch (userData.role) {
             case 'UR0_STUDENT': return 'Estudiante';
             case 'UR1_TEACHER': return 'Profesor';
             case 'UR2_HEAD': return 'Jefe de estudios';
@@ -87,117 +83,119 @@ function profile() {
                 {/* Mobile */}
 
                 <div className="profilepage__mobile">
-                        <Header />
+                    <Header />
                     {/* Tarjeta de Perfil */}
-                    <div className="mobile__header">
-                        <h2 className='Mobile__Title'>Perfil</h2>
-                        <div className="ProfileCard__mobileCard">
-                            <div className="mobilecardInfo">
-                                <div className="mobileCard__icon">
-                                    {/* imagen */}
-                                    <img src="./img/abstract-user-flat-4.png" alt="Imagen de perfil" />
-                                </div>
-                                <div className="mobileCard__info">
-                                    <div className="MobileInfo__name">
-                                        {/* name */}
-                                        <div className='nameUser_mobile'>
-                                            {userData?.user.name}
+                    <div className="mobile__content">
+                        <div className="mobile__header">
+                            <h2 className='Mobile__Title'>Perfil</h2>
+                            <div className="ProfileCard__mobileCard">
+                                <div className="mobilecardInfo">
+                                    <div className="mobileCard__icon">
+                                        {/* imagen */}
+                                        <img src="./img/abstract-user-flat-4.png" alt="Imagen de perfil" />
+                                    </div>
+                                    <div className="mobileCard__info">
+                                        <div className="MobileInfo__name">
+                                            {/* name */}
+                                            <div className='nameUser_mobile'>
+                                                {userData.name}
+                                            </div>
+                                        </div>
+                                        <div className="mobileInfo_email">
+                                            {/* email */}
+                                            <div className='emailUser_mobile'>
+                                                {userData.email}
+                                            </div>
                                         </div>
                                     </div>
-                                    <div className="mobileInfo_email">
-                                        {/* email */}
-                                        <div className='emailUser_mobile'>
-                                            {userData?.user.email}
-                                        </div>
-                                    </div>
                                 </div>
-                            </div>
-                            <div className="iconMobile">
-                                <CiEdit color='white' size={30} />
+                                <div className="iconMobile">
+                                    <CiEdit color='white' size={30} />
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    {/* Opciones */}
-                    <div className="mobile__options">
-                        <div className="options__card">
-                            <h2 className='Mobile__Title'>Opciones</h2>
-                            <div className="mobileProfile__options">
-                                <h4>Mi perfil</h4>
-                                <CiMenuKebab
-                                    onClick={toggleMenu1}
-                                    className="menu-icon"
-                                />
-                            </div>
-                            {isMenuOpenProfile && (
-                                <div className="dropdown__menuMobile">
-                                    <div className="dropdown__Info">
-                                        <div className='mobileTittle'>
-                                            <p>Nombre:</p>
-                                        </div>
-                                        <div className='mobileData'>
-                                            <p>{userData?.user.name}</p>
-                                        </div>
-                                        <div className='mobileTittle'>
-                                            <p>Email:</p>
-                                        </div>
-                                        <div className='mobileData'>
-                                            <p>{userData?.user.email}</p>
-                                        </div>
-                                        <div className='mobileTittle'>
-                                            <p>Teléfono:</p>
-                                        </div>
-                                        <div className='mobileData'>
-                                            <p>{userData?.user.phoneNumber}</p>
-                                        </div>
-                                        <div className='mobileTittle'>
-                                            <p>Rol:</p>
-                                        </div>
-                                        <div className='mobileData'>
-                                            <p>{roleTextInfo()}</p>
+                        {/* Opciones */}
+                        <div className="mobile__options">
+                            <div className="options__card">
+                                <h2 className='Mobile__Title'>Opciones</h2>
+                                <div className="mobileProfile__options">
+                                    <h4>Mi perfil</h4>
+                                    <CiMenuKebab
+                                        onClick={toggleMenu1}
+                                        className="menu-icon"
+                                    />
+                                </div>
+                                {isMenuOpenProfile && (
+                                    <div className="dropdown__menuMobile">
+                                        <div className="dropdown__Info">
+                                            <div className='mobileTittle'>
+                                                <p>Nombre:</p>
+                                            </div>
+                                            <div className='mobileData'>
+                                                <p>{userData.name}</p>
+                                            </div>
+                                            <div className='mobileTittle'>
+                                                <p>Email:</p>
+                                            </div>
+                                            <div className='mobileData'>
+                                                <p>{userData.email}</p>
+                                            </div>
+                                            <div className='mobileTittle'>
+                                                <p>Teléfono:</p>
+                                            </div>
+                                            <div className='mobileData'>
+                                                <p>{userData.phoneNumber}</p>
+                                            </div>
+                                            <div className='mobileTittle'>
+                                                <p>Rol:</p>
+                                            </div>
+                                            <div className='mobileData'>
+                                                <p>{roleTextInfo()}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            )}
+                                )}
 
-                            <div className="mobileProfile__options">
-                                <h4>Mis Cursos</h4>
-                                <CiMenuKebab
-                                    onClick={toggleMenu2}
-                                    className="menu-icon"
-                                />
-                            </div>
-                            {isMenuOpenCourses && (
-                                <div className="dropdown__menuMobile">
-                                    <div className="dropdown__Info">
-                                        <div className='mobileTittle'>
-                                            <p className='modulesInfo'>Segundo Desarrollo de aplicaciones web - Turno de tarde</p>
+                                <div className="mobileProfile__options">
+                                    <h4>Mis Cursos</h4>
+                                    <CiMenuKebab
+                                        onClick={toggleMenu2}
+                                        className="menu-icon"
+                                    />
+                                </div>
+                                {isMenuOpenCourses && (
+                                    <div className="dropdown__menuMobile">
+                                        <div className="dropdown__Info">
+                                            <div className='mobileTittle'>
+                                                <p className='modulesInfo'>Segundo Desarrollo de aplicaciones web - Turno de tarde</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            )}
+                                )}
 
-                            <div className="mobileProfile__options">
-                                <h4>Mis Notificaciones</h4>
-                                <CiMenuKebab
-                                    onClick={toggleMenu3}
-                                    className="menu-icon"
-                                />
-                            </div>
-                            {isMenuOpenNotices && (
-                                <div className="dropdown__menuMobile">
+                                <div className="mobileProfile__options">
+                                    <h4>Mis Notificaciones</h4>
+                                    <CiMenuKebab
+                                        onClick={toggleMenu3}
+                                        className="menu-icon"
+                                    />
                                 </div>
-                            )}
+                                {isMenuOpenNotices && (
+                                    <div className="dropdown__menuMobile">
+                                    </div>
+                                )}
 
-                            <div className="mobileProfile__options">
-                                <h4>Cambiar de Rol</h4>
+                                <div className="mobileProfile__options">
+                                    <h4>Cambiar de Rol</h4>
+                                </div>
                             </div>
                         </div>
+                        {/* Botón de Cierre de Sesión */}
+                        <button className="logoutButton" onClick={handleLogout}>
+                            Cerrar Sesión
+                        </button>
                     </div>
-                    {/* Botón de Cierre de Sesión */}
-                    <button className="logoutButton" onClick={handleLogout}>
-                        Cerrar Sesión
-                    </button>
                 </div>
 
 
@@ -218,13 +216,13 @@ function profile() {
                                     <div className="Info__name">
                                         {/* name */}
                                         <div className='nameUser'>
-                                            {userData?.user.name}
+                                            {userData.name}
                                         </div>
                                     </div>
                                     <div className="Info_email">
                                         {/* email */}
                                         <div className='emailUser'>
-                                            {userData?.user.email}
+                                            {userData.email}
                                         </div>
                                     </div>
                                 </div>
@@ -253,7 +251,7 @@ function profile() {
                                                 <p>Nombre:</p>
                                             </div>
                                             <div className='userData__name'>
-                                                <p>{userData?.user.name}</p>
+                                                <p>{userData.name}</p>
                                             </div>
                                         </div>
 
@@ -262,7 +260,7 @@ function profile() {
                                                 <p>Email:</p>
                                             </div>
                                             <div className='userData__email'>
-                                                <p>{userData?.user.email}</p>
+                                                <p>{userData.email}</p>
                                             </div>
                                         </div>
 
@@ -271,7 +269,7 @@ function profile() {
                                                 <p>Teléfono:</p>
                                             </div>
                                             <div className='userData__phone'>
-                                                <p>{userData?.user.phoneNumber}</p>
+                                                <p>{userData.phoneNumber}</p>
                                             </div>
                                         </div>
 
