@@ -7,6 +7,9 @@ import { useState } from 'react';
 import { Id, WarningData } from '#common/@types/models';
 import NavigationTab from "#src/assets/componets/CommonComps/navigationTab/NavigationTab";
 import { FaRegBell } from "react-icons/fa";
+import { useApi } from "#src/api/ApiContext";
+import RigthMenu from "#src/assets/componets/CommonComps/rigthMenu/rigthMenu";
+import { ApiRts } from "#common/@enums/http";
 
 enum ReminderKind {
   Exam        = "Exam",
@@ -23,6 +26,8 @@ type ReminderData = {
 const dateStr = (d: Date) => d.toJSON().slice(0, 10);
 
 function NoticesPage() {
+    const [fetchRsrc, api] = useApi<WarningData>(ApiRts.Warnings);
+
     const notices: Omit<WarningData & Id, "teacherId">[] = [
         {
             id: 1,
@@ -86,10 +91,12 @@ function NoticesPage() {
     return (
         <>
         <NavigationTab></NavigationTab>
+        <RigthMenu/>
         <div className="noticesPage">
             <div className="noticesPage__notifications">
                 <h2>Notificaciones</h2>
-                { notices.map(n => (
+                { 
+                  notices.map(n => (
                     // <NoticeCard 
                     <div className="notifications__entry" key={n.id}>
                         <p className="entry__title">{ 

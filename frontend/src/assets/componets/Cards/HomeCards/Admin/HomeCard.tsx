@@ -27,7 +27,7 @@ function HomeCard() {
                     <h5 className='card__title'>Página de Avisos</h5>
                     <p>Vea sus avisos</p>
                 </div>
-                <a href="/NoticesPage"><button>Acceder</button></a>
+                <a href="/notices"><button>Acceder</button></a>
             </div>
 
             <div className="card__content">

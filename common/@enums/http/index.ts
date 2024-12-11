@@ -1,11 +1,13 @@
 export enum ApiRts {
-    Users   = "users",
+    Users       = "users",
     TimeTables = "timetables",
-    Modules = "modules",
-    Groups  = "groups",
-    Sessions  = "sessions",
-    Login   = "login",
-    Signin  = "signin",
+    Modules     = "modules",
+    Groups      = "groups",
+    Sessions    = "sessions",
+    Login       = "login",
+    Signin      = "signin",
+    Warnings    = "warnings",
+    Schedule    = "schedule"
 }
 
 export enum Method {

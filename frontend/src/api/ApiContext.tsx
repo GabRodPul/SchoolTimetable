@@ -1,8 +1,8 @@
-import { Body } from "#common/@types/http";
+import { Body, ResponseData } from "#common/@types/http";
 import { createContext, useReducer, useContext, Reducer, PropsWithoutRef } from "react";
 import { AuthData, Id, UserData } from "#common/@types/models";
 import { API, myfetch } from "./api";
-import { FetchData, FetchState } from "../types/api";
+import { FetchData, FetchOptions, FetchState } from "../types/api";
 import { ApiRts, Method } from "#common/@enums/http";
 
 const evalFetch = <T,>() => (fetch: FetchData<T>, payload: FetchData<T>) => {
@@ -40,7 +40,9 @@ const ApiResourceProvider = <T,>(props: any) => {
 
 type UserLogin = { email: string, password: string };
 const useApi = <T,>(route: ApiRts)
-: [ FetchData<T>, { 
+: [ FetchData<T>, {
+    fetch:  (init: any) 
+                                 => Promise<void>, 
     get:    (id: Id)             => Promise<void>,
     getAll: ()                   => Promise<void>,
     post:   (body: T)            => Promise<void>,
@@ -111,6 +113,25 @@ const useApi = <T,>(route: ApiRts)
     }
 
     return [fetchRsrc, {
+        fetch: async (init) => {
+            try {
+                const data = await 
+                    fetch(`http://localhost:8080/api/${route}`, init)
+                        .then(res => res.json())
+                        .then(res => res as ResponseData<T>);        ;
+
+                dispatch({
+                    state: FetchState.Success,
+                    data
+                });
+            } catch(err: any) {
+                dispatch({
+                    state: FetchState.Error,
+                    error: err as Error
+                });
+            }
+        }, 
+        
         get: async (id: Id) => {
             try {
                 const data = await API.get<T>(route, id);
