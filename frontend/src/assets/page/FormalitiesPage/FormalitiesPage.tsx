@@ -7,14 +7,16 @@ import { Id, WarningData } from '#common/@types/models';
 import { useApi } from '#src/api/ApiContext';
 import { ApiRts } from '#common/@enums/http';
 import { FetchState } from '#src/types/api';
+import { useNavigate } from 'react-router';
 
 type Warning = WarningData & Id;
 
 const Formalities: React.FC = () => {
+        const navigate = useNavigate();
     const [warning, api] = useApi<Warning>(ApiRts.Warnings);
     const [selectedWarning, setSelectedWarning] = useState<Warning | null>(null);
     const [formState, setFormState] = useState<Warning>({
-        id: 0,
+        id: 9,
         teacherId: 1,
         description: "",
         startDate: "",
@@ -43,53 +45,31 @@ const Formalities: React.FC = () => {
     };
 
     const handleCreate = () => {
-
         // Validamos el formulario antes de realizar el POST
-    
         if (!validateForm()) return;
-    
         console.log("Enviando datos al backend:", formState);
-    
         api.post(formState)
-    
-            .then((response) => {
-    
-                console.log("POST exitoso:", response.data);
-    
+            .then(() => {
+                console.log("POST exitoso:", formState);
                 // Asumimos que el backend devuelve el nuevo objeto creado
-    
-                const newWarning = response.data; // Captura la respuesta del backend
-    
+                const newWarning = formState; // Asegúrate de que esto contenga la ID generada
                 setFormState({
-    
                     id: newWarning.id, // Actualiza el estado con la ID generada
-    
                     teacherId: 1,
-    
                     description: "",
-    
                     startDate: "",
-    
                     endDate: "",
-    
                     startHour: "",
-    
                     endHour: ""
-    
                 });
-    
                 api.getAll(); // Actualizar datos después del POST
-    
+                console.log("Aparezco");
+                navigate('/formalities')
             })
-    
             .catch((error) => {
-    
                 console.error("Error al realizar el POST:", error);
-    
                 alert("Hubo un error al intentar crear el trámite.");
-    
             });
-    
     };
 
     const handleUpdate = () => {
@@ -109,6 +89,7 @@ const Formalities: React.FC = () => {
                     endHour: ""
                 });
                 api.getAll(); // Actualizar datos después de la actualización
+                
             })
             .catch((error) => {
                 console.error("Error al realizar el PUT:", error);

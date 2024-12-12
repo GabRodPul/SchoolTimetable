@@ -140,24 +140,24 @@ const useApi = <T,>(route: ApiRts)
                 });
             }
         },
-        fetchMany: async (_route: string, init?: any) => {
-            try {
-                const data = await
-                    fetch(_route, init)
-                        .then(res => res.json())
-                        .then(res => res as ResponseData<T[]>);;
+        // fetchMany: async (_route: string, init?: any) => {
+        //     try {
+        //         const data = await 
+        //             fetch(_route, init)
+        //                 .then(res => res.json())
+        //                 .then(res => res as ResponseData<T[]>);        ;
 
-                dispatch({
-                    state: FetchState.SuccessMany,
-                    data
-                });
-            } catch (err: any) {
-                dispatch({
-                    state: FetchState.Error,
-                    error: err as Error
-                });
-            }
-        },
+        //         dispatch({
+        //             state: FetchState.SuccessMany,
+        //             data
+        //         });
+        //     } catch(err: any) {
+        //         dispatch({
+        //             state: FetchState.Error,
+        //             error: err as Error
+        //         });
+        //     }
+        // }, 
 
         get: async (id: Id) => {
             try {
@@ -192,7 +192,6 @@ const useApi = <T,>(route: ApiRts)
                 })
             }
         },
-
         post: async (body: T) => {
             try {
                 const data = await API.post<T extends UserData ? T & { access_token: string } : T, T>(route, { body });

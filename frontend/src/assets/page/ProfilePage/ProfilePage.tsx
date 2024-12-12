@@ -37,6 +37,10 @@ function profile() {
     );
 
     useEffect(() => {
+        api.getAll();
+    }, []);
+
+    useEffect(() => {
         switch (fetchRsrc.state) {
             case FetchState.NotStarted:
                 //Sacar el usuario del local storage, como dato json, todos los valores
@@ -107,22 +111,6 @@ function profile() {
         localStorage.removeItem('currentUser');
         localStorage.removeItem('accessToken');
         navigate('/login');
-    };
-
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setUserData((prevState) => ({
-            ...prevState,
-            [name]: value,
-        }));
-    };
-
-    const handleConfirm = () => {
-        if (userData.name.trim() === '' || userData.phoneNumber.trim() === '') {
-            alert('Por favor, complete todos los campos antes de continuar.');
-        } else {
-            alert('Datos confirmados!');
-        }
     };
 
     return (
@@ -355,7 +343,7 @@ function profile() {
                                                 />
                                             </div>
 
-                                            <button className='userData__formButton' onClick={handleConfirm}>Confirmar:</button>
+                                            <button className='userData__formButton' >Confirmar:</button>
                                         </div>
                                     </div>
                                 </div>
