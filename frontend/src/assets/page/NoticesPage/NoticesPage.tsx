@@ -88,12 +88,18 @@ function NoticesPage() {
       },
     ];
 
+    const toggleSection = (query: string) => {
+      document.querySelector(query)
+        ;
+    }
+
     return (
         <>
         <NavigationTab></NavigationTab>
         <RigthMenu/>
         <div className="noticesPage">
             <div className="noticesPage__notifications">
+                <button>Mis Notificaciones</button>
                 <h2>Notificaciones</h2>
                 { 
                   notices.map(n => (
