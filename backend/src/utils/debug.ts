@@ -286,53 +286,6 @@ export const dbInit = async (debug: boolean) => {
     ]);
 
 
-<<<<<<< HEAD
-    await DB.sessions.bulkCreate([
-        
-        //Monday
-        { id:  1, classHourId: 1 , igtModuleId: 2, day:WorkDay.Monday,  },
-        { id:  2, classHourId: 2, igtModuleId: 2, day:WorkDay.Monday, },
-        { id:  3, classHourId: 3, igtModuleId: 5, day:WorkDay.Monday, },
-        { id:  4, classHourId: 4, igtModuleId: 5, day:WorkDay.Monday, },
-        { id:  5, classHourId: 4, igtModuleId: 8, day:WorkDay.Monday, },
-        { id:  6, classHourId: 4, igtModuleId: 8, day:WorkDay.Monday, },
-
-        //Tuesday
-        { id:  7, classHourId: 1 , igtModuleId: 11, day:WorkDay.Tuesday,  },
-        { id:  8, classHourId: 2, igtModuleId: 11, day:WorkDay.Tuesday, },
-        { id:  9, classHourId: 3, igtModuleId: 2, day:WorkDay.Tuesday, },
-        { id:  10, classHourId: 4, igtModuleId: 2, day:WorkDay.Tuesday, },
-        { id:  11, classHourId: 5, igtModuleId: 5, day:WorkDay.Tuesday, },
-        { id:  12, classHourId: 6, igtModuleId: 5, day:WorkDay.Tuesday, },
-
-        //Wensday
-        { id:  13, classHourId: 1 , igtModuleId: 8, day:WorkDay.Wednesday,  },
-        { id:  14, classHourId: 2, igtModuleId: 8, day:WorkDay.Wednesday, },
-        { id:  15, classHourId: 3, igtModuleId: 2, day:WorkDay.Wednesday, },
-        { id:  16, classHourId: 4, igtModuleId: 2, day:WorkDay.Wednesday, },
-        { id:  17, classHourId: 5, igtModuleId: 11, day:WorkDay.Wednesday, },
-        { id:  18, classHourId: 6, igtModuleId: 11, day:WorkDay.Wednesday, },
-
-        //thursday
-        { id:  19, classHourId: 1 , igtModuleId: 11, day:WorkDay.Thursday,  },
-        { id:  20, classHourId: 2, igtModuleId: 11, day:WorkDay.Thursday, },
-        { id:  21, classHourId: 3, igtModuleId: 11, day:WorkDay.Thursday, },
-        { id:  22, classHourId: 4, igtModuleId: 8, day:WorkDay.Thursday, },
-        { id:  23, classHourId: 5, igtModuleId: 8, day:WorkDay.Thursday, },
-        { id:  24, classHourId: 6, igtModuleId: 14, day:WorkDay.Thursday, },
-
-        //Friday
-        { id:  25, classHourId: 1 , igtModuleId: 5, day:WorkDay.Friday,  },
-        { id:  26, classHourId: 2, igtModuleId: 5, day:WorkDay.Friday, },
-        { id:  27, classHourId: 3, igtModuleId: 8, day:WorkDay.Friday, },
-        { id:  28, classHourId: 4, igtModuleId: 8, day:WorkDay.Friday, },
-        { id:  29, classHourId: 5, igtModuleId: 14, day:WorkDay.Friday, },
-        { id:  30, classHourId: 6, igtModuleId: 14, day:WorkDay.Friday, },
-    ]);
-
-
-=======
->>>>>>> develop
     await DB.enrollments.bulkCreate([
 
         //DOR
@@ -409,68 +362,68 @@ export const dbInit = async (debug: boolean) => {
         { id: 51, studentId: 17, moduleId: dbgMod.EMR.id, },
         { id: 52, studentId: 18, moduleId: dbgMod.EMR.id, },
 
-        ]);
+    ]);
 
 
-        await DB.igt_modules.bulkCreate([
-            // 2ºDAW
-            // * DOR
-            { id: 1, teacherId: 1, groupId: dbgGrp.DAW2M.id, moduleId: dbgMod.DOR.id, weeklyHours: 6 },
-            { id: 2, teacherId: 1, groupId: dbgGrp.DAW2T.id, moduleId: dbgMod.DOR.id, weeklyHours: 6 },
-            { id: 3, teacherId: 1, groupId: dbgGrp.DAW2N.id, moduleId: dbgMod.DOR.id, weeklyHours: 3 },
+    await DB.igt_modules.bulkCreate([
+        // 2ºDAW
+        // * DOR
+        { id: 1, teacherId: 1, groupId: dbgGrp.DAW2M.id, moduleId: dbgMod.DOR.id, weeklyHours: 6 },
+        { id: 2, teacherId: 1, groupId: dbgGrp.DAW2T.id, moduleId: dbgMod.DOR.id, weeklyHours: 6 },
+        { id: 3, teacherId: 1, groupId: dbgGrp.DAW2N.id, moduleId: dbgMod.DOR.id, weeklyHours: 3 },
 
-            // * DPL
-            { id: 4, teacherId: 1, groupId: dbgGrp.DAW2M.id, moduleId: dbgMod.DPL.id, weeklyHours: 6 },
-            { id: 5, teacherId: 1, groupId: dbgGrp.DAW2T.id, moduleId: dbgMod.DPL.id, weeklyHours: 6 },
-            { id: 6, teacherId: 1, groupId: dbgGrp.DAW2N.id, moduleId: dbgMod.DPL.id, weeklyHours: 3 },
+        // * DPL
+        { id: 4, teacherId: 1, groupId: dbgGrp.DAW2M.id, moduleId: dbgMod.DPL.id, weeklyHours: 6 },
+        { id: 5, teacherId: 1, groupId: dbgGrp.DAW2T.id, moduleId: dbgMod.DPL.id, weeklyHours: 6 },
+        { id: 6, teacherId: 1, groupId: dbgGrp.DAW2N.id, moduleId: dbgMod.DPL.id, weeklyHours: 3 },
 
-            // * DSW
-            { id: 7, teacherId: 1, groupId: dbgGrp.DAW2M.id, moduleId: dbgMod.DSW.id, weeklyHours: 8 },
-            { id: 8, teacherId: 1, groupId: dbgGrp.DAW2T.id, moduleId: dbgMod.DSW.id, weeklyHours: 8 },
-            { id: 9, teacherId: 1, groupId: dbgGrp.DAW2N.id, moduleId: dbgMod.DSW.id, weeklyHours: 5 },
+        // * DSW
+        { id: 7, teacherId: 1, groupId: dbgGrp.DAW2M.id, moduleId: dbgMod.DSW.id, weeklyHours: 8 },
+        { id: 8, teacherId: 1, groupId: dbgGrp.DAW2T.id, moduleId: dbgMod.DSW.id, weeklyHours: 8 },
+        { id: 9, teacherId: 1, groupId: dbgGrp.DAW2N.id, moduleId: dbgMod.DSW.id, weeklyHours: 5 },
 
-            // * DEW
-            { id: 10, teacherId: 1, groupId: dbgGrp.DAW2M.id, moduleId: dbgMod.DEW.id, weeklyHours: 7 },
-            { id: 11, teacherId: 1, groupId: dbgGrp.DAW2T.id, moduleId: dbgMod.DEW.id, weeklyHours: 7 },
-            { id: 12, teacherId: 1, groupId: dbgGrp.DAW2N.id, moduleId: dbgMod.DEW.id, weeklyHours: 4 },
+        // * DEW
+        { id: 10, teacherId: 1, groupId: dbgGrp.DAW2M.id, moduleId: dbgMod.DEW.id, weeklyHours: 7 },
+        { id: 11, teacherId: 1, groupId: dbgGrp.DAW2T.id, moduleId: dbgMod.DEW.id, weeklyHours: 7 },
+        { id: 12, teacherId: 1, groupId: dbgGrp.DAW2N.id, moduleId: dbgMod.DEW.id, weeklyHours: 4 },
 
-            // * EMR
-            { id: 13, teacherId: 1, groupId: dbgGrp.DAW2M.id, moduleId: dbgMod.EMR.id, weeklyHours: 3 },
-            { id: 14, teacherId: 1, groupId: dbgGrp.DAW2T.id, moduleId: dbgMod.EMR.id, weeklyHours: 3 },
-            { id: 15, teacherId: 1, groupId: dbgGrp.DAW2N.id, moduleId: dbgMod.EMR.id, weeklyHours: 1 },
+        // * EMR
+        { id: 13, teacherId: 1, groupId: dbgGrp.DAW2M.id, moduleId: dbgMod.EMR.id, weeklyHours: 3 },
+        { id: 14, teacherId: 1, groupId: dbgGrp.DAW2T.id, moduleId: dbgMod.EMR.id, weeklyHours: 3 },
+        { id: 15, teacherId: 1, groupId: dbgGrp.DAW2N.id, moduleId: dbgMod.EMR.id, weeklyHours: 1 },
 
 
-            // 2ºDAM
-            // * PGV
-            { id: 16, teacherId: 1, groupId: dbgGrp.DAM2M.id, moduleId: dbgMod.PGV.id, weeklyHours: 3 },
-            { id: 17, teacherId: 1, groupId: dbgGrp.DAM2T.id, moduleId: dbgMod.PGV.id, weeklyHours: 3 },
-            { id: 18, teacherId: 1, groupId: dbgGrp.DAM2N.id, moduleId: dbgMod.PGV.id, weeklyHours: 2 },
+        // 2ºDAM
+        // * PGV
+        { id: 16, teacherId: 1, groupId: dbgGrp.DAM2M.id, moduleId: dbgMod.PGV.id, weeklyHours: 3 },
+        { id: 17, teacherId: 1, groupId: dbgGrp.DAM2T.id, moduleId: dbgMod.PGV.id, weeklyHours: 3 },
+        { id: 18, teacherId: 1, groupId: dbgGrp.DAM2N.id, moduleId: dbgMod.PGV.id, weeklyHours: 2 },
 
-            // * AED
-            { id: 19, teacherId: 1, groupId: dbgGrp.DAM2M.id, moduleId: dbgMod.AED.id, weeklyHours: 7 },
-            { id: 20, teacherId: 1, groupId: dbgGrp.DAM2T.id, moduleId: dbgMod.AED.id, weeklyHours: 7 },
-            { id: 21, teacherId: 1, groupId: dbgGrp.DAM2N.id, moduleId: dbgMod.AED.id, weeklyHours: 4 },
+        // * AED
+        { id: 19, teacherId: 1, groupId: dbgGrp.DAM2M.id, moduleId: dbgMod.AED.id, weeklyHours: 7 },
+        { id: 20, teacherId: 1, groupId: dbgGrp.DAM2T.id, moduleId: dbgMod.AED.id, weeklyHours: 7 },
+        { id: 21, teacherId: 1, groupId: dbgGrp.DAM2N.id, moduleId: dbgMod.AED.id, weeklyHours: 4 },
 
-            // * DAD
-            { id: 22, teacherId: 1, groupId: dbgGrp.DAM2M.id, moduleId: dbgMod.DAD.id, weeklyHours: 6 },
-            { id: 23, teacherId: 1, groupId: dbgGrp.DAM2T.id, moduleId: dbgMod.DAD.id, weeklyHours: 6 },
-            { id: 24, teacherId: 1, groupId: dbgGrp.DAM2N.id, moduleId: dbgMod.DAD.id, weeklyHours: 4 },
+        // * DAD
+        { id: 22, teacherId: 1, groupId: dbgGrp.DAM2M.id, moduleId: dbgMod.DAD.id, weeklyHours: 6 },
+        { id: 23, teacherId: 1, groupId: dbgGrp.DAM2T.id, moduleId: dbgMod.DAD.id, weeklyHours: 6 },
+        { id: 24, teacherId: 1, groupId: dbgGrp.DAM2N.id, moduleId: dbgMod.DAD.id, weeklyHours: 4 },
 
-            // * SSG
-            { id: 25, teacherId: 1, groupId: dbgGrp.DAM2M.id, moduleId: dbgMod.SSG.id, weeklyHours: 5 },
-            { id: 26, teacherId: 1, groupId: dbgGrp.DAM2T.id, moduleId: dbgMod.SSG.id, weeklyHours: 5 },
-            { id: 27, teacherId: 1, groupId: dbgGrp.DAM2N.id, moduleId: dbgMod.SSG.id, weeklyHours: 3 },
+        // * SSG
+        { id: 25, teacherId: 1, groupId: dbgGrp.DAM2M.id, moduleId: dbgMod.SSG.id, weeklyHours: 5 },
+        { id: 26, teacherId: 1, groupId: dbgGrp.DAM2T.id, moduleId: dbgMod.SSG.id, weeklyHours: 5 },
+        { id: 27, teacherId: 1, groupId: dbgGrp.DAM2N.id, moduleId: dbgMod.SSG.id, weeklyHours: 3 },
 
-            // * PGL
-            { id: 28, teacherId: 1, groupId: dbgGrp.DAM2M.id, moduleId: dbgMod.PGL.id, weeklyHours: 4 },
-            { id: 29, teacherId: 1, groupId: dbgGrp.DAM2T.id, moduleId: dbgMod.PGL.id, weeklyHours: 4 },
-            { id: 30, teacherId: 1, groupId: dbgGrp.DAM2N.id, moduleId: dbgMod.PGL.id, weeklyHours: 2 },
+        // * PGL
+        { id: 28, teacherId: 1, groupId: dbgGrp.DAM2M.id, moduleId: dbgMod.PGL.id, weeklyHours: 4 },
+        { id: 29, teacherId: 1, groupId: dbgGrp.DAM2T.id, moduleId: dbgMod.PGL.id, weeklyHours: 4 },
+        { id: 30, teacherId: 1, groupId: dbgGrp.DAM2N.id, moduleId: dbgMod.PGL.id, weeklyHours: 2 },
 
-            // * EMR
-            { id: 31, teacherId: 1, groupId: dbgGrp.DAM2M.id, moduleId: dbgMod.EMR.id, weeklyHours: 3 },
-            { id: 32, teacherId: 1, groupId: dbgGrp.DAM2T.id, moduleId: dbgMod.EMR.id, weeklyHours: 3 },
-            { id: 33, teacherId: 1, groupId: dbgGrp.DAM2N.id, moduleId: dbgMod.EMR.id, weeklyHours: 1 },
-        ]);
+        // * EMR
+        { id: 31, teacherId: 1, groupId: dbgGrp.DAM2M.id, moduleId: dbgMod.EMR.id, weeklyHours: 3 },
+        { id: 32, teacherId: 1, groupId: dbgGrp.DAM2T.id, moduleId: dbgMod.EMR.id, weeklyHours: 3 },
+        { id: 33, teacherId: 1, groupId: dbgGrp.DAM2N.id, moduleId: dbgMod.EMR.id, weeklyHours: 1 },
+    ]);
 
     await DB.sessions.bulkCreate([
 
