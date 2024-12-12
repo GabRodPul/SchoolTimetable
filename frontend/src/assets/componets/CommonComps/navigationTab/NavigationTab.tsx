@@ -24,7 +24,7 @@ function NavigationTab() {
         switch (location.pathname) {
             case '/home': return '';
             case '/timetable': return 'Mi Horario';
-            case '/notificaciones': return <SearchBar />;
+            case '/notices': return <SearchBar />;
             case '/tramites': return <SearchBar />;
             case '/profile': return 'Mi Perfil';
             case '/admin': return 'Configuración';
