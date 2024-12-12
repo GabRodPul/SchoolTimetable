@@ -11,7 +11,7 @@ export const ScheduleController = {
         try {
             const moduleId = (await DB.enrollments.findAll({ // ARRAY
                 attributes: [ "moduleId" ],
-                where: { studentId: req.params.studentId },
+                where: { studentId: req.params.userId },
             })).map(e => e.dataValues.moduleId);
 
             const modules = (await DB.modules.findAll({
@@ -31,6 +31,8 @@ export const ScheduleController = {
                 where: { id: sessions.map(s => s.classHourId) } 
             })).map(c => c.dataValues);
 
+            console.log(`IGT Modules: ${igtModules}`);
+            console.log(`Sessions: ${sessions}`);
             const data = sessions.map(s => ({
                 moduleName: modules
                     .find(m => m.id === igtModules.find(igt => igt.id === s.igtModuleId)!.moduleId)!
@@ -38,6 +40,8 @@ export const ScheduleController = {
                 ...s,
                 ...classHours.find(c => c.id === s.classHourId),
             }));
+
+            console.log(`Schedule: ${data.length}`);
 
             res.send(data);
         } catch(err: any) {

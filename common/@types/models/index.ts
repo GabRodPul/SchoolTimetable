@@ -25,7 +25,7 @@ export type UserDataResponse = {
 export type UserWithId = UserData & { id: number };
 
 export type AuthData = {
-    user:           UserData,
+    user:           UserData & Id,
     accessToken:    string,
 }
 
