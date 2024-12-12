@@ -469,9 +469,9 @@ export const dbInit = async (debug: boolean) => {
     ]);
 
     await DB.warnings.bulkCreate([
-        { id: 1, description: "Baja", startDate: new Date('2024-12-15'), endDate: new Date('2025-12-15'), startHour: "15:00:01", endHour: "18:00:01", },
-        { id: 2, description: "Ausencia", startDate: new Date('2024-12-15'), endDate: new Date('2024-12-15'), startHour: "08:00:01", endHour: "18:00:01", },
-        { id: 3, description: "Baja", startDate: new Date('2024-12-15'), endDate: new Date('2024-12-19'), startHour: "18:00:01", endHour: "18:00:01", }
+        { id: 1, teacherId: 1, description: "Baja", startDate: new Date('2024-12-15'), endDate: new Date('2025-12-15'), startHour: "15:00:01", endHour: "18:00:01", },
+        { id: 2, teacherId: 1, description: "Ausencia", startDate: new Date('2024-12-15'), endDate: new Date('2024-12-15'), startHour: "08:00:01", endHour: "18:00:01", },
+        { id: 3, teacherId: 1, description: "Baja", startDate: new Date('2024-12-15'), endDate: new Date('2024-12-19'), startHour: "18:00:01", endHour: "18:00:01", }
     ]);
 
     await DB.sessionsChanged.bulkCreate([

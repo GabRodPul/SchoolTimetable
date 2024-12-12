@@ -5,7 +5,7 @@ import {
     ModelValidateOptions
 } from "sequelize";
 import { Id, WarningData } from "../../../common/@types/models"
-import { defineId } from "../utils/data";
+import { defineId, fkId } from "../utils/data";
 import { isBeforeStart } from "../utils/validation";
 
 // The only purpose of extending Model is getting
@@ -14,12 +14,13 @@ import { isBeforeStart } from "../utils/validation";
 // & Id is required to pass id to where.
 // Omit = avoid having to define "courseId"
 interface WarningInstance extends 
-    Model<Omit<WarningData, "teacherId"> & Id> {}
+    Model<WarningData & Id> {}
 
 // https://sequelize.org/docs/v6/core-concepts/validations-and-constraints/
 const WarningModel = { init: (sequelize: Sequelize) =>
     sequelize.define<WarningInstance>("warnings", {
         ...defineId,
+        teacherId: fkId,
         description: {
             type: DataTypes.STRING(255),
             allowNull: false,

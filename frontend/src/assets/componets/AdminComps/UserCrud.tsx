@@ -9,7 +9,7 @@ const UserCrud: React.FC = () => {
     const [users, api] = useApi<User>(ApiRts.Users);
 
     const [selectedUser, setSelectedUser] = useState<User | null>(null);
-    const [formState, setFormState] = useState<User>({ id: 0, name: "", email: "", role: "", password: "", phoneNumber: "" });
+    const [formState, setFormState] = useState<User>({ id: 0, teacherId: "", name: "", email: "", role: "", password: "", phoneNumber: "" });
 
     useEffect(() => {
         api.getAll();

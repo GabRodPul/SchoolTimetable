@@ -3,64 +3,64 @@ import NavigationTab from '#src/assets/componets/CommonComps/navigationTab/Navig
 import RigthMenu from '#src/assets/componets/CommonComps/rigthMenu/rigthMenu'; // Importar el componente correctamente
 import { LuBellRing } from 'react-icons/lu';
 import './FormalitiesPageStyles.css';
-
-type FormalitieType = "Baja" | "Ausencia";
+import { useApi } from '#src/api/ApiContext';
+import { ApiRts } from '#common/@enums/http';
+import { Id, WarningData } from '#common/@types/models';
+import { FetchState } from '#src/types/api';
+type Warning = WarningData & Id;
 
 //* Define la interfaz para el estado
-interface Formalitie {
-    type: FormalitieType;
-    motive: string;
-    startDate: string;
-    endDate: string;
-}
+// interface Formalitie {
+//     type: FormalitieType;
+//     motive: string;
+//     startDate: string;
+//     endDate: string;
+// }
 
 const Formalities: React.FC = () => {
-    const [formalities, setFormalities] = useState<Formalitie[]>([]);
-    const [newFormalitie, setNewFormalitie] = useState<Formalitie>({
-        type: "Baja",
-        motive: "",
-        startDate: "",
-        endDate: "",
-    });
 
-    // Recuperar datos del localStorage al montar el componente
+    const [warning, api] = useApi<Warning>(ApiRts.Warnings)
+    const [selectedWarning, setSelectedWarning] = useState<Warning | null>(null);
+    const [formState, setFormState] = useState<Warning>({ id: 0, teacherId: 1, description: "", startDate: new Date(""), endDate: new Date(""), startHour: "", endHour: "" });
+
     useEffect(() => {
-        const storedFormalities = localStorage.getItem("formalities");
-        if (storedFormalities) {
-            setFormalities(JSON.parse(storedFormalities));
-        }
+        api.getAll();
     }, []);
 
-    // Guardar datos en localStorage cada vez que cambien
-    useEffect(() => {
-        localStorage.setItem("formalities", JSON.stringify(formalities));
-    }, [formalities]);
-
-    // Manejar la adición de un nuevo formalitie
-    const handleAddFormalitie = () => {
-        if (newFormalitie.motive && newFormalitie.startDate && newFormalitie.endDate) {
-            const updatedFormalities = [...formalities, newFormalitie];
-            setFormalities(updatedFormalities);
-            setNewFormalitie({ type: "Baja", motive: "", startDate: "", endDate: "" });
-        }
-    };
-
-    // Manejar cambios en los campos del formulario
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        setNewFormalitie((prev) => ({ ...prev, [name]: value }));
+        setFormState(prevState => ({ ...prevState, [name]: value }));
     };
 
-    const getTypeColor = (type: FormalitieType): string => {
-        switch (type) {
-            case "Baja":
-                return "#FB9318";
-            case "Ausencia":
-                return "#9B2BC7";
-            default:
-                return "#000000";
-        }
+    const handleCreate = () => {
+        api.post(formState).then(() => {
+            setFormState({ id: 0, teacherId: 1, description: "", startDate: new Date(""), endDate: new Date(""), startHour: "", endHour: "" });
+            api.getAll();
+        });
     };
+
+    const handleUpdate = () => {
+        if (!selectedWarning) return;
+        api.put({ id: selectedWarning.id, body: formState }).then(() => {
+            setSelectedWarning(null);
+            setFormState({ id: 0, name: "", email: "", role: "", password: "", phoneNumber: "" });
+            api.getAll();
+        });
+    };
+
+    const handleDelete = (id: Id) => {
+        api.delete(id).then(() => {
+            api.getAll();
+        });
+    };
+
+    const handleEdit = (user: User) => {
+        setSelectedUser(user);
+        setFormState(user);
+    };
+
+    if (warning.state === FetchState.Loading) return <p>Loading...</p>;
+    if (warning.state === FetchState.Error) return <p>Error: {warning.error?.message}</p>;
 
     // Renderizar el componente
     return (
@@ -78,67 +78,90 @@ const Formalities: React.FC = () => {
                             <div className="formalitiesForm__title">
                                 <h2>Trámites</h2>
                             </div>
-                            <label>
-                                <p>Tipo</p>
-                                <select name="type" value={newFormalitie.type} onChange={handleChange}>
-                                    <option value="Baja">Baja</option>
-                                    <option value="Ausencia">Ausencia</option>
-                                </select>
-                            </label>
-                            <label>
-                                <p>Motivo</p>
-                                <input
-                                    type="text"
-                                    name="motive"
-                                    value={newFormalitie.motive}
-                                    onChange={handleChange}
-                                    placeholder="Escribe aquí tu motivo"
-                                />
-                            </label>
-                            <label>
-                                <p>Fecha inicio</p>
-                                <input
-                                    type="date"
-                                    name="startDate"
-                                    value={newFormalitie.startDate}
-                                    onChange={handleChange}
-                                />
-                            </label>
-                            <label>
-                                <p>Fecha fin</p>
-                                <input
-                                    type="date"
-                                    name="endDate"
-                                    value={newFormalitie.endDate}
-                                    onChange={handleChange}
-                                />
-                            </label>
+                            <form
+                                onSubmit={e => {
+                                    e.preventDefault();
+                                    selectedWarning ? handleUpdate() : handleCreate();
+                                }}
+                            >
+                                <label>
+                                    <p>Motivo</p>
+                                    <input
+                                        type="text"
+                                        name="description"
+                                        placeholder="Motivo de la ausencia"
+                                        value={formState.description}
+                                        onChange={handleInputChange}
+                                    />
+                                </label>
+                                <label>
+                                    <p>Hora Inicio</p>
+                                    <input
+                                        type="text"
+                                        name="startHour"
+                                        placeholder="Hora de inicio"
+                                        value={formState.startHour}
+                                        onChange={handleInputChange}
+                                    />
+                                </label>
+
+                                <label>
+                                    <p>Hora Fin</p>
+                                    <input
+                                        type="text"
+                                        name="endHour"
+                                        placeholder="Hora de fin"
+                                        value={formState.endHour}
+                                        onChange={handleInputChange}
+                                    />
+                                </label>
+                                <label>
+                                    <p>Fecha inicio</p>
+                                    <input
+                                        type="date"
+                                        name="startDate"
+                                        value={formState.startDate.toISOString()}
+                                        onChange={handleInputChange}
+                                    />
+                                </label>
+                                <label>
+                                    <p>Fecha fin</p>
+                                    <input
+                                        type="date"
+                                        name="endDate"
+                                        value={formState.endDate.toISOString()}
+                                        onChange={handleInputChange}
+                                    />
+                                </label>
+                                <button type="submit" className="formalities__button">
+                                    Añadir
+                                </button>
+                            </form>
                         </div>
-                        <button className="formalities__button" onClick={handleAddFormalitie}>
-                            Añadir
-                        </button>
                     </div>
 
                     <div className="formalities__info">
-                        <div className="formalitiesInfo__title">
-                            <h2>Tus Trámites</h2>
+                        <div>
+                            <h2>User List</h2>
+                            {(warning.state === FetchState.Success || warning.state === FetchState.SuccessMany) &&
+                                Array.isArray(warning.data) && warning.data.map((warning) => {
+                                    const warningListed = warning as Warning;
+                                    return (
+                                        <div key={warningListed.id}>
+                                            <p>
+                                                {warningListed.description} ({warningListed.startDate.toISOString()}) - {warningListed.endDate.toISOString()} - {warningListed.startHour} - {warningListed.endHour}
+                                            </p>
+                                            <button onClick={() => handleEdit(warningListed.id)}>Edit</button>
+                                            <button onClick={() => handleDelete({ id: warningListed.id })}>Delete</button>
+                                        </div>
+                                    );
+                                })
+                            }
                         </div>
-                        {formalities.map((formalitie, index) => (
-                            <div key={index} className="formalities__data">
-                                <LuBellRing style={{ color: getTypeColor(formalitie.type) }} />
-                                <span style={{ color: getTypeColor(formalitie.type) }}>{formalitie.type}</span>
-                                <span>{formalitie.motive}</span>
-                                <span>
-                                    {`${new Date(formalitie.startDate).toLocaleDateString("es-ES")} - ${new Date(
-                                        formalitie.endDate
-                                    ).toLocaleDateString("es-ES")}`}
-                                </span>
-                            </div>
-                        ))}
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 
