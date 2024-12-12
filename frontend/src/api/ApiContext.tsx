@@ -11,7 +11,7 @@ const evalFetch = <T,>() => (fetch: FetchData<T>, payload: FetchData<T>) => {
             ...fetch,
             state: payload.state
         };
-        
+
         case FetchState.Loading: return {
             ...fetch,
             state: payload.state
@@ -19,7 +19,7 @@ const evalFetch = <T,>() => (fetch: FetchData<T>, payload: FetchData<T>) => {
 
         case FetchState.Success:
         case FetchState.SuccessMany:
-        case FetchState.Error: 
+        case FetchState.Error:
             return { ...payload };
     }
 }
@@ -41,24 +41,24 @@ const ApiResourceProvider = <T,>(props: any) => {
 type UserLogin = { email: string, password: string };
 
 const useApi = <T,>(route: ApiRts)
-: [ FetchData<T>, {
-    fetch:  (_route: string, method: Method, init?: any) 
-                                 => Promise<void>, 
-    get:    (id: Id)             => Promise<void>,
-    getAll: ()                   => Promise<void>,
-    post:   (body: T)            => Promise<void>,
-    put:    (opts: Body<T> & Id) => Promise<void>,
-    delete: (id: Id)             => Promise<void>,
-    signin:
-            ((body: UserData)    => Promise<void>) |
-            undefined,
-    login:
-            ((body: UserLogin)   => Promise<void>) |
-            undefined
-    resetRsrc: () => void
-} ] => {
+    : [FetchData<T>, {
+        fetch: (_route: string, method: Method, init?: any)
+            => Promise<void>,
+        get: (id: Id) => Promise<void>,
+        getAll: () => Promise<void>,
+        post: (body: T) => Promise<void>,
+        put: (opts: Body<T> & Id) => Promise<void>,
+        delete: (id: Id) => Promise<void>,
+        signin:
+        ((body: UserData) => Promise<void>) |
+        undefined,
+        login:
+        ((body: UserLogin) => Promise<void>) |
+        undefined
+        resetRsrc: () => void
+    }] => {
     const [fetchRsrc, dispatch] = useReducer<Reducer<FetchData<T>, FetchData<T>>>(
-        evalFetch<T>(), 
+        evalFetch<T>(),
         { state: FetchState.NotStarted }
     );
 
@@ -76,7 +76,7 @@ const useApi = <T,>(route: ApiRts)
                         state: FetchState.Success,
                         data: data as T // xddd
                     });
-                } catch(e: unknown) {
+                } catch (e: unknown) {
                     dispatch({
                         state: FetchState.Error,
                         error: e as Error
@@ -93,7 +93,7 @@ const useApi = <T,>(route: ApiRts)
                         state: FetchState.Success,
                         data: data as T // xddd
                     });
-                } catch(e: unknown) {
+                } catch (e: unknown) {
                     dispatch({
                         state: FetchState.Error,
                         error: e as Error
@@ -116,7 +116,7 @@ const useApi = <T,>(route: ApiRts)
     return [fetchRsrc, {
         fetch: async (_route: string, method: Method, init?: any) => {
             try {
-                const data = await 
+                const data = await
                     fetch(_route, {
                         method,
                         mode: "cors",
@@ -127,38 +127,38 @@ const useApi = <T,>(route: ApiRts)
                         ...init
                     })
                         .then(res => res.json())
-                        .then(res => res as ResponseData<T>);        ;
+                        .then(res => res as ResponseData<T>);;
 
                 dispatch({
                     state: FetchState.Success,
                     data
                 });
-            } catch(err: any) {
+            } catch (err: any) {
                 dispatch({
                     state: FetchState.Error,
                     error: err as Error
                 });
             }
-        }, 
+        },
         fetchMany: async (_route: string, init?: any) => {
             try {
-                const data = await 
+                const data = await
                     fetch(_route, init)
                         .then(res => res.json())
-                        .then(res => res as ResponseData<T[]>);        ;
+                        .then(res => res as ResponseData<T[]>);;
 
                 dispatch({
                     state: FetchState.SuccessMany,
                     data
                 });
-            } catch(err: any) {
+            } catch (err: any) {
                 dispatch({
                     state: FetchState.Error,
                     error: err as Error
                 });
             }
-        }, 
-        
+        },
+
         get: async (id: Id) => {
             try {
                 const data = await API.get<T>(route, id);
@@ -173,11 +173,11 @@ const useApi = <T,>(route: ApiRts)
                 })
             }
         },
-    
+
         // ts(2353): Object literal may only specify known properties, and 'getAll' does 
         //           not exist in type '{ get: (id: Id) => Promise<void>; }'
         // Apparently this is a bug???
-        
+
         getAll: async () => {
             try {
                 const data = await API.getAll<T>(route);
@@ -192,7 +192,7 @@ const useApi = <T,>(route: ApiRts)
                 })
             }
         },
-    
+
         post: async (body: T) => {
             try {
                 const data = await API.post<T extends UserData ? T & { access_token: string } : T, T>(route, { body });
@@ -222,7 +222,7 @@ const useApi = <T,>(route: ApiRts)
                 })
             }
         },
-        
+
         delete: async (id: Id) => {
             try {
                 const data = await API.delete<T>(route, id);
@@ -237,7 +237,7 @@ const useApi = <T,>(route: ApiRts)
                 })
             }
         },
-        
+
         signin,
         login,
 
