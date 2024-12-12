@@ -1,7 +1,7 @@
 import { Sequelize, DataTypes, Model } from "sequelize";
 import { Id, SessionChangeData } from "../../../common/@types/models"
 import { isBeforeStart } from "../utils/validation";
-import { defineId, namedFkId } from "../utils/data";
+import { defineId, fkId, namedFkId } from "../utils/data";
 import { WorkDay } from "../../../common/@enums/models"
 
 // The only purpose of extending Model is getting
@@ -10,7 +10,7 @@ import { WorkDay } from "../../../common/@enums/models"
 // & Id is required to pass id to where.
 // Omit = avoid having to define "classHourId" | "sessionId"
 interface SessionInstance extends
-    Model<Omit<SessionChangeData, "classHourId" | "sessionId"> & Id> { }
+    Model<SessionChangeData & Id> { }
 
 const DayVals = { values: Object.values(WorkDay) } as const;
 
@@ -20,9 +20,9 @@ const SessionChangedModel = {
     init: (sequelize: Sequelize) =>
         sequelize.define<SessionInstance>("session_changed", {
             ...defineId,
-
-            ...namedFkId("classHourId"),
-            ...namedFkId("sessionId"),
+            
+            classHourId: fkId,
+            sessionId: fkId,
 
             day: {
                 type: DataTypes.ENUM(DayVals),

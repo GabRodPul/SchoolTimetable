@@ -465,6 +465,19 @@ export const dbInit = async (debug: boolean) => {
         { id: 27, classHourId: 3, igtModuleId: 8, day: WorkDay.Friday, },
         { id: 28, classHourId: 4, igtModuleId: 8, day: WorkDay.Friday, },
         { id: 29, classHourId: 5, igtModuleId: 14, day: WorkDay.Friday, },
-        { id: 30, classHourId: 6, igtModuleId: 14, day: WorkDay.Friday, },
+        { id: 30, classHourId: 6, igtModuleId: 14, day: WorkDay.Friday, }
+    ]);
+
+    await DB.warnings.bulkCreate([
+        { id: 1, description: "Baja", startDate: new Date('2024-12-15'), endDate: new Date('2025-12-15'), startHour: "15:00:01", endHour: "18:00:01", },
+        { id: 2, description: "Ausencia", startDate: new Date('2024-12-15'), endDate: new Date('2024-12-15'), startHour: "08:00:01", endHour: "18:00:01", },
+        { id: 3, description: "Baja", startDate: new Date('2024-12-15'), endDate: new Date('2024-12-19'), startHour: "18:00:01", endHour: "18:00:01", }
+    ]);
+
+    await DB.sessionsChanged.bulkCreate([
+        { id: 1, sessionId: 1, classHourId: 1, day: WorkDay.Monday, startDate: new Date('2024-12-15'), endDate: new Date('2024-12-15'), },
+        { id: 2, sessionId: 2, classHourId: 2, day: WorkDay.Monday, startDate: new Date('2024-12-15'), endDate: new Date('2024-12-15'), },
+        { id: 3, sessionId: 1, classHourId: 3, day: WorkDay.Monday, startDate: new Date('2024-12-15'), endDate: new Date('2024-12-15'), },
+        { id: 4, sessionId: 1, classHourId: 1, day: WorkDay.Thursday, startDate: new Date('2024-12-18'), endDate: new Date('2024-12-18'), },
     ]);
 };
