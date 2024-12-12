@@ -1,5 +1,5 @@
 import __React, { useEffect, useState } from 'react';
-import { AuthData, UserData } from "#common/@types/models";
+import { AuthData, Id, UserData } from "#common/@types/models";
 import { useNavigate } from 'react-router-dom';
 import { useApi } from '#src/api/ApiContext';
 import { ApiRts } from '#common/@enums/http';
@@ -15,6 +15,7 @@ import NavigationTab from '#src/assets/componets/CommonComps/navigationTab/Navig
 import RigthMenu from '#src/assets/componets/CommonComps/rigthMenu/rigthMenu';
 import Header from '#src/assets/componets/CommonComps/MenuheaderMobile/Header';
 
+type User = UserData & Id;
 function profile() {
 
     const localEmail = (JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData).user.email;
@@ -22,75 +23,34 @@ function profile() {
     const localPass = (JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData).user.password;
     const localNumber = (JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData).user.phoneNumber;
     const localRole = (JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData).user.role;
-
     const navigate = useNavigate();
-    const [fetchRsrc, api] = useApi<UserData>(ApiRts.Users)
-    const [userData, setUserData] = useState<UserData>(
-        {
-            email: localEmail,
-            name: localName,
-            password: localPass,
-            phoneNumber: localNumber,
-            role: localRole,
-            image: undefined
-        }
-    );
+
+    const [users, api] = useApi<User>(ApiRts.Users);
+    const [formState, setFormState] = useState<User>({ id: 0, name: localName, email: localEmail, role: "", password: localPass, phoneNumber: localNumber });
+    const [filtered, setFilteredUsers] = useState<User[]>([]); // Estado para usuarios filtrados
+    const [selectedUser, setSelectedUser] = useState<User | null>(null);
+    const [currentUser, setCurrentUser] = useState<User | null>(null); // Estado para el usuario actual
+
+    console.log("Hola", (JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData));
 
     useEffect(() => {
         api.getAll();
     }, []);
 
     useEffect(() => {
-        switch (fetchRsrc.state) {
-            case FetchState.NotStarted:
-                //Sacar el usuario del local storage, como dato json, todos los valores
-                const authData = JSON.parse(localStorage.getItem("currentUser")!) as any;
-                //*console log de comprobacion
-                console.log("AuthData:", authData);
-                //buscando el usuario en la base de datos
-                api.get(authData);
-                break;
-
-            case FetchState.Loading:
-                break;
-
-            case FetchState.Success:
-                // Sacar nombre para buscar el usuario:
-                const nameUser = (JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData).user.name;
-                console.log("NombreUser:", nameUser);
-
-                //*console log de comprobacion
-                console.log("Hoa:", fetchRsrc.data);
-
-                //!Fallo
-                if ("name" in fetchRsrc.data) {
-                    setUserData(fetchRsrc.data as UserData);
-                }
-
-                //usar .. para romper el arry, y luego filtrar fetchRsrc.data
-
-
-                //?Opcion alternativa, pero no hay filter
-                // fetchRsrc.data.filter(item => item.email === localEmail).forEach(item => {
-                //     console.log(`Procesando: ${item.name} para el usuario ${item.email}`);
-                // });
-
-                break;
-
-            default:
-                break;
+        console.log("Hola",localStorage.getItem('currentUser '));
+        if (users.state === FetchState.Success && Array.isArray(users.data)) {
+            const email = (JSON.parse(localStorage.getItem('currentUser ') ?? "null") as AuthData).user.email; // Obtener el email del localStorage
+            const filtered = users.data.filter(user => user.email === email);
+            console.log("Usuarios filtrados: ", filtered);
+            setFilteredUsers(filtered);
+            setCurrentUser(filtered[0] || null); // Establecer el primer usuario filtrado como el usuario actual
         }
-    }, [fetchRsrc]);
+    }, [users]);
 
-
-    const roleTextInfo = () => {
-        switch (userData.role) {
-            case 'UR0_STUDENT': return 'Estudiante';
-            case 'UR1_TEACHER': return 'Profesor';
-            case 'UR2_HEAD': return 'Jefe de estudios';
-            case 'UR3_ADMIN': return 'Admin';
-            default: return '';
-        }
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setFormState((prevState: any) => ({ ...prevState, [name]: value }));
     };
 
     const [isMenuOpenProfile, setIsMenuOpen1] = useState(false);
@@ -129,18 +89,18 @@ function profile() {
                                     <div className="mobileCard__icon">
                                         {/* imagen */}
                                         <img src="./img/abstract-user-flat-4.png" alt="Imagen de perfil" />
-                                    </div>
+                                    </div>  
                                     <div className="mobileCard__info">
                                         <div className="MobileInfo__name">
                                             {/* name */}
                                             <div className='nameUser_mobile'>
-                                                {userData.name}
+                                                {currentUser?.name}
                                             </div>
                                         </div>
                                         <div className="mobileInfo_email">
                                             {/* email */}
                                             <div className='emailUser_mobile'>
-                                                {userData.email}
+                                                a
                                             </div>
                                         </div>
                                     </div>
@@ -169,26 +129,26 @@ function profile() {
                                                 <p>Nombre:</p>
                                             </div>
                                             <div className='mobileData'>
-                                                <p>{userData.name}</p>
+                                                <p>a</p>
                                             </div>
                                             <div className='mobileTittle'>
                                                 <p>Email:</p>
                                             </div>
                                             <div className='mobileData'>
-                                                <p>{userData.email}</p>
+                                                <p>a</p>
                                             </div>
                                             <div className='mobileTittle'>
                                                 <p>Teléfono:</p>
                                             </div>
                                             <div className='mobileData'>
-                                                <p>{userData.phoneNumber}</p>
+                                                <p>a</p>
                                             </div>
                                             <div className='mobileTittle'>
                                                 <p>Rol:</p>
                                             </div>
                                             <div className='mobileData'>
                                                 {/* <p>{roleTextInfo()}</p> */}
-                                                <p>{userData.role}</p>
+                                                <p>a</p>
                                             </div>
                                         </div>
                                     </div>
@@ -253,13 +213,13 @@ function profile() {
                                     <div className="Info__name">
                                         {/* name */}
                                         <div className='nameUser'>
-                                            {userData.name}
+                                        {currentUser?.name}
                                         </div>
                                     </div>
                                     <div className="Info_email">
                                         {/* email */}
                                         <div className='emailUser'>
-                                            {userData.email}
+                                            a
                                         </div>
                                     </div>
                                 </div>
@@ -288,7 +248,7 @@ function profile() {
                                                 <p>Nombre:</p>
                                             </div>
                                             <div className='userData__name'>
-                                                <p>{userData.name}</p>
+                                                <p>a</p>
                                             </div>
                                         </div>
 
@@ -297,7 +257,7 @@ function profile() {
                                                 <p>Email:</p>
                                             </div>
                                             <div className='userData__email'>
-                                                <p>{userData.email}</p>
+                                                <p>a</p>
                                             </div>
                                         </div>
 
@@ -306,7 +266,7 @@ function profile() {
                                                 <p>Teléfono:</p>
                                             </div>
                                             <div className='userData__phone'>
-                                                <p>{userData.phoneNumber}</p>
+                                                <p>a</p>
                                             </div>
                                         </div>
 
@@ -316,7 +276,7 @@ function profile() {
                                             </div>
                                             <div className='userData__roleText'>
                                                 {/* <p>{roleTextInfo()}</p> */}
-                                                <p>{userData.role}</p>
+                                                <p>a</p>
                                             </div>
                                         </div>
                                     </div>
@@ -327,9 +287,11 @@ function profile() {
                                             </div>
                                             <div className='userData__formText'>
                                                 <input
-                                                    type="text"
-                                                    name="name"
-                                                    placeholder="Cambie Su Nombre"
+                                                    type="email"
+                                                    name="email"
+                                                    placeholder="Email"
+                                                    value={formState.email}
+                                                    onChange={handleInputChange}
                                                 />
                                             </div>
                                             <div className='userData__formTittle'>
@@ -337,9 +299,11 @@ function profile() {
                                             </div>
                                             <div className='userData__formText'>
                                                 <input
-                                                    type="text"
-                                                    name="phoneNumber"
-                                                    placeholder="Cambie Su Teléfono"
+                                                    type="email"
+                                                    name="email"
+                                                    placeholder="Email"
+                                                    value={formState.email}
+                                                    onChange={handleInputChange}
                                                 />
                                             </div>
 
