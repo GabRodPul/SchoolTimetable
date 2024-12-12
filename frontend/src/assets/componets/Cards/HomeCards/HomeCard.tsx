@@ -29,7 +29,7 @@ function HomeCard() {
                     <h5 className='card__title'>Página de Avisos</h5>
                     <p>Vea sus avisos</p>
                 </div>
-                <a href="/NoticesPage"><button>Acceder</button></a>
+                <a href="/notices"><button>Acceder</button></a>
             </div>
 
             <div className='options_HomeCard'>
@@ -42,7 +42,7 @@ function HomeCard() {
                             <h5 className='card__title'>Página de Tramites</h5>
                             <p>Vea sus tramites</p>
                         </div>
-                        <a href="http://"><button>Acceder</button></a>
+                        <a href="/formalities"><button>Acceder</button></a>
                     </div>
                 }
             </div>
@@ -56,7 +56,7 @@ function HomeCard() {
                             <h5 className='card__title'>Configuración</h5>
                             <p>Configuración de la app</p>
                         </div>
-                        <a href="http://"><button>Acceder</button></a>
+                        <a href="/admin"><button>Acceder</button></a>
                     </div>
                 }
             </div>

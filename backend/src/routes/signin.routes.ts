@@ -1,13 +1,14 @@
 import { Express, Router } from "express";
-import { signin } from "../controllers/auth";
+import { hasRolePermissions, signin } from "../controllers/auth";
+import { UserRole } from "../../../common/@enums/models";
 
 const SigninRoutes = { init: ( app: Express ) => {
     const router = Router();
     
     // Login
-    router.post( "/", signin );
+    router.post( "/", hasRolePermissions(UserRole.Admin), signin );
 
-    app.use("/api/signin", router);
+    app.use("/api/signin", hasRolePermissions(UserRole.Admin), router);
 
 }};
 

@@ -11,7 +11,7 @@ const SearchBar = () => {
         switch (location.pathname) {
             case '/notices':
                 return "Buscar Notificación";
-            case '/tramites':
+            case '/formalities':
                 return "Buscar Trámite";
             default:
                 return 'Página Desconocida';

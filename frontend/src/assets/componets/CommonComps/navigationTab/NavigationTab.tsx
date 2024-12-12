@@ -25,7 +25,7 @@ function NavigationTab() {
             case '/home': return '';
             case '/timetable': return 'Mi Horario';
             case '/notices': return <SearchBar />;
-            case '/tramites': return <SearchBar />;
+            case '/formalities': return <SearchBar />;
             case '/profile': return 'Mi Perfil';
             case '/admin': return 'Configuración';
             default: '';
@@ -74,9 +74,8 @@ function NavigationTab() {
                             </div>
                             <div>
                                 {role != 'UR0_STUDENT' &&
-                                    // <Link className='navigationLink' to="/tramites">
-                                    <Link className='navigationLink' to="">
-                                        <button className={`navigationTab__side-menuButton ${location.pathname === "/tramites" ? "active" : ""}`}>
+                                    <Link className='navigationLink' to="/formalities">
+                                        <button className={`navigationTab__side-menuButton ${location.pathname === "/formalities" ? "active" : ""}`}>
                                             <BsPencilSquare className='formalitiesIcon' size={30} /> Trámites
                                         </button>
                                     </Link>

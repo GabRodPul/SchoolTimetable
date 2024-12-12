@@ -48,8 +48,7 @@ function Header() {
                     </a>
 
                     {role !== UserRole.Student && (
-                        // <a href="/Tramites">
-                        <a href="">
+                        <a href="/formalities">
                             <button>Trámites</button>
                         </a>
                     )}
