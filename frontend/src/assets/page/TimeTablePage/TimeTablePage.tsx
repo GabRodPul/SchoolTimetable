@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { FetchState, FetchData } from '#src/types/api';
 import { ScheduleResponse } from '#common/@types/models';
 import { useApi } from '#src/api/ApiContext';
-import { ApiRts } from '#common/@enums/http';
+import { ApiRts, Method } from '#common/@enums/http';
 
 
 function TimeTablePage() {
@@ -39,7 +39,8 @@ function TimeTablePage() {
         // fetchSchedule();
         switch (fetchRsrc.state) {
             case FetchState.NotStarted:
-                api.getAll();
+                const authData = JSON.parse(localStorage.getItem("currentUser")!) as any;
+                api.fetch(`http://localhost:8080/api/?studentId=${authData.user.id}`, Method.GET);
                 break;
 
             case FetchState.Loading:
@@ -48,7 +49,7 @@ function TimeTablePage() {
             default:
                 setScheduleData({...fetchRsrc});
         }
-    }, []);
+    }, [fetchRsrc]);
 
     return (
         <div>

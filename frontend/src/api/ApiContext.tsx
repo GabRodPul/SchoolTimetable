@@ -42,7 +42,7 @@ type UserLogin = { email: string, password: string };
 
 const useApi = <T,>(route: ApiRts)
 : [ FetchData<T>, {
-    fetch:  (init: any) 
+    fetch:  (_route: string, method: Method, init?: any) 
                                  => Promise<void>, 
     get:    (id: Id)             => Promise<void>,
     getAll: ()                   => Promise<void>,
@@ -114,15 +114,41 @@ const useApi = <T,>(route: ApiRts)
     }
 
     return [fetchRsrc, {
-        fetch: async (init) => {
+        fetch: async (_route: string, method: Method, init?: any) => {
             try {
                 const data = await 
-                    fetch(`http://localhost:8080/api/${route}`, init)
+                    fetch(_route, {
+                        method,
+                        mode: "cors",
+                        headers: {
+                            "Access-Control-Allow-Origin": "*",
+                            "Content-Type": "application/json",
+                        } as HeadersInit,
+                        ...init
+                    })
                         .then(res => res.json())
                         .then(res => res as ResponseData<T>);        ;
 
                 dispatch({
                     state: FetchState.Success,
+                    data
+                });
+            } catch(err: any) {
+                dispatch({
+                    state: FetchState.Error,
+                    error: err as Error
+                });
+            }
+        }, 
+        fetchMany: async (_route: string, init?: any) => {
+            try {
+                const data = await 
+                    fetch(_route, init)
+                        .then(res => res.json())
+                        .then(res => res as ResponseData<T[]>);        ;
+
+                dispatch({
+                    state: FetchState.SuccessMany,
                     data
                 });
             } catch(err: any) {
