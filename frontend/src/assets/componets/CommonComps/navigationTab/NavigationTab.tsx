@@ -12,8 +12,7 @@ import { AuthData } from '#common/@types/models';
 function NavigationTab() {
     const location = useLocation();
     const navigate = useNavigate();
-    const name = (JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData).user.name;
-    const role = (JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData).user.role; // Cambia 'currentuser' al nombre de la clave que usas en localStorage
+    const { role, name } = (JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData).user; // Cambia 'currentuser' al nombre de la clave que usas en localStorage
 
     const handleLogout = () => {
         localStorage.removeItem('currentUser');

@@ -3,7 +3,7 @@ import RigthMenu from '#src/assets/componets/CommonComps/rigthMenu/rigthMenu';
 import Schedule from '#src/assets/componets/TimeTableComps/schedule/schedule';
 import { useState, useEffect } from 'react';
 import { FetchState, FetchData } from '#src/types/api';
-import { ScheduleResponse } from '#common/@types/models';
+import { AuthData, ScheduleResponse } from '#common/@types/models';
 import { useApi } from '#src/api/ApiContext';
 import { ApiRts, Method } from '#common/@enums/http';
 
@@ -38,11 +38,10 @@ function TimeTablePage() {
 
         // fetchSchedule();
         switch (fetchRsrc.state) {
-            case FetchState.NotStarted:
-                const authData = JSON.parse(localStorage.getItem("currentUser")!) as any;
-                console.log("Hola");
-                api.fetch(`http://localhost:8080/api/?studentId=${authData.user.id}`, Method.GET);
-                break;
+            case FetchState.NotStarted: {
+                const authData = JSON.parse(localStorage.getItem("currentUser")!) as AuthData;
+                api.fetch(`http://localhost:8080/api/schedule/${authData.user.id}`, Method.GET);
+            } break;
 
             case FetchState.Loading:
                 break;
