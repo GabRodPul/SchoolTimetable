@@ -74,7 +74,8 @@ function NavigationTab() {
                             </div>
                             <div>
                                 {role != 'UR0_STUDENT' &&
-                                    <Link className='navigationLink' to="/tramites">
+                                    // <Link className='navigationLink' to="/tramites">
+                                    <Link className='navigationLink' to="">
                                         <button className={`navigationTab__side-menuButton ${location.pathname === "/tramites" ? "active" : ""}`}>
                                             <BsPencilSquare className='formalitiesIcon' size={30} /> Trámites
                                         </button>

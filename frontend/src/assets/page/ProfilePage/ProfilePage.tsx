@@ -21,11 +21,11 @@ function profile() {
     const [fetchRsrc, api] = useApi<UserData>(ApiRts.Users)
     const [userData, setUserData] = useState<UserData>(
         {
-            email: "",
-            name: "",
-            password: "",
-            phoneNumber: "",
-            role: UserRole.Student,
+            email: "ejemplo1@gmail.com",
+            name: "Ejemplo1",
+            password: "ejemplo1",
+            phoneNumber: "+34928481313",
+            role: "Ejemplo",
             image: undefined
         }
     );
@@ -170,7 +170,8 @@ function profile() {
                                                 <p>Rol:</p>
                                             </div>
                                             <div className='mobileData'>
-                                                <p>{roleTextInfo()}</p>
+                                                {/* <p>{roleTextInfo()}</p> */}
+                                                <p>{userData.role}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -297,7 +298,8 @@ function profile() {
                                                 <p>Rol:</p>
                                             </div>
                                             <div className='userData__roleText'>
-                                                <p>{roleTextInfo()}</p>
+                                                {/* <p>{roleTextInfo()}</p> */}
+                                                <p>{userData.role}</p>
                                             </div>
                                         </div>
                                     </div>
