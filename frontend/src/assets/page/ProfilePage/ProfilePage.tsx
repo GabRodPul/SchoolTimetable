@@ -1,10 +1,11 @@
 import __React, { useEffect, useState } from 'react';
 import { AuthData, UserData } from "#common/@types/models";
-import './ProfilePageStyles.css'
 import { useNavigate } from 'react-router-dom';
 import { useApi } from '#src/api/ApiContext';
 import { ApiRts } from '#common/@enums/http';
 import { FetchState } from '#src/types/api';
+import { UserRole } from '#common/@enums/models';
+import './ProfilePageStyles.css'
 
 //Mobile
 import { CiEdit, CiMenuKebab } from "react-icons/ci";
@@ -13,19 +14,24 @@ import { CiEdit, CiMenuKebab } from "react-icons/ci";
 import NavigationTab from '#src/assets/componets/CommonComps/navigationTab/NavigationTab';
 import RigthMenu from '#src/assets/componets/CommonComps/rigthMenu/rigthMenu';
 import Header from '#src/assets/componets/CommonComps/MenuheaderMobile/Header';
-import { UserRole } from '#common/@enums/models';
 
 function profile() {
+
+    const localEmail = (JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData).user.email;
+    const localName = (JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData).user.name;
+    const localPass = (JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData).user.password;
+    const localNumber = (JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData).user.phoneNumber;
+    const localRole = (JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData).user.role;
 
     const navigate = useNavigate();
     const [fetchRsrc, api] = useApi<UserData>(ApiRts.Users)
     const [userData, setUserData] = useState<UserData>(
         {
-            email: "ejemplo1@gmail.com",
-            name: "Ejemplo1",
-            password: "ejemplo1",
-            phoneNumber: "+34928481313",
-            role: "Ejemplo",
+            email: localEmail,
+            name: localName,
+            password: localPass,
+            phoneNumber: localNumber,
+            role: localRole,
             image: undefined
         }
     );
@@ -54,9 +60,16 @@ function profile() {
 
                 //!Fallo
                 if ("name" in fetchRsrc.data) {
-                    //cambiamos los valores
                     setUserData(fetchRsrc.data as UserData);
                 }
+
+                //usar .. para romper el arry, y luego filtrar fetchRsrc.data
+
+
+                //?Opcion alternativa, pero no hay filter
+                // fetchRsrc.data.filter(item => item.email === localEmail).forEach(item => {
+                //     console.log(`Procesando: ${item.name} para el usuario ${item.email}`);
+                // });
 
                 break;
 

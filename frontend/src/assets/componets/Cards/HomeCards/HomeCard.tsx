@@ -3,6 +3,7 @@ import { FaRegClock } from "react-icons/fa6";
 import { FaRegBell } from "react-icons/fa";
 import { HiMiniPencilSquare } from "react-icons/hi2";
 import { FaGear } from "react-icons/fa6";
+import { AuthData } from '#common/@types/models';
 
 function HomeCard() {
     const role = (JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData).user.role; // Cambia 'currentuser' al nombre de la clave que usas en localStorage
