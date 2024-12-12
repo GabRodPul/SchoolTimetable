@@ -4,11 +4,12 @@ import { UserData, Id } from "#common/@types/models";
 import { FetchState } from "../../../types/api";
 import { ApiRts } from "#common/@enums/http";
 
+type User = UserData & Id;
 const UserCrud: React.FC = () => {
     const [users, api] = useApi<UserData>(ApiRts.Users);
 
-    const [selectedUser, setSelectedUser] = useState<UserData | null>(null);
-    const [formState, setFormState] = useState<UserData>({ id: 0, name: "", email: "", role: "" });
+    const [selectedUser, setSelectedUser] = useState<User | null>(null);
+    const [formState, setFormState] = useState<User>({ id: 0, name: "", email: "", role: "", password: "", phoneNumber: "" });
 
     useEffect(() => {
         api.getAll();
