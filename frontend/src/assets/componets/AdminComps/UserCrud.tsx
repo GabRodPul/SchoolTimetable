@@ -6,7 +6,7 @@ import { ApiRts } from "#common/@enums/http";
 
 type User = UserData & Id;
 const UserCrud: React.FC = () => {
-    const [users, api] = useApi<UserData>(ApiRts.Users);
+    const [users, api] = useApi<User>(ApiRts.Users);
 
     const [selectedUser, setSelectedUser] = useState<User | null>(null);
     const [formState, setFormState] = useState<User>({ id: 0, name: "", email: "", role: "", password: "", phoneNumber: "" });
@@ -22,7 +22,7 @@ const UserCrud: React.FC = () => {
 
     const handleCreate = () => {
         api.post(formState).then(() => {
-            setFormState({ id: 0, name: "", email: "", role: "" });
+            setFormState({ id: 0, name: "", email: "", role: "", password: "", phoneNumber: "" });
             api.getAll();
         });
     };
@@ -31,7 +31,7 @@ const UserCrud: React.FC = () => {
         if (!selectedUser) return;
         api.put({ id: selectedUser.id, body: formState }).then(() => {
             setSelectedUser(null);
-            setFormState({ id: 0, name: "", email: "", role: "" });
+            setFormState({ id: 0, name: "", email: "", role: "", password: "", phoneNumber: "" });
             api.getAll();
         });
     };
@@ -42,7 +42,7 @@ const UserCrud: React.FC = () => {
         });
     };
 
-    const handleEdit = (user: UserData) => {
+    const handleEdit = (user: User) => {
         setSelectedUser(user);
         setFormState(user);
     };
@@ -65,7 +65,7 @@ const UserCrud: React.FC = () => {
                     <input
                         type="text"
                         name="name"
-                        placeholder="Name"
+                        placeholder="Nombre"
                         value={formState.name}
                         onChange={handleInputChange}
                     />
@@ -78,9 +78,16 @@ const UserCrud: React.FC = () => {
                     />
                     <input
                         type="text"
-                        name="role"
-                        placeholder="Role"
-                        value={formState.role}
+                        name="password"
+                        placeholder="Contraseña"
+                        value={formState.password}
+                        onChange={handleInputChange}
+                    />
+                    <input
+                        type="text"
+                        name="phoneNumber"
+                        placeholder="Teléfono"
+                        value={formState.phoneNumber}
                         onChange={handleInputChange}
                     />
                     <button type="submit">{selectedUser ? "Update" : "Create"}</button>
@@ -90,17 +97,23 @@ const UserCrud: React.FC = () => {
 
             <div>
                 <h2>User List</h2>
-                {(users.state === FetchState.Success || users.state === FetchState.SuccessMany) && users.data?.map((user: UserData) => (
-                    <div key={user.id}>
-                        <p>
-                            {user.name} ({user.email}) - {user.role}
-                        </p>
-                        <button onClick={() => handleEdit(user)}>Edit</button>
-                        <button onClick={() => handleDelete(user.id)}>Delete</button>
-                    </div>
-                ))}
-
+                {(users.state === FetchState.Success || users.state === FetchState.SuccessMany) &&
+                    Array.isArray(users.data) && users.data.map((user) => {
+                        const userWithId = user as User;
+                        return (
+                            <div key={userWithId.id}>
+                                <p>
+                                    {userWithId.name} ({userWithId.email}) - {userWithId.role}
+                                </p>
+                                <button onClick={() => handleEdit(userWithId)}>Edit</button>
+                                <button onClick={() => handleDelete({ id: userWithId.id })}>Delete</button> 
+                            </div>
+                        );
+                    })
+                }
             </div>
+
+
         </div>
     );
 };
