@@ -10,9 +10,10 @@ import {
 const BASE_URL = `http://localhost:8080/api`;
 
 const logRes = (res: Response) => { console.log(res); return res; }
+const logRet = <T>(obj: T) => { console.log(obj); return obj; }
 
 const myfetch = async <TR, TB, TOpts extends FetchOptions<TB>> (route: ApiRts, method: Method, options?: TOpts ) =>
-    fetch(`${BASE_URL}/${route}${ options?.id !== undefined ? "/"+options?.id : "" }`, {
+    fetch(logRet(`${BASE_URL}/${route}${ options?.id !== undefined ? "/"+options?.id : "" }`), {
         method,
         mode: "cors",
         body: JSON.stringify(options?.body),
