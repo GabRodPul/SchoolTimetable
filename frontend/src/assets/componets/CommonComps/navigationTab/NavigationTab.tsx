@@ -60,7 +60,7 @@ function NavigationTab() {
                             </div>
                             <div>
                                 <Link className='navigationLink' to="/timetable">
-                                    <button className={`navigationTab__side-menuButton ${location.pathname === "/horarios" ? "active" : ""}`}>
+                                    <button className={`navigationTab__side-menuButton ${location.pathname === "/timetable" ? "active" : ""}`}>
                                         <RiCalendarScheduleLine className='scheduleIcon' size={30} /> Horarios
                                     </button>
                                 </Link>
@@ -91,7 +91,7 @@ function NavigationTab() {
                             <div>
                                 {role == 'UR3_ADMIN' &&
                                     < Link className='navigationLink' to="/admin">
-                                        <button className={`navigationTab__side-menuButton ${location.pathname === "/configuracion" ? "active" : ""}`}>
+                                        <button className={`navigationTab__side-menuButton ${location.pathname === "/admin" ? "active" : ""}`}>
                                             <GoGear className='settingsIcon' size={30} /> Configuración
                                         </button>
                                     </Link>

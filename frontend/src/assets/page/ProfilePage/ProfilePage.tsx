@@ -38,11 +38,7 @@ function profile() {
                 //*console log de comprobacion
                 console.log("AuthData:", authData);
                 //buscando el usuario en la base de datos
-                const userDataAux = api.get(authData);
-
-                //? Prueba a ver si asi si pilla los valores
-                setUserData(userDataAux as unknown as UserData);
-
+                api.get(authData);
                 break;
 
             case FetchState.Loading:

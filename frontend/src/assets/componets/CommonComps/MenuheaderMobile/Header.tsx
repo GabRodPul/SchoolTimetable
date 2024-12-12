@@ -40,7 +40,7 @@ function Header() {
                     <a href="/Home">
                         <button>Inicio</button>
                     </a>
-                    <a href="/Horarios">
+                    <a href="/timetable">
                         <button>Horarios</button>
                     </a>
                     <a href="/notices">
@@ -62,6 +62,7 @@ function Header() {
                     <a href="/profile">
                         <button>Perfil</button>
                     </a>
+
                 </div>
             )}
         </div>
