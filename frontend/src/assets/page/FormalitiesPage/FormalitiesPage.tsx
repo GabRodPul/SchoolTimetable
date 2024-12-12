@@ -120,7 +120,7 @@ const Formalities: React.FC = () => {
                                     <input
                                         type="date"
                                         name="startDate"
-                                        value={formState.startDate.toISOString()}
+                                        value={formState.startDate.toDateString()}
                                         onChange={handleInputChange}
                                     />
                                 </label>
@@ -129,7 +129,7 @@ const Formalities: React.FC = () => {
                                     <input
                                         type="date"
                                         name="endDate"
-                                        value={formState.endDate.toISOString()}
+                                        value={formState.endDate.toDateString()}
                                         onChange={handleInputChange}
                                     />
                                 </label>
@@ -149,7 +149,7 @@ const Formalities: React.FC = () => {
                                     return (
                                         <div key={warningListed.id}>
                                             <p>
-                                                {warningListed.description} ({warningListed.startDate.toISOString()}) - {warningListed.endDate.toISOString()} - {warningListed.startHour} - {warningListed.endHour}
+                                                {warningListed.description} {warningListed.startDate.toDateString()} - {warningListed.endDate.toDateString()} - {warningListed.startHour} - {warningListed.endHour}
                                             </p>
                                             <button onClick={() => handleEdit(warningListed.id)}>Edit</button>
                                             <button onClick={() => handleDelete({ id: warningListed.id })}>Delete</button>

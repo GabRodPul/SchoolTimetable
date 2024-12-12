@@ -26,11 +26,11 @@ const WarningModel = { init: (sequelize: Sequelize) =>
             allowNull: false,
         },
         startDate:  {
-            type: DataTypes.DATE,
+            type: DataTypes.STRING(255),
             allowNull: false,
         },
         endDate: {
-            type: DataTypes.DATE,
+            type: DataTypes.STRING(255),
             allowNull: false,
             // We need to add validation for this to make sure startDate <= endDate...
             // - Gabriel
