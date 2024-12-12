@@ -40,6 +40,7 @@ function TimeTablePage() {
         switch (fetchRsrc.state) {
             case FetchState.NotStarted:
                 const authData = JSON.parse(localStorage.getItem("currentUser")!) as any;
+                console.log("Hola");
                 api.fetch(`http://localhost:8080/api/?studentId=${authData.user.id}`, Method.GET);
                 break;
 

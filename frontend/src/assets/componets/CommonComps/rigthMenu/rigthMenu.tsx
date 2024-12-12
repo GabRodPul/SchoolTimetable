@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./rigthMenuStyles.css";
 import { LuBellRing } from "react-icons/lu";
 
@@ -14,9 +14,23 @@ const RigthMenu: React.FC = () => {
   const [reminders, setReminders] = useState<Reminder[]>([]);
   const [newReminder, setNewReminder] = useState<Reminder>({ type: "Examen", description: "", date: "", });
 
+  // Recuperar recordatorios del localStorage al montar el componente
+  useEffect(() => {
+    const storedReminders = localStorage.getItem("reminders");
+    if (storedReminders) {
+      setReminders(JSON.parse(storedReminders)); // Establece los recordatorios desde el localStorage
+    }
+  }, []);
+
+  // Guardar los recordatorios en localStorage cada vez que cambien
+  useEffect(() => {
+    localStorage.setItem("reminders", JSON.stringify(reminders));
+  }, [reminders]);
+
   const handleAddReminder = () => {
     if (newReminder.description && newReminder.date) {
-      setReminders([...reminders, newReminder]);
+      const updatedReminders = [...reminders, newReminder];
+      setReminders(updatedReminders);
       setNewReminder({ type: "Examen", description: "", date: "" });
     }
   };
