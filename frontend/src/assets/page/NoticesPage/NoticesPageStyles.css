@@ -1,23 +1,29 @@
-.header__mobile{
+.header__mobile {
     display: none;
 }
 
-.noticesPage{
+.noticesPage {
     display: flex;
     width: 50%;
     margin-left: 60px;
     justify-content: left;
     gap: 15%;
     margin-left: 400px;
+    font-family: 'Lexend', sans-serif;
 }
 
 
 .noticesPage__reminders h2 {
-    font-weight: 400;
+    font-weight: 600;
     border-bottom: 1px solid #DDD6D6;
 }
 
-.noticesPage__notifications, 
+.noticesPage__notifications h2 {
+    font-weight: 600;
+    border-bottom: 1px solid #DDD6D6;
+}
+
+.noticesPage__notifications,
 .noticesPage__reminders {
     text-align: left;
     width: 420px;
@@ -26,22 +32,22 @@
 
 .notifications__entry,
 .reminders__remEntry {
+    display: flex;
+    flex-direction: column;
     border: 1px solid #ccc;
-    padding-left: 20px;
     border-radius: 5px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, .3);  
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, .3);
 }
 
 .entry__title {
-    /* LO DE LA FUENTE NO FURULA */
-    /* font-family: 'Lexend'; */
     color: #9B2BC7;
     font-weight: 700;
 }
 
-/* .entry__text {
+.entry__text{
+    margin-left: 20px;
+}
 
-} */
 
 .reminders__remEntry {
     display: flex;
@@ -51,20 +57,28 @@
 .remEntry__icon {
     display: flex;
     align-items: center;
-    padding-right: 20px;
+    margin: 0px 20px;
 }
 
-.remEntry--color[kind="Exam"]       { color: #FB9318; }
-.remEntry--color[kind="Assignment"] { color: #30E578; }
-.remEntry--color[kind="Project"]    { color: #5A51F3; }
+.remEntry--color[kind="Exam"] {
+    color: #FB9318;
+}
+
+.remEntry--color[kind="Assignment"] {
+    color: #30E578;
+}
+
+.remEntry--color[kind="Project"] {
+    color: #5A51F3;
+}
 
 @media (max-width: 768px) {
 
-    .header__mobile{
+    .header__mobile {
         display: inherit;
     }
 
-    .header__desk{
+    .header__desk {
         display: none;
     }
 
@@ -103,24 +117,36 @@
         }
     }
 
-    .noticesPage__notifications{
-        display: none;
+    .noticesPage__notifications {
         width: 100%;
         display: flex;
         flex-direction: column;
         gap: 1px;
-        color: red;
         font-family: 'Lexend', sans-serif;
+    }
+
+    .noticesPage__reminders {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+        font-family: 'Lexend', sans-serif;
+    }
+
+    .reminders__remEntry {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
     }
 }
 
-@media (max-width: 1090px){
+@media (max-width: 1090px) {
 
-    .header__mobile{
+    .header__mobile {
         display: inherit;
     }
 
-    .header__desk{
+    .header__desk {
         display: none;
     }
 
@@ -159,21 +185,35 @@
         }
     }
 
-    .noticesPage__notifications{
+    .noticesPage__notifications {
         display: none;
         width: 100%;
+        max-width: 700px;
+        display: flex;
+        flex-direction: column;
+        font-family: 'Lexend', sans-serif;
+    }
+
+    .noticesPage__reminders {
+        width: 100%;
+        max-width: 700px;
         display: flex;
         flex-direction: column;
         gap: 1px;
-        color: red;
         font-family: 'Lexend', sans-serif;
+    }
+
+    .reminders__remEntry {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
     }
 
 }
 
-@media (max-width: 1745px){
+@media (max-width: 1745px) {
 
-    .noticesPage{
+    .noticesPage {
         display: flex;
         flex-direction: column;
         width: 80%;

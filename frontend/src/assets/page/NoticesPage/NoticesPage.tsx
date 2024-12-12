@@ -10,6 +10,7 @@ import { useApi } from "#src/api/ApiContext";
 import RigthMenu from "#src/assets/componets/CommonComps/rigthMenu/rigthMenu";
 import { ApiRts } from "#common/@enums/http";
 import Header from "#src/assets/componets/CommonComps/MenuheaderMobile/Header";
+import { IoIosArrowForward } from "react-icons/io";
 
 enum ReminderKind {
   Exam = "Exam",
@@ -22,6 +23,7 @@ type ReminderData = {
   description: string,
   date: Date,
 }
+
 
 const dateStr = (d: Date) => d.toJSON().slice(0, 10);
 
@@ -95,7 +97,7 @@ function NoticesPage() {
         <RigthMenu />
       </div>
       <div className="header__mobile">
-        <Header/>
+        <Header />
       </div>
       <div className="noticesPage">
         <div className="noticesPage__notifications">
@@ -104,14 +106,16 @@ function NoticesPage() {
             notices.map(n => (
               // <NoticeCard 
               <div className="notifications__entry" key={n.id}>
-                <p className="entry__title">{
-                  `Cambio de Hora ${n.startDate < n.endDate
-                    ? dateStr(n.startDate)
-                    + " - "
-                    + dateStr(n.endDate)
-                    : dateStr(n.startDate)}`
-                }</p>
-                <p>{n.description}</p>
+                <div className="entry__text">
+                  <p className="entry__title">{
+                    `Cambio de Hora ${n.startDate < n.endDate
+                      ? dateStr(n.startDate)
+                      + " - "
+                      + dateStr(n.endDate)
+                      : dateStr(n.startDate)}`
+                  }</p>
+                  <p>{n.description}</p>
+                </div>
               </div>
             ))}
         </div>
