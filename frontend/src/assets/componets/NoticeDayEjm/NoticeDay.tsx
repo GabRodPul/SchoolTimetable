@@ -1,18 +1,18 @@
 import React from 'react';
 import './NoticeDay.css'
-import DayHour from '../DayHour/DayHour'
+import HourSlot from '../TimeTableComps/HourSlot/HourSlot'
 
 const NoticeDay = () => {
     const dayExample = [
-        { code: 'DSW', teacher: 'TibCru', classroom: 'AulaT2' },
-        { code: 'DSW', teacher: 'TibCru', classroom: 'AulaT2' },
-        { code: 'EMR', teacher: 'Ester', classroom: 'AulaT2' },
+        { module: 'DSW', teacher: 'TibCru', group: '2DawT' },
+        { module: 'DSW', teacher: 'TibCru', group: '2DawT' },
+        { module: 'EMR', teacher: 'Ester', group: '2DawT' },
     ];
 
     return (
             <div className='dayHour__container'>
                 {dayExample.map((dayExp, index) => (
-                    <DayHour key={index} code={dayExp.code} teacher={dayExp.teacher} classroom={dayExp.classroom} />
+                    <HourSlot key={index} module={dayExp.module} teacher={dayExp.teacher} group={dayExp.group} />
                 ))}
             </div>
     );

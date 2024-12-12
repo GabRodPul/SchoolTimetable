@@ -1,3 +1,17 @@
+.header__mobile{
+    display: none;
+}
+
+.noticesPage{
+    display: flex;
+    width: 50%;
+    margin-left: 60px;
+    justify-content: left;
+    gap: 15%;
+    margin-left: 400px;
+}
+
+
 .noticesPage__reminders h2 {
     font-weight: 400;
     border-bottom: 1px solid #DDD6D6;
@@ -7,7 +21,7 @@
 .noticesPage__reminders {
     text-align: left;
     width: 420px;
-    margin-left: 300px;
+    /* margin-left: 300px; */
 }
 
 .notifications__entry,
@@ -25,9 +39,9 @@
     font-weight: 700;
 }
 
-.entry__text {
+/* .entry__text {
 
-}
+} */
 
 .reminders__remEntry {
     display: flex;
@@ -45,6 +59,14 @@
 .remEntry--color[kind="Project"]    { color: #5A51F3; }
 
 @media (max-width: 768px) {
+
+    .header__mobile{
+        display: inherit;
+    }
+
+    .header__desk{
+        display: none;
+    }
 
     .searchContainer {
         width: 100%;
@@ -85,9 +107,80 @@
         display: none;
         width: 100%;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         gap: 1px;
         color: red;
         font-family: 'Lexend', sans-serif;
     }
+}
+
+@media (max-width: 1090px){
+
+    .header__mobile{
+        display: inherit;
+    }
+
+    .header__desk{
+        display: none;
+    }
+
+    .searchContainer {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #e0e0e0;
+
+        .searchBar {
+            margin: 20px 0;
+            background-color: #ffff;
+            width: 80%;
+            display: flex;
+            justify-content: start;
+            align-items: baseline;
+            border: 1px solid #000000;
+            box-sizing: border-box;
+            border-radius: 50px;
+            overflow: hidden;
+
+            .searchIcon {
+                margin: 0 10px;
+                height: 100%;
+            }
+
+            .inputNotice {
+                outline: none;
+                width: 100%;
+                font-size: 12px;
+                color: #000000;
+                border: none;
+                font-size: 12pt;
+            }
+        }
+    }
+
+    .noticesPage__notifications{
+        display: none;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+        color: red;
+        font-family: 'Lexend', sans-serif;
+    }
+
+}
+
+@media (max-width: 1745px){
+
+    .noticesPage{
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        margin-left: 60px;
+        justify-content: center;
+        align-items: center;
+        margin-left: 5%;
+    }
+
 }

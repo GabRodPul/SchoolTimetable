@@ -99,6 +99,8 @@ DB.warnings.belongsTo(DB.users);
         // b:      "belongsTo",
     // }
 // )
+
+
 DB.classHour.hasMany(DB.sessions,     { foreignKey: "classHourId" });
 DB.sessions.belongsTo(DB.classHour,   { foreignKey: "classHourId" });
 DB.igt_modules.hasMany(DB.sessions,   { foreignKey: "igtModuleId" });
