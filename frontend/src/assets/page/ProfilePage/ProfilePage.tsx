@@ -109,6 +109,22 @@ function profile() {
         navigate('/login');
     };
 
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setUserData((prevState) => ({
+            ...prevState,
+            [name]: value,
+        }));
+    };
+
+    const handleConfirm = () => {
+        if (userData.name.trim() === '' || userData.phoneNumber.trim() === '') {
+            alert('Por favor, complete todos los campos antes de continuar.');
+        } else {
+            alert('Datos confirmados!');
+        }
+    };
+
     return (
         <>
             <div className="body">
@@ -322,16 +338,24 @@ function profile() {
                                                 <p>Nombre:</p>
                                             </div>
                                             <div className='userData__formText'>
-                                                <input type="text" placeholder='Cambie Su Nombre' />
+                                                <input
+                                                    type="text"
+                                                    name="name"
+                                                    placeholder="Cambie Su Nombre"
+                                                />
                                             </div>
                                             <div className='userData__formTittle'>
                                                 <p>Telefono:</p>
                                             </div>
                                             <div className='userData__formText'>
-                                                <input type="text" placeholder='Cambie Su Teléfono' />
+                                                <input
+                                                    type="text"
+                                                    name="phoneNumber"
+                                                    placeholder="Cambie Su Teléfono"
+                                                />
                                             </div>
 
-                                            <button className='userData__formButton'>Confirmar:</button>
+                                            <button className='userData__formButton' onClick={handleConfirm}>Confirmar:</button>
                                         </div>
                                     </div>
                                 </div>

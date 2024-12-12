@@ -1,27 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import NavigationTab from '#src/assets/componets/CommonComps/navigationTab/NavigationTab';
-import RigthMenu from '#src/assets/componets/CommonComps/rigthMenu/rigthMenu'; // Importar el componente correctamente
+import RigthMenu from '#src/assets/componets/CommonComps/rigthMenu/rigthMenu';
 import { LuBellRing } from 'react-icons/lu';
 import './FormalitiesPageStyles.css';
+import { Id, WarningData } from '#common/@types/models';
 import { useApi } from '#src/api/ApiContext';
 import { ApiRts } from '#common/@enums/http';
-import { Id, WarningData } from '#common/@types/models';
 import { FetchState } from '#src/types/api';
+
 type Warning = WarningData & Id;
 
-//* Define la interfaz para el estado
-// interface Formalitie {
-//     type: FormalitieType;
-//     motive: string;
-//     startDate: string;
-//     endDate: string;
-// }
-
 const Formalities: React.FC = () => {
-
-    const [warning, api] = useApi<Warning>(ApiRts.Warnings)
+    const [warning, api] = useApi<Warning>(ApiRts.Warnings);
     const [selectedWarning, setSelectedWarning] = useState<Warning | null>(null);
-    const [formState, setFormState] = useState<Warning>({ id: 0, teacherId: 1, description: "", startDate: new Date(""), endDate: new Date(""), startHour: "", endHour: "" });
+    const [formState, setFormState] = useState<Warning>({
+        id: 0,
+        teacherId: 1,
+        description: "",
+        startDate: "",
+        endDate: "",
+        startHour: "",
+        endHour: ""
+    });
 
     useEffect(() => {
         api.getAll();
@@ -32,52 +32,120 @@ const Formalities: React.FC = () => {
         setFormState(prevState => ({ ...prevState, [name]: value }));
     };
 
+    // Validación de campos antes de hacer el POST
+    const validateForm = () => {
+        const { description, startDate, endDate, startHour, endHour } = formState;
+        if (!description || !startDate || !endDate || !startHour || !endHour) {
+            alert("Todos los campos son obligatorios.");
+            return false;
+        }
+        return true;
+    };
+
     const handleCreate = () => {
-        api.post(formState).then(() => {
-            setFormState({ id: 0, teacherId: 1, description: "", startDate: new Date(""), endDate: new Date(""), startHour: "", endHour: "" });
-            api.getAll();
-        });
+
+        // Validamos el formulario antes de realizar el POST
+    
+        if (!validateForm()) return;
+    
+        console.log("Enviando datos al backend:", formState);
+    
+        api.post(formState)
+    
+            .then((response) => {
+    
+                console.log("POST exitoso:", response.data);
+    
+                // Asumimos que el backend devuelve el nuevo objeto creado
+    
+                const newWarning = response.data; // Captura la respuesta del backend
+    
+                setFormState({
+    
+                    id: newWarning.id, // Actualiza el estado con la ID generada
+    
+                    teacherId: 1,
+    
+                    description: "",
+    
+                    startDate: "",
+    
+                    endDate: "",
+    
+                    startHour: "",
+    
+                    endHour: ""
+    
+                });
+    
+                api.getAll(); // Actualizar datos después del POST
+    
+            })
+    
+            .catch((error) => {
+    
+                console.error("Error al realizar el POST:", error);
+    
+                alert("Hubo un error al intentar crear el trámite.");
+    
+            });
+    
     };
 
     const handleUpdate = () => {
         if (!selectedWarning) return;
-        api.put({ id: selectedWarning.id, body: formState }).then(() => {
-            setSelectedWarning(null);
-            setFormState({ id: 0, name: "", email: "", role: "", password: "", phoneNumber: "" });
-            api.getAll();
-        });
+        // Validación de formulario antes de actualizar
+        if (!validateForm()) return;
+        api.put({ id: selectedWarning.id, body: formState })
+            .then(() => {
+                console.log("PUT exitoso:", formState);
+                setFormState({
+                    id: 9,
+                    teacherId: 1,
+                    description: "",
+                    startDate: "",
+                    endDate: "",
+                    startHour: "",
+                    endHour: ""
+                });
+                api.getAll(); // Actualizar datos después de la actualización
+            })
+            .catch((error) => {
+                console.error("Error al realizar el PUT:", error);
+                alert("Hubo un error al intentar actualizar el trámite.");
+            });
     };
 
     const handleDelete = (id: Id) => {
-        api.delete(id).then(() => {
-            api.getAll();
-        });
+        api.delete(id)
+            .then(() => {
+                api.getAll(); // Actualizar datos después de eliminar
+            })
+            .catch((error) => {
+                console.error("Error al eliminar el trámite:", error);
+                alert("Hubo un error al intentar eliminar el trámite.");
+            });
     };
 
-    const handleEdit = (user: User) => {
-        setSelectedUser(user);
-        setFormState(user);
+    const handleEdit = (warnings: Warning) => {
+        setSelectedWarning(warnings);
+        setFormState(warnings); // Establecer los datos del trámite en el formulario para editar
     };
 
     if (warning.state === FetchState.Loading) return <p>Loading...</p>;
     if (warning.state === FetchState.Error) return <p>Error: {warning.error?.message}</p>;
 
-    // Renderizar el componente
     return (
         <div>
             <NavigationTab />
             <RigthMenu />
             <div className="formalities__content">
-                <div className="formalities__mobile">
-
-                </div>
-
                 <div className="formalities_desktop">
                     <div className="formalities__makeForm">
+                        <div className="formalitiesForm__title">
+                            <h2>Trámites</h2>
+                        </div>
                         <div className="formalities__form">
-                            <div className="formalitiesForm__title">
-                                <h2>Trámites</h2>
-                            </div>
                             <form
                                 onSubmit={e => {
                                     e.preventDefault();
@@ -118,50 +186,53 @@ const Formalities: React.FC = () => {
                                 <label>
                                     <p>Fecha inicio</p>
                                     <input
-                                        type="date"
+                                        type="text"
                                         name="startDate"
-                                        value={formState.startDate.toDateString()}
+                                        placeholder="Ejemplo: 2000/08/21"
+                                        value={formState.startDate}
                                         onChange={handleInputChange}
                                     />
                                 </label>
                                 <label>
                                     <p>Fecha fin</p>
                                     <input
-                                        type="date"
+                                        type="text"
                                         name="endDate"
-                                        value={formState.endDate.toDateString()}
+                                        placeholder="Ejemplo: 2000/08/21"
+                                        value={formState.endDate}
                                         onChange={handleInputChange}
                                     />
                                 </label>
                                 <button type="submit" className="formalities__button">
-                                    Añadir
+                                    {selectedWarning ? "Update" : "Create"}
                                 </button>
+                                {selectedWarning && <button onClick={() => setSelectedWarning(null)}>Cancel</button>}
                             </form>
                         </div>
                     </div>
 
                     <div className="formalities__info">
-                        <div>
-                            <h2>User List</h2>
-                            {(warning.state === FetchState.Success || warning.state === FetchState.SuccessMany) &&
-                                Array.isArray(warning.data) && warning.data.map((warning) => {
-                                    const warningListed = warning as Warning;
-                                    return (
-                                        <div key={warningListed.id}>
-                                            <p>
-                                                {warningListed.description} {warningListed.startDate.toDateString()} - {warningListed.endDate.toDateString()} - {warningListed.startHour} - {warningListed.endHour}
-                                            </p>
-                                            <button onClick={() => handleEdit(warningListed.id)}>Edit</button>
-                                            <button onClick={() => handleDelete({ id: warningListed.id })}>Delete</button>
-                                        </div>
-                                    );
-                                })
-                            }
+                        <div className="formalitiesInfo__title">
+                            <h2>Tus Trámites</h2>
                         </div>
+                        {(warning.state === FetchState.Success || warning.state === FetchState.SuccessMany) &&
+                            Array.isArray(warning.data) && warning.data.map((warning) => {
+                                const warningListed = warning as Warning;
+                                return (
+                                    <div key={warningListed.id}>
+                                        <p>
+                                            {warningListed.description} {warningListed.startDate} - {warningListed.endDate} - {warningListed.startHour} - {warningListed.endHour}
+                                        </p>
+                                        <button onClick={() => handleEdit(warningListed)}>Edit</button>
+                                        <button onClick={() => handleDelete({ id: warningListed.id })}>Delete</button>
+                                    </div>
+                                );
+                            })
+                        }
                     </div>
                 </div>
             </div>
-        </div >
+        </div>
     );
 };
 

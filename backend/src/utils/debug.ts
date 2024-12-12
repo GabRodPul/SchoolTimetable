@@ -469,15 +469,15 @@ export const dbInit = async (debug: boolean) => {
     ]);
 
     await DB.warnings.bulkCreate([
-        { id: 1, teacherId: 1, description: "Baja", startDate: new Date('2024-12-15'), endDate: new Date('2025-12-15'), startHour: "15:00:01", endHour: "18:00:01", },
-        { id: 2, teacherId: 1, description: "Ausencia", startDate: new Date('2024-12-15'), endDate: new Date('2024-12-15'), startHour: "08:00:01", endHour: "18:00:01", },
-        { id: 3, teacherId: 1, description: "Baja", startDate: new Date('2024-12-15'), endDate: new Date('2024-12-19'), startHour: "18:00:01", endHour: "18:00:01", }
+        { id: 1, teacherId: 1, description: "Baja", startDate: "2024-12-12", endDate: "2024-12-12", startHour: "15:00:01", endHour: "18:00:01", },
+        { id: 2, teacherId: 1, description: "Ausencia", startDate: "2024-12-12", endDate: "2024-12-12", startHour: "08:00:01", endHour: "18:00:01", },
+        { id: 3, teacherId: 1, description: "Baja", startDate: "2024-12-12", endDate: "2024-12-12", startHour: "18:00:01", endHour: "18:00:01", }
     ]);
 
     await DB.sessionsChanged.bulkCreate([
-        { id: 1, sessionId: 1, classHourId: 1, day: WorkDay.Monday, startDate: new Date('2024-12-15'), endDate: new Date('2024-12-15'), },
-        { id: 2, sessionId: 2, classHourId: 2, day: WorkDay.Monday, startDate: new Date('2024-12-15'), endDate: new Date('2024-12-15'), },
-        { id: 3, sessionId: 1, classHourId: 3, day: WorkDay.Monday, startDate: new Date('2024-12-15'), endDate: new Date('2024-12-15'), },
-        { id: 4, sessionId: 1, classHourId: 1, day: WorkDay.Thursday, startDate: new Date('2024-12-18'), endDate: new Date('2024-12-18'), },
+        { id: 1, sessionId: 1, classHourId: 1, day: WorkDay.Monday, startDate: "2024-12-12", endDate: "2024-12-12", },
+        { id: 2, sessionId: 2, classHourId: 2, day: WorkDay.Monday, startDate: "2024-12-12", endDate: "2024-12-12", },
+        { id: 3, sessionId: 1, classHourId: 3, day: WorkDay.Monday, startDate: "2024-12-12", endDate: "2024-12-12", },
+        { id: 4, sessionId: 1, classHourId: 1, day: WorkDay.Thursday, startDate: "2024-12-12", endDate: "2024-12-12", },
     ]);
 };
