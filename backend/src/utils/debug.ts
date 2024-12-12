@@ -286,6 +286,7 @@ export const dbInit = async ( debug: boolean ) => {
     ]);
 
 
+<<<<<<< HEAD
     await DB.sessions.bulkCreate([
         
         //Monday
@@ -330,6 +331,8 @@ export const dbInit = async ( debug: boolean ) => {
     ]);
 
 
+=======
+>>>>>>> develop
     await DB.enrollments.bulkCreate([
 
         //DOR
@@ -396,15 +399,15 @@ export const dbInit = async ( debug: boolean ) => {
         { id:  45, studentId: 19, moduleId: dbgMod.SSG.id, },
 
         //PGL
-        { id:  44, studentId: 15, moduleId: dbgMod.PGL.id, },
-        { id:  45, studentId: 17, moduleId: dbgMod.PGL.id, },
-        { id:  46, studentId: 19, moduleId: dbgMod.PGL.id, },
+        { id:  46, studentId: 15, moduleId: dbgMod.PGL.id, },
+        { id:  47, studentId: 17, moduleId: dbgMod.PGL.id, },
+        { id:  48, studentId: 19, moduleId: dbgMod.PGL.id, },
 
         // * EMR
-        { id:  47, studentId: 15, moduleId: dbgMod.EMR.id, },
-        { id:  48, studentId: 16, moduleId: dbgMod.EMR.id, },
-        { id:  49, studentId: 17, moduleId: dbgMod.EMR.id, },
-        { id:  50, studentId: 18, moduleId: dbgMod.EMR.id, },
+        { id:  49, studentId: 15, moduleId: dbgMod.EMR.id, },
+        { id:  50, studentId: 16, moduleId: dbgMod.EMR.id, },
+        { id:  51, studentId: 17, moduleId: dbgMod.EMR.id, },
+        { id:  52, studentId: 18, moduleId: dbgMod.EMR.id, },
 
     ]);
 
@@ -468,4 +471,47 @@ export const dbInit = async ( debug: boolean ) => {
         { id: 32, teacherId: 1, groupId: dbgGrp.DAM2T.id, moduleId: dbgMod.EMR.id, weeklyHours: 3 },
         { id: 33, teacherId: 1, groupId: dbgGrp.DAM2N.id, moduleId: dbgMod.EMR.id, weeklyHours: 1 },
     ]);
-};1
+
+    await DB.sessions.bulkCreate([
+        
+        //Monday
+        { id:  1, classHourId: 1 , igtModuleId: 2, day:WorkDay.Monday,  },
+        { id:  2, classHourId: 2, igtModuleId: 2, day:WorkDay.Monday, },
+        { id:  3, classHourId: 3, igtModuleId: 5, day:WorkDay.Monday, },
+        { id:  4, classHourId: 4, igtModuleId: 5, day:WorkDay.Monday, },
+        { id:  5, classHourId: 4, igtModuleId: 8, day:WorkDay.Monday, },
+        { id:  6, classHourId: 4, igtModuleId: 8, day:WorkDay.Monday, },
+
+        //Tuesday
+        { id:  7, classHourId: 1 , igtModuleId: 11, day:WorkDay.Tuesday,  },
+        { id:  8, classHourId: 2, igtModuleId: 11, day:WorkDay.Tuesday, },
+        { id:  9, classHourId: 3, igtModuleId: 2, day:WorkDay.Tuesday, },
+        { id:  10, classHourId: 4, igtModuleId: 2, day:WorkDay.Tuesday, },
+        { id:  11, classHourId: 5, igtModuleId: 5, day:WorkDay.Tuesday, },
+        { id:  12, classHourId: 6, igtModuleId: 5, day:WorkDay.Tuesday, },
+
+        //Wensday
+        { id:  13, classHourId: 1 , igtModuleId: 8, day:WorkDay.Wednesday,  },
+        { id:  14, classHourId: 2, igtModuleId: 8, day:WorkDay.Wednesday, },
+        { id:  15, classHourId: 3, igtModuleId: 2, day:WorkDay.Wednesday, },
+        { id:  16, classHourId: 4, igtModuleId: 2, day:WorkDay.Wednesday, },
+        { id:  17, classHourId: 5, igtModuleId: 11, day:WorkDay.Wednesday, },
+        { id:  18, classHourId: 6, igtModuleId: 11, day:WorkDay.Wednesday, },
+
+        //thursday
+        { id:  19, classHourId: 1 , igtModuleId: 11, day:WorkDay.Thursday,  },
+        { id:  20, classHourId: 2, igtModuleId: 11, day:WorkDay.Thursday, },
+        { id:  21, classHourId: 3, igtModuleId: 11, day:WorkDay.Thursday, },
+        { id:  22, classHourId: 4, igtModuleId: 8, day:WorkDay.Thursday, },
+        { id:  23, classHourId: 5, igtModuleId: 8, day:WorkDay.Thursday, },
+        { id:  24, classHourId: 6, igtModuleId: 14, day:WorkDay.Thursday, },
+
+        //Friday
+        { id:  25, classHourId: 1 , igtModuleId: 5, day:WorkDay.Friday,  },
+        { id:  26, classHourId: 2, igtModuleId: 5, day:WorkDay.Friday, },
+        { id:  27, classHourId: 3, igtModuleId: 8, day:WorkDay.Friday, },
+        { id:  28, classHourId: 4, igtModuleId: 8, day:WorkDay.Friday, },
+        { id:  29, classHourId: 5, igtModuleId: 14, day:WorkDay.Friday, },
+        { id:  30, classHourId: 6, igtModuleId: 14, day:WorkDay.Friday, },
+    ]);
+};

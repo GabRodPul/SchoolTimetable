@@ -105,6 +105,8 @@ DB.classHour.hasMany(DB.sessions,     { foreignKey: "classHourId" });
 DB.sessions.belongsTo(DB.classHour,   { foreignKey: "classHourId" });
 DB.igt_modules.hasMany(DB.sessions,   { foreignKey: "igtModuleId" });
 DB.sessions.belongsTo(DB.igt_modules, { foreignKey: "igtModuleId" });
+DB.users.hasMany(DB.sessions,         { foreignKey: "teacherId"   });
+DB.sessions.belongsTo(DB.users,       { foreignKey: "teacherId"   });
 
 //* SessionsChanged
 relationship(
