@@ -12,6 +12,7 @@ import { AuthData } from '#common/@types/models';
 function NavigationTab() {
     const location = useLocation();
     const navigate = useNavigate();
+    const name = (JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData).user.name;
     const role = (JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData).user.role; // Cambia 'currentuser' al nombre de la clave que usas en localStorage
 
     const handleLogout = () => {
@@ -41,7 +42,7 @@ function NavigationTab() {
                         <div className='navigationTab__profileIcon'>
                             <img src="./img/userExample.png" alt="Imagen de perfil" />
                         </div>
-                        <p className="navigationTab__profileName">Daniel Matias</p>
+                        <p className="navigationTab__profileName">{name}</p>
                     </div>
                 </div>
             </div>
