@@ -9,7 +9,7 @@ const SearchBar = () => {
     function usePageTitle() {
         const location = useLocation();
         switch (location.pathname) {
-            case '/notificaciones':
+            case '/notices':
                 return "Buscar Notificación";
             case '/tramites':
                 return "Buscar Trámite";
