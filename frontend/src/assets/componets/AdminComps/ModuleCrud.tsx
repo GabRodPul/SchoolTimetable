@@ -4,11 +4,13 @@ import { ModuleData, Id } from "#common/@types/models";
 import { FetchState } from "../../../types/api";
 import { ApiRts } from "#common/@enums/http";
 
-const ModuleCrud: React.FC = () => {
-    const [modules, api] = useApi<ModuleData>(ApiRts.Modules); 
+type Module = ModuleData & Id;
 
-    const [selectedModule, setSelectedModule] = useState<ModuleData | null>(null);
-    const [formState, setFormState] = useState<ModuleData>({ id: 0, name: "" });
+const ModuleCrud: React.FC = () => {
+    const [modules, api] = useApi<Module>(ApiRts.Modules);
+
+    const [selectedModule, setSelectedModule] = useState<Module | null>(null);
+    const [formState, setFormState] = useState<Module>({ id: 0, name: "" });
 
     useEffect(() => {
         api.getAll();
@@ -21,29 +23,29 @@ const ModuleCrud: React.FC = () => {
 
     const handleCreate = () => {
         api.post(formState).then(() => {
-            setFormState({ id: 0, name: "" }); 
-            api.getAll(); 
+            setFormState({ id: 0, name: "" });
+            api.getAll();
         });
     };
 
     const handleUpdate = () => {
         if (!selectedModule) return;
         api.put({ id: selectedModule.id, body: formState }).then(() => {
-            setSelectedModule(null); 
-            setFormState({ id: 0, name: "" }); 
+            setSelectedModule(null);
+            setFormState({ id: 0, name: "" });
             api.getAll();
         });
     };
 
     const handleDelete = (id: Id) => {
         api.delete(id).then(() => {
-            api.getAll(); 
+            api.getAll();
         });
     };
 
-    const handleEdit = (module: ModuleData) => {
-        setSelectedModule(module); 
-        setFormState(module); 
+    const handleEdit = (module: Module) => {
+        setSelectedModule(module);
+        setFormState(module);
     };
 
     if (modules.state === FetchState.Loading) return <p>Loading...</p>;
@@ -75,15 +77,16 @@ const ModuleCrud: React.FC = () => {
 
             <div>
                 <h2>Module List</h2>
-                {(modules.state === FetchState.Success || modules.state === FetchState.SuccessMany) && modules.data?.map((module: ModuleData) => (
-                    <div key={module.id}>
-                        <p>{module.name}</p>
-                        <button onClick={() => handleEdit(module)}>Edit</button>
-                        {module.id !== undefined && (
-                            <button onClick={() => handleDelete(module.id)}>Delete</button>
-                        )}
-                    </div>
-                ))}
+                {(modules.state === FetchState.Success || modules.state === FetchState.SuccessMany) && 
+                    Array.isArray(modules.data) && 
+                    modules.data.map((module) => (
+                        <div key={module.id}>
+                            <p>{module.name}</p>
+                            <button onClick={() => handleEdit(module)}>Edit</button>
+                            <button onClick={() => handleDelete({ id: module.id })}>Delete</button>
+                        </div>
+                    ))
+                }
             </div>
         </div>
     );

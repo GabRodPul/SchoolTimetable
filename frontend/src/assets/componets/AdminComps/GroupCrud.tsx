@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useApi } from "../../../api/ApiContext";
-import { GroupData } from "#common/@types/models";
+import { GroupData, Id } from "#common/@types/models";
 import { FetchState } from "../../../types/api";
 import { ApiRts } from "#common/@enums/http";
 
-const GroupCrud: React.FC = () => {
-    const [groups, api] = useApi<GroupData>(ApiRts.Groups);
+type Group = GroupData & Id;
 
-    const [selectedGroup, setSelectedGroup] = useState<GroupData | null>(null);
-    const [formState, setFormState] = useState<Omit<GroupData, "id">>({
-        name: "",
-    });
+const GroupCrud: React.FC = () => {
+    const [groups, api] = useApi<Group>(ApiRts.Groups);
+
+    const [selectedGroup, setSelectedGroup] = useState<Group | null>(null);
+    const [formState, setFormState] = useState<Group>({ id: 0, name: "" });
 
     useEffect(() => {
         api.getAll();
@@ -23,50 +23,33 @@ const GroupCrud: React.FC = () => {
 
     const handleCreate = () => {
         api.post(formState).then(() => {
-            setFormState({ name: "" });
+            setFormState({ id: 0, name: "" });
             api.getAll();
         });
     };
 
     const handleUpdate = () => {
-        if (!selectedGroup || selectedGroup.id === undefined) return;
+        if (!selectedGroup) return;
         api.put({ id: selectedGroup.id, body: formState }).then(() => {
             setSelectedGroup(null);
-            setFormState({ name: "" });
+            setFormState({ id: 0, name: "" });
             api.getAll();
         });
     };
 
-    const handleDelete = (id: number) => {
+    const handleDelete = (id: Id) => {
         api.delete(id).then(() => {
             api.getAll();
         });
     };
 
-    const handleEdit = (group: GroupData) => {
+    const handleEdit = (group: Group) => {
         setSelectedGroup(group);
-        setFormState({ name: group.name });
+        setFormState(group);
     };
 
     if (groups.state === FetchState.Loading) return <p>Loading...</p>;
     if (groups.state === FetchState.Error) return <p>Error: {groups.error?.message}</p>;
-
-    // Verificamos si `groups.data` está disponible y es un array
-    const groupList = groups.state === FetchState.Success || groups.state === FetchState.SuccessMany
-        ? (
-            Array.isArray(groups.data)
-                ? groups.data.map((group: GroupData) => (
-                    <div key={group.id ?? Math.random()}>
-                        <p>{group.name}</p>
-                        <button onClick={() => handleEdit(group)}>Edit</button>
-                        {group.id !== undefined && (
-                            <button onClick={() => handleDelete(group.id)}>Delete</button>
-                        )}
-                    </div>
-                ))
-                : <p>No groups available or error occurred.</p>
-        )
-        : null;
 
     return (
         <div>
@@ -94,7 +77,16 @@ const GroupCrud: React.FC = () => {
 
             <div>
                 <h2>Group List</h2>
-                {groupList || <p>No groups found</p>}
+                {(groups.state === FetchState.Success || groups.state === FetchState.SuccessMany) &&
+                    Array.isArray(groups.data) &&
+                    groups.data.map((group) => (
+                        <div key={group.id}>
+                            <p>{group.name}</p>
+                            <button onClick={() => handleEdit(group)}>Edit</button>
+                            <button onClick={() => handleDelete({ id: group.id })}>Delete</button>
+                        </div>
+                    ))
+                }
             </div>
         </div>
     );

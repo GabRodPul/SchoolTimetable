@@ -3,7 +3,7 @@ export enum ApiRts {
     TimeTables = "timetables",
     Modules     = "modules",
     Groups      = "groups",
-    Sessions    = "sessions",
+    Session    = "session",
     Login       = "login",
     Signin      = "signin",
     Warnings    = "warnings",

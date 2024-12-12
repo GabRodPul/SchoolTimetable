@@ -5,13 +5,15 @@ import { FetchState } from "../../../types/api";
 import { ApiRts } from "#common/@enums/http";
 import { WorkDay } from "../../../../../common/@enums/models/index";
 
-const SessionCrud: React.FC = () => {
-    const [sessions, api] = useApi<SessionData>(ApiRts.Sessions); // API para interactuar con el backend
+type Session = SessionData & Id;
 
-    const [selectedSession, setSelectedSession] = useState<SessionData | null>(null);
-    const [formState, setFormState] = useState<SessionData>({
+const SessionCrud: React.FC = () => {
+    const [sessions, api] = useApi<Session>(ApiRts.Session); // API para interactuar con el backend
+
+    const [selectedSession, setSelectedSession] = useState<Session | null>(null);
+    const [formState, setFormState] = useState<Session>({
         id: 0,
-        day: WorkDay.Monday, // Puedes cambiar esto dependiendo de tus datos predeterminados
+        day: WorkDay.Monday, // Valor por defecto
         classHourId: 0,
         igtModuleId: 0
     });
@@ -27,8 +29,8 @@ const SessionCrud: React.FC = () => {
 
     const handleCreate = () => {
         api.post(formState).then(() => {
-            setFormState({ id: 0, day: "Monday", classHourId: 0, igtModuleId: 0 }); 
-            api.getAll(); 
+            setFormState({ id: 0, day: WorkDay.Monday, classHourId: 0, igtModuleId: 0 });
+            api.getAll();
         });
     };
 
@@ -36,19 +38,19 @@ const SessionCrud: React.FC = () => {
         if (!selectedSession) return;
         api.put({ id: selectedSession.id, body: formState }).then(() => {
             setSelectedSession(null);
-            setFormState({ id: 0, day: "Monday", classHourId: 0, igtModuleId: 0 });
+            setFormState({ id: 0, day: WorkDay.Monday, classHourId: 0, igtModuleId: 0 });
             api.getAll();
         });
     };
 
     const handleDelete = (id: Id) => {
         api.delete(id).then(() => {
-            api.getAll(); 
+            api.getAll();
         });
     };
 
-    const handleEdit = (session: SessionData) => {
-        setSelectedSession(session); 
+    const handleEdit = (session: Session) => {
+        setSelectedSession(session);
         setFormState(session);
     };
 
@@ -100,17 +102,18 @@ const SessionCrud: React.FC = () => {
 
             <div>
                 <h2>Session List</h2>
-                {(sessions.state === FetchState.Success || sessions.state === FetchState.SuccessMany) && sessions.data?.map((session: SessionData) => (
-                    <div key={session.id}>
-                        <p>
-                            Day: {session.day} | Class Hour ID: {session.classHourId} | Module ID: {session.igtModuleId}
-                        </p>
-                        <button onClick={() => handleEdit(session)}>Edit</button>
-                        {session.id !== undefined && (
-                            <button onClick={() => handleDelete(session.id)}>Delete</button>
-                        )}
-                    </div>
-                ))}
+                {(sessions.state === FetchState.Success || sessions.state === FetchState.SuccessMany) && 
+                    Array.isArray(sessions.data) && 
+                    sessions.data.map((session) => (
+                        <div key={session.id}>
+                            <p>
+                                Day: {session.day} | Class Hour ID: {session.classHourId} | Module ID: {session.igtModuleId}
+                            </p>
+                            <button onClick={() => handleEdit(session)}>Edit</button>
+                            <button onClick={() => handleDelete({ id: session.id })}>Delete</button>
+                        </div>
+                    ))
+                }
             </div>
         </div>
     );
