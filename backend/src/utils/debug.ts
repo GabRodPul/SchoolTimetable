@@ -305,28 +305,28 @@ export const dbInit = async ( debug: boolean ) => {
         { id:  12, classHourId: 6, igtModuleId: 5, day:WorkDay.Tuesday, },
 
         //Wensday
-        { id:  7, classHourId: 1 , igtModuleId: 8, day:WorkDay.Wednesday,  },
-        { id:  8, classHourId: 2, igtModuleId: 8, day:WorkDay.Wednesday, },
-        { id:  9, classHourId: 3, igtModuleId: 2, day:WorkDay.Wednesday, },
-        { id:  10, classHourId: 4, igtModuleId: 2, day:WorkDay.Wednesday, },
-        { id:  11, classHourId: 5, igtModuleId: 11, day:WorkDay.Wednesday, },
-        { id:  12, classHourId: 6, igtModuleId: 11, day:WorkDay.Wednesday, },
+        { id:  13, classHourId: 1 , igtModuleId: 8, day:WorkDay.Wednesday,  },
+        { id:  14, classHourId: 2, igtModuleId: 8, day:WorkDay.Wednesday, },
+        { id:  15, classHourId: 3, igtModuleId: 2, day:WorkDay.Wednesday, },
+        { id:  16, classHourId: 4, igtModuleId: 2, day:WorkDay.Wednesday, },
+        { id:  17, classHourId: 5, igtModuleId: 11, day:WorkDay.Wednesday, },
+        { id:  18, classHourId: 6, igtModuleId: 11, day:WorkDay.Wednesday, },
 
         //thursday
-        { id:  7, classHourId: 1 , igtModuleId: 11, day:WorkDay.Thursday,  },
-        { id:  8, classHourId: 2, igtModuleId: 11, day:WorkDay.Thursday, },
-        { id:  9, classHourId: 3, igtModuleId: 11, day:WorkDay.Thursday, },
-        { id:  10, classHourId: 4, igtModuleId: 8, day:WorkDay.Thursday, },
-        { id:  11, classHourId: 5, igtModuleId: 8, day:WorkDay.Thursday, },
-        { id:  12, classHourId: 6, igtModuleId: 14, day:WorkDay.Thursday, },
+        { id:  19, classHourId: 1 , igtModuleId: 11, day:WorkDay.Thursday,  },
+        { id:  20, classHourId: 2, igtModuleId: 11, day:WorkDay.Thursday, },
+        { id:  21, classHourId: 3, igtModuleId: 11, day:WorkDay.Thursday, },
+        { id:  22, classHourId: 4, igtModuleId: 8, day:WorkDay.Thursday, },
+        { id:  23, classHourId: 5, igtModuleId: 8, day:WorkDay.Thursday, },
+        { id:  24, classHourId: 6, igtModuleId: 14, day:WorkDay.Thursday, },
 
         //Friday
-        { id:  7, classHourId: 1 , igtModuleId: 5, day:WorkDay.Friday,  },
-        { id:  8, classHourId: 2, igtModuleId: 5, day:WorkDay.Friday, },
-        { id:  9, classHourId: 3, igtModuleId: 8, day:WorkDay.Friday, },
-        { id:  10, classHourId: 4, igtModuleId: 8, day:WorkDay.Friday, },
-        { id:  11, classHourId: 5, igtModuleId: 14, day:WorkDay.Friday, },
-        { id:  12, classHourId: 6, igtModuleId: 14, day:WorkDay.Friday, },
+        { id:  25, classHourId: 1 , igtModuleId: 5, day:WorkDay.Friday,  },
+        { id:  26, classHourId: 2, igtModuleId: 5, day:WorkDay.Friday, },
+        { id:  27, classHourId: 3, igtModuleId: 8, day:WorkDay.Friday, },
+        { id:  28, classHourId: 4, igtModuleId: 8, day:WorkDay.Friday, },
+        { id:  29, classHourId: 5, igtModuleId: 14, day:WorkDay.Friday, },
+        { id:  30, classHourId: 6, igtModuleId: 14, day:WorkDay.Friday, },
     ]);
 
 
