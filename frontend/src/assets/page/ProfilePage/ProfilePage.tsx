@@ -64,6 +64,14 @@ function profile() {
         // Implementar lógica de creación si es necesario
     };
 
+    const handleUpdate = () => {
+        // Implementar lógica de creación si es necesario
+    };
+
+    const handleEdit = () => {
+        // Implementar lógica de creación si es necesario
+    };
+
     const validateForm = () => {
         const { name, phoneNumber } = tempFormState; // Validar el estado temporal
         if (!name || !phoneNumber) {
@@ -519,7 +527,7 @@ function profile() {
 
                                                 </button>
 
-                                                {selectedUser && <button type="button" onClick={()=> handleEdit(warningListed)}>Cancelar</button>}
+                                                {selectedUser && <button type="button" onClick={()=> handleEdit()}>Cancelar</button>}
 
                                             </form>
 

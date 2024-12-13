@@ -23,21 +23,32 @@ const EnrollmentCrud: React.FC = () => {
     useEffect(() => {
 
         api.getAll();
-        
+
 
         // api.getStudents().then(setStudents);
         // api.getModules().then(setModules); 
-    }, [api]);
+    }, []);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const { name, value } = e.target;
         setFormState(prevState => ({ ...prevState, [name]: parseInt(value, 10) }));
     };
 
+    // Validación de campos antes de hacer el POST o PUT
+    const validateForm = () => {
+        const { studentId, moduleId } = formState;
+        if (studentId <= 0 || moduleId <= 0) {
+            alert("Debes seleccionar un estudiante y un módulo.");
+            return false;
+        }
+        return true;
+    };
+
     const handleCreate = () => {
+        if (!validateForm()) return;
         api.post(formState).then(() => {
             setFormState({ id: 0, studentId: 0, moduleId: 0 });
-            api.getAll(); 
+            api.getAll();
         }).catch((error) => {
             console.error("Error al crear la inscripción:", error);
         });
@@ -48,7 +59,7 @@ const EnrollmentCrud: React.FC = () => {
         api.put({ id: selectedEnrollment.id, body: formState }).then(() => {
             setSelectedEnrollment(null);
             setFormState({ id: 0, studentId: 0, moduleId: 0 });
-            api.getAll(); 
+            api.getAll();
         }).catch((error) => {
             console.error("Error al actualizar la inscripción:", error);
         });
@@ -56,15 +67,15 @@ const EnrollmentCrud: React.FC = () => {
 
     const handleDelete = (id: Id) => {
         api.delete(id).then(() => {
-            api.getAll(); 
+            api.getAll();
         }).catch((error) => {
             console.error("Error al borrar la inscripción:", error);
         });
     };
 
     const handleEdit = (enrollment: Enrollment) => {
-        setSelectedEnrollment(enrollment); 
-        setFormState(enrollment); 
+        setSelectedEnrollment(enrollment);
+        setFormState(enrollment);
     };
 
     if (enrollments.state === FetchState.Loading) return <p>Loading...</p>;

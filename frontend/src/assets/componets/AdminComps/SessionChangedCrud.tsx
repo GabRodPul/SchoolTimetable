@@ -22,17 +22,28 @@ const SessionChangedCrud: React.FC = () => {
 
     useEffect(() => {
         api.getAll();
-    }, [api]);
+    }, []);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         setFormState(prevState => ({ ...prevState, [name]: value }));
     };
 
+    // Validación de campos antes de hacer el POST o PUT
+    const validateForm = () => {
+        const { sessionId, classHourId, day, startDate, endDate } = formState;
+        if (sessionId <= 0 || classHourId <= 0 || !day || !startDate || !endDate) {
+            alert("Todos los campos son obligatorios y deben ser válidos.");
+            return false;
+        }
+        return true;
+    };
+
     const handleCreate = () => {
+        if (!validateForm()) return;
         api.post(formState).then(() => {
             setFormState({ id: 0, sessionId: 0, classHourId: 0, day: WorkDay.Monday, startDate: "", endDate: "" });
-            api.getAll(); 
+            api.getAll();
         }).catch((error) => {
             console.error("Error al crear la sesión cambiada:", error);
         });
@@ -43,7 +54,7 @@ const SessionChangedCrud: React.FC = () => {
         api.put({ id: selectedSession.id, body: formState }).then(() => {
             setSelectedSession(null);
             setFormState({ id: 0, sessionId: 0, classHourId: 0, day: WorkDay.Monday, startDate: "", endDate: "" });
-            api.getAll(); 
+            api.getAll();
         }).catch((error) => {
             console.error("Error al actualizar la sesión cambiada:", error);
         });
@@ -51,15 +62,15 @@ const SessionChangedCrud: React.FC = () => {
 
     const handleDelete = (id: Id) => {
         api.delete(id).then(() => {
-            api.getAll(); 
+            api.getAll();
         }).catch((error) => {
             console.error("Error al borrar la sesión cambiada:", error);
         });
     };
 
     const handleEdit = (session: SessionChanged) => {
-        setSelectedSession(session); 
-        setFormState(session); 
+        setSelectedSession(session);
+        setFormState(session);
     };
 
     if (sessions.state === FetchState.Loading) return <p>Loading...</p>;

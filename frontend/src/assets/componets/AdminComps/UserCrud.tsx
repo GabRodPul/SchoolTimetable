@@ -3,6 +3,7 @@ import { useApi } from "../../../api/ApiContext";
 import { UserData, Id } from "#common/@types/models";
 import { FetchState } from "../../../types/api";
 import { ApiRts } from "#common/@enums/http";
+import './CrudsStyles.css';
 
 type User = UserData & Id;
 
@@ -11,13 +12,15 @@ const UserCrud: React.FC = () => {
 
     const [selectedUser, setSelectedUser] = useState<User | null>(null);
     const [formState, setFormState] = useState<User>({
-        id: 0, 
-        name: "", 
-        email: "", 
-        role: "", 
-        password: "", 
+        id: 0,
+        name: "",
+        email: "",
+        role: "",
+        password: "",
         phoneNumber: ""
     });
+
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
     useEffect(() => {
         api.getAll();
@@ -28,37 +31,45 @@ const UserCrud: React.FC = () => {
         setFormState(prevState => ({ ...prevState, [name]: value }));
     };
 
-    const handleCreate = () => {
-        console.log("Enviando formState:", formState);
+    const validateForm = () => {
+        const { name, email, password, phoneNumber } = formState;
+        if (!name || !email || !password || !phoneNumber) {
+            alert("All fields are required.");
+            return false;
+        }
+        return true;
+    };
 
+    const handleCreate = () => {
+        if (!validateForm()) return;
         api.post(formState).then(() => {
             setFormState({ id: 0, name: "", email: "", role: "", password: "", phoneNumber: "" });
-            api.getAll(); // Refrescamos la lista de usuarios
+            api.getAll();
         }).catch((error) => {
-            console.error("Error al crear el usuario:", error);
-            alert("Hubo un error al crear el usuario. Intenta nuevamente.");
+            console.error("Error creating user:", error);
+            alert("There was an error creating the user. Please try again.");
         });
     };
 
     const handleUpdate = () => {
         if (!selectedUser) return;
-        
+
         api.put({ id: selectedUser.id, body: formState }).then(() => {
             setSelectedUser(null);
             setFormState({ id: 0, name: "", email: "", role: "", password: "", phoneNumber: "" });
-            api.getAll(); // Refrescamos la lista de usuarios
+            api.getAll();
         }).catch((error) => {
-            console.error("Error al actualizar el usuario:", error);
-            alert("Hubo un error al actualizar el usuario. Intenta nuevamente.");
+            console.error("Error updating user:", error);
+            alert("There was an error updating the user. Please try again.");
         });
     };
 
     const handleDelete = (id: Id) => {
         api.delete(id).then(() => {
-            api.getAll(); // Refrescamos la lista de usuarios
+            api.getAll();
         }).catch((error) => {
-            console.error("Error al borrar el usuario:", error);
-            alert("Hubo un error al borrar el usuario. Intenta nuevamente.");
+            console.error("Error deleting user:", error);
+            alert("There was an error deleting the user. Please try again.");
         });
     };
 
@@ -67,14 +78,11 @@ const UserCrud: React.FC = () => {
         setFormState(user);
     };
 
-    if (users.state === FetchState.Loading) return <p>Loading...</p>;
-    if (users.state === FetchState.Error) return <p>Error: {users.error?.message}</p>;
-
     return (
-        <div>
-            <h1>User Management</h1>
+        <div className="crud-container">
+            <h1 className="crud-title">User Management</h1>
 
-            <div>
+            <div className="crud-form">
                 <h2>{selectedUser ? "Edit User" : "Create User"}</h2>
                 <form
                     onSubmit={e => {
@@ -88,6 +96,7 @@ const UserCrud: React.FC = () => {
                         placeholder="Name"
                         value={formState.name}
                         onChange={handleInputChange}
+                        className="crud-input"
                     />
                     <input
                         type="email"
@@ -95,6 +104,7 @@ const UserCrud: React.FC = () => {
                         placeholder="Email"
                         value={formState.email}
                         onChange={handleInputChange}
+                        className="crud-input"
                     />
                     <input
                         type="text"
@@ -102,6 +112,7 @@ const UserCrud: React.FC = () => {
                         placeholder="Password"
                         value={formState.password}
                         onChange={handleInputChange}
+                        className="crud-input"
                     />
                     <input
                         type="text"
@@ -109,24 +120,52 @@ const UserCrud: React.FC = () => {
                         placeholder="Phone Number"
                         value={formState.phoneNumber}
                         onChange={handleInputChange}
+                        className="crud-input"
                     />
-                    <button type="submit">{selectedUser ? "Update" : "Create"}</button>
-                    {selectedUser && <button type="button" onClick={() => setSelectedUser(null)}>Cancel</button>}
+                    <button type="submit" className="crud-button">
+                        {selectedUser ? "Update" : "Create"}
+                    </button>
+                    {selectedUser && (
+                        <button
+                            type="button"
+                            onClick={() => setSelectedUser(null)}
+                            className="crud-button crud-button-cancel"
+                        >
+                            Cancel
+                        </button>
+                    )}
                 </form>
             </div>
 
-            <div>
+            <div className="crud-list">
                 <h2>User List</h2>
-                {(users.state === FetchState.Success || users.state === FetchState.SuccessMany) &&
+                <button
+                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                    className="crud-dropdown-toggle"
+                >
+                    {isDropdownOpen ? "Hide Users" : "Show Users"}
+                </button>
+                {isDropdownOpen &&
+                    (users.state === FetchState.Success || users.state === FetchState.SuccessMany) &&
                     Array.isArray(users.data) && users.data.map((user) => {
                         const userWithId = user as User;
                         return (
-                            <div key={userWithId.id}>
+                            <div key={userWithId.id} className="crud-item">
                                 <p>
                                     {userWithId.name} ({userWithId.email}) - {userWithId.role}
                                 </p>
-                                <button onClick={() => handleEdit(userWithId)}>Edit</button>
-                                <button onClick={() => handleDelete({ id: userWithId.id })}>Delete</button>
+                                <div className="Cruds__item__buttons">
+                                    <button
+                                        onClick={() => handleEdit(userWithId)}
+                                        className="crud-button crud-button-edit">
+                                        Edit
+                                    </button>
+                                    <button
+                                        onClick={() => handleDelete({ id: userWithId.id })}
+                                        className="crud-button crud-button-delete">
+                                        Delete
+                                    </button>
+                                </div>
                             </div>
                         );
                     })

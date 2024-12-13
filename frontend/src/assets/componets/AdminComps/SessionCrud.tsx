@@ -18,16 +18,25 @@ const SessionCrud: React.FC = () => {
         igtModuleId: 0
     });
 
-    useEffect(() => {
-        api.getAll();
-    }, [api]);
+    
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         setFormState((prevState) => ({ ...prevState, [name]: value }));
     };
 
+   // Validación de campos antes de hacer el POST o PUT
+    const validateForm = () => {
+        const { classHourId, igtModuleId, day } = formState;
+        if (classHourId <= 0 || igtModuleId <= 0 || !day) {
+            alert("Todos los campos son obligatorios y deben ser válidos.");
+            return false;
+        }
+        return true;
+    };
+
     const handleCreate = () => {
+        if (!validateForm()) return;
         api.post(formState).then(() => {
             setFormState({ id: 0, day: WorkDay.Monday, classHourId: 0, igtModuleId: 0 });
             api.getAll();
@@ -56,6 +65,10 @@ const SessionCrud: React.FC = () => {
 
     if (sessions.state === FetchState.Loading) return <p>Loading...</p>;
     if (sessions.state === FetchState.Error) return <p>Error: {sessions.error?.message}</p>;
+
+    useEffect(() => {
+        api.getAll();
+    }, []);
 
     return (
         <div>

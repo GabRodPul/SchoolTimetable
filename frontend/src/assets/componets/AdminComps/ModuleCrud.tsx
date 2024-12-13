@@ -14,14 +14,25 @@ const ModuleCrud: React.FC = () => {
 
     useEffect(() => {
         api.getAll();
-    }, [api]);
+    }, []);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormState((prevState) => ({ ...prevState, [name]: value }));
     };
 
+    // Validación de campos antes de hacer el POST o PUT
+    const validateForm = () => {
+        const { name } = formState;
+        if (!name) {
+            alert("El nombre del módulo es obligatorio.");
+            return false;
+        }
+        return true;
+    };
+
     const handleCreate = () => {
+        if (!validateForm()) return;
         api.post(formState).then(() => {
             setFormState({ id: 0, name: "" });
             api.getAll(); // Refrescamos la lista de módulos
@@ -33,7 +44,7 @@ const ModuleCrud: React.FC = () => {
 
     const handleUpdate = () => {
         if (!selectedModule) return;
-        
+
         api.put({ id: selectedModule.id, body: formState }).then(() => {
             setSelectedModule(null);
             setFormState({ id: 0, name: "" });
@@ -87,8 +98,8 @@ const ModuleCrud: React.FC = () => {
 
             <div>
                 <h2>Module List</h2>
-                {(modules.state === FetchState.Success || modules.state === FetchState.SuccessMany) && 
-                    Array.isArray(modules.data) && 
+                {(modules.state === FetchState.Success || modules.state === FetchState.SuccessMany) &&
+                    Array.isArray(modules.data) &&
                     modules.data.map((module) => (
                         <div key={module.id}>
                             <p>{module.name}</p>

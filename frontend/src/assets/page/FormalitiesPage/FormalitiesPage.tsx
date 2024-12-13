@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import NavigationTab from '#src/assets/componets/CommonComps/navigationTab/NavigationTab';
-import RigthMenu from '#src/assets/componets/CommonComps/rigthMenu/rigthMenu';
 import { LuBellRing } from 'react-icons/lu';
 import './FormalitiesPageStyles.css';
 import { Id, WarningData } from '#common/@types/models';
@@ -8,11 +6,16 @@ import { useApi } from '#src/api/ApiContext';
 import { ApiRts } from '#common/@enums/http';
 import { FetchState } from '#src/types/api';
 import { useNavigate } from 'react-router';
+//Mobile
+import Header from '#src/assets/componets/CommonComps/MenuheaderMobile/Header';
+//Desktop
+import NavigationTab from '#src/assets/componets/CommonComps/navigationTab/NavigationTab';
+import RigthMenu from '#src/assets/componets/CommonComps/rigthMenu/rigthMenu';
 
 type Warning = WarningData & Id;
 
 const Formalities: React.FC = () => {
-        const navigate = useNavigate();
+    const navigate = useNavigate();
     const [warning, api] = useApi<Warning>(ApiRts.Warnings);
     const [selectedWarning, setSelectedWarning] = useState<Warning | null>(null);
     const [formState, setFormState] = useState<Warning>({
@@ -89,7 +92,7 @@ const Formalities: React.FC = () => {
                     endHour: ""
                 });
                 api.getAll(); // Actualizar datos después de la actualización
-                
+
             })
             .catch((error) => {
                 console.error("Error al realizar el PUT:", error);
@@ -117,99 +120,201 @@ const Formalities: React.FC = () => {
     if (warning.state === FetchState.Error) return <p>Error: {warning.error?.message}</p>;
 
     return (
-        <div>
-            <NavigationTab />
-            <RigthMenu />
-            <div className="formalities__content">
-                <div className="formalities_desktop">
-                    <div className="formalities__makeForm">
-                        <div className="formalitiesForm__title">
-                            <h2>Trámites</h2>
-                        </div>
-                        <div className="formalities__form">
-                            <form
-                                onSubmit={e => {
-                                    e.preventDefault();
-                                    selectedWarning ? handleUpdate() : handleCreate();
-                                }}
-                            >
-                                <label>
-                                    <p>Motivo</p>
-                                    <input
-                                        type="text"
-                                        name="description"
-                                        placeholder="Motivo de la ausencia"
-                                        value={formState.description}
-                                        onChange={handleInputChange}
-                                    />
-                                </label>
-                                <label>
-                                    <p>Hora Inicio</p>
-                                    <input
-                                        type="text"
-                                        name="startHour"
-                                        placeholder="Hora de inicio"
-                                        value={formState.startHour}
-                                        onChange={handleInputChange}
-                                    />
-                                </label>
+        <div className='body'>
+            <div className="mobile">
+                <Header />
+                <div className="formalitiesMobile">
+                    <div className="formalitiesMobile__content">
+                        <div className="formalitiesMobile__makeForm">
+                            <div className="formalitiesMobileForm__title">
+                                <h2>Trámites</h2>
+                            </div>
+                            <div className="formalitiesMobile__form">
+                                <form
+                                    onSubmit={e => {
+                                        e.preventDefault();
+                                        selectedWarning ? handleUpdate() : handleCreate();
+                                    }}
+                                    className='formalitiesMobile__data'
+                                >
+                                    <label>
+                                        <p>Motivo</p>
+                                        <input
+                                            type="text"
+                                            name="description"
+                                            placeholder="Motivo de la ausencia"
+                                            value={formState.description}
+                                            onChange={handleInputChange}
+                                        />
+                                    </label>
+                                    <label>
+                                        <p>Hora Inicio</p>
+                                        <input
+                                            type="text"
+                                            name="startHour"
+                                            placeholder="Hora de inicio"
+                                            value={formState.startHour}
+                                            onChange={handleInputChange}
+                                        />
+                                    </label>
 
-                                <label>
-                                    <p>Hora Fin</p>
-                                    <input
-                                        type="text"
-                                        name="endHour"
-                                        placeholder="Hora de fin"
-                                        value={formState.endHour}
-                                        onChange={handleInputChange}
-                                    />
-                                </label>
-                                <label>
-                                    <p>Fecha inicio</p>
-                                    <input
-                                        type="text"
-                                        name="startDate"
-                                        placeholder="Ejemplo: 2000/08/21"
-                                        value={formState.startDate}
-                                        onChange={handleInputChange}
-                                    />
-                                </label>
-                                <label>
-                                    <p>Fecha fin</p>
-                                    <input
-                                        type="text"
-                                        name="endDate"
-                                        placeholder="Ejemplo: 2000/08/21"
-                                        value={formState.endDate}
-                                        onChange={handleInputChange}
-                                    />
-                                </label>
-                                <button type="submit" className="formalities__button">
-                                    {selectedWarning ? "Update" : "Create"}
-                                </button>
-                                {selectedWarning && <button onClick={() => setSelectedWarning(null)}>Cancel</button>}
-                            </form>
+                                    <label>
+                                        <p>Hora Fin</p>
+                                        <input
+                                            type="text"
+                                            name="endHour"
+                                            placeholder="Hora de fin"
+                                            value={formState.endHour}
+                                            onChange={handleInputChange}
+                                        />
+                                    </label>
+                                    <label>
+                                        <p>Fecha inicio</p>
+                                        <input
+                                            type="text"
+                                            name="startDate"
+                                            placeholder="Ejemplo: 2000/08/21"
+                                            value={formState.startDate}
+                                            onChange={handleInputChange}
+                                        />
+                                    </label>
+                                    <label>
+                                        <p>Fecha fin</p>
+                                        <input
+                                            type="text"
+                                            name="endDate"
+                                            placeholder="Ejemplo: 2000/08/21"
+                                            value={formState.endDate}
+                                            onChange={handleInputChange}
+                                        />
+                                    </label>
+                                    <button type="submit" className="formalitiesMobile__button">
+                                        {selectedWarning ? "Editar" : "Crear"}
+                                    </button>
+                                    {selectedWarning && <button onClick={() => setSelectedWarning(null)} className="formalitiesMobile__Cancelbutton">Cancelar</button>}
+                                </form>
+                            </div>
+                        </div>
+
+                        <div className="formalitiesMobile__info">
+                            <div className="formalitiesMobile__title">
+                                <h2>Ver trámites Realizados</h2>
+                            </div>
+                            {(warning.state === FetchState.Success || warning.state === FetchState.SuccessMany) &&
+                                Array.isArray(warning.data) && warning.data.map((warning) => {
+                                    const warningListed = warning as Warning;
+                                    return (
+                                        <div key={warningListed.id} className='formalitiesMobile__card'>
+                                            <p>
+                                                {warningListed.description} {warningListed.startDate} - {warningListed.endDate} - {warningListed.startHour} - {warningListed.endHour}
+                                            </p>
+                                            <div className="buttons">
+                                                <button onClick={() => handleEdit(warningListed)} className='Edit'>Editar</button>
+                                                <button onClick={() => handleDelete({ id: warningListed.id })} className='Delete'>Eliminar</button>
+                                            </div>
+                                        </div>
+                                    );
+                                })
+                            }
                         </div>
                     </div>
+                </div>
+            </div>
+            <div className="desktop">
+                <NavigationTab />
+                <RigthMenu />
+                <div className="formalities">
+                    <div className="formalities__content">
+                        <div className="formalities__makeForm">
+                            <div className="formalitiesForm__title">
+                                <h2>Trámites</h2>
+                            </div>
+                            <div className="formalities__form">
+                                <form
+                                    onSubmit={e => {
+                                        e.preventDefault();
+                                        selectedWarning ? handleUpdate() : handleCreate();
+                                    }}
+                                    className='formalitiesForm__data'
+                                >
+                                    <label>
+                                        <p>Motivo</p>
+                                        <input
+                                            type="text"
+                                            name="description"
+                                            placeholder="Motivo de la ausencia"
+                                            value={formState.description}
+                                            onChange={handleInputChange}
+                                        />
+                                    </label>
+                                    <label>
+                                        <p>Hora Inicio</p>
+                                        <input
+                                            type="text"
+                                            name="startHour"
+                                            placeholder="Hora de inicio"
+                                            value={formState.startHour}
+                                            onChange={handleInputChange}
+                                        />
+                                    </label>
 
-                    <div className="formalities__info">
-                        <div className="formalitiesInfo__title">
-                            <h2>Tus Trámites</h2>
+                                    <label>
+                                        <p>Hora Fin</p>
+                                        <input
+                                            type="text"
+                                            name="endHour"
+                                            placeholder="Hora de fin"
+                                            value={formState.endHour}
+                                            onChange={handleInputChange}
+                                        />
+                                    </label>
+                                    <label>
+                                        <p>Fecha inicio</p>
+                                        <input
+                                            type="text"
+                                            name="startDate"
+                                            placeholder="Ejemplo: 2000/08/21"
+                                            value={formState.startDate}
+                                            onChange={handleInputChange}
+                                        />
+                                    </label>
+                                    <label>
+                                        <p>Fecha fin</p>
+                                        <input
+                                            type="text"
+                                            name="endDate"
+                                            placeholder="Ejemplo: 2000/08/21"
+                                            value={formState.endDate}
+                                            onChange={handleInputChange}
+                                        />
+                                    </label>
+                                    <button type="submit" className="formalities__button">
+                                        {selectedWarning ? "Editar" : "Crear"}
+                                    </button>
+                                    {selectedWarning && <button onClick={() => setSelectedWarning(null)} className="formalities__Cancelbutton">Cancelar</button>}
+                                </form>
+                            </div>
                         </div>
-                        {(warning.state === FetchState.Success || warning.state === FetchState.SuccessMany) &&
-                            Array.isArray(warning.data) && warning.data.map((warning) => {
-                                const warningListed = warning as Warning;
-                                return (
-                                    <div key={warningListed.id}>
-                                        <p>
-                                            {warningListed.description} {warningListed.startDate} - {warningListed.endDate} - {warningListed.startHour} - {warningListed.endHour}
-                                        </p>
-                                        <button onClick={() => handleEdit(warningListed)}>Edit</button>
-                                        <button onClick={() => handleDelete({ id: warningListed.id })}>Delete</button>
-                                    </div>
-                                );
-                            })
-                        }
+
+                        <div className="formalities__info">
+                            <div className="formalitiesInfo__title">
+                                <h2>Tus Trámites</h2>
+                            </div>
+                            {(warning.state === FetchState.Success || warning.state === FetchState.SuccessMany) &&
+                                Array.isArray(warning.data) && warning.data.map((warning) => {
+                                    const warningListed = warning as Warning;
+                                    return (
+                                        <div key={warningListed.id} className='formalirties__card'>
+                                            <p>
+                                                {warningListed.description} {warningListed.startDate} - {warningListed.endDate} - {warningListed.startHour} - {warningListed.endHour}
+                                            </p>
+                                            <button onClick={() => handleEdit(warningListed)}>Editar</button>
+                                            <button onClick={() => handleDelete({ id: warningListed.id })}>Eliminar</button>
+                                        </div>
+                                    );
+                                })
+                            }
+                        </div>
                     </div>
                 </div>
             </div>

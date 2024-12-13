@@ -21,7 +21,18 @@ const GroupCrud: React.FC = () => {
         setFormState((prevState) => ({ ...prevState, [name]: value }));
     };
 
+    // Validación de campos antes de hacer el POST o PUT
+    const validateForm = () => {
+        const { name } = formState;
+        if (!name) {
+            alert("El nombre del grupo es obligatorio.");
+            return false;
+        }
+        return true;
+    };
+
     const handleCreate = () => {
+        if (!validateForm()) return;
         api.post(formState).then(() => {
             setFormState({ id: 0, name: "" });
             api.getAll();

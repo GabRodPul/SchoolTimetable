@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useApi } from "../../../api/ApiContext";
-import { ClassHourData, Id, SessionHour, } from "#common/@types/models"; 
+import { ClassHourData, Id, SessionHour, } from "#common/@types/models";
 import { FetchState } from "../../../types/api";
 import { ApiRts } from "#common/@enums/http";
 import { Turn } from "#common/@enums/models";
 
-type ClassHour = ClassHourData & Id; 
+type ClassHour = ClassHourData & Id;
 
 const ClassHourCrud: React.FC = () => {
     const [classHours, api] = useApi<ClassHour>(ApiRts.ClassHour);
@@ -13,15 +13,15 @@ const ClassHourCrud: React.FC = () => {
     const [selectedClassHour, setSelectedClassHour] = useState<ClassHour | null>(null);
     const [formState, setFormState] = useState<ClassHour>({
         id: 0,
-        turn: Turn.Morning, 
-        sessionHour: 1,     
+        turn: Turn.Morning,
+        sessionHour: 1,
         start: "",
         end: "",
     });
 
     useEffect(() => {
         api.getAll();
-    }, [api]);
+    }, []);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -29,16 +29,27 @@ const ClassHourCrud: React.FC = () => {
     };
 
     const handleTurnChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        const value = e.target.value as Turn; 
+        const value = e.target.value as Turn;
         setFormState((prevState) => ({ ...prevState, turn: value }));
     };
 
     const handleSessionHourChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        const value = Number(e.target.value) as SessionHour; 
+        const value = Number(e.target.value) as SessionHour;
         setFormState((prevState) => ({ ...prevState, sessionHour: value }));
     };
 
+    // Validación de campos antes de hacer el POST o PUT
+    const validateForm = () => {
+        const { start, end, turn, sessionHour } = formState;
+        if (!start || !end || !turn || sessionHour <= 0) {
+            alert("Todos los campos son obligatorios y deben ser válidos.");
+            return false;
+        }
+        return true;
+    };
+
     const handleCreate = () => {
+        if (!validateForm()) return;
         api.post(formState).then(() => {
             setFormState({ id: 0, turn: Turn.Morning, sessionHour: 1, start: "", end: "" });
             api.getAll();
@@ -54,7 +65,7 @@ const ClassHourCrud: React.FC = () => {
         api.put({ id: selectedClassHour.id, body: formState }).then(() => {
             setSelectedClassHour(null);
             setFormState({ id: 0, turn: Turn.Morning, sessionHour: 1, start: "", end: "" });
-            api.getAll(); 
+            api.getAll();
         }).catch((error) => {
             console.error("Error al actualizar la clase:", error);
             alert("Hubo un error al actualizar la clase. Intenta nuevamente.");
