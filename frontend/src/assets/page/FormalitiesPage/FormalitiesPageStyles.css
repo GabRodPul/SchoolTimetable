@@ -85,25 +85,23 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 3%;
 }
 
 /* Tarjeta individual de cada trámite */
 .formalitiesMobile__card {
-    padding: 5px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 65%;
-    height: 100%;
+    width: 250px;
+    height: 100px;
     align-items: center;
-    margin-bottom: 5%;
     background-color: #fff;
     border-radius: 8px;
     border: 1px solid #e0e0e0;
     font-size: 12px;
     font-family: MerriweatherSans, sans-serif;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
-    gap: 5%;
 }
 
 .formalitiesMobile__card p {
@@ -245,25 +243,28 @@
 }
 
 .formalities__info {
+    display: flex;
+    flex-direction: column;
     margin-top: 20px;
-    width: 400px;
+    gap: 3%;
+    width: 550px;
 }
 
 /* Tarjeta individual de cada trámite */
 .formalirties__card {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     width: 250px;
     height: 100px;
     align-items: center;
-    margin-bottom: 12px;
     background-color: #fff;
     border-radius: 8px;
     border: 1px solid #e0e0e0;
     font-size: 12px;
     font-family: MerriweatherSans, sans-serif;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
-    margin-right: 5%;
+
 }
 
 .formalirties__card p {
@@ -274,7 +275,7 @@
     line-height: 1.4;
 }
 
-.formalities__card .buttons{
+.buttons{
     display: flex;
     margin-bottom: 5px;
     gap: 2%;

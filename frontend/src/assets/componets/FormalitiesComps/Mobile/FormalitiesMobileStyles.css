@@ -1,0 +1,160 @@
+.formalitiesMobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+}
+
+.formalitiesMobile__content {
+    display: flex;
+    flex-direction: column;
+    gap: 5%;
+    height: 100%;
+    width: 100%;
+}
+
+.formalitiesMobile__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    text-align: left;
+    margin-bottom: 40px;
+
+    .formalitiesMobile__data {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+}
+
+.formalitiesMobile label {
+    font-size: 1rem;
+    color: #333;
+}
+
+.formalitiesMobile__form select,
+.formalitiesMobile__form input {
+    width: 100%;
+    padding: 8px;
+    border: 0px;
+    border-bottom: 1px solid #e0e0e0;
+    font-family: MerriweatherSans, sans-serif;
+    font-size: 16px;
+    color: #6c757d;
+}
+
+.formalitiesMobile__button {
+    padding: 10px;
+    background-color: #004B84;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: MerriweatherSans, sans-serif;
+    font-size: 16px;
+    width: 200px;
+    margin-bottom: 20px;
+}
+
+.formalitiesMobile__Cancelbutton {
+    padding: 10px;
+    background-color: #ad0000;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: MerriweatherSans, sans-serif;
+    font-size: 16px;
+    width: 200px;
+    margin-bottom: 20px;
+}
+
+.formalitiesMobile__button:hover {
+    background-color: #0056b3;
+}
+
+.formalitiesMobile__info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3%;
+}
+
+/* Tarjeta individual de cada trámite */
+.formalitiesMobile__card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 250px;
+    height: 100px;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    font-size: 12px;
+    font-family: MerriweatherSans, sans-serif;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.formalitiesMobile__card p {
+    margin: 0;
+    flex-grow: 1;
+    font-size: 12px;
+    color: #333;
+    line-height: 1.4;
+}
+
+.formalitiesMobile__card .buttons{
+    margin-bottom: 5px;
+}
+
+.formalitiesMobile__card .Edit {
+    background-color: #004B84;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: MerriweatherSans, sans-serif;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.formalitiesMobile__card .Delete {
+    background-color: #f54a4a;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: MerriweatherSans, sans-serif;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Contenedor para los botones de acción */
+.formalitiesMobile__actions {
+    display: flex;
+    gap: 12px;
+}
+
+/* Botones de acción (editar y eliminar) */
+.formalitiesMobile__actions button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.4rem;
+    /* Tamaño ajustado para hacerlos un poco más grandes */
+    color: #6c757d;
+    transition: color 0.2s;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    /* Forma circular */
+}
