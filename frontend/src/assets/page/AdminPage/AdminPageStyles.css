@@ -1,5 +1,9 @@
 .AdminPage__Cruds{
+    margin-left: 240px; 
+    margin-right: 240px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
+    justify-content: flex-start;
 }

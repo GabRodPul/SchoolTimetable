@@ -20,8 +20,6 @@ const UserCrud: React.FC = () => {
         phoneNumber: ""
     });
 
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
     useEffect(() => {
         api.getAll();
     }, []);
@@ -80,7 +78,7 @@ const UserCrud: React.FC = () => {
 
     return (
         <div className="crud-container">
-            <h1 className="crud-title">User Management</h1>
+            <h1 className="crud-title">Formulario de Usuarios</h1>
 
             <div className="crud-form">
                 <h2>{selectedUser ? "Edit User" : "Create User"}</h2>
@@ -136,40 +134,26 @@ const UserCrud: React.FC = () => {
                     )}
                 </form>
             </div>
-
+            
+            <h2>Listado de Usuarios</h2>
             <div className="crud-list">
-                <h2>User List</h2>
-                <button
-                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                    className="crud-dropdown-toggle"
-                >
-                    {isDropdownOpen ? "Hide Users" : "Show Users"}
-                </button>
-                {isDropdownOpen &&
-                    (users.state === FetchState.Success || users.state === FetchState.SuccessMany) &&
-                    Array.isArray(users.data) && users.data.map((user) => {
+                
+                {(users.state === FetchState.Success || users.state === FetchState.SuccessMany) &&
+                    Array.isArray(users.data) &&
+                    users.data.map((user) => {
                         const userWithId = user as User;
                         return (
                             <div key={userWithId.id} className="crud-item">
                                 <p>
                                     {userWithId.name} ({userWithId.email}) - {userWithId.role}
                                 </p>
-                                <div className="Cruds__item__buttons">
-                                    <button
-                                        onClick={() => handleEdit(userWithId)}
-                                        className="crud-button crud-button-edit">
-                                        Edit
-                                    </button>
-                                    <button
-                                        onClick={() => handleDelete({ id: userWithId.id })}
-                                        className="crud-button crud-button-delete">
-                                        Delete
-                                    </button>
+                                <div>
+                                    <button className="crud-button crud-button-edit" onClick={() => handleEdit(userWithId)}>Edit</button>
+                                    <button className="crud-button crud-button-delete" onClick={() => handleDelete({ id: userWithId.id })}>Delete</button>
                                 </div>
                             </div>
                         );
-                    })
-                }
+                    })}
             </div>
         </div>
     );
