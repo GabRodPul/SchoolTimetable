@@ -89,8 +89,7 @@ function NoticesPage() {
     ];
 
     const toggleSection = (query: string) => {
-      document.querySelector(query)
-        ;
+      document.querySelector(query);
     }
 
     return (
