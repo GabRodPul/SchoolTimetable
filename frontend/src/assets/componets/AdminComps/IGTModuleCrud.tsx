@@ -39,6 +39,7 @@ const IGTModuleCrud: React.FC = () => {
 
     const handleCreate = () => {
         if (!validateForm()) return;
+    
         console.log("Enviando formState:", formState);
         api.post(formState).then(() => {
             setFormState({ id: 0, teacherId: 0, groupId: 0, moduleId: 0, weeklyHours: 1 });
@@ -51,7 +52,7 @@ const IGTModuleCrud: React.FC = () => {
 
     const handleUpdate = () => {
         if (!selectedModule) return;
-
+        if (!validateForm()) return;
         api.put({ id: selectedModule.id, body: formState }).then(() => {
             setSelectedModule(null);
             setFormState({ id: 0, teacherId: 0, groupId: 0, moduleId: 0, weeklyHours: 1 });

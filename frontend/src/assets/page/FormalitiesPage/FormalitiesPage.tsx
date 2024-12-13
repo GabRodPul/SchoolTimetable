@@ -65,6 +65,7 @@ const Formalities: React.FC = () => {
                     startHour: "",
                     endHour: ""
                 });
+                console.log("Aparezco");
                 api.getAll(); // Actualizar datos después del POST
                 console.log("Aparezco");
                 navigate('/formalities')
@@ -145,6 +146,7 @@ const Formalities: React.FC = () => {
                                             placeholder="Motivo de la ausencia"
                                             value={formState.description}
                                             onChange={handleInputChange}
+                                            required
                                         />
                                     </label>
                                     <label>
@@ -155,6 +157,7 @@ const Formalities: React.FC = () => {
                                             placeholder="Hora de inicio"
                                             value={formState.startHour}
                                             onChange={handleInputChange}
+                                            required
                                         />
                                     </label>
 
@@ -166,6 +169,7 @@ const Formalities: React.FC = () => {
                                             placeholder="Hora de fin"
                                             value={formState.endHour}
                                             onChange={handleInputChange}
+                                            required
                                         />
                                     </label>
                                     <label>
@@ -176,6 +180,7 @@ const Formalities: React.FC = () => {
                                             placeholder="Ejemplo: 2000/08/21"
                                             value={formState.startDate}
                                             onChange={handleInputChange}
+                                            required
                                         />
                                     </label>
                                     <label>
@@ -186,6 +191,7 @@ const Formalities: React.FC = () => {
                                             placeholder="Ejemplo: 2000/08/21"
                                             value={formState.endDate}
                                             onChange={handleInputChange}
+                                            required
                                         />
                                     </label>
                                     <button type="submit" className="formalitiesMobile__button">
@@ -308,8 +314,10 @@ const Formalities: React.FC = () => {
                                             <p>
                                                 {warningListed.description} {warningListed.startDate} - {warningListed.endDate} - {warningListed.startHour} - {warningListed.endHour}
                                             </p>
-                                            <button onClick={() => handleEdit(warningListed)}>Editar</button>
-                                            <button onClick={() => handleDelete({ id: warningListed.id })}>Eliminar</button>
+                                            <div className="buttons">
+                                                <button onClick={() => handleEdit(warningListed)} className='Edit'>Editar</button>
+                                                <button onClick={() => handleDelete({ id: warningListed.id })} className='Delete'>Eliminar</button>
+                                            </div>
                                         </div>
                                     );
                                 })

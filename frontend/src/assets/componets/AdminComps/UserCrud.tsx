@@ -51,8 +51,8 @@ const UserCrud: React.FC = () => {
     };
 
     const handleUpdate = () => {
+        if (!validateForm()) return;
         if (!selectedUser) return;
-
         api.put({ id: selectedUser.id, body: formState }).then(() => {
             setSelectedUser(null);
             setFormState({ id: 0, name: "", email: "", role: "", password: "", phoneNumber: "" });

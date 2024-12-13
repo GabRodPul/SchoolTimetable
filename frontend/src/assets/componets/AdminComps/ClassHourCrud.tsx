@@ -60,8 +60,8 @@ const ClassHourCrud: React.FC = () => {
     };
 
     const handleUpdate = () => {
+        if (!validateForm()) return;
         if (!selectedClassHour) return;
-
         api.put({ id: selectedClassHour.id, body: formState }).then(() => {
             setSelectedClassHour(null);
             setFormState({ id: 0, turn: Turn.Morning, sessionHour: 1, start: "", end: "" });

@@ -60,6 +60,7 @@ const WarningCrud: React.FC = () => {
     };
 
     const handleUpdate = () => {
+        if (!validateForm()) return;
         if (!selectedWarning) return;
 
         api.put({ id: selectedWarning.id, body: formState }).then(() => {

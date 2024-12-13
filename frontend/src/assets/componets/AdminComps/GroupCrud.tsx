@@ -40,6 +40,7 @@ const GroupCrud: React.FC = () => {
     };
 
     const handleUpdate = () => {
+        if (!validateForm()) return;
         if (!selectedGroup) return;
         api.put({ id: selectedGroup.id, body: formState }).then(() => {
             setSelectedGroup(null);
