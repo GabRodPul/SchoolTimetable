@@ -5,11 +5,13 @@ export enum ApiRts {
     Modules     = "modules",
     Groups      = "groups",
     Session    = "session",
+    SessionChanged = "session-changed",
     Login       = "login",
     Signin      = "signin",
     Warnings    = "warnings",
     Schedule    = "schedule",
     ClassHour   = "classHour",
+    Enrollmet  = "enrollment",
 }
 
 export enum Method {
