@@ -100,7 +100,6 @@ export type ScheduleResponse = {
   };
 
 
-
 export type SessionData = {
     classHourId:    number,
     igtModuleId:    number,

@@ -1,5 +1,6 @@
 export enum ApiRts {
     Users       = "users",
+    IGT_modules = "igt_modules",
     TimeTables = "timetables",
     Modules     = "modules",
     Groups      = "groups",
@@ -7,7 +8,8 @@ export enum ApiRts {
     Login       = "login",
     Signin      = "signin",
     Warnings    = "warnings",
-    Schedule    = "schedule"
+    Schedule    = "schedule",
+    ClassHour   = "classHour",
 }
 
 export enum Method {

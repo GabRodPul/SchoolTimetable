@@ -22,7 +22,7 @@ const ClassHourRoutes = {
         // Update a User with id
         router.delete("/:id", hasRolePermissions(UserRole.Admin), ClassHourController.delete);
 
-        app.use("/api/courses", router);
+        app.use("/api/classHour", router);
     }
 };
 

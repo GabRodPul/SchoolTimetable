@@ -5,11 +5,19 @@ import { FetchState } from "../../../types/api";
 import { ApiRts } from "#common/@enums/http";
 
 type User = UserData & Id;
+
 const UserCrud: React.FC = () => {
     const [users, api] = useApi<User>(ApiRts.Users);
 
     const [selectedUser, setSelectedUser] = useState<User | null>(null);
-    const [formState, setFormState] = useState<User>({ id: 0, name: "", email: "", role: "", password: "", phoneNumber: "" });
+    const [formState, setFormState] = useState<User>({
+        id: 0, 
+        name: "", 
+        email: "", 
+        role: "", 
+        password: "", 
+        phoneNumber: ""
+    });
 
     useEffect(() => {
         api.getAll();
@@ -21,24 +29,36 @@ const UserCrud: React.FC = () => {
     };
 
     const handleCreate = () => {
+        console.log("Enviando formState:", formState);
+
         api.post(formState).then(() => {
             setFormState({ id: 0, name: "", email: "", role: "", password: "", phoneNumber: "" });
-            api.getAll();
+            api.getAll(); // Refrescamos la lista de usuarios
+        }).catch((error) => {
+            console.error("Error al crear el usuario:", error);
+            alert("Hubo un error al crear el usuario. Intenta nuevamente.");
         });
     };
 
     const handleUpdate = () => {
         if (!selectedUser) return;
+        
         api.put({ id: selectedUser.id, body: formState }).then(() => {
             setSelectedUser(null);
             setFormState({ id: 0, name: "", email: "", role: "", password: "", phoneNumber: "" });
-            api.getAll();
+            api.getAll(); // Refrescamos la lista de usuarios
+        }).catch((error) => {
+            console.error("Error al actualizar el usuario:", error);
+            alert("Hubo un error al actualizar el usuario. Intenta nuevamente.");
         });
     };
 
     const handleDelete = (id: Id) => {
         api.delete(id).then(() => {
-            api.getAll();
+            api.getAll(); // Refrescamos la lista de usuarios
+        }).catch((error) => {
+            console.error("Error al borrar el usuario:", error);
+            alert("Hubo un error al borrar el usuario. Intenta nuevamente.");
         });
     };
 
@@ -65,7 +85,7 @@ const UserCrud: React.FC = () => {
                     <input
                         type="text"
                         name="name"
-                        placeholder="Nombre"
+                        placeholder="Name"
                         value={formState.name}
                         onChange={handleInputChange}
                     />
@@ -79,19 +99,19 @@ const UserCrud: React.FC = () => {
                     <input
                         type="text"
                         name="password"
-                        placeholder="Contraseña"
+                        placeholder="Password"
                         value={formState.password}
                         onChange={handleInputChange}
                     />
                     <input
                         type="text"
                         name="phoneNumber"
-                        placeholder="Teléfono"
+                        placeholder="Phone Number"
                         value={formState.phoneNumber}
                         onChange={handleInputChange}
                     />
                     <button type="submit">{selectedUser ? "Update" : "Create"}</button>
-                    {selectedUser && <button onClick={() => setSelectedUser(null)}>Cancel</button>}
+                    {selectedUser && <button type="button" onClick={() => setSelectedUser(null)}>Cancel</button>}
                 </form>
             </div>
 
@@ -106,14 +126,12 @@ const UserCrud: React.FC = () => {
                                     {userWithId.name} ({userWithId.email}) - {userWithId.role}
                                 </p>
                                 <button onClick={() => handleEdit(userWithId)}>Edit</button>
-                                <button onClick={() => handleDelete({ id: userWithId.id })}>Delete</button> 
+                                <button onClick={() => handleDelete({ id: userWithId.id })}>Delete</button>
                             </div>
                         );
                     })
                 }
             </div>
-
-
         </div>
     );
 };
