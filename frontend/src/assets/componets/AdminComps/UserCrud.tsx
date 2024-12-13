@@ -77,8 +77,8 @@ const UserCrud: React.FC = () => {
         setFormState(user);
     };
 
-    if (users.state === FetchState.Loading) return <p>Loading...</p>;
-    if (users.state === FetchState.Error) return <p>Error: {users.error?.message}</p>;
+    // if (users.state === FetchState.Loading) return <p>Loading...</p>;
+    // if (users.state === FetchState.Error) return <p>Error: {users.error?.message}</p>;
 
     return (
         <div>

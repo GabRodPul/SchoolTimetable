@@ -23,11 +23,9 @@ const EnrollmentCrud: React.FC = () => {
     useEffect(() => {
 
         api.getAll();
-
-
         // api.getStudents().then(setStudents);
         // api.getModules().then(setModules); 
-    }, [api]);
+    }, []);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const { name, value } = e.target;

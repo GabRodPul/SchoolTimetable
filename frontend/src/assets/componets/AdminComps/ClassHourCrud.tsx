@@ -21,7 +21,7 @@ const ClassHourCrud: React.FC = () => {
 
     useEffect(() => {
         api.getAll();
-    }, [api]);
+    }, []);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;

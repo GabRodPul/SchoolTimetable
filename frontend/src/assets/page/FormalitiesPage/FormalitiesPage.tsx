@@ -65,10 +65,8 @@ const Formalities: React.FC = () => {
                     startHour: "",
                     endHour: ""
                 });
-                console.log("Aparezco");
                 api.getAll(); // Actualizar datos después del POST
-                console.log("Aparezco");
-                navigate('/formalities')
+                // navigate('/formalities')
             })
             .catch((error) => {
                 console.error("Error al realizar el POST:", error);
@@ -80,7 +78,7 @@ const Formalities: React.FC = () => {
         if (!selectedWarning) return;
         // Validación de formulario antes de actualizar
         if (!validateForm()) return;
-        api.put({ id: selectedWarning.id, body: formState })
+        api.put({ body: formState, id: selectedWarning.id })
             .then(() => {
                 console.log("PUT exitoso:", formState);
                 setFormState({
@@ -92,7 +90,10 @@ const Formalities: React.FC = () => {
                     startHour: "",
                     endHour: ""
                 });
-                api.getAll(); // Actualizar datos después de la actualización
+                api.getAll().then(() => {
+                    setSelectedWarning(null);
+                }); // Actualizar datos después de la actualización
+
 
             })
             .catch((error) => {
@@ -117,8 +118,8 @@ const Formalities: React.FC = () => {
         setFormState(warnings); // Establecer los datos del trámite en el formulario para editar
     };
 
-    if (warning.state === FetchState.Loading) return <p>Loading...</p>;
-    if (warning.state === FetchState.Error) return <p>Error: {warning.error?.message}</p>;
+    // if (warning.state === FetchState.Loading) return <p>Loading...</p>;
+    // if (warning.state === FetchState.Error) return <p>Error: {warning.error?.message}</p>;
 
     return (
         <div className='body'>
