@@ -15,19 +15,6 @@ function LoginPageForm() {
 
   const navigate = useNavigate();
 
-  const handleLogin = (event: React.FormEvent) => {
-    event.preventDefault();
-
-    if (fetchRsrc.state == FetchState.NotStarted)
-        api.login!({ email, password });
-
-    console.log('Correo:', email);
-    console.log('Contraseña:', password);
-    console.log('Recuérdame:', rememberMe);
-
-    // navigate('/Home');
-  };
-
   useEffect(() => {
     console.log(fetchRsrc)
 
@@ -53,6 +40,23 @@ function LoginPageForm() {
       }
     }
   }, [fetchRsrc])
+
+  const handleLogin = (event: React.FormEvent) => {
+    event.preventDefault();
+    // Validación de campos vacíos
+    if (!email || !password) {
+        alert("Por favor, complete todos los campos."); // Muestra un mensaje de alerta
+        return; // Detiene la ejecución si hay campos vacíos
+    }
+    if (fetchRsrc.state === FetchState.NotStarted) {
+        api.login!({ email, password });
+    }
+
+    console.log('Correo:', email);
+    console.log('Contraseña:', password);
+    console.log('Recuérdame:', rememberMe);
+    // navigate('/Home'); // Esta línea se puede dejar comentada, ya que la navegación se maneja en el useEffect
+};
 
   if (localStorage.getItem("currentUser"))
     navigate("/Home");
@@ -109,6 +113,8 @@ function LoginPageForm() {
             <button
               type="submit" // Se mantiene como botón de envío
               className="LoginPageButton"
+              onClick={() =>
+              handleLogin}
             >
               Entrar
             </button>

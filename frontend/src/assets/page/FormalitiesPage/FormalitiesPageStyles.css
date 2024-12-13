@@ -1,11 +1,15 @@
 .formalities__content {
     display: flex;
     flex-direction: row;
-    /* justify-content: space-evenly; */
-    /* margin-left: -100px; */
     width: 100%;
     margin-left: 25%;
-    gap: 15%;
+
+}
+
+.formalities_desktop {
+    display: flex;
+    flex-direction: row;
+    gap: 65%;
 }
 
 .formalities__form {
@@ -52,6 +56,7 @@
 
 .formalities__info {
     margin-top: 10px;
+    width: 400px;
 }
 
 .formalities__data {
@@ -63,7 +68,7 @@
     padding: 10px;
     margin-bottom: 10px;
     background-color: #fff;
-    border-radius: 24px;
+    border-radius: 20px;
     border: 1px solid #787486;
     font-size: 0.9rem;
 }

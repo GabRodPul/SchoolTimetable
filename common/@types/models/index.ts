@@ -110,15 +110,15 @@ export type SessionChangeData = {
     sessionId:      number,
     classHourId:    number,
     day:            WorkDay,
-    startDate:      Date,
-    endDate:        Date,
+    startDate:      string,
+    endDate:        string,
 }
 
 export type WarningData = {
     teacherId:      number,
     description:    string,
-    startDate:      Date,
-    endDate:        Date,
+    startDate:      string,
+    endDate:        string,
     startHour:      string, // MySQL TIME
     endHour:        string, // MySQL TIME
 } 
