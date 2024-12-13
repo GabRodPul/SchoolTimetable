@@ -10,6 +10,8 @@ export enum ApiRts {
     Warnings    = "warnings",
     Schedule    = "schedule",
     ClassHour   = "classHour",
+    SessionChanged = "session-changed",
+    Enrollmet = "enrollment"
 }
 
 export enum Method {

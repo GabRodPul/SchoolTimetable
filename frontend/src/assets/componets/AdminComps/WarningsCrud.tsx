@@ -29,7 +29,19 @@ const WarningCrud: React.FC = () => {
         setFormState((prevState) => ({ ...prevState, [name]: value }));
     };
 
+    // Validación de campos antes de hacer el POST o PUT
+
+    const validateForm = () => {
+        const { teacherId, description, startDate, endDate, startHour, endHour } = formState;
+        if (teacherId <= 0 || !description || !startDate || !endDate || !startHour || !endHour) {
+            alert("Todos los campos son obligatorios y deben ser válidos.");
+            return false;
+        }
+        return true;
+    };
+
     const handleCreate = () => {
+        if (!validateForm()) return;
         api.post(formState).then(() => {
             setFormState({
                 id: 0,
@@ -155,7 +167,7 @@ const WarningCrud: React.FC = () => {
                     Array.isArray(warnings.data) && warnings.data.map((warning) => (
                         <div key={warning.id}>
                             <p>
-                                Teacher ID: {warning.teacherId}, Description: {warning.description}, Start Date: {warning.startDate}, End Date: {warning.endDate}, 
+                                Teacher ID: {warning.teacherId}, Description: {warning.description}, Start Date: {warning.startDate}, End Date: {warning.endDate},
                                 Time: {warning.startHour} to {warning.endHour}
                             </p>
                             <button onClick={() => handleEdit(warning)}>Edit</button>

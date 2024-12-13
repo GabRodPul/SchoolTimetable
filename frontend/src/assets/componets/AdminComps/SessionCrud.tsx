@@ -27,7 +27,18 @@ const SessionCrud: React.FC = () => {
         setFormState((prevState) => ({ ...prevState, [name]: value }));
     };
 
+   // Validación de campos antes de hacer el POST o PUT
+    const validateForm = () => {
+        const { classHourId, igtModuleId, day } = formState;
+        if (classHourId <= 0 || igtModuleId <= 0 || !day) {
+            alert("Todos los campos son obligatorios y deben ser válidos.");
+            return false;
+        }
+        return true;
+    };
+
     const handleCreate = () => {
+        if (!validateForm()) return;
         api.post(formState).then(() => {
             setFormState({ id: 0, day: WorkDay.Monday, classHourId: 0, igtModuleId: 0 });
             api.getAll();

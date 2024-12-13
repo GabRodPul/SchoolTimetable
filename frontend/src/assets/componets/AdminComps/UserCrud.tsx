@@ -11,11 +11,11 @@ const UserCrud: React.FC = () => {
 
     const [selectedUser, setSelectedUser] = useState<User | null>(null);
     const [formState, setFormState] = useState<User>({
-        id: 0, 
-        name: "", 
-        email: "", 
-        role: "", 
-        password: "", 
+        id: 0,
+        name: "",
+        email: "",
+        role: "",
+        password: "",
         phoneNumber: ""
     });
 
@@ -28,9 +28,19 @@ const UserCrud: React.FC = () => {
         setFormState(prevState => ({ ...prevState, [name]: value }));
     };
 
-    const handleCreate = () => {
-        console.log("Enviando formState:", formState);
+    // Validación de campos antes de hacer el POST o PUT
+    const validateForm = () => {
+        const { name, email, password, phoneNumber } = formState;
+        if (!name || !email || !password || !phoneNumber) {
+            alert("Todos los campos son obligatorios.");
+            return false;
+        }
+        return true;
+    };
 
+    const handleCreate = () => {
+        if (!validateForm()) return;
+        console.log("Enviando formState:", formState);
         api.post(formState).then(() => {
             setFormState({ id: 0, name: "", email: "", role: "", password: "", phoneNumber: "" });
             api.getAll(); // Refrescamos la lista de usuarios
@@ -42,7 +52,7 @@ const UserCrud: React.FC = () => {
 
     const handleUpdate = () => {
         if (!selectedUser) return;
-        
+
         api.put({ id: selectedUser.id, body: formState }).then(() => {
             setSelectedUser(null);
             setFormState({ id: 0, name: "", email: "", role: "", password: "", phoneNumber: "" });
