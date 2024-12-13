@@ -80,7 +80,7 @@ const Formalities: React.FC = () => {
             .then(() => {
                 console.log("PUT exitoso:", formState);
                 setFormState({
-                    id: 9,
+                    id: selectedWarning.id,
                     teacherId: 1,
                     description: "",
                     startDate: "",

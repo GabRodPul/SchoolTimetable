@@ -17,40 +17,60 @@ import Header from '#src/assets/componets/CommonComps/MenuheaderMobile/Header';
 
 type User = UserData & Id;
 function profile() {
-
-    const localEmail = (JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData).user.email;
-    const localName = (JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData).user.name;
-    const localPass = (JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData).user.password;
-    const localNumber = (JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData).user.phoneNumber;
-    const localRole = (JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData).user.role;
     const navigate = useNavigate();
 
-    const [users, api] = useApi<User>(ApiRts.Users);
-    const [formState, setFormState] = useState<User>({ id: 0, name: localName, email: localEmail, role: "", password: localPass, phoneNumber: localNumber });
-    const [filtered, setFilteredUsers] = useState<User[]>([]); // Estado para usuarios filtrados
-    const [selectedUser, setSelectedUser] = useState<User | null>(null);
-    const [currentUser, setCurrentUser] = useState<User | null>(null); // Estado para el usuario actual
 
-    console.log("Hola", (JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData));
+    const [users, api] = useApi<User>(ApiRts.Users);
+
+    const [formState, setFormState] = useState<User>({ id: 0, name: "", email: "", role: "", password: "", phoneNumber: "" });
+
+    const [tempFormState, setTempFormState] = useState<User>({ id: 0, name: "", email: "", role: "", password: "", phoneNumber: "" }); // Estado temporal
+
+    const [filtered, setFilteredUsers] = useState<User[]>([]);
+
+    const [selectedUser, setSelectedUser] = useState<User | null>(null);
+
+    const [currentUser, setCurrentUser] = useState<User | null>(null);
+
 
     useEffect(() => {
+
         api.getAll();
+
     }, []);
 
+
     useEffect(() => {
-        console.log("Hola",localStorage.getItem('currentUser '));
+        //Saco el email aquí
+        const { email} = (JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData).user;
+        console.log("Email: ", email)
         if (users.state === FetchState.Success && Array.isArray(users.data)) {
-            const email = (JSON.parse(localStorage.getItem('currentUser ') ?? "null") as AuthData).user.email; // Obtener el email del localStorage
             const filtered = users.data.filter(user => user.email === email);
-            console.log("Usuarios filtrados: ", filtered);
             setFilteredUsers(filtered);
-            setCurrentUser(filtered[0] || null); // Establecer el primer usuario filtrado como el usuario actual
+            setCurrentUser(filtered[0] || null);
+            if (filtered.length > 0) {
+                setTempFormState(filtered[0]); // Cargar datos del usuario seleccionado en el estado temporal
+            }
         }
     }, [users]);
 
+
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        setFormState((prevState: any) => ({ ...prevState, [name]: value }));
+        setTempFormState((prevState) => ({ ...prevState, [name]: value })); // Actualiza el estado temporal
+    };
+
+    const handleCreate = () => {
+        // Implementar lógica de creación si es necesario
+    };
+
+    const validateForm = () => {
+        const { name, phoneNumber } = tempFormState; // Validar el estado temporal
+        if (!name || !phoneNumber) {
+            alert("Todos los campos son obligatorios.");
+            return false;
+        }
+        return true;
     };
 
     const [isMenuOpenProfile, setIsMenuOpen1] = useState(false);
@@ -74,271 +94,493 @@ function profile() {
     };
 
     return (
+
         <>
+
             <div className="body">
+
                 {/* Mobile */}
 
                 <div className="profilepage__mobile">
+
                     <Header />
-                    {/* Tarjeta de Perfil */}
+
                     <div className="mobile__content">
+
                         <div className="mobile__header">
+
                             <h2 className='Mobile__Title'>Perfil</h2>
-                            <div className="ProfileCard__mobileCard">
+
+                            <div className="Profile Card__mobileCard">
+
                                 <div className="mobilecardInfo">
+
                                     <div className="mobileCard__icon">
-                                        {/* imagen */}
+
                                         <img src="./img/abstract-user-flat-4.png" alt="Imagen de perfil" />
-                                    </div>  
+
+                                    </div>
+
                                     <div className="mobileCard__info">
+
                                         <div className="MobileInfo__name">
-                                            {/* name */}
-                                            <div className='nameUser_mobile'>
+
+                                            <div className='nameUser _mobile'>
+
                                                 {currentUser?.name}
+
                                             </div>
+
                                         </div>
+
                                         <div className="mobileInfo_email">
-                                            {/* email */}
-                                            <div className='emailUser_mobile'>
-                                                a
+
+                                            <div className='emailUser _mobile'>
+
+                                                {currentUser?.email}
+
                                             </div>
+
                                         </div>
+
                                     </div>
+
                                 </div>
+
                                 <div className="iconMobile">
+
                                     <CiEdit color='white' size={30} />
+
                                 </div>
+
                             </div>
+
                         </div>
 
-                        {/* Opciones */}
+
                         <div className="mobile__options">
+
                             <div className="options__card">
+
                                 <h2 className='Mobile__Title'>Opciones</h2>
+
                                 <div className="mobileProfile__options">
+
                                     <h4>Mi perfil</h4>
-                                    <CiMenuKebab
-                                        onClick={toggleMenu1}
-                                        className="menu-icon"
-                                    />
+
+                                    <CiMenuKebab onClick={toggleMenu1} className="menu-icon" />
+
                                 </div>
+
                                 {isMenuOpenProfile && (
+
                                     <div className="dropdown__menuMobile">
+
                                         <div className="dropdown__Info">
+
                                             <div className='mobileTittle'>
+
                                                 <p>Nombre:</p>
+
                                             </div>
+
                                             <div className='mobileData'>
-                                                <p>a</p>
+
+                                                <p>{currentUser?.name}</p>
+
                                             </div>
+
                                             <div className='mobileTittle'>
+
                                                 <p>Email:</p>
+
                                             </div>
+
                                             <div className='mobileData'>
-                                                <p>a</p>
+
+                                                <p>{currentUser?.email}</p>
+
                                             </div>
+
                                             <div className='mobileTittle'>
+
                                                 <p>Teléfono:</p>
+
                                             </div>
+
                                             <div className='mobileData'>
-                                                <p>a</p>
+
+                                                <p>{currentUser?.phoneNumber}</p>
+
                                             </div>
+
                                             <div className='mobileTittle'>
+
                                                 <p>Rol:</p>
+
                                             </div>
+
                                             <div className='mobileData'>
-                                                {/* <p>{roleTextInfo()}</p> */}
-                                                <p>a</p>
+
+                                                <p>{currentUser?.role}</p>
+
                                             </div>
+
                                         </div>
+
                                     </div>
+
                                 )}
 
+
                                 <div className="mobileProfile__options">
+
                                     <h4>Mis Cursos</h4>
-                                    <CiMenuKebab
-                                        onClick={toggleMenu2}
-                                        className="menu-icon"
-                                    />
+
+                                    <CiMenuKebab onClick={toggleMenu2} className="menu-icon" />
+
                                 </div>
+
                                 {isMenuOpenCourses && (
+
                                     <div className="dropdown__menuMobile">
+
                                         <div className="dropdown__Info">
+
                                             <div className='mobileTittle'>
+
                                                 <p className='modulesInfo'>Segundo Desarrollo de aplicaciones web - Turno de tarde</p>
+
                                             </div>
+
                                         </div>
+
                                     </div>
+
                                 )}
 
+
                                 <div className="mobileProfile__options">
+
                                     <h4>Mis Notificaciones</h4>
-                                    <CiMenuKebab
-                                        onClick={toggleMenu3}
-                                        className="menu-icon"
-                                    />
+
+                                    <CiMenuKebab onClick={toggleMenu3} className="menu-icon" />
+
                                 </div>
+
                                 {isMenuOpenNotices && (
+
                                     <div className="dropdown__menuMobile">
+
                                     </div>
+
                                 )}
 
+
                                 <div className="mobileProfile__options">
+
                                     <h4>Cambiar de Rol</h4>
+
                                 </div>
+
                             </div>
+
                         </div>
-                        {/* Botón de Cierre de Sesión */}
+
                         <button className="logoutButton" onClick={handleLogout}>
+
                             Cerrar Sesión
+
                         </button>
+
                     </div>
+
                 </div>
 
 
                 <div className='profilepage__desktop'>
 
                     <div className='P_navigationTabs'>
+
                         <NavigationTab />
+
                     </div>
+
 
                     <div className="PflContent">
+
                         <div className="PflContent__Info">
+
                             <div className="PflContent__ProfileCard">
+
                                 <div className="ProfileCard__icon">
-                                    {/* imagen */}
+
                                     <img src="./img/abstract-user-flat-4.png" alt="Imagen de perfil" />
+
                                 </div>
+
                                 <div className="ProfileCard__info">
+
                                     <div className="Info__name">
-                                        {/* name */}
-                                        <div className='nameUser'>
-                                        {currentUser?.name}
+
+                                        <div className='nameUser '>
+
+                                            {currentUser?.name}
+
                                         </div>
+
                                     </div>
+
                                     <div className="Info_email">
-                                        {/* email */}
-                                        <div className='emailUser'>
-                                            a
+
+                                        <div className='emailUser '>
+
+                                            {currentUser?.email}
+
                                         </div>
+
                                     </div>
+
                                 </div>
-                                {/* iconos si eso */}
+
                             </div>
+
 
                             <div className="PflContent__GeneralInfo">
+
                                 <div className="generalInfo__title">
+
                                     <h3>Información general</h3>
+
                                 </div>
+
                                 <div className="generalInfo__titles">
+
                                     <div className="titles_content">
+
                                         <div className="titles__data">
+
                                             <h5>Mis Datos</h5>
+
                                         </div>
+
                                         <div className="titles__edit">
+
                                             <h5>Editar Perfil</h5>
+
                                         </div>
+
                                     </div>
+
                                 </div>
+
 
                                 <div className="generalInfo__userdata">
+
                                     <div className="userdata__Info">
+
                                         <div className="info__userData">
+
                                             <div className='userData__Tittle'>
+
                                                 <p>Nombre:</p>
+
                                             </div>
+
                                             <div className='userData__name'>
-                                                <p>a</p>
+
+                                                <p>{formState.name}</p>
+
                                             </div>
+
                                         </div>
 
+
                                         <div className="info__userData">
+
                                             <div className='userData__Tittle'>
+
                                                 <p>Email:</p>
+
                                             </div>
+
                                             <div className='userData__email'>
-                                                <p>a</p>
+
+                                                <p>{formState.email}</p>
+
                                             </div>
+
                                         </div>
 
+
                                         <div className="info__userData">
+
                                             <div className='userData__Tittle'>
+
                                                 <p>Teléfono:</p>
+
                                             </div>
+
                                             <div className='userData__phone'>
-                                                <p>a</p>
+
+                                                <p>{formState.phoneNumber}</p>
+
                                             </div>
+
                                         </div>
+
 
                                         <div className="info__userData">
+
                                             <div className='userData__Tittle'>
+
                                                 <p>Rol:</p>
-                                            </div>
-                                            <div className='userData__roleText'>
-                                                {/* <p>{roleTextInfo()}</p> */}
-                                                <p>a</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="userdata__form">
-                                        <div className="form__userForm">
-                                            <div className='userData__formTittle'>
-                                                <p>Nombre:</p>
-                                            </div>
-                                            <div className='userData__formText'>
-                                                <input
-                                                    type="email"
-                                                    name="email"
-                                                    placeholder="Email"
-                                                    value={formState.email}
-                                                    onChange={handleInputChange}
-                                                />
-                                            </div>
-                                            <div className='userData__formTittle'>
-                                                <p>Telefono:</p>
-                                            </div>
-                                            <div className='userData__formText'>
-                                                <input
-                                                    type="email"
-                                                    name="email"
-                                                    placeholder="Email"
-                                                    value={formState.email}
-                                                    onChange={handleInputChange}
-                                                />
+
                                             </div>
 
-                                            <button className='userData__formButton' >Confirmar:</button>
+                                            <div className='userData__roleText'>
+
+                                                <p>{formState.role}</p>
+
+                                            </div>
+
                                         </div>
+
                                     </div>
+
+                                    <div className="userdata__form">
+
+                                        <div className="form__userForm">
+
+                                            <div className='userData__formTittle'>
+
+                                                <p>Nombre:</p>
+
+                                            </div>
+
+                                            <form
+
+                                                onSubmit={e => {
+
+                                                    e.preventDefault();
+
+                                                    selectedUser ? handleUpdate() : handleCreate();
+
+                                                }}
+
+                                            >
+
+                                                <div className='userData__formText'>
+
+                                                    <input
+
+                                                        type="text"
+
+                                                        name="name"
+
+                                                        placeholder="Nombre"
+
+                                                        value={formState.name}
+
+                                                        onChange={handleInputChange}
+
+                                                    />
+
+                                                </div>
+
+                                                <div className='userData__formTittle'>
+
+                                                    <p>Teléfono:</p>
+
+                                                </div>
+
+                                                <div className='userData__formText'>
+
+                                                    <input
+
+                                                        type="text"
+
+                                                        name="phoneNumber"
+
+                                                        placeholder="Teléfono"
+
+                                                        value={formState.phoneNumber}
+
+                                                        onChange={handleInputChange}
+
+                                                    />
+
+                                                </div>
+
+
+                                                <button type="submit" className="formalities__button">
+
+                                                    {selectedUser ? "Actualizar" : "Crear"}
+
+                                                </button>
+
+                                                {selectedUser && <button type="button" onClick={()=> handleEdit(warningListed)}>Cancelar</button>}
+
+                                            </form>
+
+                                        </div>
+
+                                    </div>
+
                                 </div>
+
 
                                 <div className="generalInfo__title">
-                                    <h5>Mis Modulos</h5>
+
+                                    <h5>Mis Módulos</h5>
+
                                 </div>
+
 
                                 <div className="generalInfo__data">
+
                                     <div className="info__ModulesData">
+
                                         <div className='ModulesData__Tittle'>
+
                                             <p>Impartiendo:</p>
+
                                         </div>
+
                                         <div className='ModulesData__name'>
+
                                             <p>Segundo Desarrollo de aplicaciones web - Turno de tarde</p>
+
                                         </div>
+
                                     </div>
+
                                 </div>
 
+
                             </div>
+
                         </div>
+
 
                         <div className="P_rightsidemenu">
+
                             <RigthMenu />
+
                         </div>
+
                     </div>
 
+
                 </div>
+
             </div>
+
         </>
+
     );
+
 }
+
 
 export default profile;

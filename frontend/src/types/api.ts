@@ -24,7 +24,7 @@ export enum FetchState {
     Loading         = "FSTATE_LOADING", 
     Success         = "FSTATE_SUCCESS",
     SuccessMany     = "FSTATE_SUCCESSMANY", 
-    Error           = "FSTATE_ERROR", 
+    Error           = "FSTATE_ERROR",
 }
 
 export type FetchData<T>
