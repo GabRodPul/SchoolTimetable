@@ -5,13 +5,18 @@ export enum ApiRts {
     Modules     = "modules",
     Groups      = "groups",
     Session    = "session",
+    SessionChanged = "session-changed",
     Login       = "login",
     Signin      = "signin",
     Warnings    = "warnings",
     Schedule    = "schedule",
     ClassHour   = "classHour",
+<<<<<<< HEAD
+    Enrollmet  = "enrollment",
+=======
     SessionChanged = "session-changed",
     Enrollmet = "enrollment"
+>>>>>>> navigationTabWIP
 }
 
 export enum Method {

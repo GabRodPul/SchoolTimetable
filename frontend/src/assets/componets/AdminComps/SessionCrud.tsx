@@ -18,9 +18,7 @@ const SessionCrud: React.FC = () => {
         igtModuleId: 0
     });
 
-    useEffect(() => {
-        api.getAll();
-    }, []);
+    
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -68,6 +66,10 @@ const SessionCrud: React.FC = () => {
 
     if (sessions.state === FetchState.Loading) return <p>Loading...</p>;
     if (sessions.state === FetchState.Error) return <p>Error: {sessions.error?.message}</p>;
+
+    useEffect(() => {
+        api.getAll();
+    }, []);
 
     return (
         <div>

@@ -1,0 +1,5 @@
+.AdminPage__Cruds{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

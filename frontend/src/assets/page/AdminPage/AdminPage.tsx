@@ -15,18 +15,21 @@ import "./AdminPageStyles.css"
 function Admin() {
     return (
         <div>
-            <NavigationTab/>
-            <RigthMenu/>
-            <UserCrud/>
-            <GroupCrud/>
-            {/* <SessionCrud/> */}
-            {/* <ModuleCrud/> */}
-            <IGTModuleCrud/>
-            {/* <ClassHourCrud/> */}
-            {/* <WarningCrud/> */}
-            {/* <SessionChangedCrud/> */}
-            {/* <EnrollmentCrud/> */}
-            
+            <div className="deskAdmin__nav">
+                <NavigationTab />
+                <RigthMenu />
+            </div>
+            <div className="AdminPage__Cruds">
+                <UserCrud />
+                <GroupCrud />
+                <SessionCrud/>
+                <ModuleCrud/>
+                <IGTModuleCrud />
+                <ClassHourCrud/>
+                <WarningCrud/>
+                <SessionChangedCrud/>
+                <EnrollmentCrud/>
+            </div>
         </div>
     );
 }
