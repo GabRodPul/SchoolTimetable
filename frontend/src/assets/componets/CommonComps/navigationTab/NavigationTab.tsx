@@ -20,9 +20,19 @@ function NavigationTab() {
         navigate('/login');
     };
 
+    const roleTextInfo = () =>{
+        switch (role) {
+            case 'UR0_STUDENT': return 'Estudiante';
+            case 'UR1_TEACHER': return 'Profesor';
+            case 'UR2_HEAD': return 'Jefatura';
+            case 'UR3_ADMIN': return 'Administrador';
+            default: '';
+        }
+    }
+
     const pageTitle = () => {
         switch (location.pathname) {
-            case '/home': return '';
+            case '/home': return roleTextInfo();
             case '/timetable': return 'Mi Horario';
             case '/notices': return <SearchBar />;
             case '/formalities': return <SearchBar />;
