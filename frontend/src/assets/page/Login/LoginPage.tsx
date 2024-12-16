@@ -80,7 +80,7 @@ function LoginPageForm() {
           <form className="loginPageForm" onSubmit={handleLogin}>
             <label className="LoginInputText">
               <p>Email</p>
-              <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required
+              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required
               />
             </label>
 

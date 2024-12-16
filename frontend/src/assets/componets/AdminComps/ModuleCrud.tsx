@@ -43,8 +43,8 @@ const ModuleCrud: React.FC = () => {
     };
 
     const handleUpdate = () => {
+        if (!validateForm()) return;
         if (!selectedModule) return;
-
         api.put({ id: selectedModule.id, body: formState }).then(() => {
             setSelectedModule(null);
             setFormState({ id: 0, name: "" });

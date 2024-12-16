@@ -49,6 +49,7 @@ const EnrollmentCrud: React.FC = () => {
     };
 
     const handleUpdate = () => {
+        if (!validateForm()) return;
         if (!selectedEnrollment) return;
         api.put({ id: selectedEnrollment.id, body: formState }).then(() => {
             setSelectedEnrollment(null);

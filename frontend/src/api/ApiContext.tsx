@@ -220,6 +220,7 @@ const useApi = <T,>(route: ApiRts)
                     state: FetchState.Success,
                     data
                 });
+                console.log("llegó aquí 3")
             } catch (e: unknown) {
                 dispatch({
                     state: FetchState.Error,

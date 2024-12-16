@@ -42,6 +42,7 @@ const SessionCrud: React.FC = () => {
     };
 
     const handleUpdate = () => {
+        if (!validateForm()) return;
         if (!selectedSession) return;
         api.put({ id: selectedSession.id, body: formState }).then(() => {
             setSelectedSession(null);
