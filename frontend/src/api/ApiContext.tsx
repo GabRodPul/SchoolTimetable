@@ -197,9 +197,14 @@ const useApi = <T,>(route: ApiRts)
 
         post: async (body: T) => {
             try {
+<<<<<<< HEAD
                 console.log("Enviando datos para crear:", body);
                 const data = await API.post<T extends UserData ? T & { access_token: string } : T, T>(route, { body });
                 console.log("Respuesta de la API al crear:", data);
+=======
+                // const data = await API.post<T extends UserData ? AuthData : T, T>(route, { body });
+                const data = await API.post<T, T>(route, { body }); // We are using "signin" to get the access token so screw this.
+>>>>>>> develop
                 dispatch({
                     state: FetchState.Success,
                     data

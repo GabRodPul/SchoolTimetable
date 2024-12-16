@@ -90,6 +90,7 @@ function NoticesPage() {
     },
   ];
 
+<<<<<<< HEAD
   return (
     <>
       <div className="header__desk">
@@ -115,6 +116,47 @@ function NoticesPage() {
                       : dateStr(n.startDate)}`
                   }</p>
                   <p>{n.description}</p>
+=======
+    const toggleSection = (query: string) => {
+      document.querySelector(query);
+    }
+
+    return (
+        <>
+        <NavigationTab></NavigationTab>
+        <RigthMenu/>
+        <div className="noticesPage">
+            <div className="noticesPage__notifications">
+                <button>Mis Notificaciones</button>
+                <h2>Notificaciones</h2>
+                { 
+                  notices.map(n => (
+                    // <NoticeCard 
+                    <div className="notifications__entry" key={n.id}>
+                        <p className="entry__title">{ 
+                        `Cambio de Hora ${
+                            n.startDate < n.endDate 
+                            ? dateStr(n.startDate) 
+                            + " - " 
+                            + dateStr( n.endDate ) 
+                            : dateStr(n.startDate) }`
+                        }</p>
+                        <p>{ n.description }</p>
+                    </div>
+                ))}
+            </div>
+            <div className="noticesPage__reminders">
+                <h2>Recordatorios</h2>
+                { reminders.map((r, i) => 
+                (<div className="reminders__remEntry" key={i}>
+                    <div {...{kind: r.kind}} className="remEntry__icon remEntry--color">
+                      <FaRegBell size={24} />
+                    </div>
+                    <div className="remEntry__textContainer">
+                      <p className="remEntry--color" {...{kind: r.kind}}>{ r.kind }</p>
+                      <p>{ r.description + ", " + dateStr(r.date) }</p>
+                    </div>
+>>>>>>> develop
                 </div>
               </div>
             ))}
