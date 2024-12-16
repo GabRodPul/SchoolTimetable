@@ -13,7 +13,7 @@ Really simple application to manage and check school timetables, built with Reac
 - Aesthetics inspired by other applications like Moodle.
 
 ## First Approach
--We work with one of many approaches, having our backend and frontend separated, related through calls between them., although another option would be the approach of keeping them relatively close throughout the laragon.
+- We work with one of many approaches, having our backend and frontend separated, related through calls between them., although another option would be the approach of keeping them relatively close throughout the laragon.
 
 ## Instructions 🚀
 
