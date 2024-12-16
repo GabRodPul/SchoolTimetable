@@ -1,9 +1,27 @@
+.mobileAdmin__nav{
+    display: none;
+}
+
 .AdminPage__Cruds{
-    margin-left: 240px; 
-    margin-right: 240px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
+    margin-top: 80px;
+}
+
+@media (max-width: 1380px) {
+    .mobileAdmin__nav{
+        display: inherit;
+    }
+
+    .deskAdmin__nav{
+        display: none;
+    }
+
+
+}
+
+@media (max-width: 1735px) {
+
+    .crud__list {
+        width: 750px;
+    }
+
 }
