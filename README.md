@@ -12,6 +12,9 @@ Really simple application to manage and check school timetables, built with Reac
 - WIP CRUD.
 - Aesthetics inspired by other applications like Moodle.
 
+## First Approach
+-We work with one of many approaches, having our backend and frontend separated, related through calls between them., although another option would be the approach of keeping them relatively close throughout the laragon.
+
 ## Instructions 🚀
 
 ### Prerequisites 📋
@@ -58,7 +61,6 @@ You can find documentation about all endpoints [here](https://documenter.getpost
 * [Express.js](https://expressjs.com/es/) - Backend web framework
 * [Sequelize](https://sequelize.org/) - ORM
 * [React](https://es.react.dev/) - React
-* [Angular](https://angular.dev/) - Frontend web framework
 * [MySQL](https://www.mysql.com/) - Database
 
 ## Authors ✒️
