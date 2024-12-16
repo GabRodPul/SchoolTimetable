@@ -42,6 +42,11 @@ cd backend && npm install
 And the frontend.
 ```
 cd ../frontend && npm install
+npm install react-icons
+npm install react-router-dom
+npm install font-awesome
+npm install react-fonts
+npm install react-date-range
 ```
 
 To start the backend, use:
