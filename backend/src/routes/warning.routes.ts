@@ -1,13 +1,11 @@
 import { Express, Router } from "express";
 import { WarningController } from "../controllers/warning.controller";
-import {hasRolePermissions} from "../controllers/auth"
-import { UserRole } from "../../../common/@enums/models";
 
 const WarningRoutes = { init: ( app: Express ) => {
     const router = Router();
     
     // Create a new warning, with a middleware to filter, only allowing teachers
-    router.post( "/", hasRolePermissions(UserRole.Teacher), WarningController.create );
+    router.post( "/", WarningController.create);
     
     // Retrive all warnings
     router.get( "/", WarningController.findAll );
