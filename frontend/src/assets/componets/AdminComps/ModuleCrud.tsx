@@ -3,6 +3,7 @@ import { useApi } from "../../../api/ApiContext";
 import { ModuleData, Id } from "#common/@types/models";
 import { FetchState } from "../../../types/api";
 import { ApiRts } from "#common/@enums/http";
+import './CrudsStyles.css';
 
 type Module = ModuleData & Id;
 
@@ -21,7 +22,6 @@ const ModuleCrud: React.FC = () => {
         setFormState((prevState) => ({ ...prevState, [name]: value }));
     };
 
-    // Validación de campos antes de hacer el POST o PUT
     const validateForm = () => {
         const { name } = formState;
         if (!name) {
@@ -35,7 +35,7 @@ const ModuleCrud: React.FC = () => {
         if (!validateForm()) return;
         api.post(formState).then(() => {
             setFormState({ id: 0, name: "" });
-            api.getAll(); // Refrescamos la lista de módulos
+            api.getAll();
         }).catch((error) => {
             console.error("Error al crear el módulo:", error);
             alert("Hubo un error al crear el módulo. Intenta nuevamente.");
@@ -48,7 +48,7 @@ const ModuleCrud: React.FC = () => {
         api.put({ id: selectedModule.id, body: formState }).then(() => {
             setSelectedModule(null);
             setFormState({ id: 0, name: "" });
-            api.getAll(); // Refrescamos la lista de módulos
+            api.getAll();
         }).catch((error) => {
             console.error("Error al actualizar el módulo:", error);
             alert("Hubo un error al actualizar el módulo. Intenta nuevamente.");
@@ -57,7 +57,7 @@ const ModuleCrud: React.FC = () => {
 
     const handleDelete = (id: Id) => {
         api.delete(id).then(() => {
-            api.getAll(); // Refrescamos la lista de módulos
+            api.getAll();
         }).catch((error) => {
             console.error("Error al borrar el módulo:", error);
             alert("Hubo un error al borrar el módulo. Intenta nuevamente.");
@@ -73,10 +73,10 @@ const ModuleCrud: React.FC = () => {
     if (modules.state === FetchState.Error) return <p>Error: {modules.error?.message}</p>;
 
     return (
-        <div>
-            <h1>Module Management</h1>
+        <div className="crud__container">
+            <h1 className="crud__title">Module Management</h1>
 
-            <div>
+            <div className="crud__form">
                 <h2>{selectedModule ? "Edit Module" : "Create Module"}</h2>
                 <form
                     onSubmit={(e) => {
@@ -90,24 +90,48 @@ const ModuleCrud: React.FC = () => {
                         placeholder="Module Name"
                         value={formState.name}
                         onChange={handleInputChange}
+                        className="crud__input"
                     />
-                    <button type="submit">{selectedModule ? "Update" : "Create"}</button>
-                    {selectedModule && <button type="button" onClick={() => setSelectedModule(null)}>Cancel</button>}
+                    <button type="submit" className="crud__button">
+                        {selectedModule ? "Update" : "Create"}
+                    </button>
+                    {selectedModule && (
+                        <button
+                            type="button"
+                            onClick={() => setSelectedModule(null)}
+                            className="crud__button--cancel"
+                        >
+                            Cancel
+                        </button>
+                    )}
                 </form>
             </div>
 
             <div>
                 <h2>Module List</h2>
-                {(modules.state === FetchState.Success || modules.state === FetchState.SuccessMany) &&
-                    Array.isArray(modules.data) &&
-                    modules.data.map((module) => (
-                        <div key={module.id}>
-                            <p>{module.name}</p>
-                            <button onClick={() => handleEdit(module)}>Edit</button>
-                            <button onClick={() => handleDelete({ id: module.id })}>Delete</button>
-                        </div>
-                    ))
-                }
+                <div className="crud__list">
+                    {(modules.state === FetchState.Success || modules.state === FetchState.SuccessMany) &&
+                        Array.isArray(modules.data) &&
+                        modules.data.map((module) => (
+                            <div key={module.id} className="crud__item">
+                                <p>{module.name}</p>
+                                <div className="crud__buttonGroup">
+                                    <button
+                                        onClick={() => handleEdit(module)}
+                                        className="crud__button--edit"
+                                    >
+                                        Edit
+                                    </button>
+                                    <button
+                                        onClick={() => handleDelete({ id: module.id })}
+                                        className="crud__button--delete"
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
+                </div>
             </div>
         </div>
     );

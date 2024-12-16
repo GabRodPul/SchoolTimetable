@@ -3,6 +3,7 @@ import { useApi } from "../../../api/ApiContext";
 import { WarningData, Id } from "#common/@types/models";
 import { FetchState } from "../../../types/api";
 import { ApiRts } from "#common/@enums/http";
+import './CrudsStyles.css';
 
 type Warning = WarningData & Id;
 
@@ -28,8 +29,6 @@ const WarningCrud: React.FC = () => {
         const { name, value } = e.target;
         setFormState((prevState) => ({ ...prevState, [name]: value }));
     };
-
-    // Validación de campos antes de hacer el POST o PUT
 
     const validateForm = () => {
         const { teacherId, description, startDate, endDate, startHour, endHour } = formState;
@@ -94,15 +93,12 @@ const WarningCrud: React.FC = () => {
         setFormState(warning);
     };
 
-    if (warnings.state === FetchState.Loading) return <p>Loading...</p>;
-    if (warnings.state === FetchState.Error) return <p>Error: {warnings.error?.message}</p>;
-
     return (
-        <div>
-            <h1>Warning Management</h1>
+        <div className="crud__container">
+            <h1 className="crud__title">Formulario de Advertencias</h1>
 
-            <div>
-                <h2>{selectedWarning ? "Edit Warning" : "Create Warning"}</h2>
+            <div className="crud__form">
+                <h2>{selectedWarning ? "Editar Advertencia" : "Crear Advertencia"}</h2>
                 <form
                     onSubmit={(e) => {
                         e.preventDefault();
@@ -112,69 +108,97 @@ const WarningCrud: React.FC = () => {
                     <input
                         type="number"
                         name="teacherId"
-                        placeholder="Teacher ID"
+                        placeholder="ID del Profesor"
                         value={formState.teacherId}
                         onChange={handleInputChange}
+                        className="crud__input"
                     />
 
                     <textarea
                         name="description"
-                        placeholder="Description"
+                        placeholder="Descripción"
                         value={formState.description}
                         onChange={handleInputChange}
+                        className="crud__input"
                     />
 
                     <input
                         type="date"
                         name="startDate"
-                        placeholder="Start Date"
+                        placeholder="Fecha de Inicio"
                         value={formState.startDate}
                         onChange={handleInputChange}
+                        className="crud__input"
                     />
 
                     <input
                         type="date"
                         name="endDate"
-                        placeholder="End Date"
+                        placeholder="Fecha de Fin"
                         value={formState.endDate}
                         onChange={handleInputChange}
+                        className="crud__input"
                     />
 
                     <input
                         type="time"
                         name="startHour"
-                        placeholder="Start Hour"
+                        placeholder="Hora de Inicio"
                         value={formState.startHour}
                         onChange={handleInputChange}
+                        className="crud__input"
                     />
 
                     <input
                         type="time"
                         name="endHour"
-                        placeholder="End Hour"
+                        placeholder="Hora de Fin"
                         value={formState.endHour}
                         onChange={handleInputChange}
+                        className="crud__input"
                     />
 
-                    <button type="submit">{selectedWarning ? "Update" : "Create"}</button>
-                    {selectedWarning && <button onClick={() => setSelectedWarning(null)}>Cancel</button>}
+                    <button type="submit" className="crud__button">
+                        {selectedWarning ? "Actualizar" : "Crear"}
+                    </button>
+                    {selectedWarning && (
+                        <button
+                            type="button"
+                            onClick={() => setSelectedWarning(null)}
+                            className="crud__button--cancel"
+                        >
+                            Cancelar
+                        </button>
+                    )}
                 </form>
             </div>
 
-            <div>
-                <h2>Warning List</h2>
+            <h2>Listado de Advertencias</h2>
+            <div className="crud__list">
                 {(warnings.state === FetchState.Success || warnings.state === FetchState.SuccessMany) &&
-                    Array.isArray(warnings.data) && warnings.data.map((warning) => (
-                        <div key={warning.id}>
+                    Array.isArray(warnings.data) &&
+                    warnings.data.map((warning) => (
+                        <div key={warning.id} className="crud__item">
                             <p>
-                                Teacher ID: {warning.teacherId}, Description: {warning.description}, Start Date: {warning.startDate}, End Date: {warning.endDate},
-                                Time: {warning.startHour} to {warning.endHour}
+                                ID del Profesor: {warning.teacherId}, Descripción: {warning.description}, Fecha: {warning.startDate} - {warning.endDate},
+                                Horario: {warning.startHour} - {warning.endHour}
                             </p>
-                            <button onClick={() => handleEdit(warning)}>Edit</button>
-                            <button onClick={() => handleDelete({ id: warning.id })}>Delete</button>
+                            <div className="crud__buttonGroup">
+                                <button
+                                    className="crud__button--edit"
+                                    onClick={() => handleEdit(warning)}
+                                >
+                                    Editar
+                                </button>
+                                <button
+                                    className="crud__button--delete"
+                                    onClick={() => handleDelete({ id: warning.id })}
+                                >
+                                    Eliminar
+                                </button>
+                            </div>
                         </div>
-                    ))
-                }
+                    ))}
             </div>
         </div>
     );

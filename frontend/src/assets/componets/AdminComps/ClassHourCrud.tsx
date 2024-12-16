@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useApi } from "../../../api/ApiContext";
-import { ClassHourData, Id, SessionHour, } from "#common/@types/models";
+import { ClassHourData, Id, SessionHour } from "#common/@types/models";
 import { FetchState } from "../../../types/api";
 import { ApiRts } from "#common/@enums/http";
 import { Turn } from "#common/@enums/models";
+import './CrudsStyles.css';
 
 type ClassHour = ClassHourData & Id;
 
@@ -90,10 +91,10 @@ const ClassHourCrud: React.FC = () => {
     if (classHours.state === FetchState.Error) return <p>Error: {classHours.error?.message}</p>;
 
     return (
-        <div>
-            <h1>Class Hour Management</h1>
+        <div className="crud__container">
+            <h1 className="crud__title">Class Hour Management</h1>
 
-            <div>
+            <div className="crud__form">
                 <h2>{selectedClassHour ? "Edit Class Hour" : "Create Class Hour"}</h2>
                 <form
                     onSubmit={(e) => {
@@ -105,6 +106,7 @@ const ClassHourCrud: React.FC = () => {
                         name="turn"
                         value={formState.turn}
                         onChange={handleTurnChange}
+                        className="crud__select"
                     >
                         <option value={Turn.Morning}>Morning</option>
                         <option value={Turn.Afternoon}>Afternoon</option>
@@ -115,6 +117,7 @@ const ClassHourCrud: React.FC = () => {
                         name="sessionHour"
                         value={formState.sessionHour}
                         onChange={handleSessionHourChange}
+                        className="crud__select"
                     >
                         {[1, 2, 3, 4, 5, 6].map((hour) => (
                             <option key={hour} value={hour}>
@@ -129,6 +132,7 @@ const ClassHourCrud: React.FC = () => {
                         placeholder="Start Time"
                         value={formState.start}
                         onChange={handleInputChange}
+                        className="crud__input"
                     />
 
                     <input
@@ -137,23 +141,46 @@ const ClassHourCrud: React.FC = () => {
                         placeholder="End Time"
                         value={formState.end}
                         onChange={handleInputChange}
+                        className="crud__input"
                     />
 
-                    <button type="submit">{selectedClassHour ? "Update" : "Create"}</button>
-                    {selectedClassHour && <button onClick={() => setSelectedClassHour(null)}>Cancel</button>}
+                    <button type="submit" className="crud__button">
+                        {selectedClassHour ? "Update" : "Create"}
+                    </button>
+                    {selectedClassHour && (
+                        <button
+                            type="button"
+                            onClick={() => setSelectedClassHour(null)}
+                            className="crud__button--cancel"
+                        >
+                            Cancel
+                        </button>
+                    )}
                 </form>
             </div>
 
-            <div>
+            <div className="crud__list">
                 <h2>Class Hour List</h2>
                 {(classHours.state === FetchState.Success || classHours.state === FetchState.SuccessMany) &&
                     Array.isArray(classHours.data) && classHours.data.map((classHour) => (
-                        <div key={classHour.id}>
+                        <div key={classHour.id} className="crud__item">
                             <p>
                                 {classHour.turn} - {classHour.sessionHour} - {classHour.start} to {classHour.end}
                             </p>
-                            <button onClick={() => handleEdit(classHour)}>Edit</button>
-                            <button onClick={() => handleDelete({ id: classHour.id })}>Delete</button>
+                            <div className="crud__buttonGroup">
+                                <button
+                                    className="crud__button--edit"
+                                    onClick={() => handleEdit(classHour)}
+                                >
+                                    Edit
+                                </button>
+                                <button
+                                    className="crud__button--delete"
+                                    onClick={() => handleDelete({ id: classHour.id })}
+                                >
+                                    Delete
+                                </button>
+                            </div>
                         </div>
                     ))
                 }

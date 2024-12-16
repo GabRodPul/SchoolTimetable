@@ -1,27 +1,26 @@
-.crud-container {
+.crud__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 20px;
 }
 
-/* Title styling */
-.crud-title {
+.crud__title {
     font-size: 24px;
     text-align: center;
     margin-bottom: 20px;
     color: #333;
 }
 
-/* Form container */
-.crud-form {
-    margin: 20px auto;
-    max-width: 600px; /* Optional: limit the width of the form */
+.crud__form {
+    width: 550px;
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
     background-color: #f9f9f9;
 }
 
-/* Input styling */
-.crud-input {
+.crud__input {
     display: block;
     margin-bottom: 15px;
     padding: 10px;
@@ -32,81 +31,65 @@
     font-size: 14px;
 }
 
-/* General button styling */
-.crud-button {
+.crud__button {
     padding: 10px 15px;
     margin-right: 10px;
-    background-color: #007BFF;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
-    font-size: 14px;
-}
-
-.crud-button:hover {
     background-color: #0056b3;
-}
-
-/* Cancel button */
-.crud-button-cancel {
-    background-color: #6c757d;
-}
-
-.crud-button-cancel:hover {
-    background-color: #5a6268;
-}
-
-/* Dropdown toggle button */
-.crud-dropdown-toggle {
-    display: block;
-    margin: 10px auto 20px auto;
-    padding: 10px 15px;
-    background-color: #28a745;
     color: #fff;
     border: none;
     cursor: pointer;
     border-radius: 4px;
-    text-align: center;
     font-size: 14px;
 }
 
-.crud-dropdown-toggle:hover {
-    background-color: #218838;
+.crud__button:hover {
+    background-color: #004b9b;
 }
 
-/* List container with scroll */
-.crud-list {
+.crud__button--cancel {
+    padding: 10px 15px;
+    margin-right: 10px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #e63754;
+}
+
+.crud__button--cancel:hover {
+    background-color: #ce0000;
+}
+
+.crud__list {
     margin: 20px auto;
-    max-width: 600px; /* Limit the width of the list */
-    max-height: 300px; /* Set the height to fit approximately 5 items */
-    overflow-y: auto; /* Enable vertical scrolling */
-    border: 1px solid #ddd; /* Add a border for better visibility */
+    width: 600px;
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
     border-radius: 4px;
     padding: 10px;
     background-color: #ffffff;
 }
 
-/* Styling for the scrollbar */
-.crud-list::-webkit-scrollbar {
+.crud__list::-webkit-scrollbar {
     width: 8px;
 }
 
-.crud-list::-webkit-scrollbar-thumb {
+.crud__list::-webkit-scrollbar-thumb {
     background-color: #ccc;
     border-radius: 4px;
 }
 
-.crud-list::-webkit-scrollbar-thumb:hover {
+.crud__list::-webkit-scrollbar-thumb:hover {
     background-color: #aaa;
 }
 
-.crud-list::-webkit-scrollbar-track {
+.crud__list::-webkit-scrollbar-track {
     background-color: #f9f9f9;
 }
 
-/* Individual item in the list */
-.crud-item {
+.crud__item {
     margin-bottom: 10px;
     padding: 15px;
     border: 1px solid #ddd;
@@ -117,41 +100,55 @@
     background-color: #f9f9f9;
 }
 
-/* Remove margin for the last item in the list */
-.crud-item:last-child {
+.crud__item:last-child {
     margin-bottom: 0;
 }
 
-/* Edit button */
-.crud-button-edit {
+.crud__buttonGroup {
+    display: flex;
+    gap: 10px;
+}
+
+.crud__button--edit {
+    padding: 10px 15px;
+    margin-right: 10px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
     background-color: #ffc107;
 }
 
-.crud-button-edit:hover {
+.crud__button--edit:hover {
     background-color: #e0a800;
 }
 
-/* Delete button */
-.crud-button-delete {
-    background-color: #dc3545;
+.crud__button--delete {
+    padding: 10px 15px;
+    margin-right: 10px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #e63754;
 }
 
-.crud-button-delete:hover {
+.crud__button--delete:hover {
     background-color: #c82333;
 }
 
-/* Styling for the page container with menus */
 .main-content {
-    margin-left: 240px; /* Adjust according to the width of your left menu */
-    margin-right: 240px; /* Adjust if you have a right-side menu */
+    margin-left: 240px;
+    margin-right: 240px;
     padding: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centers content horizontally */
-    justify-content: flex-start; /* Aligns content to the top */
+    align-items: center;
+    justify-content: flex-start;
 }
 
-/* Utility classes for spacing and alignment */
 .text-center {
     text-align: center;
 }

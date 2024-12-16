@@ -11,12 +11,7 @@ export enum ApiRts {
     Warnings    = "warnings",
     Schedule    = "schedule",
     ClassHour   = "classHour",
-<<<<<<< HEAD
-    Enrollmet  = "enrollment",
-=======
-    SessionChanged = "session-changed",
     Enrollmet = "enrollment"
->>>>>>> navigationTabWIP
 }
 
 export enum Method {

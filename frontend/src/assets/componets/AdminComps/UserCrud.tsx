@@ -77,10 +77,10 @@ const UserCrud: React.FC = () => {
     };
 
     return (
-        <div className="crud-container">
-            <h1 className="crud-title">Formulario de Usuarios</h1>
+        <div className="crud__container">
+            <h1 className="crud__title">Formulario de Usuarios</h1>
 
-            <div className="crud-form">
+            <div className="crud__form">
                 <h2>{selectedUser ? "Edit User" : "Create User"}</h2>
                 <form
                     onSubmit={e => {
@@ -94,7 +94,7 @@ const UserCrud: React.FC = () => {
                         placeholder="Name"
                         value={formState.name}
                         onChange={handleInputChange}
-                        className="crud-input"
+                        className="crud__input"
                     />
                     <input
                         type="email"
@@ -102,15 +102,7 @@ const UserCrud: React.FC = () => {
                         placeholder="Email"
                         value={formState.email}
                         onChange={handleInputChange}
-                        className="crud-input"
-                    />
-                    <input
-                        type="text"
-                        name="password"
-                        placeholder="Password"
-                        value={formState.password}
-                        onChange={handleInputChange}
-                        className="crud-input"
+                        className="crud__input"
                     />
                     <input
                         type="text"
@@ -118,16 +110,16 @@ const UserCrud: React.FC = () => {
                         placeholder="Phone Number"
                         value={formState.phoneNumber}
                         onChange={handleInputChange}
-                        className="crud-input"
+                        className="crud__input"
                     />
-                    <button type="submit" className="crud-button">
+                    <button type="submit" className="crud__button">
                         {selectedUser ? "Update" : "Create"}
                     </button>
                     {selectedUser && (
                         <button
                             type="button"
                             onClick={() => setSelectedUser(null)}
-                            className="crud-button crud-button-cancel"
+                            className="crud__button--cancel"
                         >
                             Cancel
                         </button>
@@ -136,20 +128,20 @@ const UserCrud: React.FC = () => {
             </div>
             
             <h2>Listado de Usuarios</h2>
-            <div className="crud-list">
+            <div className="crud__list">
                 
                 {(users.state === FetchState.Success || users.state === FetchState.SuccessMany) &&
                     Array.isArray(users.data) &&
                     users.data.map((user) => {
                         const userWithId = user as User;
                         return (
-                            <div key={userWithId.id} className="crud-item">
+                            <div key={userWithId.id} className="crud__item">
                                 <p>
                                     {userWithId.name} ({userWithId.email}) - {userWithId.role}
                                 </p>
-                                <div>
-                                    <button className="crud-button crud-button-edit" onClick={() => handleEdit(userWithId)}>Edit</button>
-                                    <button className="crud-button crud-button-delete" onClick={() => handleDelete({ id: userWithId.id })}>Delete</button>
+                                <div className="crud__buttonGroup">
+                                    <button className="crud__button--edit" onClick={() => handleEdit(userWithId)}>Edit</button>
+                                    <button className="crud__button--delete" onClick={() => handleDelete({ id: userWithId.id })}>Delete</button>
                                 </div>
                             </div>
                         );

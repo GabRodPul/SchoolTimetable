@@ -4,28 +4,26 @@ import { SessionData, Id } from "#common/@types/models";
 import { FetchState } from "../../../types/api";
 import { ApiRts } from "#common/@enums/http";
 import { WorkDay } from "../../../../../common/@enums/models/index";
+import './CrudsStyles.css';
 
 type Session = SessionData & Id;
 
 const SessionCrud: React.FC = () => {
-    const [sessions, api] = useApi<Session>(ApiRts.Session); // API para interactuar con el backend
+    const [sessions, api] = useApi<Session>(ApiRts.Session);
 
     const [selectedSession, setSelectedSession] = useState<Session | null>(null);
     const [formState, setFormState] = useState<Session>({
         id: 0,
-        day: WorkDay.Monday, // Valor por defecto
+        day: WorkDay.Monday,
         classHourId: 0,
-        igtModuleId: 0
+        igtModuleId: 0,
     });
-
-    
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         setFormState((prevState) => ({ ...prevState, [name]: value }));
     };
 
-   // Validación de campos antes de hacer el POST o PUT
     const validateForm = () => {
         const { classHourId, igtModuleId, day } = formState;
         if (classHourId <= 0 || igtModuleId <= 0 || !day) {
@@ -71,10 +69,10 @@ const SessionCrud: React.FC = () => {
     }, []);
 
     return (
-        <div>
-            <h1>Session Management</h1>
+        <div className="crud__container">
+            <h1 className="crud__title">Session Management</h1>
 
-            <div>
+            <div className="crud__form">
                 <h2>{selectedSession ? "Edit Session" : "Create Session"}</h2>
                 <form
                     onSubmit={(e) => {
@@ -86,6 +84,7 @@ const SessionCrud: React.FC = () => {
                         name="day"
                         value={formState.day}
                         onChange={handleInputChange}
+                        className="crud__input"
                     >
                         <option value="Monday">Monday</option>
                         <option value="Tuesday">Tuesday</option>
@@ -100,6 +99,7 @@ const SessionCrud: React.FC = () => {
                         placeholder="Class Hour ID"
                         value={formState.classHourId}
                         onChange={handleInputChange}
+                        className="crud__input"
                     />
                     <input
                         type="number"
@@ -107,26 +107,48 @@ const SessionCrud: React.FC = () => {
                         placeholder="Module ID"
                         value={formState.igtModuleId}
                         onChange={handleInputChange}
+                        className="crud__input"
                     />
-                    <button type="submit">{selectedSession ? "Update" : "Create"}</button>
-                    {selectedSession && <button onClick={() => setSelectedSession(null)}>Cancel</button>}
+                    <button type="submit" className="crud__button">
+                        {selectedSession ? "Update" : "Create"}
+                    </button>
+                    {selectedSession && (
+                        <button
+                            type="button"
+                            onClick={() => setSelectedSession(null)}
+                            className="crud__button--cancel"
+                        >
+                            Cancel
+                        </button>
+                    )}
                 </form>
             </div>
 
-            <div>
-                <h2>Session List</h2>
-                {(sessions.state === FetchState.Success || sessions.state === FetchState.SuccessMany) && 
-                    Array.isArray(sessions.data) && 
+            <h2>Session List</h2>
+            <div className="crud__list">
+                {(sessions.state === FetchState.Success || sessions.state === FetchState.SuccessMany) &&
+                    Array.isArray(sessions.data) &&
                     sessions.data.map((session) => (
-                        <div key={session.id}>
+                        <div key={session.id} className="crud__item">
                             <p>
                                 Day: {session.day} | Class Hour ID: {session.classHourId} | Module ID: {session.igtModuleId}
                             </p>
-                            <button onClick={() => handleEdit(session)}>Edit</button>
-                            <button onClick={() => handleDelete({ id: session.id })}>Delete</button>
+                            <div className="crud__buttonGroup">
+                                <button
+                                    className="crud__button--edit"
+                                    onClick={() => handleEdit(session)}
+                                >
+                                    Edit
+                                </button>
+                                <button
+                                    className="crud__button--delete"
+                                    onClick={() => handleDelete({ id: session.id })}
+                                >
+                                    Delete
+                                </button>
+                            </div>
                         </div>
-                    ))
-                }
+                    ))}
             </div>
         </div>
     );

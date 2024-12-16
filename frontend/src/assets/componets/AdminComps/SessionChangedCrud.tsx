@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useApi } from "../../../api/ApiContext";
-import { SessionChangeData, Id, } from "#common/@types/models";
+import { SessionChangeData, Id } from "#common/@types/models";
 import { FetchState } from "../../../types/api";
 import { ApiRts } from "#common/@enums/http";
 import { WorkDay } from "#common/@enums/models";
+import './CrudsStyles.css';
 
 type SessionChanged = SessionChangeData & Id;
 
@@ -29,7 +30,6 @@ const SessionChangedCrud: React.FC = () => {
         setFormState(prevState => ({ ...prevState, [name]: value }));
     };
 
-    // Validación de campos antes de hacer el POST o PUT
     const validateForm = () => {
         const { sessionId, classHourId, day, startDate, endDate } = formState;
         if (sessionId <= 0 || classHourId <= 0 || !day || !startDate || !endDate) {
@@ -77,10 +77,10 @@ const SessionChangedCrud: React.FC = () => {
     if (sessions.state === FetchState.Error) return <p>Error: {sessions.error?.message}</p>;
 
     return (
-        <div>
-            <h1>Session Changed Management</h1>
+        <div className="crud__container">
+            <h1 className="crud__title">Session Changed Management</h1>
 
-            <div>
+            <div className="crud__form">
                 <h2>{selectedSession ? "Edit Session" : "Create Session"}</h2>
                 <form
                     onSubmit={(e) => {
@@ -94,6 +94,7 @@ const SessionChangedCrud: React.FC = () => {
                         placeholder="Session ID"
                         value={formState.sessionId}
                         onChange={handleInputChange}
+                        className="crud__input"
                     />
                     <input
                         type="number"
@@ -101,11 +102,13 @@ const SessionChangedCrud: React.FC = () => {
                         placeholder="Class Hour ID"
                         value={formState.classHourId}
                         onChange={handleInputChange}
+                        className="crud__input"
                     />
                     <select
                         name="day"
                         value={formState.day}
                         onChange={handleInputChange}
+                        className="crud__input"
                     >
                         {Object.values(WorkDay).map(day => (
                             <option key={day} value={day}>{day}</option>
@@ -117,6 +120,7 @@ const SessionChangedCrud: React.FC = () => {
                         placeholder="Start Date"
                         value={formState.startDate}
                         onChange={handleInputChange}
+                        className="crud__input"
                     />
                     <input
                         type="date"
@@ -124,27 +128,51 @@ const SessionChangedCrud: React.FC = () => {
                         placeholder="End Date"
                         value={formState.endDate}
                         onChange={handleInputChange}
+                        className="crud__input"
                     />
-                    <button type="submit">{selectedSession ? "Update" : "Create"}</button>
-                    {selectedSession && <button onClick={() => setSelectedSession(null)}>Cancel</button>}
+                    <button type="submit" className="crud__button">
+                        {selectedSession ? "Update" : "Create"}
+                    </button>
+                    {selectedSession && (
+                        <button
+                            type="button"
+                            onClick={() => setSelectedSession(null)}
+                            className="crud__button--cancel"
+                        >
+                            Cancel
+                        </button>
+                    )}
                 </form>
             </div>
 
             <div>
                 <h2>Session List</h2>
-                {(sessions.state === FetchState.Success || sessions.state === FetchState.SuccessMany) &&
-                    Array.isArray(sessions.data) && sessions.data.map((session) => {
-                        return (
-                            <div key={session.id}>
-                                <p>
-                                    Session ID: {session.sessionId}, Class Hour ID: {session.classHourId}, Day: {session.day}, Start Date: {session.startDate}, End Date: {session.endDate}
-                                </p>
-                                <button onClick={() => handleEdit(session)}>Edit</button>
-                                <button onClick={() => handleDelete({ id: session.id })}>Delete</button>
-                            </div>
-                        );
-                    })
-                }
+                <div className="crud__list">
+                    {(sessions.state === FetchState.Success || sessions.state === FetchState.SuccessMany) &&
+                        Array.isArray(sessions.data) && sessions.data.map((session) => {
+                            return (
+                                <div key={session.id} className="crud__item">
+                                    <p>
+                                        Session ID: {session.sessionId}, Class Hour ID: {session.classHourId}, Day: {session.day}, Start Date: {session.startDate}, End Date: {session.endDate}
+                                    </p>
+                                    <div className="crud__buttonGroup">
+                                        <button
+                                            className="crud__button--edit"
+                                            onClick={() => handleEdit(session)}
+                                        >
+                                            Edit
+                                        </button>
+                                        <button
+                                            className="crud__button--delete"
+                                            onClick={() => handleDelete({ id: session.id })}
+                                        >
+                                            Delete
+                                        </button>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                </div>
             </div>
         </div>
     );
