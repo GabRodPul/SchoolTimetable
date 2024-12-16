@@ -13,7 +13,7 @@
 }
 
 .crud__form {
-    width: 850px;
+    width: 750px;
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -62,7 +62,7 @@
 }
 
 .crud__list {
-    width: 900px;
+    width: 800px;
     max-height: 300px;
     overflow-y: auto;
     border: 1px solid #ddd;
@@ -165,10 +165,22 @@
     }
 
     .crud__list {
-        width: 400px;
+        width: 300px;
     }
 
     .crud__form {
         width: 350px;
     }
+}
+
+@media (max-width: 1575px) {
+
+    .crud__list {
+        width: 550px;
+    }
+
+    .crud__form {
+        width: 750px;
+    }
+
 }
