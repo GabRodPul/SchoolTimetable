@@ -58,7 +58,6 @@ You can find documentation about all endpoints [here](https://documenter.getpost
 * [Express.js](https://expressjs.com/es/) - Backend web framework
 * [Sequelize](https://sequelize.org/) - ORM
 * [React](https://es.react.dev/) - React
-* [Angular](https://angular.dev/) - Frontend web framework
 * [MySQL](https://www.mysql.com/) - Database
 
 ## Authors ✒️
