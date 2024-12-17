@@ -140,7 +140,11 @@
     }
 }
 
-@media (max-width: 1090px) {
+@media (max-width: 1145px) {
+
+    .desk__menu{
+        display: none;
+    }
 
     .header__mobile {
         display: inherit;
