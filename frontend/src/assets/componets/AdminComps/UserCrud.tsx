@@ -30,8 +30,8 @@ const UserCrud: React.FC = () => {
     };
 
     const validateForm = () => {
-        const { name, email, password, phoneNumber } = formState;
-        if (!name || !email || !password || !phoneNumber) {
+        const { name, email, phoneNumber } = formState;
+        if (!name || !email  || !phoneNumber) {
             alert("All fields are required.");
             return false;
         }
