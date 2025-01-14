@@ -14,7 +14,12 @@ import { ScheduleRoutes } from "./schedule.routes";
 
 type Routes = { init: (app: Express) => void };
 const initApiRoutes = (app: Express) => {
+
+    //Añadir las rutas de las views
+    // require("./routes/motorbike.views.routes")(app);
+    // require("./routes/user.views.routes")(app);
     [
+
         UserRoutes,
         GroupRoutes,
         WarningRoutes,
