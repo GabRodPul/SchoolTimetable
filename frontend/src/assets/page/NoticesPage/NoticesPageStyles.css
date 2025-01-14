@@ -25,6 +25,8 @@
 
 .noticesPage__notifications,
 .noticesPage__reminders {
+    display: flex;
+    flex-direction: column;
     text-align: left;
     width: 420px;
     /* margin-left: 300px; */
@@ -117,7 +119,7 @@
         }
     }
 
-    .noticesPage__notifications {
+    /* .noticesPage__notifications {
         width: 100%;
         display: flex;
         flex-direction: column;

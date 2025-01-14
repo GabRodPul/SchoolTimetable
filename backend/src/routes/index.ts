@@ -13,24 +13,30 @@ import { IGTModuleRoutes } from "./igt-module.routes";
 import { ScheduleRoutes } from "./schedule.routes";
 
 type Routes = { init: (app: Express) => void };
-const initApiRoutes = (app: Express) => {
-    [
-        UserRoutes,
-        GroupRoutes,
-        WarningRoutes,
-        SessionRoutes,
-        ClassHourRoutes,
-        SessionRoutes,
-        SessionsChangedRoutes,
-        EnrollmentRoutes,
-        ModuleRoutes,
-        IGTModuleRoutes,
-        ScheduleRoutes,
-
-        // Auth, given ApiRts enum we better use separate routes
-        SigninRoutes,
-        LoginRoutes,
-    ].forEach(r => r.init(app));
+const initApiRoutes = (app: Express, views: boolean) => {
+    const data = views 
+        ? [
+            
+        ]
+        : [
+            UserRoutes,
+            GroupRoutes,
+            WarningRoutes,
+            SessionRoutes,
+            ClassHourRoutes,
+            SessionRoutes,
+            SessionsChangedRoutes,
+            EnrollmentRoutes,
+            ModuleRoutes,
+            IGTModuleRoutes,
+            ScheduleRoutes,
+    
+            // Auth, given ApiRts enum we better use separate routes
+            SigninRoutes,
+            LoginRoutes,
+        ];
+    
+    data.forEach(r => r.init(app));
 }
 
 export { initApiRoutes };

@@ -8,6 +8,7 @@ import { GoGear } from "react-icons/go";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SearchBar from '#src/assets/componets/CommonComps/SearchBarheader/SearchBarheader';
 import { AuthData } from '#common/@types/models';
+import Header from '../MenuheaderMobile/Header';
 
 function NavigationTab() {
     const location = useLocation();
@@ -43,6 +44,10 @@ function NavigationTab() {
     };
 
     return (
+        <>
+        <div className="header">
+            <Header />
+        </div>
         <div className='navigationTab__body'>
             <div className='navigationTab__header'>
                 <h2 className="navigationTab__currentPage">{pageTitle()}</h2>
@@ -118,6 +123,7 @@ function NavigationTab() {
                 </div >
             </div >
         </div >
+        </>
     );
 }
 

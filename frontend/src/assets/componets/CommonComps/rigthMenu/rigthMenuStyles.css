@@ -1,3 +1,7 @@
+@media (max-width: 767px) {
+  .rigthMenu { display: none; }
+}
+
 .rigthMenu {
   width: 250px;
   padding: 20px 60px;
