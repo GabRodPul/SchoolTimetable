@@ -31,6 +31,8 @@ const initApiRoutes = (app: Express) => {
         SigninRoutes,
         LoginRoutes,
     ].forEach(r => r.init(app));
+
+    // require("./routes/user.views.routes")(app);
 }
 
 export { initApiRoutes };

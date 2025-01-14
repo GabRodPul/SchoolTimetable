@@ -21,6 +21,7 @@ app.use(express.urlencoded({ extended: true })); // content-type: application/x-
 // app.use(cors(corsOptions));
 app.use(cors());
 
+app.set('view engine', 'ejs');
 
 // Authorization middleware
 // app.use(function (req: Request, res: Response, next: NextFunction) {
