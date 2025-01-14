@@ -9,6 +9,8 @@ import { UserRole } from "../../common/@enums/models";
 import { hashSync } from "bcrypt";
 import { dbInit } from "./utils/debug";
 
+import { Application } from "express";
+
 const furl = `http://localhost:${envvars.FEND_PORT}`;
 // console.log(furl)
 // const corsOptions = { origin: furl };
@@ -21,6 +23,7 @@ app.use(express.urlencoded({ extended: true })); // content-type: application/x-
 // app.use(cors(corsOptions));
 app.use(cors());
 
+app.set('view engine', 'ejs');
 
 // Authorization middleware
 // app.use(function (req: Request, res: Response, next: NextFunction) {
@@ -56,7 +59,7 @@ app.use(cors());
 // });
 
 // DB
-dbInit( true ).then();
+dbInit(true).then();
 
 // Routes
 app.get("/", (req: Request, res: Response) => {
@@ -64,6 +67,16 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 initApiRoutes(app);
+
+// require("./routes/views_routes/classHour.views.routes")(app);
+// Importación dinámica del archivo JavaScript
+// (async () => {
+//     const classHourRoutes = await import("./routes/views_ routes/classHour.views.routes");
+//     classHourRoutes.default(app); // Si exporta una función como predeterminada
+// })();
+
+require("./routes/views_routes/classHour.views.routes")(app);
+
 
 const PORT = process.env.PORT ?? 8080;
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
