@@ -1,0 +1,27 @@
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Template</title>
+</head>
+
+<body>
+  <header>
+    <% include ('header.ejs') %> 
+  </header>
+  <h1><%= _backendOn ?? "Backend off" %></h1>
+  <ul>
+    <% for (let i=0; i < _dummyData.length; i++) { %>
+      <li>
+        <%= _dummyData[i].value %>
+      </li>
+    <% } %>
+  </ul>
+  <% if (_dummyNumber >= 5) { %>
+    <p>There's at least 5 entries of dummy data</p>
+    <% } else { %>
+      <p>There's less than 5 entries of dummy data</p>
+  <% } %>
+</body>
+
+</html>
