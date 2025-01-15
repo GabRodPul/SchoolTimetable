@@ -12,6 +12,8 @@ import { ModuleRoutes } from "./module.routes";
 import { IGTModuleRoutes } from "./igt-module.routes";
 import { ScheduleRoutes } from "./schedule.routes";
 
+const groupViewRoutes = require("./view_routes/groupe.views.routes");
+
 type Routes = { init: (app: Express) => void };
 const initApiRoutes = (app: Express) => {
     [
@@ -33,6 +35,8 @@ const initApiRoutes = (app: Express) => {
     ].forEach(r => r.init(app));
 
     // require("./routes/user.views.routes")(app);
+
+    groupViewRoutes(app);
 }
 
 export { initApiRoutes };
