@@ -19,22 +19,20 @@ const findAll = async (req: Request, res: Response) => {
 // Métodos
 export const ClassHourViewsController = Object.freeze({
     //Guardar una hora de clase en la base de datos
-
+    store: async (req: Request, res: Response) => {
+        try {
+            const newClassHour = await ClassHours.create(req.body);
+            res.redirect('/classHours');
+        } catch (err: any) {
+            // We make sure that computeError return ResponseData
+            res.render("error", computeError(err, "Some error occurred while creating the User."));
+        }
+    },
 
 
     // Mostrar el formulario para crear una nueva hora de clase
     showCreateForm: (req: Request, res: Response) => {
         res.render('ClassHour/create');
-    },
-
-    // Crear una nueva hora de clase
-    create: async (req: Request, res: Response) => {
-        try {
-            const newClassHour = await ClassHours.create(req.body);
-            res.redirect('/classHours'); // Redirigir a la lista de horas de clase
-        } catch (err: any) {
-            res.send(resMsg(500, err.message));
-        }
     },
 
     // Mostrar el formulario para editar una hora de clase
