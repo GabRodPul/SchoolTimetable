@@ -8,10 +8,10 @@ function HomeContent() {
     return (
         <div className='HomeContent'>
             <div className="HomeContent__Img1">
-                <img src="/img/HomeDesk.png" alt="Descripción de la imagen" className='imgDesk' />
+                <img src="/img/HomeDesk.png" alt="" className='imgDesk' />
             </div>
             <div className="HomeContent__Img2">
-                <img src="/img/FrontImg.png" alt="Descripción de la imagen" className='imgTablet' />
+                <img src="/img/FrontImg.png" alt="" className='imgTablet' />
             </div>
             <div className="HomeContent__Cards">
                 <HomeCard />
