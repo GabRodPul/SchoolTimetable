@@ -168,7 +168,7 @@
 }
 
 /* - Version desktop - */
-.formalities {
+.formalities__desktop {
     display: flex;
     flex-direction: row;
     width: 100%;
