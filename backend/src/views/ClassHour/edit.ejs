@@ -9,22 +9,22 @@
 
 <body>
   <h1>Edit Class Hour</h1>
-  <form action="/classHours/update/<%= classHour.id %>" method="POST">
+  <form action="/classHour/update/<%= classHour.id %>" method="POST">
     <label for="brand">Brand:</label>
     <input type="text" id="brand" name="brand" value="<%= classHour.turn %>" required>
 
     <label for="sessionHour">Session Hour:</label>
     <input type="text" id="sessionHour" name="sessionHour" value="<%= classHour.sessionHour %>" required>
 
-    <label for="brand">Start:</label>
-    <input type="date" id="start" name="start" value="<%= classHour.start %>" required>
+    <label for="start">Start:</label>
+    <input type="time" id="start" name="start" value="<%= classHour.start %>" required>
 
-    <label for="brand">End:</label>
-    <input type="date" id="end" name="end" value="<%= classHour.start %>" required>
+    <label for="end">End:</label>
+    <input type="time" id="end" name="end" value="<%= classHour.start %>" required>
 
     <button type="submit">Update</button>
   </form>
-  <a href="/motorbikes">Back to List</a>
+  <a href="/classHour">Back to List</a>
 </body>
 
 </html>

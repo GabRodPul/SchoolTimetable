@@ -9,7 +9,7 @@ const ClassHours = DB.classHour;
 const findAll = async (req: Request, res: Response) => {
     try {
         const data = await ClassHours.findAll();
-        res.render('classHours/index', { data });
+        res.render('classHour/index', { data });
     } catch (err: any) {
         res.send(resMsg(500, err.message));
     }
@@ -21,8 +21,9 @@ export const ClassHourViewsController = Object.freeze({
     //Guardar una hora de clase en la base de datos
     store: async (req: Request, res: Response) => {
         try {
-            const newClassHour = await ClassHours.create(req.body);
-            res.redirect('/classHours');
+            const newClassHour = {...req.body};
+            const data = await ClassHours.create(newClassHour);
+            res.redirect('/classHour');
         } catch (err: any) {
             // We make sure that computeError return ResponseData
             res.render("error", computeError(err, "Some error occurred while creating the User."));
@@ -32,7 +33,7 @@ export const ClassHourViewsController = Object.freeze({
 
     // Mostrar el formulario para crear una nueva hora de clase
     showCreateForm: (req: Request, res: Response) => {
-        res.render('classHours/create');
+        res.render('classHour/create');
     },
 
     findAll,
@@ -45,7 +46,7 @@ export const ClassHourViewsController = Object.freeze({
             if (!classHour) {
                 throw new Error(`ClassHour with id ${id} not found`);
             }
-            res.render('classHours/edit', { classHour });
+            res.render('classHour/edit', { classHour });
         } catch (err: any) {
             res.send(resMsg(500, err.message));
         }
@@ -59,7 +60,7 @@ export const ClassHourViewsController = Object.freeze({
             if (!updated) {
                 throw new Error(`ClassHour with id ${id} not found`);
             }
-            res.redirect('/classHours'); // Redirigir a la lista de horas de clase
+            res.redirect('/classHour'); // Redirigir a la lista de horas de clase
         } catch (err: any) {
             res.send(resMsg(500, err.message));
         }
@@ -73,7 +74,7 @@ export const ClassHourViewsController = Object.freeze({
             if (!deleted) {
                 throw new Error(`ClassHour with id ${id} not found`);
             }
-            res.send(resMsg(204, "Successfully deleted!"));
+            res.redirect('/classHour');
         } catch (err: any) {
             res.send(computeError(err, `Some error occurred while deleting classHour with id ${id}`));
         }

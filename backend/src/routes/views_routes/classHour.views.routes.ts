@@ -22,5 +22,5 @@ export const ClassHourViewsRoutes = { init: (app: Express) => {
     // Delete some User with id
     router.post("/delete/:id", ClassHourViewsController.delete );
 
-    app.use("/classHours", router);
+    app.use("/classHour", router);
 }};

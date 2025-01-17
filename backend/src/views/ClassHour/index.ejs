@@ -9,21 +9,21 @@
 
 <body>
   <h1>Class Hour List</h1>
-  <% if (classHours.length> 0) { %>
-  <% classHours.forEach((m)=> { %>
+  <% if (data.length> 0) { %>
+  <% data.forEach((m)=> { %>
   <div class="card">
     <%= m.turn %>
     <%= m.sessionHour %>
     <%= m.start %>
-    <%= m.end %><a href="/classHours/edit/<%= m.id %>">Edit</a>
-    <form action="/classHours/delete/<%= m.id %>" method="POST">
+    <%= m.end %><a href="/classHour/edit/<%= m.id %>">Edit</a>
+    <form action="/classHour/delete/<%= m.id %>" method="POST">
       <input type="submit" value="Delete" />
     </form>
   </div>
   <% }) %>
-  <p><a href="/classHours/create">Add a new Class Hour</a>.</p>
+  <p><a href="/classHour/create">Add a new Class Hour</a>.</p>
   <% } else { %>
-  <p>No Class Hours found. <a href="/classHours/create">Add a new Class Hour</a>.</p>
+  <p>No Class Hours found. <a href="/classHour/create">Add a new Class Hour</a>.</p>
   <% } %>
   <div>
   </div>

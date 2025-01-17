@@ -9,22 +9,22 @@
 
 <body>
   <h1>Create New Create Class</h1>
-  <form action="/classHours/store" method="POST">
+  <form action="/classHour" method="POST">
     <label for="turn">Turn:</label>
     <input type="text" id="turn" name="turn" required>
 
     <label for="sessionHour">Session Hour:</label>
     <input type="text" id="sessionHour" name="sessionHour" required>
 
-    <label for="brand">Start:</label>
-    <input type="date" id="start" name="start" required>
+    <label for="start">Start:</label>
+    <input type="time" id="start" name="start" placeholder="Ej 2000-00-00" required>
 
-    <label for="brand">End:</label>
-    <input type="date" id="end" name="end" required>
+    <label for="end">End:</label>
+    <input type="time" id="end" name="end" placeholder="Ej 2000-00-00" required>
 
     <button type="submit">Create</button>
   </form>
-  <a href="/classHours">Back to List</a>
+  <a href="/classHour">Back to List</a>
 </body>
 
 </html>
