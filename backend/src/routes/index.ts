@@ -12,12 +12,14 @@ import { ModuleRoutes } from "./module.routes";
 import { IGTModuleRoutes } from "./igt-module.routes";
 import { ScheduleRoutes } from "./schedule.routes";
 import { UserViewsRoutes } from "./views_routes/user.views.routes";
+import { AuthViewRoutes } from "./views_routes/auth.views.routes";
 
 type Routes = { init: (app: Express) => void };
 const initApiRoutes = (app: Express, views: boolean) => {
     const data = views 
         ? [
-            UserViewsRoutes
+            UserViewsRoutes,
+            AuthViewRoutes,
         ]
         : [
             UserRoutes,
