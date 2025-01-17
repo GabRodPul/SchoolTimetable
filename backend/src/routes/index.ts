@@ -12,32 +12,37 @@ import { ModuleRoutes } from "./module.routes";
 import { IGTModuleRoutes } from "./igt-module.routes";
 import { ScheduleRoutes } from "./schedule.routes";
 import { UserViewsRoutes } from "./views_routes/user.views.routes";
+import { ClassHourViewsRoutes } from "./views_routes/classHour.views.routes";
 
 type Routes = { init: (app: Express) => void };
 const initApiRoutes = (app: Express, views: boolean) => {
     const data = views 
         ? [
-            UserViewsRoutes
+            UserViewsRoutes,
+            ClassHourViewsRoutes
         ]
         : [
-            UserRoutes,
-            GroupRoutes,
-            WarningRoutes,
-            SessionRoutes,
-            ClassHourRoutes,
-            SessionRoutes,
-            SessionsChangedRoutes,
-            EnrollmentRoutes,
-            ModuleRoutes,
-            IGTModuleRoutes,
-            ScheduleRoutes,
+
+                UserRoutes,
+                GroupRoutes,
+                WarningRoutes,
+                SessionRoutes,
+                ClassHourRoutes,
+                SessionRoutes,
+                SessionsChangedRoutes,
+                EnrollmentRoutes,
+                ModuleRoutes,
+                IGTModuleRoutes,
+                ScheduleRoutes,
     
-            // Auth, given ApiRts enum we better use separate routes
-            SigninRoutes,
-            LoginRoutes,
-        ];
+                // Auth, given ApiRts enum we better use separate routes
+                SigninRoutes,
+                LoginRoutes,
+            ];
     
-    data.forEach(r => r.init(app));
+    data;
+    
+        data.forEach(r => r.init(app));
 }
 
 export { initApiRoutes };
