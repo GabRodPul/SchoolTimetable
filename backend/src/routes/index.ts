@@ -12,7 +12,7 @@ import { ModuleRoutes } from "./module.routes";
 import { IGTModuleRoutes } from "./igt-module.routes";
 import { ScheduleRoutes } from "./schedule.routes";
 
-const groupViewRoutes = require("./view_routes/groupe.views.routes");
+const groupViewRoutes = require("./view_routes/group.views.routes");
 
 type Routes = { init: (app: Express) => void };
 const initApiRoutes = (app: Express) => {

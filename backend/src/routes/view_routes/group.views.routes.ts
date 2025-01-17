@@ -5,25 +5,25 @@ module.exports = app => {
     var router = require("express").Router();
 
     // Save a new Group
-    router.post("/", groups.store);
+    router.post("/", group.store);
 
     // Retrieve all Group
-    router.get("/", groups.index);
+    router.get("/", group.index);
 
     // Show Form to create a new Group
-    router.get("/create", groups.create);
+    router.get("/create", group.create);
 
     // Show Group with id
-    // router.get("/:id", authSession.isAuthenticated, groups.show);
+    // router.get("/:id", authSession.isAuthenticated, group.show);
 
     // Show form to edit Group with id
-    router.get("/edit/:id", groups.edit);
+    router.get("/edit/:id", group.edit);
 
     // Update a Group with id
-    router.post("/update/:id", groups.update);
+    router.post("/update/:id", group.update);
 
     // Delete a Group with id
-    router.post("/delete/:id", groups.destroy);
+    router.post("/delete/:id", group.destroy);
 
     app.use('/groups', router);
 }

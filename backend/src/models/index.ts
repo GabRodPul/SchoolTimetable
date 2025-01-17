@@ -22,6 +22,7 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
 
 const DB = Object.freeze({
     sequelize,
+    Sequelize,
     users:           UserModel.init(sequelize),
     groups:          GroupModel.init(sequelize),
     courses:         CourseModel.init(sequelize),
