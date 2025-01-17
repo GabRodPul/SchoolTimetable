@@ -131,8 +131,8 @@ const EnrollmentCrud: React.FC = () => {
                 </form>
             </div>
 
+            <h2>Enrollment List</h2>
             <div className="crud__list">
-                <h2>Enrollment List</h2>
                 {(enrollments.state === FetchState.Success || enrollments.state === FetchState.SuccessMany) &&
                     Array.isArray(enrollments.data) && enrollments.data.map((enrollment) => {
                         return (

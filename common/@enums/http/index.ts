@@ -11,7 +11,7 @@ export enum ApiRts {
     Warnings    = "warnings",
     Schedule    = "schedule",
     ClassHour   = "classHour",
-    Enrollmet = "enrollment"
+    Enrollmet   = "enrollment"
 }
 
 export enum Method {

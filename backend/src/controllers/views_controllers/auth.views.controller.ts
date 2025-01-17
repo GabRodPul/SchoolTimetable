@@ -1,14 +1,14 @@
 import { NextFunction, Request, Response } from 'express';
 import { compareSync } from 'bcrypt';
 import { verify, JwtPayload } from 'jsonwebtoken';
-import { UserModel } from '../models/user.model';
-import { Id, UserData } from '../../../common/@types/models';
-import utils from '../utils/utils';
-import { resMsg } from '../utils/response';
-import { DB } from '../models';
-import { computeError } from '../utils/error';
-import { envvars } from '../env';
-import { UserRole } from '../../../common/@enums/models';
+import { UserModel } from '../../models/user.model';
+import { Id, UserData } from '../../../../common/@types/models';
+import utils from '../../utils/utils';
+import { resMsg } from '../../utils/response';
+import { DB } from '../../models';
+import { computeError } from '../../utils/error';
+import { envvars } from '../../env';
+import { UserRole } from '../../../../common/@enums/models';
 
 const Users = DB.users;
 
@@ -63,7 +63,7 @@ export const isAuthenticated = async (req: Request, res: Response, next: NextFun
     verify(token, envvars.JWT_SECRET as string, vrfCallback);
 };
 
-export const signin = async (req: Request, res: Response) => {
+export const signinView = async (req: Request, res: Response) => {
     try {
         const data = (await Users.create(req.body)).get({ plain: true });
         const accessToken = utils.generateToken(data);
@@ -74,17 +74,17 @@ export const signin = async (req: Request, res: Response) => {
     }
 };
 
-export const logout = async (req: Request, res: Response) => {
+export const logoutView = async (req: Request, res: Response) => {
     try {
         // Respuesta sencilla para confirmar que el logout fue procesado
         res.send(resMsg(200, "User successfully logged out."));
     } catch (err: any) {
         console.error("Logout error:", err);
-        res.send(computeError(err, "An error occurred while logging out."));
+        res.render("error", computeError(err, "An error occurred while logging out."));
     }
 };
 
-export const login = async (req: Request, res: Response) => {
+export const loginView = async (req: Request, res: Response) => {
     try {
         const { email, password } = req.body;
 

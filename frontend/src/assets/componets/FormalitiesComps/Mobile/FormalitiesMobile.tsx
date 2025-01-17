@@ -5,11 +5,16 @@ import { useApi } from '#src/api/ApiContext';
 import { ApiRts } from '#common/@enums/http';
 import { FetchState } from '#src/types/api';
 import { useNavigate } from 'react-router';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 type Warning = WarningData & Id;
 
 const FormalitiesMobile: React.FC = () => {
     const navigate = useNavigate();
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
+    
     const [warning, api] = useApi<Warning>(ApiRts.Warnings);
     const [selectedWarning, setSelectedWarning] = useState<Warning | null>(null);
     const [formState, setFormState] = useState<Warning>({
@@ -165,27 +170,21 @@ const FormalitiesMobile: React.FC = () => {
                                 />
                             </label>
                             <label>
-                                <p>Fecha inicio</p>
-                                <input
-                                    type="text"
-                                    name="startDate"
-                                    placeholder="Ejemplo: 2000/08/21"
-                                    value={formState.startDate}
-                                    onChange={handleInputChange}
-                                    required
+                                <p>Fecha de Inicio</p>
+                                <DatePicker
+                                    selected={startDate} onChange={(date: any) =>
+                                        setStartDate(date)}
                                 />
                             </label>
                             <label>
-                                <p>Fecha fin</p>
-                                <input
-                                    type="text"
-                                    name="endDate"
-                                    placeholder="Ejemplo: 2000/08/21"
-                                    value={formState.endDate}
-                                    onChange={handleInputChange}
-                                    required
+                                <p>Fecha de Fin</p>
+                                <DatePicker
+                                    selected={endDate} onChange={(date: any) =>
+                                        setEndDate(date)}
+
                                 />
                             </label>
+
                             <button type="submit" className="formalitiesMobile__button">
                                 {selectedWarning ? "Editar" : "Crear"}
                             </button>

@@ -61,22 +61,21 @@ app.use(cors());
 dbInit(true).then();
 
 // Routes
-// Routes
 if (views) {
     app.set('views', './src/views');
     app.set('view engine', 'ejs');
 
     const _dummyData = [
-        { value: "one" },
-        { value: "two" },
-        { value: "three" },
-        { value: "four" },
-        { value: "five" },
+        { value: "one"  },
+        { value: "two"  },
+        { value: "three"  },
+        { value: "four"  },
+        { value: "five"  },
     ];
 
     app.get("/", (req, res) => {
-        res.render('index', {
-            _backendOn: "School Timetable",
+        res.render('index', { 
+            _backendOn: "School Timetable", 
             _dummyData,
             _dummyNumber: _dummyData.length
         });
@@ -86,19 +85,8 @@ if (views) {
         res.json({ message: "Welcome to SchoolTimetable application." })
     });
 }
-// app.get("/", (req: Request, res: Response) => {
-//     res.json({ message: "Welcome to SchoolTimetable application." })
-// });
 
 initApiRoutes(app, views);
-
-// require("./routes/views_routes/classHour.views.routes")(app);
-// Importación dinámica del archivo JavaScript
-// (async () => {
-//     const classHourRoutes = await import("./routes/views_ routes/classHour.views.routes");
-//     classHourRoutes.default(app); // Si exporta una función como predeterminada
-// })();
-
 
 const PORT = process.env.PORT ?? 8080;
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));

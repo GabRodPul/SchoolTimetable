@@ -71,7 +71,9 @@ button:focus-visible {
 @font-face {
   font-family: 'Lexend';
   src: local('Lexend'), url(./assets/fonts/Lexend-Regular.ttf);
+}
 
+@font-face {
   font-family: 'MerriweatherSans';
   src: local('MerriweatherSans'), url(./assets/fonts/MerriweatherSans-VariableFont_wght.ttf);
 }
