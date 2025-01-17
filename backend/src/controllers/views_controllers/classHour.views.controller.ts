@@ -9,7 +9,7 @@ const ClassHours = DB.classHour;
 const findAll = async (req: Request, res: Response) => {
     try {
         const data = await ClassHours.findAll();
-        res.render('ClassHour/index', { data });
+        res.render('classHours/index', { data });
     } catch (err: any) {
         res.send(resMsg(500, err.message));
     }
@@ -32,8 +32,10 @@ export const ClassHourViewsController = Object.freeze({
 
     // Mostrar el formulario para crear una nueva hora de clase
     showCreateForm: (req: Request, res: Response) => {
-        res.render('ClassHour/create');
+        res.render('classHours/create');
     },
+
+    findAll,
 
     // Mostrar el formulario para editar una hora de clase
     showEditForm: async (req: Request, res: Response) => {
@@ -43,7 +45,7 @@ export const ClassHourViewsController = Object.freeze({
             if (!classHour) {
                 throw new Error(`ClassHour with id ${id} not found`);
             }
-            res.render('ClassHour/edit', { classHour });
+            res.render('classHours/edit', { classHour });
         } catch (err: any) {
             res.send(resMsg(500, err.message));
         }
