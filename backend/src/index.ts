@@ -9,6 +9,8 @@ import { UserRole } from "../../common/@enums/models";
 import { hashSync } from "bcrypt";
 import { dbInit } from "./utils/debug";
 
+import session from "express-session"
+
 const furl = `http://localhost:${envvars.FEND_PORT}`;
 // console.log(furl)
 // const corsOptions = { origin: furl };
@@ -71,6 +73,18 @@ if (views) {
         { value: "four"  },
         { value: "five"  },
     ];
+
+    DB.store.sync();
+
+    app.use(session({
+        secret:             envvars.SESSION_SECRET!,
+        store:              DB.store,
+        resave:             false,
+        saveUninitialized:  false,
+        cookie: {
+            maxAge: 24 * 60 * 60 * 1000
+        }
+    }));
 
     app.get("/", (req, res) => {
         res.render('index', { 
