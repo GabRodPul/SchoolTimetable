@@ -7,7 +7,7 @@ const SessionsChangedRoutes = { init: ( app: Express ) => {
     const router = Router();
     
     // Create a new Changed Session
-    router.post( "/", hasRolePermissions(UserRole.Admin), SessionChangedController.create );
+    router.post( "/", hasRolePermissions(UserRole.Head), SessionChangedController.create );
     // router.post( "/", hasRolePermissions(UserRole.Teacher) SessionChangedController.create );
     
     // Retrive all Changed Session
@@ -17,10 +17,10 @@ const SessionsChangedRoutes = { init: ( app: Express ) => {
     router.get( "/:id", SessionChangedController.findByPk );
     
     // Update a Changed Session with id
-    router.put( "/:id", hasRolePermissions(UserRole.Admin), SessionChangedController.update );
+    router.put( "/:id", hasRolePermissions(UserRole.Head), SessionChangedController.update );
     
     // Update a Changed Session with id
-    router.delete( "/:id", hasRolePermissions(UserRole.Admin), SessionChangedController.delete );
+    router.delete( "/:id", hasRolePermissions(UserRole.Head), SessionChangedController.delete );
 
     app.use("/api/session-changed", router);
 }};

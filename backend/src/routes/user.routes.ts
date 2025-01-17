@@ -16,9 +16,9 @@ const UserRoutes = { init: ( app: Express ) => {
     router.get( "/:id", UserController.findByPk );
     
     // Update a User with id
-    router.put( "/:id", UserController.update );
+    router.put( "/:id",hasRolePermissions(UserRole.Admin), UserController.update );
     
-    // Update a User with id
+    // Delete a User with id
     router.delete( "/:id", hasRolePermissions(UserRole.Admin), UserController.delete );
 
     app.use("/api/users", router);

@@ -99,74 +99,53 @@ function NoticesPage() {
     },
   ];
 
-  const toggleHidden = (ref: RefObject<HTMLDivElement>, setState: Dispatch<SetStateAction<boolean>>) => {
-    const shown = ref.current?.style.display !== 'none';
-    setState(shown);
-    ref.current!.style.display = shown ? 'none' : 'block';
+  const toggleSection = (query: string) => {
+    document.querySelector(query);
   }
 
   return (
-    <>
-    <NavigationTab></NavigationTab>
-        <RigthMenu/>
-        <SearchBar />
-        <div className="noticesPage">
-            <div className="noticesPage__notifications">
-              <div className="toggle">
-                <button 
-                  className="toggleButton" 
-                  onClick={() => toggleHidden(notifRef, setNotifShown)}>
-                    Mis Notificaciones
-                { !notifShown && <RiArrowDownSLine />}
-                { notifShown && <RiArrowRightSLine />}
-                </button>
+    <div>
+      <div className="desk__menu">
+        <NavigationTab />
+        <RigthMenu />
+      </div>
+      <div className="header__mobile">
+        <Header/>
+      </div>
+      <div className="noticesPage">
+        <div className="noticesPage__notifications">
+          <h2>Notificaciones</h2>
+          {
+            notices.map(n => (
+              // <NoticeCard 
+              <div className="notifications__entry" key={n.id}>
+                <p className="entry__title">{
+                  `Cambio de Hora ${n.startDate < n.endDate
+                    ? n.startDate
+                    + " - "
+                    + n.endDate
+                    : n.startDate}`
+                }</p>
+                <p>{n.description}</p>
               </div>
-                <h2>Notificaciones</h2>
-                <div className="notifications__entries" ref={notifRef}>
-                { 
-                  notices.map(n => (
-                    // <NoticeCard 
-                    <div className="notifications__entry" key={n.id}>
-                        <p className="entry__title">{ 
-                        `Cambio de Hora ${
-                          n.startDate < n.endDate 
-                          ? n.startDate 
-                          + " - " 
-                          + n.endDate  
-                          : n.startDate }`
-                        }</p>
-                        <p>{ n.description }</p>
-                    </div>
-                ))}
-                </div>
+            ))}
+        </div>
+        <div className="noticesPage__reminders">
+          <h2>Recordatorios</h2>
+          {reminders.map((r, i) =>
+          (<div className="reminders__remEntry" key={i}>
+            <div {...{ kind: r.kind }} className="remEntry__icon remEntry--color">
+              <FaRegBell size={24} />
             </div>
-            <div className="noticesPage__reminders">
-            <div className="toggle">
-                <button 
-                  className="toggleButton" 
-                  onClick={() => toggleHidden(remdrRef, setRemdrShown)}>
-                    Mis Recordatorios
-                  { !remdrShown && <RiArrowDownSLine />}
-                  { remdrShown && <RiArrowRightSLine />}
-                  </button>
-                </div>                
-              <h2>Recordatorios</h2>
-                <div className="reminders__entries" ref={remdrRef}>
-                { reminders.map((r, i) => 
-                (<div className="reminders__remEntry" key={i}>
-                    <div {...{kind: r.kind}} className="remEntry__icon remEntry--color">
-                      <FaRegBell size={24} />
-                    </div>
-                    <div className="remEntry__textContainer">
-                      <p className="remEntry--color" {...{kind: r.kind}}>{ r.kind }</p>
-                      <p>{ r.description + ", " + dateStr(r.date) }</p>
-                    </div>
-                </div>
-                ))}
+            <div className="remEntry__textContainer">
+              <p className="remEntry--color" {...{ kind: r.kind }}>{r.kind}</p>
+              <p>{r.description + ", " + dateStr(r.date)}</p>
             </div>
-          </div>      
-        </div>  
-        </>    
+          </div>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }
 
