@@ -1,0 +1,131 @@
+.hidden { display: none; }
+
+.transactsPage {
+    display: flex;
+}
+
+.transactsPage__reminders h2 {
+    font-weight: 400;
+    border-bottom: 1px solid #DDD6D6;
+}
+
+.transactsPage__transactions {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    width: 420px;
+    margin-left: 300px;
+}
+
+.toggle {
+    display: none;
+}
+
+.transactions__entry {
+    border: 1px solid #ccc;
+    padding-left: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, .3);  
+}
+
+.entry__title {
+    /* LO DE LA FUENTE NO FURULA */
+    /* font-family: 'Lexend'; */
+    color: #9B2BC7;
+    font-weight: 700;
+}
+
+.entry__text {
+
+}
+
+.transactions__entry {
+    display: flex;
+    flex-direction: row;
+}
+
+.entry__icon {
+    display: flex;
+    align-items: center;
+    padding-right: 20px;
+}
+
+.transactEntry--color[kind="On Leave"]    { color: #EB0000; }
+.transactEntry--color[kind="Absence"]    { color: #D2D214; }
+
+@media (max-width: 768px) {
+    .transactsPage {
+        display: block;
+    }
+
+    .transactsPage__transactions {
+        /* margin-left: 20px; */
+        margin: auto;
+    }
+
+    .transactions__entries,
+    .reminders__entries {
+        display: none;
+    }
+
+    .searchContainer {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #e0e0e0;
+
+        .searchBar {
+            margin: 20px 0;
+            background-color: #ffff;
+            width: 80%;
+            display: flex;
+            justify-content: start;
+            align-items: baseline;
+            border: 1px solid #000000;
+            box-sizing: border-box;
+            border-radius: 50px;
+            overflow: hidden;
+
+            .searchIcon {
+                margin: 0 10px;
+                height: 100%;
+            }
+
+            .inputNotice {
+                outline: none;
+                width: 100%;
+                font-size: 12px;
+                color: #000000;
+                border: none;
+                font-size: 12pt;
+            }
+        }
+    }
+
+    /* .transactsPage__transactions{
+        display: none;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        gap: 1px;
+        color: red;
+        font-family: 'Lexend', sans-serif;
+    } */
+    h2 { display: none; }
+
+    .toggle { 
+        display: block;
+    }
+
+    .toggleButton {
+        width: 100%;
+        font-size: 18px;
+        background-color: #FFF;
+        font-family: 'Lexend';
+
+        border: none;
+        /* border-bottom: 2px solid #000; */
+        height: 60px;
+    }
+}
