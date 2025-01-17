@@ -15,10 +15,10 @@ import { UserViewsRoutes } from "./views_routes/user.views.routes";
 import { ClassHourViewsRoutes } from "./views_routes/classHour.views.routes";
 
 type Routes = { init: (app: Express) => void };
-const initApiRoutes = (app: Express, views: boolean, views: boolean) => {
+const initApiRoutes = (app: Express, views: boolean) => {
     const data = views 
         ? [
-            UserViewsRoutes
+            UserViewsRoutes,
             ClassHourViewsRoutes
         ]
         : [
