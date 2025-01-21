@@ -238,15 +238,15 @@ function profile() {
 							</div>
 							<div className="PflContent__GeneralInfo">
 								<div className="generalInfo__title">
-									<p className='section__title'>Información general</p>
+									<h4 className='section__title'>Información general</h4>
 								</div>
 								<div className="generalInfo__titles">
 									<div className="titles_content">
 										<div className="titles__data">
-											<p className='subsection__title'>Mis Datos</p>
+											<h5 className='subsection__title'>Mis Datos</h5>
 										</div>
 										<div className="titles__edit">
-											<p className='subsection__title'>Editar Perfil</p>
+											<h5 className='subsection__title'>Editar Perfil</h5>
 										</div>
 									</div>
 								</div>
@@ -326,7 +326,7 @@ function profile() {
 									</div>
 								</div>
 								<div className="generalInfo__title">
-									<p className='section__title'>Mis Módulos</p>
+									<h4 className='section__title'>Mis Módulos</h4>
 								</div>
 								<div className="generalInfo__data">
 									<div className="info__ModulesData">
