@@ -1,0 +1,26 @@
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Error</title>
+</head>
+
+<body>
+  <header>
+    <% include ('header.ejs') %> 
+  </header>
+  <h1>Error <%= code %></h1>
+  <% if (code === 400 && errors !== undefined) { %>
+    <ul>
+        <% for (let i=0; i < errors.length; i++) { %>
+          <li>
+            <%= errors[i] %>
+          </li>
+        <% } %>
+      </ul>  
+  <% } else { %>
+      <p><%= message %></p>
+  <% } %>
+</body>
+
+</html>

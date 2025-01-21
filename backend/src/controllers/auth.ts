@@ -135,8 +135,8 @@ export const hasRolePermissions = (role: UserRole) => {
                 return;
             }
 
-            const user = decoded as JwtPayload;
-            if (!user.email) {
+            const user = decoded as JwtPayload; 
+            if (!user.email) {  
                 res.send(resMsg(401, "Invalid token payload."));
                 return;
             }

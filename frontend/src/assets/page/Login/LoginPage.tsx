@@ -71,7 +71,7 @@ function LoginPageForm() {
           <h2>Inicia sesión con tu cuenta</h2>
 
           <button className="LoginGoogleButton">
-            <img src="/img/LogoGoogle.png" alt="Google logo" />
+            <img src="/img/LogoGoogle.png" alt="Logo de Google" />
             <p>Continuar con Google</p>
           </button>
           

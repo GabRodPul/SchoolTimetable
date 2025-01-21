@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User List</title>
+</head>
+
+<body>
+  <h1>User List</h1>
+  <a href="/users/create">Create</a>
+  <% if (data.length> 0) { %>
+    <% data.forEach((u)=> { %>
+      <div class="card">
+          <%= u.name %>
+          <%= u.email %>
+          <%= u.phoneNumber %>
+          <%= u.role %>
+          <%= u.image ?? "NO IMAGE" %>
+          <a href="/users/edit/<%= u.id %>">Edit</a>
+          <form action="/users/delete/<%= u.id %>" method="POST">
+            <input type="submit" value="Delete" />
+          </form>
+      </div>
+      <% }) %>
+        <p><a href="/users/create">Add a new user</a>.</p>
+        <% } else { %>
+          <p>No users found. <a href="/users/create">Add a new user</a>.</p>
+          <% } %>
+            <div>
+              <form action="/users/logout" method="POST">
+                <button type="submit">Logout</button>
+              </form>
+            </div>
+
+</body>
+
+</html>

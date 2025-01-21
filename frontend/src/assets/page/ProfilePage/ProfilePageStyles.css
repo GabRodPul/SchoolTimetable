@@ -1,4 +1,5 @@
 /* --- Versión Desktop --- */
+/* Arreglar cosas a futuro */
 .profilepage__desktop {
     font-family: 'MerriweatherSans', sans-serif;
 }
@@ -12,7 +13,7 @@
 .PflContent__Info {
     display: flex;
     flex-direction: column;
-    width: 137vh;
+    width: 100%;
 }
 
 .PflContent__ProfileCard {
@@ -21,7 +22,6 @@
     justify-items: center;
     margin-left: 250px;
     margin-top: 1px;
-    width: 100%;
     height: 264px;
     background-color: #004B84;
     gap: 30px;
@@ -42,7 +42,7 @@
     flex-direction: column;
     justify-content: flex-start;
     text-align: left;
-    margin-top: 100px;
+    margin-top: 3.7%;
     color: #ffffff;
     gap: 10px;
 }
@@ -57,14 +57,12 @@
 }
 
 .PflContent__GeneralInfo {
-    width: 131vh;
     margin-left: 250px;
 }
 
 .generalInfo__title {
-    display: flex;
-    height: 60px;
     border-bottom: 1px solid #E3E6EC;
+    width: 100%;
 }
 
 .generalInfo__title .section__title {
@@ -83,7 +81,7 @@
 .titles_content {
     display: flex;
     flex-direction: row;
-    width: 100%;
+    width: 72%;
     justify-content: space-around;
 
 }
@@ -92,6 +90,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    width: 72%;
 }
 
 .info__userData {
@@ -143,10 +142,8 @@
 
 .info__ModulesData {
     display: flex;
-    flex-direction: row;
-    gap: 50px;
-    text-align: left;
     justify-content: space-around;
+    width: 72%;
 }
 
 .P_rightsidemenu {
