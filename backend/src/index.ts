@@ -13,7 +13,7 @@ const furl = `http://localhost:${envvars.FEND_PORT}`;
 // console.log(furl)
 // const corsOptions = { origin: furl };
 const jwt = require('jsonwebtoken');
-const views = true;
+const views = envvars.BEND_VIEWS === '1';
 
 // Config
 const app = express();
