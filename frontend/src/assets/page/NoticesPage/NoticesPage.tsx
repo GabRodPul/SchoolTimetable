@@ -2,7 +2,6 @@
 import { FaSearch } from "react-icons/fa";
 import './NoticesPageStyles.css'
 import NoticeCard from '../../componets/Cards/NoticeCard/NoticeCard'
-import { FaSearch } from 'react-icons/fa';
 import { Dispatch, Ref, RefObject, SetStateAction, useRef, useState } from 'react';
 import { Id, WarningData } from '#common/@types/models';
 import NavigationTab from "#src/assets/componets/CommonComps/navigationTab/NavigationTab";
@@ -13,6 +12,7 @@ import { useApi } from "#src/api/ApiContext";
 import RigthMenu from "#src/assets/componets/CommonComps/rigthMenu/rigthMenu";
 import { ApiRts } from "#common/@enums/http";
 import SearchBar from "#src/assets/componets/CommonComps/SearchBarheader/SearchBarheader";
+import Header from "#src/assets/componets/CommonComps/MenuheaderMobile/Header";
 
 enum ReminderKind {
   Exam = "Exam",
