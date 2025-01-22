@@ -1,29 +1,26 @@
-module.exports = app => {
+import { Express, Router } from "express";
+import { GroupViewsController } from "../../controllers/views_controllers/groups.views.controller";
 
-    const group = require("../../controllers/views_controllers/group.views.controller");
-
-    var router = require("express").Router();
-
+export const GroupViewsRoutes = { init: (app: Express) => {
+    const router = Router();
+    
     // Save a new Group
-    router.post("/", group.store);
+    router.post("/",  GroupViewsController.store );
 
-    // Retrieve all Group
-    router.get("/", group.index);
+    // Retrive all Groups
+    router.get("/", GroupViewsController.findAll );
 
     // Show Form to create a new Group
-    router.get("/create", group.create);
+    router.get("/create", GroupViewsController.showCreateForm );
 
-    // Show Group with id
-    // router.get("/:id", authSession.isAuthenticated, group.show);
+    // Show Form to edit Group with id
+    router.get("/edit/:id", GroupViewsController.showEditForm );
 
-    // Show form to edit Group with id
-    router.get("/edit/:id", group.edit);
+    // Update some Group with id
+    router.post("/update/:id", GroupViewsController.update );
 
-    // Update a Group with id
-    router.post("/update/:id", group.update);
+    // Delete some Group with id
+    router.post("/delete/:id", GroupViewsController.destroy );
 
-    // Delete a Group with id
-    router.post("/delete/:id", group.destroy);
-
-    app.use('/groups', router);
-}
+    app.use("/groups", router);
+}};

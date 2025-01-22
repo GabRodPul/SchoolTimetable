@@ -13,6 +13,7 @@ const furl = `http://localhost:${envvars.FEND_PORT}`;
 // console.log(furl)
 // const corsOptions = { origin: furl };
 const jwt = require('jsonwebtoken');
+const views = true;
 
 // Config
 const app = express();
@@ -60,11 +61,32 @@ app.set('view engine', 'ejs');
 dbInit( true ).then();
 
 // Routes
-app.get("/", (req: Request, res: Response) => {
-    res.json({ message: "Welcome to SchoolTimetable application." })
-});
+if (views) {
+    app.set('views', './src/views');
+    app.set('view engine', 'ejs');
 
-initApiRoutes(app);
+    const _dummyData = [
+        { value: "one"  },
+        { value: "two"  },
+        { value: "three"  },
+        { value: "four"  },
+        { value: "five"  },
+    ];
+
+    app.get("/", (req, res) => {
+        res.render('index', { 
+            _backendOn: "School Timetable", 
+            _dummyData,
+            _dummyNumber: _dummyData.length
+        });
+    });
+} else {
+    app.get("/", (req: Request, res: Response) => {
+        res.json({ message: "Welcome to SchoolTimetable application." })
+    });
+}
+
+initApiRoutes(app, views);
 
 const PORT = process.env.PORT ?? 8080;
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
