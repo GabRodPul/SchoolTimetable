@@ -13,6 +13,7 @@ const furl = `http://localhost:${envvars.FEND_PORT}`;
 // console.log(furl)
 // const corsOptions = { origin: furl };
 const jwt = require('jsonwebtoken');
+const views = envvars.BEND_VIEWS === '1';
 
 // Config
 const app = express();
@@ -21,22 +22,23 @@ app.use(express.urlencoded({ extended: true })); // content-type: application/x-
 // app.use(cors(corsOptions));
 app.use(cors());
 
+// app.set('view engine', 'ejs');
 
 // Authorization middleware
 // app.use(function (req: Request, res: Response, next: NextFunction) {
 //     // Check header or URL
 //     let token = req.headers['authorization'];
 //     if (!token) return next(); // If no token, continue
-// 
+
 //     if (req.headers.authorization?.indexOf('Basic ') === 0) {
 //         // Verify auth basic credentials
 //         const base64Credentials = req.headers.authorization.split(' ')[1];
 //         const credentials = Buffer.from(base64Credentials, 'base64').toString('ascii');
 //         const [username, password] = credentials.split(':');
-// 
+
 //         req.body.username = username;
 //         req.body.password = password;
-// 
+
 //         return next();
 //     }
 //     token = token.replace('Bearer ', '');
@@ -56,14 +58,35 @@ app.use(cors());
 // });
 
 // DB
-dbInit( true ).then();
+dbInit(true).then();
 
 // Routes
-app.get("/", (req: Request, res: Response) => {
-    res.json({ message: "Welcome to SchoolTimetable application." })
-});
+if (views) {
+    app.set('views', './src/views');
+    app.set('view engine', 'ejs');
 
-initApiRoutes(app);
+    const _dummyData = [
+        { value: "one"  },
+        { value: "two"  },
+        { value: "three"  },
+        { value: "four"  },
+        { value: "five"  },
+    ];
+
+    app.get("/", (req, res) => {
+        res.render('index', { 
+            _backendOn: "School Timetable", 
+            _dummyData,
+            _dummyNumber: _dummyData.length
+        });
+    });
+} else {
+    app.get("/", (req: Request, res: Response) => {
+        res.json({ message: "Welcome to SchoolTimetable application." })
+    });
+}
+
+initApiRoutes(app, views);
 
 const PORT = process.env.PORT ?? 8080;
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));

@@ -2,15 +2,17 @@
 import { FaSearch } from "react-icons/fa";
 import './NoticesPageStyles.css'
 import NoticeCard from '../../componets/Cards/NoticeCard/NoticeCard'
-import { useState } from 'react';
+import { FaSearch } from 'react-icons/fa';
+import { Dispatch, Ref, RefObject, SetStateAction, useRef, useState } from 'react';
 import { Id, WarningData } from '#common/@types/models';
 import NavigationTab from "#src/assets/componets/CommonComps/navigationTab/NavigationTab";
 import { FaRegBell } from "react-icons/fa";
+import { RiArrowUpSLine, RiArrowDownSLine, RiArrowRightSLine } from "react-icons/ri";
+import { MdOutlineArrowForwardIos } from "react-icons/md";
 import { useApi } from "#src/api/ApiContext";
 import RigthMenu from "#src/assets/componets/CommonComps/rigthMenu/rigthMenu";
 import { ApiRts } from "#common/@enums/http";
-import Header from "#src/assets/componets/CommonComps/MenuheaderMobile/Header";
-import { IoIosArrowForward } from "react-icons/io";
+import SearchBar from "#src/assets/componets/CommonComps/SearchBarheader/SearchBarheader";
 
 enum ReminderKind {
   Exam = "Exam",
@@ -28,6 +30,13 @@ type ReminderData = {
 const dateStr = (d: Date) => d.toJSON().slice(0, 10);
 
 function NoticesPage() {
+  let init = false;
+  const notifRef = useRef(null),
+    remdrRef = useRef(null);
+
+  const [notifShown, setNotifShown] = useState(false),
+    [remdrShown, setRemdrShown] = useState(false);
+
   const [fetchRsrc, api] = useApi<WarningData>(ApiRts.Warnings);
 
   const notices: Omit<WarningData & Id, "teacherId">[] = [

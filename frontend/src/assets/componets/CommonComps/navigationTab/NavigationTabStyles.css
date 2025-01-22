@@ -1,3 +1,11 @@
+@media (max-width: 767px) {
+    .navigationTab__body { display: none; }
+}
+
+@media (min-width: 768px) {
+    .header { display: none; }
+}
+
 .navigationTab__body::after {
  margin-left: 250px;
 }
@@ -77,7 +85,7 @@
     position: fixed;
 }
 
-.navigationTab__side-menuHeader {
+.navigationTab__side-menuHeader{
     font-size: 24px;
     padding: 20px;
     color: #495057;
@@ -101,11 +109,11 @@
     border: none;
     background: none;
     text-align: left;
-    font-size: 18px;
+    font-size: 16px;
     color: #495057;
     display: flex;
     align-items: center;
-    gap: 30px;
+    gap: 25px;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
     font-family: MerriweatherSans, sans-serif;
