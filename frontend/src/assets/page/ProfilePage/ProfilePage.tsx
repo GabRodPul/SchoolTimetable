@@ -368,13 +368,13 @@ function profile() {
 
                     <div className="titles__data">
 
-                      <h5>Mis Datos</h5>
+                      <h4>Mis Datos</h4>
 
                     </div>
 
                     <div className="titles__edit">
 
-                      <h5>Editar Perfil</h5>
+                      <h4>Editar Perfil</h4>
 
                     </div>
 
@@ -540,7 +540,7 @@ function profile() {
 
                 <div className="generalInfo__title">
 
-                  <h5>Mis Módulos</h5>
+                  <h3>Mis Módulos</h3>
 
                 </div>
 
