@@ -96,10 +96,10 @@ const WarningCrud: React.FC = () => {
 
     return (
         <div className="crud__container">
-            <h1 className="crud__title">Formulario de Advertencias</h1>
+            <h1 className="crud__title">Formulario de Avisos</h1>
 
             <div className="crud__form">
-                <h2>{selectedWarning ? "Editar Advertencia" : "Crear Advertencia"}</h2>
+                <h2>{selectedWarning ? "Editar" : "Crear"} Aviso</h2>
                 <form
                     onSubmit={(e) => {
                         e.preventDefault();
@@ -109,7 +109,7 @@ const WarningCrud: React.FC = () => {
                     <input
                         type="number"
                         name="teacherId"
-                        placeholder="ID del Profesor"
+                        placeholder="ID Profe"
                         value={formState.teacherId}
                         onChange={handleInputChange}
                         className="crud__input"
@@ -135,7 +135,7 @@ const WarningCrud: React.FC = () => {
                     <input
                         type="date"
                         name="endDate"
-                        placeholder="Fecha de Fin"
+                        placeholder="Fecha de Finalización"
                         value={formState.endDate}
                         onChange={handleInputChange}
                         className="crud__input"
@@ -153,7 +153,7 @@ const WarningCrud: React.FC = () => {
                     <input
                         type="time"
                         name="endHour"
-                        placeholder="Hora de Fin"
+                        placeholder="Hora de Finalización"
                         value={formState.endHour}
                         onChange={handleInputChange}
                         className="crud__input"
@@ -174,7 +174,7 @@ const WarningCrud: React.FC = () => {
                 </form>
             </div>
 
-            <h2>Listado de Advertencias</h2>
+            <h2>Listado de Avisos</h2>
             <div className="crud__list">
                 {(warnings.state === FetchState.Success || warnings.state === FetchState.SuccessMany) &&
                     Array.isArray(warnings.data) &&

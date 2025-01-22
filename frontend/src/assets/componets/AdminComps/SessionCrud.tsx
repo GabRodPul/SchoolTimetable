@@ -5,6 +5,7 @@ import { FetchState } from "../../../types/api";
 import { ApiRts } from "#common/@enums/http";
 import { WorkDay } from "../../../../../common/@enums/models/index";
 import './CrudsStyles.css';
+import { translate } from "../../../_translation";
 
 type Session = SessionData & Id;
 
@@ -62,7 +63,7 @@ const SessionCrud: React.FC = () => {
         setFormState(session);
     };
 
-    if (sessions.state === FetchState.Loading) return <p>Loading...</p>;
+    if (sessions.state === FetchState.Loading) return <p>Cargando...</p>;
     if (sessions.state === FetchState.Error) return <p>Error: {sessions.error?.message}</p>;
 
     useEffect(() => {
@@ -71,10 +72,10 @@ const SessionCrud: React.FC = () => {
 
     return (
         <div className="crud__container">
-            <h1 className="crud__title">Session Management</h1>
+            <h1 className="crud__title">Gestión de Sesiones</h1>
 
             <div className="crud__form">
-                <h2>{selectedSession ? "Edit Session" : "Create Session"}</h2>
+                <h2>{selectedSession ? "Editar" : "Crear"} Sesión</h2>
                 <form
                     onSubmit={(e) => {
                         e.preventDefault();
@@ -87,11 +88,11 @@ const SessionCrud: React.FC = () => {
                         onChange={handleInputChange}
                         className="crud__input"
                     >
-                        <option value="Monday">Monday</option>
-                        <option value="Tuesday">Tuesday</option>
-                        <option value="Wednesday">Wednesday</option>
-                        <option value="Thursday">Thursday</option>
-                        <option value="Friday">Friday</option>
+                        <option value="MONDAY">Lunes</option>
+                        <option value="TUESDAY">Martes</option>
+                        <option value="WEDNESDAY">Miércoles</option>
+                        <option value="THURSDAY">Jueves</option>
+                        <option value="FRIDAY">Viernes</option>
                     </select>
 
                     <input
@@ -111,7 +112,7 @@ const SessionCrud: React.FC = () => {
                         className="crud__input"
                     />
                     <button type="submit" className="crud__button">
-                        {selectedSession ? "Update" : "Create"}
+                        {selectedSession ? "Editar" : "Crear"}
                     </button>
                     {selectedSession && (
                         <button
@@ -119,33 +120,33 @@ const SessionCrud: React.FC = () => {
                             onClick={() => setSelectedSession(null)}
                             className="crud__button--cancel"
                         >
-                            Cancel
+                            Cancelar
                         </button>
                     )}
                 </form>
             </div>
 
-            <h2>Session List</h2>
+            <h2>Listado de Sesiones</h2>
             <div className="crud__list">
                 {(sessions.state === FetchState.Success || sessions.state === FetchState.SuccessMany) &&
                     Array.isArray(sessions.data) &&
                     sessions.data.map((session) => (
                         <div key={session.id} className="crud__item">
                             <p>
-                                Day: {session.day} | Class Hour ID: {session.classHourId} | Module ID: {session.igtModuleId}
+                                Día: {translate.workDay(session.day)} | ID Hora de Clase: {session.classHourId} | ID Módulo: {session.igtModuleId}
                             </p>
                             <div className="crud__buttonGroup">
                                 <button
                                     className="crud__button--edit"
                                     onClick={() => handleEdit(session)}
                                 >
-                                    Edit
+                                    Editar
                                 </button>
                                 <button
                                     className="crud__button--delete"
                                     onClick={() => handleDelete({ id: session.id })}
                                 >
-                                    Delete
+                                    Eliminar
                                 </button>
                             </div>
                         </div>

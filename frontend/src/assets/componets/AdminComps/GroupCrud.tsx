@@ -73,15 +73,15 @@ const GroupCrud: React.FC = () => {
         setFormState(group);
     };
 
-    if (groups.state === FetchState.Loading) return <p>Loading...</p>;
+    if (groups.state === FetchState.Loading) return <p>Cargando...</p>;
     if (groups.state === FetchState.Error) return <p>Error: {groups.error?.message}</p>;
 
     return (
         <div className="crud__container">
-            <h1 className="crud__title">Group Management</h1>
+            <h1 className="crud__title">Gestión de Grupos</h1>
 
             <div className="crud__form">
-                <h2>{selectedGroup ? "Edit Group" : "Create Group"}</h2>
+                <h2>{selectedGroup ? "Editar Grupo" : "Crear Grupo"}</h2>
                 <form
                     onSubmit={(e) => {
                         e.preventDefault();
@@ -91,13 +91,13 @@ const GroupCrud: React.FC = () => {
                     <input
                         type="text"
                         name="name"
-                        placeholder="Group Name"
+                        placeholder="Nombre del Grupo"
                         value={formState.name}
                         onChange={handleInputChange}
                         className="crud__input"
                     />
                     <button type="submit" className="crud__button">
-                        {selectedGroup ? "Update" : "Create"}
+                        {selectedGroup ? "Editar" : "Crear"}
                     </button>
                     {selectedGroup && (
                         <button
@@ -105,32 +105,32 @@ const GroupCrud: React.FC = () => {
                             onClick={() => setSelectedGroup(null)}
                             className="crud__button--cancel"
                         >
-                            Cancel
+                            Cancelar
                         </button>
                     )}
                 </form>
             </div>
 
             <div>
-                <h2>Group List</h2>
+                <h2>Listado de Grupos</h2>
                 <div className="crud__list">
                     {(groups.state === FetchState.Success || groups.state === FetchState.SuccessMany) &&
                         Array.isArray(groups.data) &&
                         groups.data.map((group) => (
                             <div key={group.id} className="crud__item">
-                                <p><strong>Name:</strong> {group.name}</p>
+                                <p><strong>Nombre:</strong> {group.name}</p>
                                 <div className="crud__buttonGroup">
                                     <button
                                         onClick={() => handleEdit(group)}
                                         className="crud__button--edit"
                                     >
-                                        Edit
+                                        Editar
                                     </button>
                                     <button
                                         onClick={() => handleDelete({ id: group.id })}
                                         className="crud__button--delete"
                                     >
-                                        Delete
+                                        Borrar
                                     </button>
                                 </div>
                             </div>

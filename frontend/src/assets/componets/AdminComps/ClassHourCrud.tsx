@@ -87,15 +87,15 @@ const ClassHourCrud: React.FC = () => {
         setFormState(classHour);
     };
 
-    if (classHours.state === FetchState.Loading) return <p>Loading...</p>;
+    if (classHours.state === FetchState.Loading) return <p>Cargando...</p>;
     if (classHours.state === FetchState.Error) return <p>Error: {classHours.error?.message}</p>;
 
     return (
         <div className="crud__container">
-            <h1 className="crud__title">Class Hour Management</h1>
+            <h1 className="crud__title">Gestión de Horas de Clase</h1>
 
             <div className="crud__form">
-                <h2>{selectedClassHour ? "Edit Class Hour" : "Create Class Hour"}</h2>
+                <h2>{selectedClassHour ? "Editar Class Hour" : "Crear Class Hour"}</h2>
                 <form
                     onSubmit={(e) => {
                         e.preventDefault();
@@ -108,9 +108,9 @@ const ClassHourCrud: React.FC = () => {
                         onChange={handleTurnChange}
                         className="crud__select"
                     >
-                        <option value={Turn.Morning}>Morning</option>
-                        <option value={Turn.Afternoon}>Afternoon</option>
-                        <option value={Turn.Evening}>Evening</option>
+                        <option value={Turn.Morning}>Mañana</option>
+                        <option value={Turn.Afternoon}>Tarde</option>
+                        <option value={Turn.Evening}>Noche</option>
                     </select>
 
                     <select
@@ -129,7 +129,7 @@ const ClassHourCrud: React.FC = () => {
                     <input
                         type="time"
                         name="start"
-                        placeholder="Start Time"
+                        placeholder="Hora de Inicio"
                         value={formState.start}
                         onChange={handleInputChange}
                         className="crud__input"
@@ -138,14 +138,14 @@ const ClassHourCrud: React.FC = () => {
                     <input
                         type="time"
                         name="end"
-                        placeholder="End Time"
+                        placeholder="Hora de Finalización"
                         value={formState.end}
                         onChange={handleInputChange}
                         className="crud__input"
                     />
 
                     <button type="submit" className="crud__button">
-                        {selectedClassHour ? "Update" : "Create"}
+                        {selectedClassHour ? "Editar" : "Crear"}
                     </button>
                     {selectedClassHour && (
                         <button
@@ -153,14 +153,14 @@ const ClassHourCrud: React.FC = () => {
                             onClick={() => setSelectedClassHour(null)}
                             className="crud__button--cancel"
                         >
-                            Cancel
+                            Cancelar
                         </button>
                     )}
                 </form>
             </div>
 
             <div className="crud__list">
-                <h2>Class Hour List</h2>
+                <h2>Listado de Horas de Clase</h2>
                 {(classHours.state === FetchState.Success || classHours.state === FetchState.SuccessMany) &&
                     Array.isArray(classHours.data) && classHours.data.map((classHour) => (
                         <div key={classHour.id} className="crud__item">
@@ -172,13 +172,13 @@ const ClassHourCrud: React.FC = () => {
                                     className="crud__button--edit"
                                     onClick={() => handleEdit(classHour)}
                                 >
-                                    Edit
+                                    Editar
                                 </button>
                                 <button
                                     className="crud__button--delete"
                                     onClick={() => handleDelete({ id: classHour.id })}
                                 >
-                                    Delete
+                                    Eliminar
                                 </button>
                             </div>
                         </div>
