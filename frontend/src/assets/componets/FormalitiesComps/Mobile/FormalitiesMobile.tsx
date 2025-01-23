@@ -117,7 +117,7 @@ const FormalitiesMobile: React.FC = () => {
         setFormState(warnings); // Establecer los datos del trámite en el formulario para editar
     };
 
-    // if (warning.state === FetchState.Loading) return <p>Loading...</p>;
+    // if (warning.state === FetchState.Loading) return <p>Cargando...</p>;
     // if (warning.state === FetchState.Error) return <p>Error: {warning.error?.message}</p>;
 
     return (
