@@ -1,7 +1,9 @@
-import { defineConfig, loadEnv } from 'vite'
+import { loadEnv } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 // import { fileURLToPath } from 'url'
 import path from 'path'
+import { defineConfig } from 'vitest/config'
+
 
 const __dirname = path.dirname(__filename);
 
