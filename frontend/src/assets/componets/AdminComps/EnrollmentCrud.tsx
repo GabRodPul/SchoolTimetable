@@ -56,7 +56,7 @@ const EnrollmentCrud: React.FC = () => {
             setFormState({ id: 0, studentId: 0, moduleId: 0 });
             api.getAll();
         }).catch((error) => {
-            console.error("Error al actualizar la inscripción:", error);
+            console.error("Error al actualizar la matrícula:", error);
         });
     };
 
@@ -64,7 +64,7 @@ const EnrollmentCrud: React.FC = () => {
         api.delete(id).then(() => {
             api.getAll();
         }).catch((error) => {
-            console.error("Error al borrar la inscripción:", error);
+            console.error("Error al borrar la matrícula:", error);
         });
     };
 
@@ -73,15 +73,15 @@ const EnrollmentCrud: React.FC = () => {
         setFormState(enrollment);
     };
 
-    if (enrollments.state === FetchState.Loading) return <p>Loading...</p>;
+    if (enrollments.state === FetchState.Loading) return <p>Cargando...</p>;
     if (enrollments.state === FetchState.Error) return <p>Error: {enrollments.error?.message}</p>;
 
     return (
         <div className="crud__container">
-            <h1 className="crud__title">Enrollment Management</h1>
+            <h1 className="crud__title">Gestión de Matrículas</h1>
 
             <div className="crud__form">
-                <h2>{selectedEnrollment ? "Edit Enrollment" : "Create Enrollment"}</h2>
+                <h2>{selectedEnrollment ? "Editar" : "Crear"} Matrícula</h2>
                 <form
                     onSubmit={(e) => {
                         e.preventDefault();
@@ -94,7 +94,7 @@ const EnrollmentCrud: React.FC = () => {
                         onChange={handleInputChange}
                         className="crud__input"
                     >
-                        <option value={0}>Select Student</option>
+                        <option value={0}>Elija Estudiante</option>
                         {/* {students.map(student => (
                             <option key={student.id} value={student.id}>
                                 {student.name} ({student.email}) - {student.phoneNumber}
@@ -108,7 +108,7 @@ const EnrollmentCrud: React.FC = () => {
                         onChange={handleInputChange}
                         className="crud__input"
                     >
-                        <option value={0}>Select Module</option>
+                        <option value={0}>Elija Módulo</option>
                         {/* {modules.map(module => (
                             <option key={module.id} value={module.id}>
                                 {module.name} ({module.name})
@@ -117,7 +117,7 @@ const EnrollmentCrud: React.FC = () => {
                     </select>
 
                     <button type="submit" className="crud__button">
-                        {selectedEnrollment ? "Update" : "Create"}
+                        {selectedEnrollment ? "Editar" : "Crear"}
                     </button>
                     {selectedEnrollment && (
                         <button
@@ -125,24 +125,24 @@ const EnrollmentCrud: React.FC = () => {
                             onClick={() => setSelectedEnrollment(null)}
                             className="crud__button--cancel"
                         >
-                            Cancel
+                            Cancelar
                         </button>
                     )}
                 </form>
             </div>
 
+            <h2>Listado de Matrículas</h2>
             <div className="crud__list">
-                <h2>Enrollment List</h2>
                 {(enrollments.state === FetchState.Success || enrollments.state === FetchState.SuccessMany) &&
                     Array.isArray(enrollments.data) && enrollments.data.map((enrollment) => {
                         return (
                             <div key={enrollment.id} className="crud__item">
                                 <p>
-                                    Student ID: {enrollment.studentId}, Module ID: {enrollment.moduleId}
+                                    ID Estudiante: {enrollment.studentId}, ID Módulo: {enrollment.moduleId}
                                 </p>
                                 <div className="crud__buttonGroup">
-                                    <button className="crud__button--edit" onClick={() => handleEdit(enrollment)}>Edit</button>
-                                    <button className="crud__button--delete" onClick={() => handleDelete({ id: enrollment.id })}>Delete</button>
+                                    <button className="crud__button--edit" onClick={() => handleEdit(enrollment)}>Editar</button>
+                                    <button className="crud__button--delete" onClick={() => handleDelete({ id: enrollment.id })}>Eliminar</button>
                                 </div>
                             </div>
                         );

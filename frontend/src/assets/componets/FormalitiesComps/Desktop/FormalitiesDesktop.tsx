@@ -5,11 +5,15 @@ import { useApi } from '#src/api/ApiContext';
 import { ApiRts } from '#common/@enums/http';
 import { FetchState } from '#src/types/api';
 import { useNavigate } from 'react-router';
+import DatePicker from 'react-datepicker';
 
 type Warning = WarningData & Id;
 
 const FormalitiesDesktop: React.FC = () => {
     const navigate = useNavigate();
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
+
     const [warning, api] = useApi<Warning>(ApiRts.Warnings);
     const [selectedWarning, setSelectedWarning] = useState<Warning | null>(null);
     const [formState, setFormState] = useState<Warning>({
@@ -112,7 +116,7 @@ const FormalitiesDesktop: React.FC = () => {
         setFormState(warnings); // Establecer los datos del trámite en el formulario para editar
     };
 
-    // if (warning.state === FetchState.Loading) return <p>Loading...</p>;
+    // if (warning.state === FetchState.Loading) return <p>Cargando...</p>;
     // if (warning.state === FetchState.Error) return <p>Error: {warning.error?.message}</p>;
 
     return (
@@ -163,23 +167,18 @@ const FormalitiesDesktop: React.FC = () => {
                                 />
                             </label>
                             <label>
-                                <p>Fecha inicio</p>
-                                <input
-                                    type="text"
-                                    name="startDate"
-                                    placeholder="Ejemplo: 2000/08/21"
-                                    value={formState.startDate}
-                                    onChange={handleInputChange}
+                                <p>Fecha de Inicio</p>
+                                <DatePicker
+                                    selected={startDate} onChange={(date: any) =>
+                                        setStartDate(date)}
                                 />
                             </label>
                             <label>
-                                <p>Fecha fin</p>
-                                <input
-                                    type="text"
-                                    name="endDate"
-                                    placeholder="Ejemplo: 2000/08/21"
-                                    value={formState.endDate}
-                                    onChange={handleInputChange}
+                                <p>Fecha de Fin</p>
+                                <DatePicker
+                                    selected={endDate} onChange={(date: any) =>
+                                        setEndDate(date)}
+
                                 />
                             </label>
                             <button type="submit" className="formalities__button">

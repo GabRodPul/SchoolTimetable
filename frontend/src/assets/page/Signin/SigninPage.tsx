@@ -63,7 +63,7 @@ const SigninPage = () => {
         <h2>Crea una cuenta nueva</h2>
         
         <button className="LoginGoogleButton">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png" alt="Google logo" />
+          <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png" alt="Logo de Google" />
           Continuar con Google
         </button>
         

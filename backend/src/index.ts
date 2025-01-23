@@ -13,7 +13,7 @@ const furl = `http://localhost:${envvars.FEND_PORT}`;
 // console.log(furl)
 // const corsOptions = { origin: furl };
 const jwt = require('jsonwebtoken');
-const views = true;
+const views = envvars.BEND_VIEWS === '1';
 
 // Config
 const app = express();
@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: true })); // content-type: application/x-
 // app.use(cors(corsOptions));
 app.use(cors());
 
-app.set('view engine', 'ejs');
+// app.set('view engine', 'ejs');
 
 // Authorization middleware
 // app.use(function (req: Request, res: Response, next: NextFunction) {
@@ -58,7 +58,7 @@ app.set('view engine', 'ejs');
 // });
 
 // DB
-dbInit( true ).then();
+dbInit(true).then();
 
 // Routes
 if (views) {

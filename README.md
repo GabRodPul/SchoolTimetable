@@ -1,14 +1,17 @@
-# School Timetable
+# School Timetable 🏫
 
 Really simple application to manage and check school timetables, built with ReactJS + Express + Sequelize + MySQL.
 
-## Backend
+## First Approach 
+- We work with one of many approaches, having our backend and frontend separated, related through calls between them., although another option would be the approach of keeping them relatively close throughout the laragon.
+
+### Backend
 - Express + Sequelize + MySQL.
 - Fully functioning CRUD.
 - 100% TypeScript code.
 - 9 fully functioning CRUDs. 
 
-## Frontend
+### Frontend
 - WIP CRUD.
 - Aesthetics inspired by other applications like Moodle.
 
@@ -35,13 +38,29 @@ git clone https://github.com/GabRodPul/SchoolTimetable.git
 
 After that, install the backend.
 ```
-cd SchoolTimetable
-cd backend && npm install
+cd backend/
+npm install
 ```
-
 And the frontend.
 ```
-cd ../frontend && npm install
+cd ../frontend
+npm install
+```
+- In case that some dependencies doesn't install, here are some of the instances that we have problems with: 
+```
+npm install react-icons
+```
+```
+npm install react-router-dom
+```
+```
+npm install font-awesome
+```
+```
+npm install react-fonts
+```
+```
+npm install react-date-range
 ```
 
 To start the backend, use:

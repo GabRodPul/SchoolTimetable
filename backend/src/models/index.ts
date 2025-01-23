@@ -12,6 +12,8 @@ import { SessionModel } from "./session.model"
 import { SessionChangedModel } from "./session-changed.model"
 import { ClassHourModel } from "./classHour.model";
 
+import { Store } from 'express-session';
+import connect = require('connect-session-sequelize');
 
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     host:               dbConfig.HOST,
@@ -20,9 +22,11 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     pool:               dbConfig.pool
 });
 
+const SequelizeStore = connect(Store);
+
 const DB = Object.freeze({
     sequelize,
-    Sequelize,
+    storage: new SequelizeStore({ db: sequelize }),
     users:           UserModel.init(sequelize),
     groups:          GroupModel.init(sequelize),
     courses:         CourseModel.init(sequelize),

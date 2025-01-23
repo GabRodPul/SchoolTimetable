@@ -79,15 +79,15 @@ const IGTModuleCrud: React.FC = () => {
         setFormState(module);
     };
 
-    if (modules.state === FetchState.Loading) return <p>Loading...</p>;
+    if (modules.state === FetchState.Loading) return <p>Cargando...</p>;
     if (modules.state === FetchState.Error) return <p>Error: {modules.error?.message}</p>;
 
     return (
         <div className="crud__container">
-            <h1 className="crud__title">IGT Module Management</h1>
+            <h1 className="crud__title">Gestión de Módulos IGP</h1>
 
             <div className="crud__form">
-                <h2>{selectedModule ? "Edit Module" : "Create Module"}</h2>
+                <h2>{selectedModule ? "Editar" : "Crear"} Módulo IGP</h2>
                 <form
                     onSubmit={(e) => {
                         e.preventDefault();
@@ -97,7 +97,7 @@ const IGTModuleCrud: React.FC = () => {
                     <input
                         type="number"
                         name="teacherId"
-                        placeholder="Teacher ID"
+                        placeholder="ID Profe"
                         value={formState.teacherId}
                         onChange={handleInputChange}
                         className="crud__input"
@@ -105,7 +105,7 @@ const IGTModuleCrud: React.FC = () => {
                     <input
                         type="number"
                         name="groupId"
-                        placeholder="Group ID"
+                        placeholder="ID Grupo"
                         value={formState.groupId}
                         onChange={handleInputChange}
                         className="crud__input"
@@ -113,7 +113,7 @@ const IGTModuleCrud: React.FC = () => {
                     <input
                         type="number"
                         name="moduleId"
-                        placeholder="Module ID"
+                        placeholder="ID Módulo"
                         value={formState.moduleId}
                         onChange={handleInputChange}
                         className="crud__input"
@@ -121,13 +121,13 @@ const IGTModuleCrud: React.FC = () => {
                     <input
                         type="number"
                         name="weeklyHours"
-                        placeholder="Weekly Hours"
+                        placeholder="Horas Semanales"
                         value={formState.weeklyHours}
                         onChange={handleInputChange}
                         className="crud__input"
                     />
                     <button type="submit" className="crud__button">
-                        {selectedModule ? "Update" : "Create"}
+                        {selectedModule ? "Editar" : "Crear"}
                     </button>
                     {selectedModule && (
                         <button
@@ -135,37 +135,37 @@ const IGTModuleCrud: React.FC = () => {
                             onClick={() => setSelectedModule(null)}
                             className="crud__button--cancel"
                         >
-                            Cancel
+                            Cancelar
                         </button>
                     )}
                 </form>
             </div>
 
             <div>
-                <h2>Module List</h2>
+                <h2>Listado de Módulos IGP</h2>
                 <div className="crud__list">
                     {(modules.state === FetchState.Success || modules.state === FetchState.SuccessMany) &&
                         Array.isArray(modules.data) &&
                         modules.data.map((module) => (
                             <div key={module.id} className="crud__item">
                                 <p>
-                                    <strong>Teacher ID:</strong> {module.teacherId},{" "}
-                                    <strong>Group ID:</strong> {module.groupId},{" "}
-                                    <strong>Module ID:</strong> {module.moduleId},{" "}
-                                    <strong>Weekly Hours:</strong> {module.weeklyHours}
+                                    <strong>ID Profe:</strong> {module.teacherId},{" "}
+                                    <strong>ID Grupo:</strong> {module.groupId},{" "}
+                                    <strong>ID Módulo:</strong> {module.moduleId},{" "}
+                                    <strong>Horas Semanales:</strong> {module.weeklyHours}
                                 </p>
                                 <div className="crud__buttonGroup">
                                     <button
                                         onClick={() => handleEdit(module)}
                                         className="crud__button--edit"
                                     >
-                                        Edit
+                                        Editar
                                     </button>
                                     <button
                                         onClick={() => handleDelete({ id: module.id })}
                                         className="crud__button--delete"
                                     >
-                                        Delete
+                                        Eliminar
                                     </button>
                                 </div>
                             </div>

@@ -12,6 +12,7 @@ import ProfilePage from './assets/page/ProfilePage/ProfilePage'
 import Admin from './assets/page/AdminPage/AdminPage'
 import TimeTablePage from './assets/page/TimeTablePage/TimeTablePage'
 import FormalitiesPage from './assets/page/FormalitiesPage/FormalitiesPage'
+import TransactionsPage from './assets/page/TransactionPage/TransactionPage'
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Route path='/admin' element={<Admin />} />
           <Route path='/timetable' element={<TimeTablePage />} />
           <Route path='/formalities' element={<FormalitiesPage />} />
+          <Route path='/transactions' element={<TransactionsPage />} />
           {/* <Route path='/GroupPage' element={<GroupPage />} /> */}
         </Routes>
       </BrowserRouter>

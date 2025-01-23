@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Class Hour List</title>
+</head>
+
+<body>
+  <h1>Class Hour List</h1>
+  <% if (data.length> 0) { %>
+  <% data.forEach((m)=> { %>
+  <div class="card">
+    <%= m.turn %>
+    <%= m.sessionHour %>
+    <%= m.start %>
+    <%= m.end %><a href="/classHour/edit/<%= m.id %>">Edit</a>
+    <form action="/classHour/delete/<%= m.id %>" method="POST">
+      <input type="submit" value="Delete" />
+    </form>
+  </div>
+  <% }) %>
+  <p><a href="/classHour/create">Add a new Class Hour</a>.</p>
+  <% } else { %>
+  <p>No Class Hours found. <a href="/classHour/create">Add a new Class Hour</a>.</p>
+  <% } %>
+  <div>
+  </div>
+
+</body>
+
+</html>

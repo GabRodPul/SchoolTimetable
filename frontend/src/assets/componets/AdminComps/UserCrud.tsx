@@ -32,7 +32,7 @@ const UserCrud: React.FC = () => {
     const validateForm = () => {
         const { name, email, password, phoneNumber } = formState;
         if (!name || !email || !password || !phoneNumber) {
-            alert("All fields are required.");
+            alert("Todos los campos son obligatorios.");
             return false;
         }
         return true;
@@ -45,7 +45,7 @@ const UserCrud: React.FC = () => {
             api.getAll();
         }).catch((error) => {
             console.error("Error creating user:", error);
-            alert("There was an error creating the user. Please try again.");
+            alert("Ocurrió un error al crear usuario. Por favor, inténtelo de nuevo.");
         });
     };
 
@@ -58,7 +58,7 @@ const UserCrud: React.FC = () => {
             api.getAll();
         }).catch((error) => {
             console.error("Error updating user:", error);
-            alert("There was an error updating the user. Please try again.");
+            alert("Ocurrió un error al actualizar usuario. Por favor, inténtelo de nuevo.");
         });
     };
 
@@ -67,7 +67,7 @@ const UserCrud: React.FC = () => {
             api.getAll();
         }).catch((error) => {
             console.error("Error deleting user:", error);
-            alert("There was an error deleting the user. Please try again.");
+            alert("Ocurrió un error al eliminar usuario. Por favor, inténtelo de nuevo.");
         });
     };
 
@@ -81,7 +81,7 @@ const UserCrud: React.FC = () => {
             <h1 className="crud__title">Formulario de Usuarios</h1>
 
             <div className="crud__form">
-                <h2>{selectedUser ? "Edit User" : "Create User"}</h2>
+                <h2>{selectedUser ? "Editar" : "Crear"} Usuario</h2>
                 <form
                     onSubmit={e => {
                         e.preventDefault();
@@ -91,7 +91,7 @@ const UserCrud: React.FC = () => {
                     <input
                         type="text"
                         name="name"
-                        placeholder="Name"
+                        placeholder="Nombre"
                         value={formState.name}
                         onChange={handleInputChange}
                         className="crud__input"
@@ -107,13 +107,13 @@ const UserCrud: React.FC = () => {
                     <input
                         type="text"
                         name="phoneNumber"
-                        placeholder="Phone Number"
+                        placeholder="Número de Télefono"
                         value={formState.phoneNumber}
                         onChange={handleInputChange}
                         className="crud__input"
                     />
                     <button type="submit" className="crud__button">
-                        {selectedUser ? "Update" : "Create"}
+                        {selectedUser ? "Editar" : "Crear"}
                     </button>
                     {selectedUser && (
                         <button
@@ -121,7 +121,7 @@ const UserCrud: React.FC = () => {
                             onClick={() => setSelectedUser(null)}
                             className="crud__button--cancel"
                         >
-                            Cancel
+                            Cancelar
                         </button>
                     )}
                 </form>
@@ -140,8 +140,8 @@ const UserCrud: React.FC = () => {
                                     {userWithId.name} ({userWithId.email}) - {userWithId.role}
                                 </p>
                                 <div className="crud__buttonGroup">
-                                    <button className="crud__button--edit" onClick={() => handleEdit(userWithId)}>Edit</button>
-                                    <button className="crud__button--delete" onClick={() => handleDelete({ id: userWithId.id })}>Delete</button>
+                                    <button className="crud__button--edit" onClick={() => handleEdit(userWithId)}>Editar</button>
+                                    <button className="crud__button--delete" onClick={() => handleDelete({ id: userWithId.id })}>Eliminar</button>
                                 </div>
                             </div>
                         );
