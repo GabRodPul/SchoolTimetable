@@ -9,8 +9,8 @@
 
 <body>
   <h1> Listado de grupos</h1>
-  <% if (groups.length> 0) { %>
-    <% groups.forEach((m)=> { %>
+  <% if (data.length> 0) { %>
+    <% data.forEach((m)=> { %>
       <div class="card">
         <%= m.name %>
         <a href="/groups/edit/<%= m.id %>">Editar</a>

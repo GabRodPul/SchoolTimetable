@@ -9,9 +9,9 @@
 
 <body>
   <h1>Editar grupo</h1>
-  <form action="/groups/update/<%= group.id %>" method="POST">
+  <form action="/groups/update/<%= data.id %>" method="POST">
     <label for="name">Nombre:</label>
-    <input type="text" id="name" name="name" value="<%= group.name %>" required>
+    <input type="text" id="name" name="name" value="<%= data.name %>" required>
     <br>
     <button type="submit">Actualizar</button>
   </form>
