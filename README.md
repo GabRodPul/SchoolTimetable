@@ -94,3 +94,12 @@ You can find documentation about all endpoints [here](https://documenter.getpost
 * NIRA
 * MIRIAM
 * MIGUEL ÁNGEL
+
+
+##Provisional:
+* Diagrama de clases:
+* ![imagen](https://github.com/user-attachments/assets/7d41f02b-e7d3-4f46-b944-f277a8fcb1b7)
+* Diagrama de Entidad Relacion
+* ![imagen](https://github.com/user-attachments/assets/2af93a33-c79a-4f86-9fdf-2a5bea458fb2)
+
+
