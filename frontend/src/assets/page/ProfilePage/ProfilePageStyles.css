@@ -65,10 +65,10 @@
     width: 100%;
 }
 
-.generalInfo__title h3 {
+.generalInfo__title .section__title {
     margin-left: 5%;
     text-align: left;
-    font-size: 24px;
+    font-size: 22px;
 }
 
 .generalInfo__titles {
