@@ -13,6 +13,7 @@ import Admin from './assets/page/AdminPage/AdminPage'
 import TimeTablePage from './assets/page/TimeTablePage/TimeTablePage'
 import FormalitiesPage from './assets/page/FormalitiesPage/FormalitiesPage'
 import TransactionsPage from './assets/page/TransactionPage/TransactionPage'
+import UserList from './assets/componets/AdminLists/UserList'
 
 
 function App() {
@@ -22,6 +23,8 @@ function App() {
       {/* <Header/> */}
       <BrowserRouter>
         <Routes>
+       
+          <Route path='/userslist' element={<UserList />} />
           <Route path='/' element={<LoginPage />} />
           <Route path='/login' element={<LoginPage />} />
           {/* <Route path='/signin' element={<SigninPage />} /> */}

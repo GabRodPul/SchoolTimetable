@@ -1,0 +1,126 @@
+/* Style général pour un thème clair */
+.userlist {
+    display: flex;
+    justify-content: center; /* Centre horizontalement */
+    align-items: center; /* Centre verticalement */
+    min-height: 10vh; /* Prend toute la hauteur de la page */
+}
+
+/* Table de la liste */
+.userlist__usertable {
+    width: 80%; /* Ajustez la largeur de la table */
+    border-collapse: collapse;
+    background-color: #ffffff; /* Couleur de fond de la table */
+    border-radius: 8px; /* Coins arrondis */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Ombre pour un effet moderne */
+    overflow: hidden;
+}
+/* Table générale */
+table.userlist__usertable {
+    width: 70%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+/* En-tête de la table */
+table.userlist__usertable th {
+    background-color: #4a90e2; /* Bleu clair */
+    color: #ffffff;
+    text-align: center; /* Aligne le texte au centre */
+    padding: 16px; /* Ajoute un espacement uniforme */
+    font-size: 16px;
+    font-weight: bold;
+    white-space: nowrap; /* Empêche le texte de s'étirer ou de se casser sur plusieurs lignes */
+    border-bottom: 2px solid #e0e0e0; /* Ligne de séparation pour plus de lisibilité */
+}
+
+/* Corps de la table */
+table.userlist__usertable td {
+    padding: 16px;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 14px;
+    color: #555;
+    text-align: center;
+}
+
+/* Lignes alternées */
+table.userlist__usertable tr:nth-child(even) {
+    background-color: #f9fbfc; /* Gris très clair */
+}
+
+/* Animation au survol */
+table.userlist__usertable tr:hover {
+    background-color: #eef3fa; /* Bleu très léger */
+    transition: background-color 0.3s ease;
+}
+
+/* Style des rôles (dernière colonne) */
+table.userlist__usertable td:last-child {
+    font-weight: bold;
+    text-transform: capitalize;
+    text-align: center;
+    color: #4a90e2;
+}
+
+/* Boutons d'action (édition, suppression) */
+table.userlist__usertable td .action-icon {
+    cursor: pointer;
+    margin: 0 5px;
+    font-size: 16px;
+    color: #4a90e2;
+    transition: color 0.2s ease;
+}
+
+table.crud__list td .action-icon:hover {
+    color: #e74c3c; /* Rouge clair */
+}
+
+.userlist__addbtn {
+    background-color: white;
+    color: #2196f3;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.userlist__addbtn:hover {
+    background-color:whitesmoke;
+}
+
+.userlist__editbtn {
+    background-color: #2196f3;
+    color: white;
+    padding: 6px 12px;
+    margin-right: 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.3s ease;
+}
+
+.userlist__editbtn:hover {
+    background-color: #1976d2;
+}
+
+.userlist__deletebtn {
+    background-color: #f44336;
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.3s ease;
+}
+
+.userlist__deletebtn:hover {
+    background-color: #d32f2f;
+}

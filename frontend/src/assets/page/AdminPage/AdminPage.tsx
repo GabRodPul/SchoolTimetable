@@ -7,6 +7,7 @@ import SessionChangedCrud from "#src/assets/componets/AdminComps/SessionChangedC
 import SessionCrud from "#src/assets/componets/AdminComps/SessionCrud";
 import UserCrud from "#src/assets/componets/AdminComps/UserCrud";
 import WarningCrud from "#src/assets/componets/AdminComps/WarningsCrud";
+import UserList from "#src/assets/componets/AdminLists/UserList";
 import Header from "#src/assets/componets/CommonComps/MenuheaderMobile/Header";
 import NavigationTab from "#src/assets/componets/CommonComps/navigationTab/NavigationTab";
 import RigthMenu from "#src/assets/componets/CommonComps/rigthMenu/rigthMenu";
@@ -25,6 +26,7 @@ function Admin() {
             </div>
             <div className="AdminPage__Cruds">
                 <UserCrud />
+                <UserList/>
                 <GroupCrud />
                 <SessionCrud/>
                 <ModuleCrud/>
@@ -33,6 +35,7 @@ function Admin() {
                 <WarningCrud/>
                 <SessionChangedCrud/>
                 <EnrollmentCrud/>
+                
             </div>
         </div>
     );
