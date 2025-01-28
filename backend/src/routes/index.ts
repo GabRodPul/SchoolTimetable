@@ -13,13 +13,15 @@ import { IGTModuleRoutes } from "./igt-module.routes";
 import { ScheduleRoutes } from "./schedule.routes";
 import { UserViewsRoutes } from "./views_routes/user.views.routes";
 import { ClassHourViewsRoutes } from "./views_routes/classHour.views.routes";
+import { GroupViewsRoutes } from "./views_routes/group.views.routes";
 
 type Routes = { init: (app: Express) => void };
 const initApiRoutes = (app: Express, views: boolean) => {
     const data = views 
         ? [
             UserViewsRoutes,
-            ClassHourViewsRoutes
+            ClassHourViewsRoutes,
+            GroupViewsRoutes
         ]
         : [
 
