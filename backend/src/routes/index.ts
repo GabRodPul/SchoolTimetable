@@ -14,6 +14,7 @@ import { ScheduleRoutes } from "./schedule.routes";
 import { UserViewsRoutes } from "./views_routes/user.views.routes";
 import { ClassHourViewsRoutes } from "./views_routes/classHour.views.routes";
 import { GroupViewsRoutes } from "./views_routes/group.views.routes";
+import { AuthViewRoutes } from "./views_routes/auth.views.routes";
 
 type Routes = { init: (app: Express) => void };
 const initApiRoutes = (app: Express, views: boolean) => {
@@ -21,7 +22,8 @@ const initApiRoutes = (app: Express, views: boolean) => {
         ? [
             UserViewsRoutes,
             ClassHourViewsRoutes,
-            GroupViewsRoutes
+            GroupViewsRoutes,
+            AuthViewRoutes,
         ]
         : [
 
