@@ -177,9 +177,16 @@
     height: 20px;
     margin-left: 5%;
     text-align: left;
-    font-size: 20px;
+    font-size: 24px;
 }
 
+.Mobile__Subtitle{
+    display: flex;
+    height: 20px;
+    margin-left: 5%;
+    text-align: left;
+    font-size: 20px;
+}
 
 .ProfileCard__mobileCard {
     display: flex;
@@ -255,6 +262,10 @@
     align-items: center;
     justify-content: space-between;
     border-radius: 5%;
+}
+
+.Options__title{
+    font-size: 16px;
 }
 
 .options__card {

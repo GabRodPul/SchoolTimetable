@@ -58,7 +58,7 @@ function profile() {
   const handleEdit = () => {
     // Implementar lógica de creación si es necesario
   };
-  
+
   const validateForm = () => {
     const { name, phoneNumber } = tempFormState; // Validar el estado temporal
     if (!name || !phoneNumber) {
@@ -95,7 +95,7 @@ function profile() {
           <Header />
           <div className="mobile__content">
             <div className="mobile__header">
-              <h2 className='Mobile__Title'>Perfil</h2>
+              <h1 className='Mobile__Title'>Perfil</h1>
               <div className="Profile Card__mobileCard">
                 <div className="mobilecardInfo">
                   <div className="mobileCard__icon">
@@ -121,9 +121,9 @@ function profile() {
             </div>
             <div className="mobile__options">
               <div className="options__card">
-                <h2 className='Mobile__Title'>Opciones</h2>
+                <h2 className='Mobile__Subtitle'>Opciones</h2>
                 <div className="mobileProfile__options">
-                  <h4>Mi perfil</h4>
+                  <h3 className='Options__title'>Mi perfil</h3>
                   <CiMenuKebab onClick={toggleMenu1} className="menu-icon" />
                 </div>
                 {isMenuOpenProfile && (
@@ -157,7 +157,7 @@ function profile() {
                   </div>
                 )}
                 <div className="mobileProfile__options">
-                  <h4>Mis Cursos</h4>
+                  <h3 className='Options__title'>Mis Cursos</h3>
                   <CiMenuKebab onClick={toggleMenu2} className="menu-icon" />
                 </div>
                 {isMenuOpenCourses && (
@@ -170,7 +170,7 @@ function profile() {
                   </div>
                 )}
                 <div className="mobileProfile__options">
-                  <h4>Mis Notificaciones</h4>
+                  <h3 className='Options__title'>Mis Notificaciones</h3>
                   <CiMenuKebab onClick={toggleMenu3} className="menu-icon" />
                 </div>
                 {isMenuOpenNotices && (
@@ -178,7 +178,7 @@ function profile() {
                   </div>
                 )}
                 <div className="mobileProfile__options">
-                  <h4>Cambiar de Rol</h4>
+                  <h3 className='Options__title'>Cambiar de Rol</h3>
                 </div>
               </div>
             </div>
@@ -187,6 +187,7 @@ function profile() {
             </button>
           </div>
         </div>
+
         <div className='profilepage__desktop'>
           <div className='P_navigationTabs'>
             <NavigationTab />

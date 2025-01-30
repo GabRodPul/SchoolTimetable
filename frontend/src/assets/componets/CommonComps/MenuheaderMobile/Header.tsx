@@ -27,7 +27,7 @@ function Header() {
         <div className='header'>
             <div className="header__content">
                 <a href='/Home'>
-                    <FontAwesomeIcon icon={faCalendar} className="calendar-icon" />
+                    <FontAwesomeIcon icon={faCalendar} className="calendar-icon" aria-label='Icono de Inicio'/>
                 </a>
             </div>
             <FontAwesomeIcon
