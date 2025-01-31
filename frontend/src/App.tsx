@@ -18,7 +18,7 @@ import TransactionsPage from './assets/page/TransactionPage/TransactionPage'
 function App() {
 
   return (
-    <>
+    <> 
       {/* <Header/> */}
       <BrowserRouter>
         <Routes>
