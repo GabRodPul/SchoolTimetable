@@ -9,6 +9,7 @@ import { DB } from '../models';
 import { computeError } from '../utils/error';
 import { envvars } from '../env';
 import { UserRole } from '../../../common/@enums/models';
+import bcrypt from "bcrypt";
 
 const Users = DB.users;
 
@@ -24,7 +25,7 @@ export const isAuthenticated = async (req: Request, res: Response, next: NextFun
     // We get the authorization header token
     const authHeader = req.headers.authorization;
     const token = authHeader && authHeader.split(' ')[1]; // Get the token without the "Bearer"
-
+    console.log("s:auth " + token);
     if (!token) {
         res.send(resMsg(400, "Token is required."));
         return;
@@ -38,6 +39,7 @@ export const isAuthenticated = async (req: Request, res: Response, next: NextFun
 
         // `decoded` has the correct type and contains `id`
         const user = decoded as JwtPayload;
+        console.log(`s:auth ${user.email}`)
         if (!user.email) {
             res.send(resMsg(401, "Invalid token payload."));
             return;
@@ -50,7 +52,8 @@ export const isAuthenticated = async (req: Request, res: Response, next: NextFun
                 res.send(resMsg(401, "Invalid user."));
                 return;
             }
-
+            
+            console.log(`s:auth ${!!data}`)
             next();
         } catch (err: any) {
             console.error("Database error:", err);
@@ -63,9 +66,13 @@ export const isAuthenticated = async (req: Request, res: Response, next: NextFun
     verify(token, envvars.JWT_SECRET as string, vrfCallback);
 };
 
+// FIXME: This should be named "signup"
 export const signin = async (req: Request, res: Response) => {
     try {
-        const data = (await Users.create(req.body)).get({ plain: true });
+        const data = (await Users.create({
+            ...req.body,
+            password: bcrypt.hashSync(req.body.password, 10)
+        })).get({ plain: true });
         const accessToken = utils.generateToken(data);
         const user = utils.cleanUser(data);
         res.send({ user, accessToken });
@@ -86,6 +93,7 @@ export const logout = async (req: Request, res: Response) => {
 
 export const login = async (req: Request, res: Response) => {
     try {
+        console.log(req.body)
         const { email, password } = req.body;
 
         if (!email || !password) {
@@ -101,7 +109,10 @@ export const login = async (req: Request, res: Response) => {
 
         // Compare the encrypted password
         const result = compareSync(password, data.password);
+        console.log(result);
         if (!result) {
+            console.log(password)
+            console.log(data.password)
             res.send(resMsg(401, "Password not valid!"));
             return;
         }
@@ -120,7 +131,7 @@ export const login = async (req: Request, res: Response) => {
     }
 }
 export const hasRolePermissions = (role: UserRole) => {
-    return (req: Request, res: Response, next: NextFunction) => {
+    return async (req: Request, res: Response, next: NextFunction) => {
         const authHeader = req.headers.authorization;
         const token = authHeader && authHeader.split(' ')[1];
 

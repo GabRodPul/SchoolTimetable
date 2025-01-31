@@ -40,12 +40,12 @@
 }
 
 .card__title {
-    font-size: 1rem;
-    color: #333;
+    font-size: 22px;
+    color: #000;
     margin: 0;
 }
 
-.card__content p {
+.card__content {
     font-size: .9rem;
     color: #666;
     margin-top: -2px;
