@@ -10,7 +10,7 @@ services:
       MYSQL_DATABASE: ${BEND_DB_NAME}
       MYSQL_ROOT_PASSWORD: ${BEND_DB_PASSWORD}
     #   # So you don't have to use root, but you can if you like
-    #   - MYSQL_USER=${MYSQL_USER}
+      MYSQL_USER: ${MYSQL_USER}
     #   # You can use whatever password you like
     #   - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     #   # Password for root access
@@ -25,7 +25,7 @@ services:
       - app-network
   api:
     image: school_api
-    build: ./backend
+    build: ./
     env_file:
       - .env
     ports: 

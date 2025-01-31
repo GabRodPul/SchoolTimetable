@@ -1,6 +1,7 @@
 const getEnv = (process: NodeJS.Process) => ({ // It may complay that NodeJS.Process can't be found. Ignore it.
     NODE_ENV:               process.env.NODE_ENV,
 
+    DEV_BEND_DB_HOST:       process.env.DEV_BEND_DB_HOST,
     DEV_BEND_DB_DIALECT:    process.env.DEV_BEND_DB_DIALECT,
     DEV_BEND_DB_NAME:       process.env.DEV_BEND_DB_NAME,
     DEV_BEND_DB_USERNAME:   process.env.DEV_BEND_DB_USERNAME,
@@ -13,6 +14,7 @@ const getEnv = (process: NodeJS.Process) => ({ // It may complay that NodeJS.Pro
     DEV_ADMIN_EMAIL:        process.env.DEV_ADMIN_EMAIL,
     DEV_ADMIN_PASSWORD:     process.env.DEV_ADMIN_PASSWORD,
 
+    TEST_BEND_DB_HOST:      process.env.TEST_BEND_DB_HOST,
     TEST_BEND_DB_DIALECT:   process.env.TEST_BEND_DB_DIALECT,
     TEST_BEND_DB_NAME:      process.env.TEST_BEND_DB_NAME,
     TEST_BEND_DB_USERNAME:  process.env.TEST_BEND_DB_USERNAME,
@@ -25,6 +27,7 @@ const getEnv = (process: NodeJS.Process) => ({ // It may complay that NodeJS.Pro
     TEST_ADMIN_EMAIL:       process.env.TEST_ADMIN_EMAIL,
     TEST_ADMIN_PASSWORD:    process.env.TEST_ADMIN_PASSWORD,
 
+    PROD_BEND_DB_HOST:      process.env.PROD_BEND_DB_HOST,
     PROD_BEND_DB_DIALECT:   process.env.PROD_BEND_DB_DIALECT,
     PROD_BEND_DB_NAME:      process.env.PROD_BEND_DB_NAME,
     PROD_BEND_DB_USERNAME:  process.env.PROD_BEND_DB_USERNAME,

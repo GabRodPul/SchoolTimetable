@@ -4,12 +4,12 @@ import { getEnv } from "#common/get-envs"
 import { enumStrVals } from "./utils/data";
 import { Envvars, NodeEnv } from "#common/@types/env"
 
-const path = process.env.NODE_ENV?.toUpperCase() === "TEST"
-           ? `${__dirname}/../../.env`
-           : `${__dirname}/../../../../.env`;
+const path = `${__dirname}/../../.env`
 
 config({ path });
+console.log( `Loading enviroment NODE_ENV="`+process.env.NODE_ENV+`"...` );
 const _env: () => Envvars = () => {
+    
     const e         = getEnv( process );
     const NODE_ENV  = e.NODE_ENV!.toUpperCase() as NodeEnv;
     const validEnvs = enumStrVals(NodeEnv).values;
@@ -20,6 +20,7 @@ const _env: () => Envvars = () => {
 
     const envK
     : Record<keyof Omit<Envvars, "NODE_ENV">, string> = {
+        BEND_DB_HOST:       `${NODE_ENV}_BEND_DB_HOST`    ,
         BEND_DB_DIALECT:    `${NODE_ENV}_BEND_DB_DIALECT` ,
         BEND_DB_NAME:       `${NODE_ENV}_BEND_DB_NAME`    ,
         BEND_DB_USERNAME:   `${NODE_ENV}_BEND_DB_USERNAME`,
@@ -47,6 +48,7 @@ const _env: () => Envvars = () => {
 
     return {
         NODE_ENV,
+        BEND_DB_HOST        : (e as any)[envK.BEND_DB_HOST    ]!,
         BEND_DB_DIALECT     : (e as any)[envK.BEND_DB_DIALECT ]!,
         BEND_DB_NAME        : (e as any)[envK.BEND_DB_NAME    ]!,    
         BEND_DB_USERNAME    : (e as any)[envK.BEND_DB_USERNAME]!,        

@@ -1,20 +1,23 @@
 FROM node
 
+# Copy common stuff
+WORKDIR /usr/src/common
+ADD common/ /usr/src/common/
+
 # Create app directory
 WORKDIR /usr/src/app
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
-COPY package*.json ./
+COPY backend/package*.json /usr/src/app/
 
 RUN npm install
-RUN npm install -g typescript ts-node
 # If you are building your code for production
 # RUN npm ci --only=production
 
 # Bundle app source
-COPY . .
+COPY backend /usr/src/app/
 
 EXPOSE 8080
 
@@ -28,7 +31,8 @@ EXPOSE 8080
 # ENTRYPOINT [ "npm", "start" ]
 
 # CMD [ "node", "start"  ]
-CMD ["ts-node", "src/index.ts"]
+CMD ["npm", "run", "start" ]
+# ENTRYPOINT [ "node", "--es-module-specifier-resolution=node", "dist/backend/src/index.js" ]
 
 # Removing possible \r in files edited with windows
 #RUN sed -i 's/\r//g' ./docker-entrypoint.sh
