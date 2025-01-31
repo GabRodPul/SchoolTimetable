@@ -23,7 +23,7 @@ function App() {
       {/* <Header/> */}
       <BrowserRouter>
         <Routes>
-       
+
           <Route path='/userslist' element={<UserList />} />
           <Route path='/' element={<LoginPage />} />
           <Route path='/login' element={<LoginPage />} />
@@ -35,6 +35,7 @@ function App() {
           <Route path='/timetable' element={<TimeTablePage />} />
           <Route path='/formalities' element={<FormalitiesPage />} />
           <Route path='/transactions' element={<TransactionsPage />} />
+          <Route path='/userslist' element={<UserList />} />
           {/* <Route path='/GroupPage' element={<GroupPage />} /> */}
         </Routes>
       </BrowserRouter>

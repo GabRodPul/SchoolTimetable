@@ -25,11 +25,12 @@ function UserList() {
                     <th>Role</th>
                     <th>
                     <button className="userlist__addbtn" >➕ Add User</button>
-                    <button>
-                     Toggle
-                    </button>
                     </th>
                 </tr>
+                {
+                    users.state === FetchState.Error && <tr><td className='userlist__emptyerr' colSpan={5}>{users.error.message}
+                    </td></tr>
+                }
                 { users.state == FetchState.SuccessMany &&
                 Array.isArray(users.data) &&
                 users.data.map((u:User)=> {return (
@@ -43,6 +44,9 @@ function UserList() {
                         <button className="userlist__deletebtn">🗑️ Delete</button>
                         </td>
                     </tr>
+
+                                    
+
                 )})}
             </table>
         </div>

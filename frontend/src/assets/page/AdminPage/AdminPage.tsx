@@ -27,7 +27,7 @@ function Admin() {
             <div className="AdminPage__Cruds">
                 <UserCrud />
                 <UserList/>
-                <GroupCrud />
+                 <GroupCrud />
                 <SessionCrud/>
                 <ModuleCrud/>
                 <IGTModuleCrud />
