@@ -87,6 +87,7 @@ const SessionCrud: React.FC = () => {
                         value={formState.day}
                         onChange={handleInputChange}
                         className="crud__input"
+                        aria-label="DayPicker"
                     >
                         <option value="MONDAY">Lunes</option>
                         <option value="TUESDAY">Martes</option>
