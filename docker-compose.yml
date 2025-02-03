@@ -6,7 +6,7 @@ services:
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       timeout: 10s
-      retries: 10
+      retries: 3
 
     # restart: always
     env_file:
@@ -43,6 +43,7 @@ services:
     depends_on:
       db:
         condition: service_healthy
+
     # command: ["./wait-for-it.sh", "db:3306", "--timeout=0", "--", "./docker-entrypoint.sh"]
     #command: ["./wait-for-it.sh", "db:5432", "--timeout=0", "--", "./docker-entrypoint.sh"]
   # app:
@@ -60,9 +61,102 @@ services:
   #     - app-network
   #   depends_on:
   #     - api
+
 volumes:
   my-db:
     driver: local
 networks:
   app-network:
     driver: bridge
+
+
+
+
+
+
+
+
+# version: "3.8"
+
+# services:
+#   backend:
+#     build:
+#       context: .  # El directorio raíz de tu proyecto
+#       dockerfile: Dockerfile  # El nombre del Dockerfile
+#     container_name: school_timetable_backend
+#     env_file:
+#       - .env  # Cargar las variables de entorno desde el archivo .env
+#     environment:
+#       - NODE_ENV=${NODE_ENV}
+#       - BEND_DB_DIALECT=${BEND_DB_DIALECT}
+#       - BEND_DB_NAME=${BEND_DB_NAME}
+#       - BEND_DB_USERNAME=${BEND_DB_USERNAME}
+#       - BEND_DB_PASSWORD=${BEND_DB_PASSWORD}
+#       - BEND_PORT=${BEND_PORT}
+#       - JWT_SECRET=${JWT_SECRET}
+#       - DEV_BEND_DB_DIALECT=${DEV_BEND_DB_DIALECT}
+#       - DEV_BEND_DB_HOST=${DEV_BEND_DB_HOST}
+#       - DEV_BEND_DB_NAME=${DEV_BEND_DB_NAME}
+#       - DEV_BEND_DB_USERNAME=${DEV_BEND_DB_USERNAME}
+#       - DEV_BEND_DB_PASSWORD=${DEV_BEND_DB_PASSWORD}
+#       - DEV_BEND_PORT=${DEV_BEND_PORT}
+#       - DEV_BEND_VIEWS=${DEV_BEND_VIEWS}
+#       - DEV_JWT_SECRET=${DEV_JWT_SECRET}
+#       - DEV_SESSION_SECRET=${DEV_SESSION_SECRET}
+#       - DEV_FEND_PORT=${DEV_FEND_PORT}
+#       - DEV_ADMIN_EMAIL=${DEV_ADMIN_EMAIL}
+#       - DEV_ADMIN_PASSWORD=${DEV_ADMIN_PASSWORD}
+#       - TEST_BEND_DB_DIALECT=${TEST_BEND_DB_DIALECT}
+#       - TEST_BEND_DB_HOST=${TEST_BEND_DB_HOST}
+#       - TEST_BEND_DB_NAME=${TEST_BEND_DB_NAME}
+#       - TEST_BEND_DB_USERNAME=${TEST_BEND_DB_USERNAME}
+#       - TEST_BEND_DB_PASSWORD=${TEST_BEND_DB_PASSWORD}
+#       - TEST_BEND_PORT=${TEST_BEND_PORT}
+#       - TEST_BEND_VIEWS=${TEST_BEND_VIEWS}
+#       - TEST_JWT_SECRET=${TEST_JWT_SECRET}
+#       - TEST_SESSION_SECRET=${TEST_SESSION_SECRET}
+#       - TEST_FEND_PORT=${TEST_FEND_PORT}
+#       - TEST_ADMIN_EMAIL=${TEST_ADMIN_EMAIL}
+#       - TEST_ADMIN_PASSWORD=${TEST_ADMIN_PASSWORD}
+#       - PROD_BEND_DB_DIALECT=${PROD_BEND_DB_DIALECT}
+#       - PROD_BEND_DB_HOST=${PROD_BEND_DB_HOST}
+#       - PROD_BEND_DB_NAME=${PROD_BEND_DB_NAME}
+#       - PROD_BEND_DB_USERNAME=${PROD_BEND_DB_USERNAME}
+#       - PROD_BEND_DB_PASSWORD=${PROD_BEND_DB_PASSWORD}
+#       - PROD_BEND_PORT=${PROD_BEND_PORT}
+#       - PROD_BEND_VIEWS=${PROD_BEND_VIEWS}
+#       - PROD_JWT_SECRET=${PROD_JWT_SECRET}
+#       - PROD_SESSION_SECRET=${PROD_SESSION_SECRET}
+#       - PROD_FEND_PORT=${PROD_FEND_PORT}
+#       - PROD_ADMIN_EMAIL=${PROD_ADMIN_EMAIL}
+#       - PROD_ADMIN_PASSWORD=${PROD_ADMIN_PASSWORD}
+#     ports:
+#       - "8089:8080"  # Exponer el puerto del backend
+#     depends_on:
+#       - db  # El backend depende del servicio de base de datos
+#     networks:
+#       - school_timetable_network
+
+#   db:
+#     image: mysql:8.0  # Imagen oficial de MySQL 8.0
+#     container_name: school_timetable_db
+#     env_file:
+#       - .env  # Cargar las variables de entorno desde el archivo .env
+#     environment:
+#       MYSQL_ROOT_PASSWORD: ${BEND_DB_PASSWORD}  # Contraseña del root
+#       MYSQL_USER: ${DEV_BEND_DB_USERNAME}  # Nombre de usuario
+#       MYSQL_PASSWORD: ${DEV_BEND_DB_PASSWORD}  # Contraseña para el usuario
+#       MYSQL_DATABASE: ${DEV_BEND_DB_NAME}  # Base de datos a crear
+#     ports:
+#       - "3309:3306"  # Exponer el puerto de MySQL
+#     volumes:
+#       - mysql_data:/var/lib/mysql  # Volumen persistente para datos
+#     networks:
+#       - school_timetable_network
+
+# volumes:
+#   mysql_data:  # Volumen para persistir los datos de MySQL
+
+# networks:
+#   school_timetable_network:  # Red personalizada para la comunicación entre contenedores
+#     driver: bridge

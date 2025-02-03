@@ -49,3 +49,46 @@ CMD ["npm", "run", "start" ]
 # To keep container running in openshift.
 # To make it work in openshift is necessary from the terminal to run /docker-entrypoint.sh
 #CMD tail -f /dev/null
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# # Usa la imagen oficial de Node.js
+# FROM node:18-alpine
+
+# # Configura el directorio de trabajo
+# WORKDIR /usr/src/common
+# ADD common/ /usr/src/common/
+# WORKDIR /usr/src/app
+
+# # Copia package.json y package-lock.json para instalar dependencias
+# COPY backend/package*.json ./
+
+# # Instala las dependencias
+# RUN npm install
+
+# # Copia el resto del código de la aplicación
+# COPY backend/ ./
+
+# # Expone el puerto que usará la aplicación
+# EXPOSE 8080
+
+# # Comando de inicio
+# CMD ["npm", "start"]
