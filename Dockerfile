@@ -64,12 +64,6 @@ CMD ["npm", "run", "start" ]
 
 
 
-
-
-
-
-
-
 # # Usa la imagen oficial de Node.js
 # FROM node:18-alpine
 
