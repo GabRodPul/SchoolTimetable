@@ -111,6 +111,7 @@ const SessionChangedCrud: React.FC = () => {
                         value={formState.day}
                         onChange={handleInputChange}
                         className="crud__input"
+                        aria-label="DayPicker"
                     >
                         {Object.values(WorkDay).map(day => (
                             <option key={day} value={day}>{translate.workDay(day)}</option>
