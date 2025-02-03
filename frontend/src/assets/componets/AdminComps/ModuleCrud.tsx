@@ -69,15 +69,15 @@ const ModuleCrud: React.FC = () => {
         setFormState(module);
     };
 
-    if (modules.state === FetchState.Loading) return <p>Loading...</p>;
+    if (modules.state === FetchState.Loading) return <p>Cargando...</p>;
     if (modules.state === FetchState.Error) return <p>Error: {modules.error?.message}</p>;
 
     return (
         <div className="crud__container">
-            <h1 className="crud__title">Module Management</h1>
+            <h1 className="crud__title">Gestión de Módulos</h1>
 
             <div className="crud__form">
-                <h2>{selectedModule ? "Edit Module" : "Create Module"}</h2>
+                <h2>{selectedModule ? "Editar" : "Crear"} Módulo</h2>
                 <form
                     onSubmit={(e) => {
                         e.preventDefault();
@@ -87,13 +87,13 @@ const ModuleCrud: React.FC = () => {
                     <input
                         type="text"
                         name="name"
-                        placeholder="Module Name"
+                        placeholder="Nombre del Módulo"
                         value={formState.name}
                         onChange={handleInputChange}
                         className="crud__input"
                     />
                     <button type="submit" className="crud__button">
-                        {selectedModule ? "Update" : "Create"}
+                        {selectedModule ? "Editar" : "Crear"}
                     </button>
                     {selectedModule && (
                         <button
@@ -101,14 +101,14 @@ const ModuleCrud: React.FC = () => {
                             onClick={() => setSelectedModule(null)}
                             className="crud__button--cancel"
                         >
-                            Cancel
+                            Cancelar
                         </button>
                     )}
                 </form>
             </div>
 
             <div>
-                <h2>Module List</h2>
+                <h2>Listado de Módulos</h2>
                 <div className="crud__list">
                     {(modules.state === FetchState.Success || modules.state === FetchState.SuccessMany) &&
                         Array.isArray(modules.data) &&
@@ -120,13 +120,13 @@ const ModuleCrud: React.FC = () => {
                                         onClick={() => handleEdit(module)}
                                         className="crud__button--edit"
                                     >
-                                        Edit
+                                        Editar
                                     </button>
                                     <button
                                         onClick={() => handleDelete({ id: module.id })}
                                         className="crud__button--delete"
                                     >
-                                        Delete
+                                        Eliminar
                                     </button>
                                 </div>
                             </div>

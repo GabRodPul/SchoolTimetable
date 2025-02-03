@@ -177,9 +177,16 @@
     height: 20px;
     margin-left: 5%;
     text-align: left;
-    font-size: 20px;
+    font-size: 24px;
 }
 
+.Mobile__Subtitle{
+    display: flex;
+    height: 20px;
+    margin-left: 5%;
+    text-align: left;
+    font-size: 20px;
+}
 
 .ProfileCard__mobileCard {
     display: flex;
@@ -231,7 +238,7 @@
 .logoutButton {
     width: 90%;
     padding: 8px;
-    background-color: #ff4d4f;
+    background-color: #ec0000;
     color: #fff;
     border: none;
     border-radius: 6px;
@@ -255,6 +262,10 @@
     align-items: center;
     justify-content: space-between;
     border-radius: 5%;
+}
+
+.Options__title{
+    font-size: 16px;
 }
 
 .options__card {
