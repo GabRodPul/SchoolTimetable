@@ -3,6 +3,11 @@ services:
   db:
     # image: postgres
     image: mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 10
+
     # restart: always
     env_file:
       - /.env
@@ -36,7 +41,8 @@ services:
     networks:
       - app-network
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     # command: ["./wait-for-it.sh", "db:3306", "--timeout=0", "--", "./docker-entrypoint.sh"]
     #command: ["./wait-for-it.sh", "db:5432", "--timeout=0", "--", "./docker-entrypoint.sh"]
   # app:
