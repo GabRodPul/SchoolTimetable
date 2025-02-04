@@ -19,26 +19,16 @@ type User = UserData & Id;
 function profile() {
   const navigate = useNavigate();
 
-
   const [users, api] = useApi<User>(ApiRts.Users);
-
   const [formState, setFormState] = useState<User>({ id: 0, name: "", email: "", role: "", password: "", phoneNumber: "" });
-
   const [tempFormState, setTempFormState] = useState<User>({ id: 0, name: "", email: "", role: "", password: "", phoneNumber: "" }); // Estado temporal
-
   const [filtered, setFilteredUsers] = useState<User[]>([]);
-
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
-
   const [currentUser, setCurrentUser] = useState<User | null>(null);
 
-
   useEffect(() => {
-
     api.getAll();
-
   }, []);
-
 
   useEffect(() => {
     //Saco el email aquí
@@ -59,15 +49,12 @@ function profile() {
     const { name, value } = e.target;
     setTempFormState((prevState) => ({ ...prevState, [name]: value })); // Actualiza el estado temporal
   };
-
   const handleCreate = () => {
     // Implementar lógica de creación si es necesario
   };
-
   const handleUpdate = () => {
     // Implementar lógica de creación si es necesario
   };
-
   const handleEdit = () => {
     // Implementar lógica de creación si es necesario
   };
@@ -100,7 +87,6 @@ function profile() {
     localStorage.removeItem('accessToken');
     navigate('/login');
   };
-
   return (
     <>
       <div className="body">
@@ -109,7 +95,7 @@ function profile() {
           <Header />
           <div className="mobile__content">
             <div className="mobile__header">
-              <h2 className='Mobile__Title'>Perfil</h2>
+              <h1 className='Mobile__Title'>Perfil</h1>
               <div className="Profile Card__mobileCard">
                 <div className="mobilecardInfo">
                   <div className="mobileCard__icon">
@@ -135,9 +121,9 @@ function profile() {
             </div>
             <div className="mobile__options">
               <div className="options__card">
-                <h2 className='Mobile__Title'>Opciones</h2>
+                <h2 className='Mobile__Subtitle'>Opciones</h2>
                 <div className="mobileProfile__options">
-                  <h4>Mi perfil</h4>
+                  <h3 className='Options__title'>Mi perfil</h3>
                   <CiMenuKebab onClick={toggleMenu1} className="menu-icon" />
                 </div>
                 {isMenuOpenProfile && (
@@ -171,7 +157,7 @@ function profile() {
                   </div>
                 )}
                 <div className="mobileProfile__options">
-                  <h4>Mis Cursos</h4>
+                  <h3 className='Options__title'>Mis Cursos</h3>
                   <CiMenuKebab onClick={toggleMenu2} className="menu-icon" />
                 </div>
                 {isMenuOpenCourses && (
@@ -184,7 +170,7 @@ function profile() {
                   </div>
                 )}
                 <div className="mobileProfile__options">
-                  <h4>Mis Notificaciones</h4>
+                  <h3 className='Options__title'>Mis Notificaciones</h3>
                   <CiMenuKebab onClick={toggleMenu3} className="menu-icon" />
                 </div>
                 {isMenuOpenNotices && (
@@ -192,7 +178,7 @@ function profile() {
                   </div>
                 )}
                 <div className="mobileProfile__options">
-                  <h4>Cambiar de Rol</h4>
+                  <h3 className='Options__title'>Cambiar de Rol</h3>
                 </div>
               </div>
             </div>
@@ -232,10 +218,10 @@ function profile() {
                 <div className="generalInfo__titles">
                   <div className="titles_content">
                     <div className="titles__data">
-                      <h5>Mis Datos</h5>
+                      <h4>Mis Datos</h4>
                     </div>
                     <div className="titles__edit">
-                      <h5>Editar Perfil</h5>
+                      <h4>Editar Perfil</h4>
                     </div>
                   </div>
                 </div>
@@ -315,7 +301,7 @@ function profile() {
                   </div>
                 </div>
                 <div className="generalInfo__title">
-                  <h5>Mis Módulos</h5>
+                  <h3>Mis Módulos</h3>
                 </div>
                 <div className="generalInfo__data">
                   <div className="info__ModulesData">

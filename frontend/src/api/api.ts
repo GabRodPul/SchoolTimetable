@@ -20,7 +20,7 @@ const myfetch = async <TR, TB, TOpts extends FetchOptions<TB>>(route: ApiRts, me
         headers: {
             "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",
-            "Authorization": options?.token
+            "Authorization": "Bearer " + options?.token
         } as HeadersInit
     })
         .then(res => logRes(res))

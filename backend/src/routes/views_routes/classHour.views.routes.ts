@@ -1,9 +1,8 @@
 import { Express, Router } from "express";
-import { ClassHourViewsController } from "../../controllers/views_controllers/classHour.views.controller";
+import  {ClassHourViewsController} from "../../controllers/views_controllers/classHour.views.controller"
 
 export const ClassHourViewsRoutes = { init: (app: Express) => {
     const router = Router();
-    
     // Save a new User
     router.post("/",  ClassHourViewsController.store );
 
@@ -22,5 +21,5 @@ export const ClassHourViewsRoutes = { init: (app: Express) => {
     // Delete some User with id
     router.post("/delete/:id", ClassHourViewsController.delete );
 
-    app.use("/classHour", router);
+    app.use("/classHours", router);
 }};
