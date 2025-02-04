@@ -7,10 +7,6 @@ import { app } from "../index";
 import utils from "#src/utils/utils";
 
 
-const mwTestData: GroupData = {
-  name:         "Test Middleware",
-}
-
 const epTestData: GroupData = { 
   name:         "Test POST",
 };
@@ -22,15 +18,15 @@ beforeAll(async () => {{
   });
 } {
   const data = await DB.groups.create({
-    ...mwTestData,
+    ...epTestData,
   } as any);
 }});
 
 
 describe("controller/group.controller.ts - Endpoints", () => {
-    test("POST /api/signin - Empty body", async () => {
+    test("POST /api/groups - Empty body", async () => {
       const res = await request(app)
-        .post("/api/signin")
+        .post("/api/groups")
         .send({})
         .set("Access-Control-Allow-Origin", "*")
         .set("Content-Type", "application/json");
@@ -38,4 +34,29 @@ describe("controller/group.controller.ts - Endpoints", () => {
       expect(res.body.code).toEqual(500);
       expect(res.body).toHaveProperty("message");
     });
+
+    test("POST /api/groups - Missing more than 1 field", async () => {
+        const res = await request(app)
+          .post("/api/signin")
+          .send({ name: epTestData.name })
+          .set("Access-Control-Allow-Origin", "*")
+          .set("Content-Type", "application/json");
+    
+        expect(res.body.code).toEqual(400);
+        expect(res.body).toHaveProperty("errors");
+        expect(res.body.errors.length).toBeGreaterThan(1);
+      });
+
+      test("POST /api/signin - Missing more than 1 field", async () => {
+          const res = await request(app)
+            .post("/api/signin")
+            .send({ email: epTestData.email, password: epTestData.password })
+            .set("Access-Control-Allow-Origin", "*")
+            .set("Content-Type", "application/json");
+      
+          expect(res.body.code).toEqual(400);
+          expect(res.body).toHaveProperty("errors");
+          expect(res.body.errors.length).toBeGreaterThan(1);
+        });
 });
+

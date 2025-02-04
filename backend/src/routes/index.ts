@@ -32,7 +32,6 @@ const initApiRoutes = (app: Express, views: boolean) => {
                 WarningRoutes,
                 SessionRoutes,
                 ClassHourRoutes,
-                SessionRoutes,
                 SessionsChangedRoutes,
                 EnrollmentRoutes,
                 ModuleRoutes,
@@ -43,8 +42,7 @@ const initApiRoutes = (app: Express, views: boolean) => {
                 SigninRoutes,
                 LoginRoutes,
             ];
-    
-    data;
+
     
         data.forEach(r => r.init(app));
 }
