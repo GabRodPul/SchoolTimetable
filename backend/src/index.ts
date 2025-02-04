@@ -13,7 +13,7 @@ import bodyParser from "body-parser";
 import session from "express-session"
 import { NodeEnv } from "#common/@types/env";
 
-const furl = `http://localhost:${envvars.FEND_PORT}`;
+const furl = `http://${envvars.BEND_DB_HOST}:${envvars.FEND_PORT}`;
 // console.log(furl)
 // const corsOptions = { origin: furl };
 const jwt = require('jsonwebtoken');
@@ -24,9 +24,6 @@ const app = express();
 app.use(express.json()); // content-type: application/json
 app.use(express.urlencoded({ extended: true })); // content-type: application/x-www-form-urlencoded
 app.use(cors());
-
-// DB
-dbInit(true).then();
 
 // Routes
 if (views) {

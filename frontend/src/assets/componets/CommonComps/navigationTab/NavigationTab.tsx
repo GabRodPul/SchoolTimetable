@@ -9,6 +9,8 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SearchBar from '#src/assets/componets/CommonComps/SearchBarheader/SearchBarheader';
 import { AuthData } from '#common/@types/models';
 import Header from '../MenuheaderMobile/Header';
+import NavItem from './NavItem';
+import { UserRole } from '#common/@enums/models';
 
 function NavigationTab() {
   const location = useLocation();
@@ -61,70 +63,70 @@ function NavigationTab() {
           </div>
         </div>
 
-        <div className='navigationTab__content'>
-          <div className="navigationTab__side-menu">
-            <div className='navigationTab__side-menuBody'>
-              <h2 className='navigationTab__side-menuHeader'>Menú</h2>
-              <div className="navigationTab__side-menuContent">
-                <div>
-                  <Link className='navigationLink' to="/home">
-                    <button className={`navigationTab__side-menuButton ${location.pathname === "/home" ? "active" : ""}`}>
-                      <RiHome2Line className='homeIcon' size={30} /> <h3 className='button__text'>Inicio</h3>
-                    </button>
-                  </Link>
-                </div>
-                <div>
-                  <Link className='navigationLink' to="/timetable">
-                    <button className={`navigationTab__side-menuButton ${location.pathname === "/timetable" ? "active" : ""}`}>
-                      <RiCalendarScheduleLine className='scheduleIcon' size={30} /> <h3 className='button__text'>Horarios</h3>
-                    </button>
-                  </Link>
-                </div>
-                <div>
-                  <Link className='navigationLink' to="/notices">
-                    <button className={`navigationTab__side-menuButton ${location.pathname === "/notices" ? "active" : ""}`}>
-                      <LuBell className='notificationIcon' size={30} /> <h3 className='button__text'>Notificaciones</h3>
-                    </button>
-                  </Link>
-                </div>
-                <div>
-                  {role != 'UR0_STUDENT' &&
-                    <Link className='navigationLink' to="/formalities">
-                      <button className={`navigationTab__side-menuButton ${location.pathname === "/formalities" ? "active" : ""}`}>
-                        <BsPencilSquare className='formalitiesIcon' size={30} /> <h3 className='button__text'>Trámites</h3>
-                      </button>
-                    </Link>
-                  }
-                </div>
-                <div>
-                  <Link className='navigationLink' to="/profile">
-                    <button className={`navigationTab__side-menuButton ${location.pathname === "/profile" ? "active" : ""}`}>
-                      <FaRegUser className='profileIcon' size={30} /> <h3 className='button__text'>Perfil</h3>
-                    </button>
-                  </Link>
-                </div>
-                <div>
-                  {role == 'UR3_ADMIN' &&
-                    < Link className='navigationLink' to="/admin">
-                      <button className={`navigationTab__side-menuButton ${location.pathname === "/admin" ? "active" : ""}`}>
-                        <GoGear className='settingsIcon' size={30} /> <h3 className='button__text'>Configuración</h3>
-                      </button>
-                    </Link>
-                  }
+            <div className='navigationTab__content'>
+                <div className="navigationTab__side-menu">
+                    <div className='navigationTab__side-menuBody'>
+                        <h1 className='navigationTab__side-menuHeader'>Menú</h1>
+                        <div className="navigationTab__side-menuContent">
+                            
+                            <NavItem
+                                route="/home"
+                                name="Inicio"
+                                icon={RiHome2Line}
+                                role={UserRole.Student}
+                                className="homeIcon"
+                            />
+                            <NavItem
+                                route="/timetable"
+                                name="Horarios"
+                                icon={RiCalendarScheduleLine}
+                                role={UserRole.Student}
+                                className="scheduleIcon"
+                            />
+                            
+                            <NavItem
+                                route="/notices"
+                                name="Notificaciones"
+                                icon={LuBell}
+                                role={UserRole.Student}
+                                className="notificationIcon"
+                            />
 
-                </div>
-              </div>
-            </div>
-            <div className='navigationTab__side-menuFooter'>
-              <button className='navigationTab__side-menuFoot' onClick={handleLogout}>
-                <MdOutlineLogin className='logoutIcon' size={30} /> <h3 className='button__text'>Cerrar sesión</h3>
-              </button>
-            </div>
-          </div >
+                            <NavItem
+                                route="/formalities"
+                                name="Trámites"
+                                icon={BsPencilSquare}
+                                role={UserRole.Teacher}
+                                className="formalitiesIcon"
+                            />
+                            
+                            <NavItem
+                                route="/profile"
+                                name="Profil"
+                                icon={FaRegUser}
+                                role={UserRole.Admin}
+                                className="profileIcon"
+                            />
+
+                            <NavItem
+                                route="/admin"
+                                name="Configuration"
+                                icon={GoGear}
+                                role={UserRole.Admin}
+                                className="settingsIcon"
+                            />
+                        </div>
+                    </div>
+                    <div className='navigationTab__side-menuFooter'>
+                        <button className='navigationTab__side-menuFoot' onClick={handleLogout}>
+                            <MdOutlineLogin className='logoutIcon' size={30} /> Cerrar sesión
+                        </button>
+                    </div>
+                </div >
+            </div >
         </div >
-      </div >
-    </>
-  );
+        </>
+    );
 }
 
 
