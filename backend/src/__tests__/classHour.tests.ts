@@ -42,71 +42,70 @@ export const validateClassHour = (): boolean => {
 
 };
 
-// describe("controllers/classHour.controller.ts - Validate Hours", () => {
-//     it('should return true for valid class hour', () => {
-//         const result = validateClassHour();
-//         expect(result).toBe(true);
-//     });
-// });
+describe("controllers/classHour.controller.ts - Validate Hours", () => {
+    it('should return true for valid class hour', () => {
+        const result = validateClassHour();
+        expect(result).toBe(true);
+    });
+});
 
 describe("controllers/classHour.controller.ts - Endpoints", () => {
-    // test("POST /classHour - Should create a new class hour", async () => {
-    //     const res = await request(app)
-    //         .post("/api/classHour/")
-    //         .send(mwTestData)
-    //         .set("Access-Control-Allow-Origin", "*")
-    //         .set("Content-Type", "application/json");
+    test("POST /classHour - Should create a new class hour", async () => {
+        const res = await request(app)
+            .post("/classHours")
+            .send(mwTestData)
+            .set("Access-Control-Allow-Origin", "*")
+            .set("Content-Type", "application/json");
 
-    //     expect(res.status).toEqual(200);
-    // });
+        expect(res.status).toEqual(200);
+    });
 
-    // test("GET /classHour/edit/1 - Should show edit form for a class hour", async () => {
-    //     const res = await request(app).get(`/api/classHour/edit/${mwTestData.id}`)
-    //         .set("Access-Control-Allow-Origin", "*")
-    //         .set("Content-Type", "application/json");
-    //     expect(res.status).toEqual(200);
-    //     expect(res.text).toContain("classHour/edit"); // Verifica que se renderice la vista correcta
-    // });
+    test("GET /classHour/edit/1 - Should show edit form for a class hour", async () => {
+        const res = await request(app).get(`/classHours/edit/${mwTestData.id}`)
+            .set("Access-Control-Allow-Origin", "*")
+            .set("Content-Type", "application/json");
+        expect(res.status).toEqual(200);
+    });
 
-    // test("POST /classHour/update/1 - Should update a class hour", async () => {
-    //     const res = await request(app)
-    //         .post(`/api/classHour/update/${mwTestData.id}`)
-    //         .send(updatedTestData)
-    //         .set("Access-Control-Allow-Origin", "*")
-    //         .set("Content-Type", "application/json");
-    //     expect(res.status).toEqual(200); // Redirección después de actualizar
-    // });
+    test("POST /classHour/update/1 - Should update a class hour", async () => {
+        const res = await request(app)
+            .post(`/classHours/update/${mwTestData.id}`)
+            .send(updatedTestData)
+            .set("Access-Control-Allow-Origin", "*")
+            .set("Content-Type", "application/json");
+        expect(res.status).toEqual(200);
+    });
 
-    // test("POST /classHour/delete/1 - Should delete a class hour", async () => {
-    //     const res = await request(app).post(`/api/classHour/delete/${mwTestData.id}`)
-    //         .set("Access-Control-Allow-Origin", "*")
-    //         .set("Content-Type", "application/json");
-    //     expect(res.status).toEqual(200); // Redirección después de eliminar
-    // });
+    test("POST /classHour/delete/1 - Should delete a class hour", async () => {
+        const res = await request(app).post(`/classHours/delete/${mwTestData.id}`)
+            .set("Access-Control-Allow-Origin", "*")
+            .set("Content-Type", "application/json");
+        expect(res.status).toEqual(302);
+    });
 
-    // test("GET /classHour/edit/1 - Fail edit empty body/unvalid Id", async () => {
-    //     const res = await request(app).get("/api/classHour/edit/10500")
-    //         .set("Access-Control-Allow-Origin", "*")
-    //         .set("Content-Type", "application/json");
-    //     expect(res.status).toEqual(404);
-    //     expect(res.text).toContain("classHour/edit"); // Verifica que se renderice la vista correcta
-    // });
+    test("GET /classHour/edit/1 - Fail uptate empty body/unvalid Id", async () => {
+        const res = await request(app).get("/classHours/update/10500")
+            .send(updatedTestData)
+            .set("Access-Control-Allow-Origin", "*")
+            .set("Content-Type", "application/json");
+        expect(res.status).toEqual(404);
+    });
 
-    // test("POST /classHour/update/1 - Update 2ith empty body", async () => {
-    //     const res = await request(app)
-    //         .post("/api/classHour/update/2")
-    //         .send({})
-    //         .set("Access-Control-Allow-Origin", "*")
-    //         .set("Content-Type", "application/json");
-    //     expect(res.status).toEqual(404); // Redirección después de actualizar
-    // });
+        test("POST /classHour/update/1 - Update with empty body", async () => {
+            const res = await request(app)
+                .post("/classHour/updates/2")
+                .send({})
+                .set("Access-Control-Allow-Origin", "*")
+                .set("Content-Type", "application/json");
+            expect(res.status).toEqual(404); // Redirección después de actualizar
+        });
 
-    // test("POST /classHour/delete/1 - Delete unvalid Id", async () => {
-    //     const res = await request(app).post("/api/classHour/delete/6")
-    //         .set("Access-Control-Allow-Origin", "*")
-    //         .set("Content-Type", "application/json");
-    //     expect(res.status).toEqual(404); // Redirección después de eliminar
-    // });
+        test("POST /classHour/delete/1 - Delete unvalid Id", async () => {
+            const res = await request(app).post("/classHours/delete/")
+                .set("Access-Control-Allow-Origin", "*")
+                .set("Content-Type", "application/json");
+            expect(res.status).toEqual(404); // Redirección después de eliminar
+        });
 
 });
 

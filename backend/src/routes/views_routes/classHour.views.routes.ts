@@ -3,7 +3,6 @@ import  {ClassHourViewsController} from "../../controllers/views_controllers/cla
 
 export const ClassHourViewsRoutes = { init: (app: Express) => {
     const router = Router();
-    
     // Save a new User
     router.post("/",  ClassHourViewsController.store );
 

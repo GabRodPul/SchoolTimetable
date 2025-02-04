@@ -25,7 +25,7 @@ export const ClassHourViewsController = Object.freeze({
         try {
             const newClassHour = { ...req.body };
             const data = await ClassHours.create(newClassHour);
-            res.redirect('/classHours');
+            res.redirect('/classHours/index');
         } catch (err: any) {
             // We make sure that computeError return ResponseData
             res.render("error", computeError(err, "Some error occurred while creating the User."));
