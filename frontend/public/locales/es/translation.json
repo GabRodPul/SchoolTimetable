@@ -1,0 +1,15 @@
+{
+  "pages": {
+    "LoginPage": {
+      "email": "Correo",
+      "password": "Contraseña",
+      "rememberMe": "Recuérdame",
+      "loginGoogle": "Inicia sesión con tu cuenta",
+      "continueGoogle":"Continuar con Google",
+      "loginUser":"o Inicie sesión con su usuario",
+      "forgotPassword":"¿Olvidó la contraseña?",
+      "login":"Iniciar sesión",
+      "fieldAlert": "Por favor, complete todos los campos."
+    }
+  }
+}

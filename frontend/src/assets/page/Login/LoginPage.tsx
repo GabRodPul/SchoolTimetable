@@ -6,6 +6,8 @@ import { AuthData } from '#common/@types/models';
 import { ApiRts } from '#common/@enums/http';
 import { useApi } from '#src/api/ApiContext';
 import { FetchState } from '#src/types/api';
+import { useTranslation } from "react-i18next"
+import i18n from '#src/i18n';
 
 function LoginPageForm() {
   const [email,      setEmail       ] = useState('');
@@ -14,6 +16,7 @@ function LoginPageForm() {
   const [fetchRsrc,  api            ] = useApi<AuthData>(ApiRts.Login);
 
   const navigate = useNavigate();
+  const { t } = i18n;
 
   useEffect(() => {
     console.log(fetchRsrc)
@@ -51,7 +54,7 @@ function LoginPageForm() {
     event.preventDefault();
     // Validación de campos vacíos
     if (!email || !password) {
-        alert("Por favor, complete todos los campos."); // Muestra un mensaje de alerta
+        alert(t("pages.LoginPage.fieldAlert")); // Muestra un mensaje de alerta
         return; // Detiene la ejecución si hay campos vacíos
     }
     
@@ -59,9 +62,9 @@ function LoginPageForm() {
         api.login!({ email, password });
     }
 
-    console.log('Correo:', email);
-    console.log('Contraseña:', password);
-    console.log('Recuérdame:', rememberMe);
+    console.log(`${t("pages.LoginPage.email")}:`, email);
+    console.log(`${t("pages.LoginPage.password")}`, password);
+    console.log(`${t("pages.LoginPage.rememberMe")}`, rememberMe);
     // navigate('/Home'); // Esta línea se puede dejar comentada, ya que la navegación se maneja en el useEffect
 };
 
@@ -72,24 +75,24 @@ function LoginPageForm() {
       </div>
       <div className="LoginPageContainer">
         <div className="LoginPageContainerContent">
-          <h2>Inicia sesión con tu cuenta</h2>
+          <h2>{t("pages.LoginPage.loginGoogle")}</h2>
 
           <button className="LoginGoogleButton">
             <img src="/img/LogoGoogle.png" alt="Logo de Google" />
-            <p>Continuar con Google</p>
+            <p>{t("pages.LoginPage.continueGoogle")}</p>
           </button>
           
-          <div className="divider">o Inicia sesión con su usuario</div>
+          <div className="divider">{t("pages.LoginPage.loginUser")}</div>
 
           <form className="loginPageForm" onSubmit={handleLogin}>
             <label className="LoginInputText">
-              <p>Email</p>
+              <p>{t("pages.LoginPage.email")}</p>
               <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required
               />
             </label>
 
             <label className="LoginInputText">
-              <p>Contraseña</p>
+              <p>{t("pages.LoginPage.password")}</p>
               <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="*****************" required
               />
             </label>
@@ -101,16 +104,16 @@ function LoginPageForm() {
                   checked={rememberMe}
                   onChange={(e) => setRememberMe(e.target.checked)}
                 />
-                <p>Recuérdame</p>
+                <p>{t("pages.LoginPage.rememberMe")}</p>
               </label>
               <a href="/ForgotPasswordPage" className="ForgotPassword">
-                ¿Olvidó la contraseña?
+                {t("pages.LoginPage.forgotPassword")}
               </a>
             </div>
             { fetchRsrc.state === FetchState.Success && 
               (fetchRsrc.data as any).code !== undefined 
               && <div>
-              <p color="red">(fetchRsrc.data as any).mess</p>
+              <p color="red">{(fetchRsrc.data as any).message}</p>
             </div>
             }
             {/* Botón con onClick para manejar el submit */}
@@ -120,7 +123,7 @@ function LoginPageForm() {
               onClick={() =>
               handleLogin}
             >
-              Entrar
+              {t("pages.LoginPage.login")}
             </button>
           </form>
         </div>
