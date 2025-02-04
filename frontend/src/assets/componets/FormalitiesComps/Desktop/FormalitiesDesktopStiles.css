@@ -7,7 +7,7 @@
 .formalities__content {
     display: flex;
     flex-direction: row;
-    gap: 55%;
+    gap: 45%;
 }
 
 .formalities__form {
@@ -130,34 +130,66 @@
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
 }
 
-/* Contenedor para los botones de acción */
-.formalities__actions {
+/* Tarjeta individual de cada trámite */
+.formalirties__card {
     display: flex;
-    gap: 12px;
-}
-
-/* Botones de acción (editar y eliminar) */
-.formalities__actions button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 1.4rem;
-    /* Tamaño ajustado para hacerlos un poco más grandes */
-    color: #6c757d;
-    transition: color 0.2s;
-    width: 30px;
-    height: 30px;
-    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-radius: 50%;
-    /* Forma circular */
+    width: 320px;
+    height: 120px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+    font-size: 14px;
+    font-family: MerriweatherSans, sans-serif;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
-.formalities__actions button:hover {
-    color: #004B84;
-    /* Color de hover */
-    background-color: rgba(0, 75, 132, 0.1);
-    /* Añade un fondo suave al hacer hover */
+.formalirties__card p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #333;
+    line-height: 1.5;
 }
 
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.buttons .Edit {
+    background-color: #268014;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: MerriweatherSans, sans-serif;
+    font-size: 14px;
+    padding: 8px 16px;
+    transition: background-color 0.3s;
+}
+
+.buttons .Edit:hover {
+    background-color: #1f6a10;
+}
+
+.buttons .Delete {
+    background-color: #ad0000;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: MerriweatherSans, sans-serif;
+    font-size: 14px;
+    padding: 8px 16px;
+    transition: background-color 0.3s;
+}
+
+.buttons .Delete:hover {
+    background-color: #e85d5d;
+}
