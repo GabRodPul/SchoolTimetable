@@ -57,7 +57,9 @@ const RigthMenu: React.FC = () => {
 
   return (
     <div className="rigthMenu">
-      <h3>Añadir recordatorio</h3>
+
+      <p className="rightMenuTitle">Añadir recordatorio</p>
+
       <div className="rigthMenu__form">
         <label>
           <p>Tipo</p>
@@ -80,7 +82,9 @@ const RigthMenu: React.FC = () => {
       </div>
       <button className="rigthMenu__button" onClick={handleAddReminder}>Añadir</button>
       <div className="rigthMenu__reminders">
-        <h3>Recordatorios</h3>
+        <p className="rightMenuTitle">Recordatorios</p>
+
+
         {reminders.map((reminder, index) => (
           <div key={index} className="rigthMenu__reminder">
             {/* Icono y texto dinámicamente coloreados */}
