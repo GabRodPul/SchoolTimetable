@@ -34,9 +34,11 @@
 }
 
 .navigationTab__profile {
-    width: 200px;
+    display: flex;
+    align-items: center;
+    width: 400px;
     margin-top: 15px;
-    margin-right: 5%;
+    /* margin-right: 5%; */
 }
 
 .navigationTab__profileInfo {

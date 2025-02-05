@@ -11,6 +11,7 @@ import { AuthData } from '#common/@types/models';
 import Header from '../MenuheaderMobile/Header';
 import NavItem from './NavItem';
 import { UserRole } from '#common/@enums/models';
+import ThemeToggle from '../SetTheme/ThemeToggle';
 
 function NavigationTab() {
   const location = useLocation();
@@ -60,6 +61,7 @@ function NavigationTab() {
               </div>
               <p className="navigationTab__profileName">{name}</p>
             </div>
+            <ThemeToggle/>
           </div>
         </div>
 

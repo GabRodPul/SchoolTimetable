@@ -1,0 +1,10 @@
+.ToggleTheme__button {
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    background: var(--primary-color);
+    color: var(--text-color);
+    font-size: 1rem;
+    height: 50px;
+}

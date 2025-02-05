@@ -10,6 +10,7 @@ import HomeCard from '../../componets/Cards/HomeCards/HomeCard';
 // Desktops
 import HomeContent from '#src/assets/componets/ComponentsHome/HomeContentDesktop/HomeContent';
 import NavigationTab from '#src/assets/componets/CommonComps/navigationTab/NavigationTab';
+import ThemeToggle from '#src/assets/componets/CommonComps/SetTheme/ThemeToggle';
 
 function Home() {
 
