@@ -122,7 +122,7 @@ const FormalitiesDesktop: React.FC = () => {
   return (
 
     <div className="formalities">
-      <div className="formalities__content">
+      <div className="formalities__content_desktop">
         <div className="formalities__makeForm">
           <div className="formalitiesForm__title">
             <h2>Trámites</h2>
@@ -189,9 +189,9 @@ const FormalitiesDesktop: React.FC = () => {
           </div>
         </div>
 
-        <div className="formalities__info">
+        <div className="formalities__info_desktop">
           <div className="formalitiesInfo__title">
-            <h2>Tus Trámites</h2>
+            <h2>Trámites Realizados</h2>
           </div>
           {(warning.state === FetchState.Success || warning.state === FetchState.SuccessMany) &&
             Array.isArray(warning.data) && warning.data.map((warning) => {
