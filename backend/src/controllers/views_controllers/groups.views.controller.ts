@@ -9,7 +9,7 @@ const Groups = DB.groups;
 const findAll = async (_req: Request, res: Response) => {
     try {
         const data = await Groups.findAll();
-        res.render("groups/index", { data });
+        res.render("groups2/index", { data });
     } catch (err: any) {
         return res.render("error", computeError(err));
     }
@@ -20,13 +20,13 @@ export const GroupViewsController = Object.freeze({
         try {
             const group = { ...req.body};
             const data = await Groups.create(group);
-            res.redirect("/groups")
+            res.redirect("/groups2")
         } catch (err: any) {
             return res.render("error", computeError(err, "Some error occurred while creating the Group."));
         }
     },
 
-    showCreateForm: async (req: Request, res: Response) => res.render("groups/create"),
+    showCreateForm: async (req: Request, res: Response) => res.render("groups2/create"),
 
     findAll,
 
@@ -37,7 +37,7 @@ export const GroupViewsController = Object.freeze({
             if (!data) 
                 throw new Error(`Group with id ${id} not found`);
 
-            return res.render("groups/edit", { data });
+            return res.render("groups2/edit", { data });
         } catch (err: any) {
             return res.render("error", computeError(err));
         }
@@ -50,7 +50,7 @@ export const GroupViewsController = Object.freeze({
             const count = await DB.groups.update(req.body, { where: { id } });
             if (count[0] === 0)
                 throw new Error(`Cannot update Group with id=${id}. Maybe Group was not found or req.body is empty!`)
-            return res.redirect("/groups")
+            return res.redirect("/groups2")
         } catch (err: any) {
             return res.render("error", computeError(err, `Some error occurred while updating group with id ${id}`));
         }
@@ -62,7 +62,7 @@ export const GroupViewsController = Object.freeze({
             const count = await Groups.destroy({ where: { id } });
             if (!count) throw new Error(`Cannot delete Group with id=${id}. Maybe Group was not found or req.body is empty!`);
 
-            return res.redirect("/groups")
+            return res.redirect("/groups2")
         } catch (err: any) {
             return res.render("error", computeError(err, `Some error occurred while deleting Group with id ${id}`));
         }
