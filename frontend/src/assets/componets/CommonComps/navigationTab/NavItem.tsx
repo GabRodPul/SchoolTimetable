@@ -16,7 +16,7 @@ function NavItem(props: NavProps) {
     const { role, name } = (JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData).user; // Cambia 'currentuser' al nombre de la clave que usas en localStorage
 
     return (
-        <div>
+        <div className="navigationTab__side-menuItem">
             { role >= props.role &&
                 < Link className='navigationLink' to={props.route}>
                     <button className={`navigationTab__side-menuButton ${location.pathname === props.route ? "active" : ""}`}>

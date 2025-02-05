@@ -154,3 +154,7 @@
     background-color: #0056b3;
     color: white;
 }
+
+.navigationTab__side-menuItem:hover {
+    background-color: #000000;
+}
