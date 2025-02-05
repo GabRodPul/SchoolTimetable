@@ -9,7 +9,11 @@ const Groups = DB.groups;
 const findAll = async (_req: Request, res: Response) => {
     try {
         const data = await Groups.findAll();
+<<<<<<< HEAD
         res.render("group/index", { data });
+=======
+        res.render("groups/index", { data });
+>>>>>>> fc2723619ba16ebaea87908657f5d0b3b7db6cf4
     } catch (err: any) {
         return res.render("error", computeError(err));
     }
@@ -26,7 +30,11 @@ export const GroupViewsController = Object.freeze({
         }
     },
 
+<<<<<<< HEAD
     showCreateForm: async (req: Request, res: Response) => res.render("group/create"),
+=======
+    showCreateForm: async (req: Request, res: Response) => res.render("groups/create"),
+>>>>>>> fc2723619ba16ebaea87908657f5d0b3b7db6cf4
 
     findAll,
 
@@ -37,7 +45,11 @@ export const GroupViewsController = Object.freeze({
             if (!data) 
                 throw new Error(`Group with id ${id} not found`);
 
+<<<<<<< HEAD
             return res.render("group/edit", { data });
+=======
+            return res.render("groups/edit", { data });
+>>>>>>> fc2723619ba16ebaea87908657f5d0b3b7db6cf4
         } catch (err: any) {
             return res.render("error", computeError(err));
         }

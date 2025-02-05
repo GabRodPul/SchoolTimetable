@@ -6,9 +6,9 @@ const SigninRoutes = { init: ( app: Express ) => {
     const router = Router();
     
     // Login
-    router.post( "/", hasRolePermissions(UserRole.Admin), signin );
+    router.post( "/", signin );
 
-    app.use("/api/signin", hasRolePermissions(UserRole.Admin), router);
+    app.use("/api/signin", router);
 
 }};
 

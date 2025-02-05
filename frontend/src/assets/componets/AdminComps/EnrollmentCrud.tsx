@@ -93,6 +93,7 @@ const EnrollmentCrud: React.FC = () => {
                         value={formState.studentId}
                         onChange={handleInputChange}
                         className="crud__input"
+                        aria-label="StudentPicker"
                     >
                         <option value={0}>Elija Estudiante</option>
                         {/* {students.map(student => (
@@ -107,6 +108,7 @@ const EnrollmentCrud: React.FC = () => {
                         value={formState.moduleId}
                         onChange={handleInputChange}
                         className="crud__input"
+                        aria-label="ModulePicker"
                     >
                         <option value={0}>Elija Módulo</option>
                         {/* {modules.map(module => (

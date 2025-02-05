@@ -23,6 +23,15 @@
   border-bottom: 1px solid #e0e0e0;
 }
 
+.rightMenuTitle {
+  text-align: left;
+  padding: 10px 0px;
+  font-size: 20px;
+  margin-bottom: 15px;
+  font-weight: bold;
+  border-bottom: 1px solid #e0e0e0;
+}
+
 .rigthMenu__form {
   display: flex;
   flex-direction: column;

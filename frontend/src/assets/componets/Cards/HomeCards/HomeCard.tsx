@@ -4,66 +4,47 @@ import { FaRegBell } from "react-icons/fa";
 import { HiMiniPencilSquare } from "react-icons/hi2";
 import { FaGear } from "react-icons/fa6";
 import { AuthData } from '#common/@types/models';
+import HomeCardsComp from './HomeCardsComp';
+import { UserRole } from '#common/@enums/models';
 
 function HomeCard() {
-    const role = (JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData).user.role; // Cambia 'currentuser' al nombre de la clave que usas en localStorage
+  const role = (JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData).user.role; // Cambia 'currentuser' al nombre de la clave que usas en localStorage
 
-    return (
-        <div className='card__body'>
+  return (
+    <div className='card__body'>      
+      <HomeCardsComp 
+        icon={FaRegClock}
+        title="Página de Horarios"
+        description="Vea sus horarios"
+        route="/timetable"
+        role={UserRole.Student}
+      />
+      
+      <HomeCardsComp 
+        icon={FaRegBell}
+        title="Página de Avisos"
+        description="Vea sus avisos"
+        route="/notices"
+        role={UserRole.Student}
+      />
 
-            <div className="card__content">
-                <div className="card__icon">
-                    <FaRegClock />
-                </div>
-                <div className="card__info">
-                    <h5 className='card__title'>Página de Horarios</h5>
-                    <p>Vea sus horarios</p>
-                </div>
-                <a href="/timetable"><button>Acceder</button></a>
-            </div>
+      <HomeCardsComp 
+        icon={HiMiniPencilSquare}
+        title="Página de Tramites"
+        description="Vea sus tramites"
+        route="/formalities"
+        role={UserRole.Teacher}
+      />
+      <HomeCardsComp 
+        icon={FaGear}
+        title="Configuración"
+        description="Configuración de la app"
+        route="/admin"
+        role={UserRole.Admin}
+      /> 
 
-            <div className="card__content">
-                <div className="card__icon">
-                    <FaRegBell />
-                </div>
-                <div className="card__info">
-                    <h5 className='card__title'>Página de Avisos</h5>
-                    <p>Vea sus avisos</p>
-                </div>
-                <a href="/notices"><button>Acceder</button></a>
-            </div>
-
-            <div className='options_HomeCard'>
-                {role != 'UR0_STUDENT' &&
-                    <div className='card__content'>
-                        <div className="card__icon">
-                            <HiMiniPencilSquare />
-                        </div>
-                        <div className="card__info">
-                            <h5 className='card__title'>Página de Tramites</h5>
-                            <p>Vea sus tramites</p>
-                        </div>
-                        <a href="/formalities"><button>Acceder</button></a>
-                    </div>
-                }
-            </div>
-            <div className='options_HomeCard'>
-                {role == 'UR3_ADMIN' &&
-                    <div className='card__content'>
-                        <div className="card__icon">
-                            <FaGear />
-                        </div>
-                        <div className="card__info">
-                            <h5 className='card__title'>Configuración</h5>
-                            <p>Configuración de la app</p>
-                        </div>
-                        <a href="/admin"><button>Acceder</button></a>
-                    </div>
-                }
-            </div>
-
-        </div>
-    );
+    </div>
+  );
 }
 
 export default HomeCard;

@@ -26,7 +26,7 @@ const SequelizeStore = connect(Store);
 
 const DB = Object.freeze({
     sequelize,
-    storage: new SequelizeStore({ db: sequelize }),
+    store: new SequelizeStore({ db: sequelize }),
     users:           UserModel.init(sequelize),
     groups:          GroupModel.init(sequelize),
     courses:         CourseModel.init(sequelize),

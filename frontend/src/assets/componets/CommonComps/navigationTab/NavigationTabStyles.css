@@ -85,7 +85,7 @@
     position: fixed;
 }
 
-.navigationTab__side-menuHeader {
+.navigationTab__side-menuHeader{
     font-size: 24px;
     padding: 20px;
     color: #495057;
@@ -109,11 +109,11 @@
     border: none;
     background: none;
     text-align: left;
-    font-size: 18px;
+    font-size: 16px;
     color: #495057;
     display: flex;
     align-items: center;
-    gap: 30px;
+    gap: 25px;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
     font-family: MerriweatherSans, sans-serif;
@@ -136,7 +136,8 @@
 
 .navigationTab__side-menuFoot {
     font-size: 16px;
-    color: #dc3545;
+    color: #a71d2a;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 .navigationTab__side-menuFoot:hover {
