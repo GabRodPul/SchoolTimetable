@@ -62,8 +62,8 @@ function LoginPageForm() {
         api.login!({ email, password });
     }
 
-    console.log(`${t("pages.LoginPage.email")}:`, email);
-    console.log(`${t("pages.LoginPage.password")}`, password);
+    console.log(`${t("common.data.fields.email")}:`, email);
+    console.log(`${t("common.data.fields.password")}`, password);
     console.log(`${t("pages.LoginPage.rememberMe")}`, rememberMe);
     // navigate('/Home'); // Esta línea se puede dejar comentada, ya que la navegación se maneja en el useEffect
 };
@@ -86,13 +86,13 @@ function LoginPageForm() {
 
           <form className="loginPageForm" onSubmit={handleLogin}>
             <label className="LoginInputText">
-              <p>{t("pages.LoginPage.email")}</p>
+              <p>{t("common.data.fields.email")}</p>
               <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required
               />
             </label>
 
             <label className="LoginInputText">
-              <p>{t("pages.LoginPage.password")}</p>
+              <p>{t("common.data.protected.password")}</p>
               <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="*****************" required
               />
             </label>

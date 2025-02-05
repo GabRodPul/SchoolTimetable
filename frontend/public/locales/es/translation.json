@@ -1,8 +1,77 @@
 {
+  "#__COMMENT__": [
+    "Commenting like this is both very incovenient and exposes",
+    "everything to the consumer, but it's the only way. Too bad!",
+    "Write the keys like this: \"#__{title}__\".",
+    "Don't bother translating them, btw."
+  ],
+
+  "common": {
+    "actions": {
+      "add": "Añadir",
+      "edit": "Editar",
+      "delete": "Eliminar"
+    },
+    "pages": {
+      "login": "Inicio de Sesión"
+    },
+    "data": {
+      "#__tablesAndFields__": [
+        "Having an object for all the different fields in our DB",
+        "avoids repetition and the extra work that would come from",
+        "changing every single one."
+      ],
+      "tablesSingle" : {
+        "users": "Usuario",
+        "groups": "Grupo",
+        "session": "Sesión",
+        "modules": "Módulo",
+        "igt_modules": "Módulo IGP",
+        "classHour": "Hora de Clase",
+        "warnings": "Aviso",
+        "session-changed": "Cambio de Sesión",
+        "enrollment": "Matrícula",
+        "timetables": "Horario",
+        "schedule": "$t(common.data.tablesSingle.timetables)"
+      },
+      "protected": {
+        "#__protected__": "We don't really want the Admin tables to show the passwords accidentally.",
+        "password": "Contraseña"
+      },
+      "fields": {
+        "name": "Nombre",
+        "email": "Email",
+        "description": "Descripción",
+        "phoneNumber": "Nº tfno.",
+        "role": "Rol",
+
+        "day": "Día",
+        "turn": "Turno",
+        "weeklyHours": "Horas semanales",
+        "sessionHour": "Hora de Sesión",
+        "startDate": "Fecha del Inicio",
+        "endDate": "Fecha del Final",
+        "startHour": "Hora del Inicio",
+        "endHour": "Hora del Final",
+        "#__startAndEnd__": [
+          "These two are for classHour."
+        ],
+        "start": "Hora del Inicio",
+        "end": "Hora del Final",
+
+        "id": "ID",
+        "classHourId": "$t(common.data.fields.id) Hora de Clase",
+        "igtModuleId": "$t(common.data.fields.id) Módulo IGP",
+        "teacherId": "$t(common.data.fields.id) Profe",
+        "groupId": "$t(common.data.fields.id) Grupo",
+        "moduleId": "$t(common.data.fields.id) Módulo",
+        "sessionId": "$t(common.data.fields.id) Sesión",
+        "studentId": "$t(common.data.fields.id) Estudiante"
+      }
+    }
+  },
   "pages": {
     "LoginPage": {
-      "email": "Correo",
-      "password": "Contraseña",
       "rememberMe": "Recuérdame",
       "loginGoogle": "Inicia sesión con tu cuenta",
       "continueGoogle":"Continuar con Google",
@@ -36,79 +105,10 @@
       }
     }
   },
+
   "components": {
-    "AdminList": {
-      "add": "Añadir",
-      "edit": "Editar",
-      "delete": "Eliminar",
-      "th": {
-        "id": "ID",
-        "users": {
-          "__title": "Usuario",
-          "name": "Nombre",
-          "email": "Email",
-          "phoneNumber": "Nº tfno.",
-          "role": "Rol"
-        },
-        "groups": {
-          "__title": "Grupo",
-          "name": "Nombre"
-        },
-        "session": {
-          "__title": "Sesión",
-          "classHourId": "ID Hora de Clase",
-          "igtModuleId": "ID Módulo IGP",
-          "day": "Día"
-        },
-        "modules": {
-          "__title": "Módulo",
-          "name": "Nombre"
-        },
-        "igt_modules": {
-          "__title": "Módulo IGP",
-          "teacherId": "ID Profe",
-          "groupId": "ID Grupo",
-          "moduleId": "ID Módulo",
-          "weeklyHours": "Horas semanales"
-        },
-        "classHour": {
-          "__title": "Hora de Clase",
-          "turn": "Turno",
-          "sessionHour": "Hora de Sesión",
-          "start": "Hora del Inicio",
-          "end": "Hora del Final"
-        },
-        "warnings": {
-          "__title": "Aviso",
-          "teacherId": "ID Profe",
-          "description": "Descripción",
-          "startDate": "Fecha del Inicio",
-          "endDate": "Fecha del Final",
-          "startHour": "Hora del Inicio",
-          "endHour": "Hora del Final"
-        },
-        "session-changed": {
-          "__title": "Cambio de Sesión",
-          "sessionId": "ID Sesión",
-          "classHourId": "ID Hora de Clase",
-          "day": "Día",
-          "startDate": "Fecha del Inicio",
-          "endDate": "Fecha del Final"
-        },
-        "enrollment": {
-          "__title": "Matrícula",
-          "studentId": "ID Estudiante",
-          "moduleId": "ID Módulo"
-        },
+    "NavigationTab": {
 
-
-        "timetables": {
-
-        },
-        "schedule": {
-
-        }
-      }
     }
   }
 }

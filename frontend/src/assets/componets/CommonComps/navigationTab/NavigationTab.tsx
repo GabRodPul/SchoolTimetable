@@ -3,7 +3,7 @@ import { RiCalendarScheduleLine, RiHome2Line } from "react-icons/ri";
 import { LuBell } from "react-icons/lu";
 import { BsPencilSquare } from "react-icons/bs";
 import { FaRegUser } from "react-icons/fa";
-import { MdOutlineLogin } from "react-icons/md";
+import { MdOutlineLogin, MdOutlineTranslate } from "react-icons/md";
 import { GoGear } from "react-icons/go";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SearchBar from '#src/assets/componets/CommonComps/SearchBarheader/SearchBarheader';
@@ -11,16 +11,29 @@ import { AuthData } from '#common/@types/models';
 import Header from '../MenuheaderMobile/Header';
 import NavItem from './NavItem';
 import { UserRole } from '#common/@enums/models';
+import i18n from '#src/i18n';
+import { useTransition } from 'react';
 
 function NavigationTab() {
   const location = useLocation();
   const navigate = useNavigate();
   const { role, name } = (JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData).user; // Cambia 'currentuser' al nombre de la clave que usas en localStorage
+  const { t } = useTransition();
 
   const handleLogout = () => {
     localStorage.removeItem('currentUser');
     localStorage.removeItem('accessToken');
     navigate('/login');
+  };
+
+  const changeLanguage = () => {
+    let lng = i18n.languages.indexOf(i18n.language);
+    if (++lng === i18n.languages.length)
+      lng = 0;
+
+    i18n.changeLanguage(i18n.languages[lng]);
+    i18n.changeLanguage("en");
+
   };
 
   const roleTextInfo = () => {
@@ -118,6 +131,9 @@ function NavigationTab() {
                         </div>
                     </div>
                     <div className='navigationTab__side-menuFooter'>
+                        <button style={{display: "none"}} className='navigationTab__side-menuFoot' onClick={changeLanguage}>
+                            <MdOutlineTranslate className='' size={30} /> Translate
+                        </button>
                         <button className='navigationTab__side-menuFoot' onClick={handleLogout}>
                             <MdOutlineLogin className='logoutIcon' size={30} /> Cerrar sesión
                         </button>

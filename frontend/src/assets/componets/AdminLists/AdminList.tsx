@@ -16,21 +16,18 @@ export function AdminList<T>(props: AdminListProps<T>) {
       if (fetchData.state == FetchState.NotStarted) api.getAll();
     }, []);
     
-    const _noIdFields = props.fields.filter(f => f as string !== "id");
     const { t } = i18n;
-    const tKey = `components.AdminList.th.${props.route}`;
 
     return (
       <div className="userlist">
         <table className="userlist__usertable">
           <tbody>
           <tr>
-            { <th>{t("components.AdminList.th.id")}</th> }
-            { _noIdFields.map(f => {
-                return <th key={f as string}>{t(`${tKey}.${f as string}`)}</th>
+            { props.fields.map(f => {
+                return <th key={f as string}>{t(`common.data.fields.${f as string}`)}</th>
             }) }
             <th>
-              <button className="userlist__addbtn">➕ {t(`components.AdminList.add`)} {t(`${tKey}.__title`)}</button>
+              <button className="userlist__addbtn">➕ {t(`common.actions.add`)} {t(`common.data.tablesSingle.${props.route}`)}</button>
               {/* <button>Toggle</button> */}
             </th>
           </tr>
@@ -41,8 +38,8 @@ export function AdminList<T>(props: AdminListProps<T>) {
                 <tr key={(d as any).id}>
                   { props.fields.map(f => <td key={f as string}>{d[f] as string}</td>) }
                   <td>
-                    <button className="userlist__editbtn">✏️ {t(`components.AdminList.edit`)}</button>
-                    <button className="userlist__deletebtn">🗑️ {t(`components.AdminList.delete`)}</button>
+                    <button className="userlist__editbtn">✏️ {t(`common.actions.edit`)}</button>
+                    <button className="userlist__deletebtn">🗑️ {t(`common.actions.delete`)}</button>
                   </td>
                 </tr>
               );

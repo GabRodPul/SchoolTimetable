@@ -1,4 +1,77 @@
 {
+  "#__COMMENT__": [
+    "Commenting like this is both very incovenient and exposes",
+    "everything to the consumer, but it's the only way. Too bad!",
+    "Write the keys like this: \"#__{title}__\".",
+    "Don't bother translating them, btw."
+  ],
+
+  "common": {
+    "actions": {
+      "add": "Añadir",
+      "edit": "Editar",
+      "delete": "Eliminar"
+    },
+
+    "data": {
+      "#__tablesAndFields__": [
+        "Having an object for all the different fields in our DB",
+        "avoids repetition and the extra work that would come from",
+        "changing every single one."
+      ],
+      "tablesSingle" : {
+        "users": "User",
+        "groups": "Group",
+        "session": "Session",
+        "modules": "Module",
+        "igt_modules": "IGT Module",
+        "classHour": "Class Hour",
+        "warnings": "Notice (Warning)",
+        "session-changed": "Session Change",
+        "enrollment": "Enrollment",
+        "timetables": "Horario",
+        "schedule": "$t(common.data.tablesSingle.timetables)"
+      },
+      "protected": {
+        "#__protected__": [
+          "We don't really want the Admin tables to show the passwords accidentally."
+        ],
+        "password": "Password"
+      },
+      "fields": {
+        "name": "Name",
+        "email": "Email",
+        "description": "Description",
+        "phoneNumber": "Tel. no.",
+        "role": "Role",
+
+        "day": "Day",
+        "turn": "Turn",
+        "weeklyHours": "Weekly hours",
+        "sessionHour": "Session hour",
+        "startDate": "Start date",
+        "endDate": "End date",
+        "startHour": "Start hour",
+        "endHour": "End hour",
+        "#__startAndEnd__": [
+          "These two are for classHour.",
+          "They are both hours as well."
+        ],
+        "start": "$t(common.data.fields.startHour)",
+        "end": "$t(common.data.fields.endHour)",
+
+        "id": "ID",
+        "classHourId": "Class Hour $t(common.data.fields.id)",
+        "igtModuleId": "IGT Module $t(common.data.fields.id)",
+        "teacherId": "Teacher $t(common.data.fields.id)",
+        "groupId": "Group $t(common.data.fields.id)",
+        "moduleId": "Module $t(common.data.fields.id)",
+        "sessionId": "Session $t(common.data.fields.id)",
+        "studentId": "Student $t(common.data.fields.id)"
+      }
+    }
+  },
+
   "pages": {
     "LoginPage": {
       "email": "Email",
@@ -32,81 +105,6 @@
         "admin": {
           "title": "Admin Panel",
           "description": "Manage the database"
-        }
-      }
-    }
-  },
-  "components": {
-    "AdminList": {
-      "add": "Add",
-      "edit": "Edit",
-      "delete": "Delete",
-      "th": {
-        "id": "ID",
-        "users": {
-          "__title": "User",
-          "name": "Name",
-          "email": "Email",
-          "phoneNumber": "Tel. no.",
-          "role": "Role"
-        },
-        "groups": {
-          "__title": "Group",
-          "name": "Name"
-        },
-        "session": {
-          "__title": "Session",
-          "classHourId": "Class Hour ID",
-          "igtModuleId": "IGT Module ID",
-          "day": "Day"
-        },
-        "modules": {
-          "__title": "Module",
-          "name": "Name"
-        },
-        "igt_modules": {
-          "__title": "IGT Module",
-          "teacherId": "Teacher ID",
-          "groupId": "Group ID",
-          "moduleId": "Module ID",
-          "weeklyHours": "Weekly hours"
-        },
-        "classHour": {
-          "__title": "Class Hour",
-          "turn": "Turn",
-          "sessionHour": "Session Hour",
-          "start": "Start Hour",
-          "end": "End Hour"
-        },
-        "warnings": {
-          "__title": "Notice",
-          "teacherId": "Teacher ID",
-          "description": "Description",
-          "startDate": "Start Date",
-          "endDate": "End Date",
-          "startHour": "Start Hour",
-          "endHour": "End Hour"
-        },
-        "session-changed": {
-          "__title": "Session Change",
-          "sessionId": "Session ID",
-          "classHourId": "Class Hour ID",
-          "day": "Day",
-          "startDate": "Start Date",
-          "endDate": "End Date"
-        },
-        "enrollment": {
-          "__title": "Enrollment",
-          "studentId": "Student ID",
-          "moduleId": "Module ID"
-        },
-
-
-        "timetables": {
-
-        },
-        "schedule": {
-
         }
       }
     }
