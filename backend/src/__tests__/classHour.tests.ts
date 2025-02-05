@@ -50,6 +50,12 @@ describe("controllers/classHour.controller.ts - Validate Hours", () => {
 });
 
 describe("controllers/classHour.controller.ts - Endpoints", () => {
+
+    test("GET /classHour/create - Should show create form", async () => {
+        const res = await request(app).get("/classHours/create");
+        expect(res.status).toEqual(200);
+    });
+
     test("POST /classHour - Should create a new class hour", async () => {
         const res = await request(app)
             .post("/classHours")
@@ -58,6 +64,16 @@ describe("controllers/classHour.controller.ts - Endpoints", () => {
             .set("Content-Type", "application/json");
 
         expect(res.status).toEqual(200);
+    });
+
+    test("POST /classHour - Empty body", async () => {
+        const res = await request(app)
+            .post("/classHours")
+            .send({})
+            .set("Access-Control-Allow-Origin", "*")
+            .set("Content-Type", "application/json");
+
+        expect(res.status).toEqual(400);
     });
 
     test("GET /classHour/edit/1 - Should show edit form for a class hour", async () => {
@@ -69,11 +85,33 @@ describe("controllers/classHour.controller.ts - Endpoints", () => {
 
     test("POST /classHour/update/1 - Should update a class hour", async () => {
         const res = await request(app)
-            .post(`/classHours/update/${mwTestData.id}`)
+            // .post(`/classHours/update/${mwTestData.id}`)
+            .post(`/classHours/update/11111`)
             .send(updatedTestData)
             .set("Access-Control-Allow-Origin", "*")
             .set("Content-Type", "application/json");
+
+        console.log("Response status:", res.status); // Imprime el código de estado
+        console.log("Response body:", res.body); // Imprime el contenido de la respuesta
+
         expect(res.status).toEqual(200);
+    });
+
+    test("GET /classHour/edit/1 - Fail uptate/unvalid Id", async () => {
+        const res = await request(app).get("/classHours/update/10500")
+            .send(updatedTestData)
+            .set("Access-Control-Allow-Origin", "*")
+            .set("Content-Type", "application/json");
+        expect(res.status).toEqual(404);
+    });
+
+    test("POST /classHour/update/1 - Update Empty Body", async () => {
+        const res = await request(app)
+            .post(`/classHours/update/${mwTestData.id}`)
+            .send({})
+            .set("Access-Control-Allow-Origin", "*")
+            .set("Content-Type", "application/json");
+        expect(res.status).toEqual(400);
     });
 
     test("POST /classHour/delete/1 - Should delete a class hour", async () => {
@@ -83,35 +121,11 @@ describe("controllers/classHour.controller.ts - Endpoints", () => {
         expect(res.status).toEqual(302);
     });
 
-    test("GET /classHour/edit/1 - Fail uptate empty body/unvalid Id", async () => {
-        const res = await request(app).get("/classHours/update/10500")
-            .send(updatedTestData)
+    test("POST /classHour/delete/1 - Delete unvalid Id", async () => {
+        const res = await request(app).post("/classHours/delete/")
             .set("Access-Control-Allow-Origin", "*")
             .set("Content-Type", "application/json");
-        expect(res.status).toEqual(404);
+        expect(res.status).toEqual(404); // Redirección después de eliminar
     });
 
-        test("POST /classHour/update/1 - Update with empty body", async () => {
-            const res = await request(app)
-                .post("/classHour/updates/2")
-                .send({})
-                .set("Access-Control-Allow-Origin", "*")
-                .set("Content-Type", "application/json");
-            expect(res.status).toEqual(404); // Redirección después de actualizar
-        });
-
-        test("POST /classHour/delete/1 - Delete unvalid Id", async () => {
-            const res = await request(app).post("/classHours/delete/")
-                .set("Access-Control-Allow-Origin", "*")
-                .set("Content-Type", "application/json");
-            expect(res.status).toEqual(404); // Redirección después de eliminar
-        });
-
-});
-
-describe("controllers/classHour.controller.ts - Endpoints", () => {
-    test("GET /classHour/create - Should show create form", async () => {
-        const res = await request(app).get("/classHours/create");
-        expect(res.status).toEqual(200);
-    });
 });
