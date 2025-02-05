@@ -30,62 +30,57 @@ function Admin() {
 
                 <UserCrud />
                 <AdminList 
-                    buttonName="User" 
                     fields={["id", "name", "email", "phoneNumber", "role"]}
                     route={ApiRts.Users}
                 />
 
                 <GroupCrud />
                 <AdminList
-                    buttonName="Group"
                     fields={["id", "name"]}
                     route={ApiRts.Groups}
                 />
 
                 <SessionCrud/>
                 <AdminList
-                    buttonName="Session"
                     fields={["id", "classHourId", "igtModuleId","day"]}
                     route={ApiRts.Session}
                 />
                 
                 <ModuleCrud/>
                 <AdminList
-                    buttonName="Module"
                     fields={["id", "name"]}
                     route={ApiRts.Modules}
                 />
 
                 <IGTModuleCrud />
                 <AdminList
-                    buttonName="IGT Module"
                     fields={["id", "teacherId", "groupId", "moduleId" ,"weeklyHours"]}
                     route={ApiRts.IGT_modules}
                 />
 
                 <ClassHourCrud/>
                 <AdminList
-                    buttonName="Class Hour"
                     fields={["id", "turn", "sessionHour", "start", "end"]}
                     route={ApiRts.ClassHour}
                 />
 
                 <WarningCrud/>
                 <AdminList
-                    buttonName="Warning"
                     fields={["id", "teacherId", "description", "startDate", "endDate", "startHour", "endHour"]}
                     route={ApiRts.Warnings}
                 />
 
                 <SessionChangedCrud/>
 a               <AdminList
-                    buttonName="Session Changed"
                     fields={["id", "sessionId", "classHourId", "day", "startDate", "endDate"]}
                     route={ApiRts.SessionChanged}
                 />
 
                 <EnrollmentCrud/>
-                
+                <AdminList
+                    fields={["studentId", "moduleId"]}
+                    route={ApiRts.Enrollmet}
+                />
             </div>
         </div>
     );

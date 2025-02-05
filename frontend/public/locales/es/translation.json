@@ -10,6 +10,105 @@
       "forgotPassword":"¿Olvidó la contraseña?",
       "login":"Iniciar sesión",
       "fieldAlert": "Por favor, complete todos los campos."
+    },
+    "HomePage": {
+      "cards": {
+        "timetable": {
+          "title": "Página de Horarios",
+          "description": "Vea sus horarios"
+        },
+        "notices": {
+          "title": "Página de Avisos",
+          "description": "Vea sus avisos"
+        },
+        "formalities": {
+          "title": "Página de Trámites",
+          "description": "Vea sus trámites"
+        },
+        "transactions": {
+          "title": "Página de Trámites",
+          "description": "Vea sus trámites"
+        },
+        "admin": {
+          "title": "Panel de Admin",
+          "description": "Gestione la base de datos"
+        }
+      }
+    }
+  },
+  "components": {
+    "AdminList": {
+      "add": "Añadir",
+      "edit": "Editar",
+      "delete": "Eliminar",
+      "th": {
+        "id": "ID",
+        "users": {
+          "__title": "Usuario",
+          "name": "Nombre",
+          "email": "Email",
+          "phoneNumber": "Nº tfno.",
+          "role": "Rol"
+        },
+        "groups": {
+          "__title": "Grupo",
+          "name": "Nombre"
+        },
+        "session": {
+          "__title": "Sesión",
+          "classHourId": "ID Hora de Clase",
+          "igtModuleId": "ID Módulo IGP",
+          "day": "Día"
+        },
+        "modules": {
+          "__title": "Módulo",
+          "name": "Nombre"
+        },
+        "igt_modules": {
+          "__title": "Módulo IGP",
+          "teacherId": "ID Profe",
+          "groupId": "ID Grupo",
+          "moduleId": "ID Módulo",
+          "weeklyHours": "Horas semanales"
+        },
+        "classHour": {
+          "__title": "Hora de Clase",
+          "turn": "Turno",
+          "sessionHour": "Hora de Sesión",
+          "start": "Hora del Inicio",
+          "end": "Hora del Final"
+        },
+        "warnings": {
+          "__title": "Aviso",
+          "teacherId": "ID Profe",
+          "description": "Descripción",
+          "startDate": "Fecha del Inicio",
+          "endDate": "Fecha del Final",
+          "startHour": "Hora del Inicio",
+          "endHour": "Hora del Final"
+        },
+        "session-changed": {
+          "__title": "Cambio de Sesión",
+          "sessionId": "ID Sesión",
+          "classHourId": "ID Hora de Clase",
+          "day": "Día",
+          "startDate": "Fecha del Inicio",
+          "endDate": "Fecha del Final"
+        },
+        "enrollment": {
+          "__title": "Matrícula",
+          "studentId": "ID Estudiante",
+          "moduleId": "ID Módulo"
+        },
+
+
+        "timetables": {
+
+        },
+        "schedule": {
+
+        }
+      }
     }
   }
 }

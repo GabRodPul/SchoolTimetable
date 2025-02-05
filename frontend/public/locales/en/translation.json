@@ -10,6 +10,105 @@
       "forgotPassword":"Forgot your password?",
       "login":"Login",
       "fieldAlert": "Please, fill every field."
+    },
+    "HomePage": {
+      "cards": {
+        "timetable": {
+          "title": "Timetable Page",
+          "description": "View your timetables"
+        },
+        "notices": {
+          "title": "Notices Page",
+          "description": "View your notices"
+        },
+        "formalities": {
+          "title": "Transactions Page",
+          "description": "View your transactions"
+        },
+        "transactions": {
+          "title": "Transactions Page",
+          "description": "View your transactions"
+        },
+        "admin": {
+          "title": "Admin Panel",
+          "description": "Manage the database"
+        }
+      }
+    }
+  },
+  "components": {
+    "AdminList": {
+      "add": "Add",
+      "edit": "Edit",
+      "delete": "Delete",
+      "th": {
+        "id": "ID",
+        "users": {
+          "__title": "User",
+          "name": "Name",
+          "email": "Email",
+          "phoneNumber": "Tel. no.",
+          "role": "Role"
+        },
+        "groups": {
+          "__title": "Group",
+          "name": "Name"
+        },
+        "session": {
+          "__title": "Session",
+          "classHourId": "Class Hour ID",
+          "igtModuleId": "IGT Module ID",
+          "day": "Day"
+        },
+        "modules": {
+          "__title": "Module",
+          "name": "Name"
+        },
+        "igt_modules": {
+          "__title": "IGT Module",
+          "teacherId": "Teacher ID",
+          "groupId": "Group ID",
+          "moduleId": "Module ID",
+          "weeklyHours": "Weekly hours"
+        },
+        "classHour": {
+          "__title": "Class Hour",
+          "turn": "Turn",
+          "sessionHour": "Session Hour",
+          "start": "Start Hour",
+          "end": "End Hour"
+        },
+        "warnings": {
+          "__title": "Notice",
+          "teacherId": "Teacher ID",
+          "description": "Description",
+          "startDate": "Start Date",
+          "endDate": "End Date",
+          "startHour": "Start Hour",
+          "endHour": "End Hour"
+        },
+        "session-changed": {
+          "__title": "Session Change",
+          "sessionId": "Session ID",
+          "classHourId": "Class Hour ID",
+          "day": "Day",
+          "startDate": "Start Date",
+          "endDate": "End Date"
+        },
+        "enrollment": {
+          "__title": "Enrollment",
+          "studentId": "Student ID",
+          "moduleId": "Module ID"
+        },
+
+
+        "timetables": {
+
+        },
+        "schedule": {
+
+        }
+      }
     }
   }
 }
