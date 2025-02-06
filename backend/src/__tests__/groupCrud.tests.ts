@@ -8,12 +8,12 @@ import utils from "#src/utils/utils";
 
 
 const epTestData: GroupData & Id = {
-  id: 1,
+  id: 1111,
   name: "DAW2M",
 };
 
 const epTestUpdateData: GroupData & Id = {
-  id: 2,
+  id: 2222,
   name: "DAW2T",
 };
 
@@ -33,75 +33,70 @@ describe("controller/group.view.controller.ts - Endpoints", () => {
     expect(res.status).toEqual(200);
   });
 
-  // test("POST /groups2 - Empty body", async () => {
-  //   const res = await request(app)
-  //     .post("/groups2")
-  //     .send({})
-  //     .set("Access-Control-Allow-Origin", "*")
-  //     .set("Content-Type", "application/json");
-  //   expect(res.body.code).toEqual(500);
-  //   expect(res.body).toHaveProperty("message");
-  // });
+  test("POST /groups2 - Empty body", async () => {
+    const res = await request(app)
+      .post("/groups2")
+      .send({})
+      .set("Access-Control-Allow-Origin", "*")
+      .set("Content-Type", "application/json");
+    expect(res.status).toEqual(400);
+  });
 
-  // test("POST /groups2 - Should create a new group", async () => {
-  //   const res = await request(app)
-  //     .post("/groups2")
-  //     .send(epTestData)
-  //     .set("Access-Control-Allow-Origin", "*")
-  //     .set("Content-Type", "application/json");
+  test("POST /groups2 - Should create a new group", async () => {
+    const res = await request(app)
+      .post("/groups2")
+      .send(epTestData)
+      .set("Access-Control-Allow-Origin", "*")
+      .set("Content-Type", "application/json");
 
-  //   expect(res.status).toEqual(200);
-  // });
+    expect(res.status).toEqual(200);
+  });
 
-  // test("GET /groups2/edit/1 - Should show edit form for a group", async () => {
-  //   const res = await request(app).get(`/groups2/edit/${epTestData.id}`)
-  //     .set("Access-Control-Allow-Origin", "*")
-  //     .set("Content-Type", "application/json");
-  //   expect(res.status).toEqual(200);
-  // });
+  test("GET /groups2/edit - Should show edit form for a group", async () => {
+    const res = await request(app).get(`/groups2/edit/${epTestData.id}`)
+      .set("Access-Control-Allow-Origin", "*")
+      .set("Content-Type", "application/json");
+    expect(res.status).toEqual(200);
+  });
 
-  // test("POST /groups2/update/1 - Should update a group", async () => {
-  //   const res = await request(app)
-  //     .post(`/groups2/update/${epTestData.id}`)
-  //     .send(epTestUpdateData)
-  //     .set("Access-Control-Allow-Origin", "*")
-  //     .set("Content-Type", "application/json");
-  //   expect(res.status).toEqual(200);
-  // });
+  test("POST /groups2/update - Should update a group", async () => {
+    const res = await request(app)
+    .post(`/groups2/update/${epTestData.id}`)
+    .send(epTestUpdateData)
+    .set("Access-Control-Allow-Origin", "*")
+    .set("Content-Type", "application/json");
+    expect(res.status).toEqual(200);
+  });
+  
+ test("GET /groups2/edit - Fail uptate unvalid Id", async () => {
+    const res = await request(app).get("/groups2/update/10500")
+      .send({})
+      .set("Access-Control-Allow-Origin", "*")
+      .set("Content-Type", "application/json");
+    expect(res.status).toEqual(404);
+  });
 
-  // test("POST /groups2/delete/1 - Should delete a group", async () => {
-  //   const res = await request(app).post(`/groups2/delete/${epTestData.id}`)
-  //     .set("Access-Control-Allow-Origin", "*")
-  //     .set("Content-Type", "application/json");
-  //   expect(res.status).toEqual(302);
-  // });
+  test("POST /groups2/update - Update with empty body", async () => {
+    const res = await request(app)
+      .post(`/groups2/update/${epTestData.id}`)
+      .send({})
+      .set("Access-Control-Allow-Origin", "*")
+      .set("Content-Type", "application/json");
+    expect(res.status).toEqual(400); 
+  });
 
-  // test("GET /groups2/edit/1 - Fail uptate empty body/unvalid Id", async () => {
-  //   const res = await request(app).get("/groups2/update/10500")
-  //     .send({})
-  //     .set("Access-Control-Allow-Origin", "*")
-  //     .set("Content-Type", "application/json");
-  //   expect(res.status).toEqual(400);
-  // });
+  test("POST /groups2/delete - Should delete a group", async () => {
+    const res = await request(app).post(`/groups2/delete/${epTestData.id}`)
+    .set("Access-Control-Allow-Origin", "*")
+    .set("Content-Type", "application/json");
+    expect(res.status).toEqual(302);
+  });
 
-  // test("POST /groups2/update/1 - Update with empty body", async () => {
-  //   const res = await request(app)
-  //     .post("/groups2/updates/2")
-  //     .send({})
-  //     .set("Access-Control-Allow-Origin", "*")
-  //     .set("Content-Type", "application/json");
-  //   expect(res.status).toEqual(404); // Redirección después de actualizar
-  // });
-
-  // test("POST /groups2/delete/1 - Delete unvalid Id", async () => {
-  //   const res = await request(app).post("/groups2/delete/")
-  //     .set("Access-Control-Allow-Origin", "*")
-  //     .set("Content-Type", "application/json");
-  //   expect(res.status).toEqual(404); // Redirección después de eliminar
-  // });
+  test("POST /groups2/delete - Delete unvalid Id", async () => {
+    const res = await request(app).post("/groups2/delete/")
+      .set("Access-Control-Allow-Origin", "*")
+      .set("Content-Type", "application/json");
+    expect(res.status).toEqual(404); // Redirección después de eliminar
+  });
 });
-
-// afterAll(async () => {
-//   await DB.sequelize.close(); // O el método que uses para cerrar la conexión
-// });
 
