@@ -1,3 +1,8 @@
+.crud__select{
+    padding: 20px;
+    margin-right: 10px;
+}
+
 .crud__container {
     display: flex;
     flex-direction: column;
@@ -9,7 +14,6 @@
     font-size: 24px;
     text-align: center;
     margin-bottom: 20px;
-    color: #333;
 }
 
 .crud__form {
@@ -26,7 +30,7 @@
     padding: 10px;
     width: 100%;
     box-sizing: border-box;
-    border: 1px solid #ccc;
+    border: 1px solid #cacaca;
     border-radius: 4px;
     font-size: 14px;
 }
@@ -35,7 +39,7 @@
     padding: 10px 15px;
     margin-right: 10px;
     background-color: #0056b3;
-    color: #fff;
+    color: #ffffff;
     border: none;
     cursor: pointer;
     border-radius: 4px;
@@ -54,11 +58,11 @@
     cursor: pointer;
     border-radius: 4px;
     font-size: 14px;
-    background-color: #e63754;
+    background-color: #C11A36;
 }
 
 .crud__button--cancel:hover {
-    background-color: #ce0000;
+    background-color: #b10707;
 }
 
 .crud__list {
@@ -98,10 +102,6 @@
     background-color: #f9f9f9;
 }
 
-.crud__item:last-child {
-    margin-bottom: 0;
-}
-
 .crud__buttonGroup {
     display: flex;
     gap: 10px;
@@ -116,11 +116,11 @@
     cursor: pointer;
     border-radius: 4px;
     font-size: 14px;
-    background-color: #ffc107;
+    background-color: #268014;
 }
 
 .crud__button--edit:hover {
-    background-color: #e0a800;
+    background-color: #1c6d0c;
 }
 
 .crud__button--delete {
@@ -131,11 +131,11 @@
     cursor: pointer;
     border-radius: 4px;
     font-size: 14px;
-    background-color: #e63754;
+    background-color: #C11A36;
 }
 
 .crud__button--delete:hover {
-    background-color: #c82333;
+    background-color: #b10707;
 }
 
 .main-content {

@@ -13,15 +13,18 @@ import Admin from './assets/page/AdminPage/AdminPage'
 import TimeTablePage from './assets/page/TimeTablePage/TimeTablePage'
 import FormalitiesPage from './assets/page/FormalitiesPage/FormalitiesPage'
 import TransactionsPage from './assets/page/TransactionPage/TransactionPage'
+import UserList from './assets/componets/AdminLists/UserList'
 
 
 function App() {
 
   return (
-    <>
+    <> 
       {/* <Header/> */}
       <BrowserRouter>
         <Routes>
+
+          <Route path='/userslist' element={<UserList />} />
           <Route path='/' element={<LoginPage />} />
           <Route path='/login' element={<LoginPage />} />
           {/* <Route path='/signin' element={<SigninPage />} /> */}
@@ -32,6 +35,7 @@ function App() {
           <Route path='/timetable' element={<TimeTablePage />} />
           <Route path='/formalities' element={<FormalitiesPage />} />
           <Route path='/transactions' element={<TransactionsPage />} />
+          <Route path='/userslist' element={<UserList />} />
           {/* <Route path='/GroupPage' element={<GroupPage />} /> */}
         </Routes>
       </BrowserRouter>
