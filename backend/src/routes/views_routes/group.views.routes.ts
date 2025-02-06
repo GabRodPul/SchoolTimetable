@@ -22,5 +22,5 @@ export const GroupViewsRoutes = { init: (app: Express) => {
     // Delete some Group with id
     router.post("/delete/:id", GroupViewsController.destroy );
 
-    app.use("/groups", router);
+    app.use("/groups2", router);
 }};
