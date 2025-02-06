@@ -3,148 +3,108 @@
 }
 
 .noticesPage {
-    display: flex;
-    width: 50%;
-    margin-left: 60px;
-    justify-content: left;
-    gap: 15%;
-    margin-left: 400px;
+    display: flex; 
+    flex-direction: row; 
+    justify-content: space-around; 
+    align-items: flex-start; 
+    gap: 10px; 
+    width: 100%;
+    padding: 0; 
+    margin: 0 auto; 
     font-family: 'Lexend', sans-serif;
 }
 
-
-.noticesPage__reminders h2 {
-    font-weight: 600;
-    border-bottom: 1px solid #DDD6D6;
-}
-
+.noticesPage__reminders h2,
 .noticesPage__notifications h2 {
-    font-weight: 600;
+    font-weight: 800;
     border-bottom: 1px solid #DDD6D6;
 }
 
 .noticesPage__notifications,
 .noticesPage__reminders {
+    flex: 1; /* Les deux sections prennent une largeur égale */
+    max-width: 28%; /* Réduction de la largeur à 40% */
     display: flex;
     flex-direction: column;
     text-align: left;
-    width: 420px;
-    /* margin-left: 300px; */
+    
 }
-
+.noticesPage__notifications{
+    margin-left: 17.5%;
+}
+.noticesPage__reminders{
+    margin-right: 25.5%;
+}
 .notifications__entry,
 .reminders__remEntry {
     display: flex;
     flex-direction: column;
     border: 1px solid #ccc;
     border-radius: 5px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, .3);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 10px; /* Réduction de l'espacement entre les entrées */
+    padding: 8px; /* Marges internes */   
+}
+
+.notifications__entry:hover,
+.reminders__remEntry:hover {
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+    border-color: #333;
 }
 
 .entry__title {
-    color: #9B2BC7;
+    color: #6A1B9A;
     font-weight: 700;
+    margin-left: 1.7%;
+    margin-bottom: 0.5%;
+
 }
 
-.entry__text{
+.entry__text {
     margin-left: 20px;
 }
-
 
 .reminders__remEntry {
     display: flex;
     flex-direction: row;
 }
+.remEntry__textContainer {
+      margin: 0px 7px;
+}
 
 .remEntry__icon {
     display: flex;
     align-items: center;
-    margin: 0px 20px;
+    margin: 0px 10px;
 }
 
 .remEntry--color[kind="Exam"] {
-    color: #FB9318;
+    color: #B22222;
 }
 
 .remEntry--color[kind="Assignment"] {
-    color: #30E578;
+    color: #227C44;
 }
 
 .remEntry--color[kind="Project"] {
-    color: #5A51F3;
+    color: #3D32B8;
 }
 
+/* Responsive Design */
 @media (max-width: 768px) {
-
-    .header__mobile {
-        display: inherit;
+    .noticesPage {
+        flex-direction: column; /* Disposition verticale pour petits écrans */
+        gap: 15px; /* Réduction de l'espace entre les sections */
     }
 
-    .header__desk {
-        display: none;
-    }
-
-    .searchContainer {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #e0e0e0;
-
-        .searchBar {
-            margin: 20px 0;
-            background-color: #ffff;
-            width: 80%;
-            display: flex;
-            justify-content: start;
-            align-items: baseline;
-            border: 1px solid #000000;
-            box-sizing: border-box;
-            border-radius: 50px;
-            overflow: hidden;
-
-            .searchIcon {
-                margin: 0 10px;
-                height: 100%;
-            }
-
-            .inputNotice {
-                outline: none;
-                width: 100%;
-                font-size: 12px;
-                color: #000000;
-                border: none;
-                font-size: 12pt;
-            }
-        }
-    }
-
-    .noticesPage__notifications {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 1px;
-        font-family: 'Lexend', sans-serif;
-    }
-
+    .noticesPage__notifications,
     .noticesPage__reminders {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 1px;
-        font-family: 'Lexend', sans-serif;
-    }
-
-    .reminders__remEntry {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
+        max-width: 100%; /* Les sections prennent toute la largeur */
     }
 }
 
 @media (max-width: 1145px) {
-
-    .desk__menu{
+    .desk__menu {
         display: none;
     }
 
@@ -152,81 +112,23 @@
         display: inherit;
     }
 
-    .header__desk {
-        display: none;
-    }
-
-    .searchContainer {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #e0e0e0;
-
-        .searchBar {
-            margin: 20px 0;
-            background-color: #ffff;
-            width: 80%;
-            display: flex;
-            justify-content: start;
-            align-items: baseline;
-            border: 1px solid #000000;
-            box-sizing: border-box;
-            border-radius: 50px;
-            overflow: hidden;
-
-            .searchIcon {
-                margin: 0 10px;
-                height: 100%;
-            }
-
-            .inputNotice {
-                outline: none;
-                width: 100%;
-                font-size: 12px;
-                color: #000000;
-                border: none;
-                font-size: 12pt;
-            }
-        }
-    }
-
-    .noticesPage__notifications {
-        display: none;
-        width: 100%;
-        max-width: 700px;
-        display: flex;
+    .noticesPage {
         flex-direction: column;
-        font-family: 'Lexend', sans-serif;
+        gap: 15px;
     }
 
+    .noticesPage__notifications,
     .noticesPage__reminders {
-        width: 100%;
-        max-width: 700px;
-        display: flex;
-        flex-direction: column;
-        gap: 1px;
-        font-family: 'Lexend', sans-serif;
+        max-width: 100%;
     }
-
-    .reminders__remEntry {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-    }
-
 }
 
 @media (max-width: 1745px) {
-
     .noticesPage {
-        display: flex;
-        flex-direction: column;
-        width: 80%;
-        margin-left: 60px;
-        justify-content: center;
-        align-items: center;
-        margin-left: 5%;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin: 0 auto;
     }
-
 }

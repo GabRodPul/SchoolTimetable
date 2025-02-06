@@ -10,13 +10,8 @@
     padding: 20px;
 }
 
-.crud__select{
-    padding: 20px;
-    margin-right: 10px;
-}
-
 .crud__title {
-    font-size: 28px;
+    font-size: 24px;
     text-align: center;
     margin-bottom: 20px;
 }
@@ -24,9 +19,9 @@
 .crud__form {
     width: 750px;
     padding: 20px;
-    border: 1px solid #707070;
+    border: 1px solid #ddd;
     border-radius: 8px;
-    background-color: #E8E8E8;
+    background-color: #f9f9f9;
 }
 
 .crud__input {
@@ -52,7 +47,7 @@
 }
 
 .crud__button:hover {
-    background-color: #015521;
+    background-color: #004b9b;
 }
 
 .crud__button--cancel {
@@ -74,7 +69,7 @@
     width: 800px;
     max-height: 300px;
     overflow-y: auto;
-    border: 1px solid #707070;
+    border: 1px solid #ddd;
     border-radius: 4px;
     padding: 10px;
 }
@@ -100,11 +95,11 @@
     display: flex;
     margin-bottom: 10px;
     padding: 15px;
-    border: 1px solid #707070;
+    border: 1px solid #ddd;
     border-radius: 4px;
     justify-content: space-between;
     align-items: center;
-    background-color: #E8E8E8;
+    background-color: #f9f9f9;
 }
 
 .crud__buttonGroup {
