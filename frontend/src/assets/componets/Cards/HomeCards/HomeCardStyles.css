@@ -40,12 +40,12 @@
 }
 
 .card__title {
-    font-size: 1rem;
-    color: #333;
+    font-size: 22px;
+    color: #000;
     margin: 0;
 }
 
-.card__content p {
+.card__content {
     font-size: .9rem;
     color: #666;
     margin-top: -2px;
@@ -53,6 +53,7 @@
 }
 
 .card__content button {
+    transition: all 0.3s ease-in-out;
     padding: 10px 20px;
     font-size: 1rem;
     color: rgb(0, 0, 0);
@@ -67,6 +68,7 @@
 }
 
 .card__content button:hover {
+    transform: scale(1.1);
     background-color: #004B84;
     color: #ffffff;
     border: 2px solid #004B84;
@@ -77,6 +79,24 @@
     outline: none;
     box-shadow: 0 0 10px rgba(0, 75, 132, 0.5);
 }
+
+.card__content button {
+    background: linear-gradient(35deg, #004B84, #0693ff);
+    background-size: 200% 200%;
+    animation: gradient 3s infinite linear;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+  }
+
+  @keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+
 
 @media (max-width: 1439px) {
     .card__body {
