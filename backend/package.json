@@ -5,7 +5,10 @@
   "main": "../dist/index.js",
   "scripts": {
     "start": "ts-node -r tsconfig-paths/register src/index.ts",
-    "db:makemigrations": "node ./backend/node_modules/@top-gg/sequelize-typescript-auto-migrations/dist/bin/sequelize-ts.js",
+    "db:migrate": "ts-node -r tsconfig-paths/register scripts/migrate.ts migrate",
+    "db:migrate:all": "ts-node -r tsconfig-paths/register scripts/migrate.ts migrate:all",
+    "db:migrate:undo": "ts-node -r tsconfig-paths/register scripts/migrate.ts migrate:undo",
+    "db:migrate:undo:all": "ts-node -r tsconfig-paths/register scripts/migrate.ts migrate:undo:all",
     "test": "cross-env NODE_ENV=TEST jest --testTimeout=10000 --detectOpenHandles"
   },
   "author": "",
