@@ -85,8 +85,8 @@ describe("controllers/classHour.controller.ts - Endpoints", () => {
 
     test("POST /classHour/update/1 - Should update a class hour", async () => {
         const res = await request(app)
-            // .post(`/classHours/update/${mwTestData.id}`)
-            .post(`/classHours/update/11111`)
+            .post(`/classHours/update/${mwTestData.id}`)
+            // .post(`/classHours/update/11111`)
             .send(updatedTestData)
             .set("Access-Control-Allow-Origin", "*")
             .set("Content-Type", "application/json");
