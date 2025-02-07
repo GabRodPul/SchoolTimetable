@@ -9,6 +9,7 @@ import DatePicker from 'react-datepicker';
 
 type Warning = WarningData & Id;
 
+
 const FormalitiesDesktop: React.FC = () => {
     const navigate = useNavigate();
     const [startDate, setStartDate] = useState(new Date());
@@ -20,8 +21,8 @@ const FormalitiesDesktop: React.FC = () => {
         id: 9,
         teacherId: 1,
         description: "",
-        startDate: "",
-        endDate: "",
+        startDate: new Date().toISOString().split("T")[0],
+        endDate: new Date().toISOString().split("T")[0],
         startHour: "",
         endHour: ""
     });
@@ -35,7 +36,6 @@ const FormalitiesDesktop: React.FC = () => {
         setFormState(prevState => ({ ...prevState, [name]: value }));
     };
 
-    // Validación de campos antes de hacer el POST
     const validateForm = () => {
         const { description, startDate, endDate, startHour, endHour } = formState;
         if (!description || !startDate || !endDate || !startHour || !endHour) {
@@ -46,25 +46,19 @@ const FormalitiesDesktop: React.FC = () => {
     };
 
     const handleCreate = () => {
-        // Validamos el formulario antes de realizar el POST
         if (!validateForm()) return;
-        console.log("Enviando datos al backend:", formState);
         api.post(formState)
             .then(() => {
-                console.log("POST exitoso:", formState);
-                // Asumimos que el backend devuelve el nuevo objeto creado
-                const newWarning = formState; // Asegúrate de que esto contenga la ID generada
                 setFormState({
-                    id: newWarning.id, // Actualiza el estado con la ID generada
+                    id: 9,
                     teacherId: 1,
                     description: "",
-                    startDate: "",
-                    endDate: "",
+                    startDate: new Date().toISOString().split("T")[0],
+                    endDate: new Date().toISOString().split("T")[0],
                     startHour: "",
                     endHour: ""
                 });
-                api.getAll(); // Actualizar datos después del POST
-                // navigate('/formalities')
+                api.getAll();
             })
             .catch((error) => {
                 console.error("Error al realizar el POST:", error);
@@ -73,26 +67,19 @@ const FormalitiesDesktop: React.FC = () => {
     };
 
     const handleUpdate = () => {
-        if (!selectedWarning) return;
-        // Validación de formulario antes de actualizar
-        if (!validateForm()) return;
+        if (!selectedWarning || !validateForm()) return;
         api.put({ body: formState, id: selectedWarning.id })
             .then(() => {
-                console.log("PUT exitoso:", formState);
                 setFormState({
                     id: selectedWarning.id,
                     teacherId: 1,
                     description: "",
-                    startDate: "",
-                    endDate: "",
+                    startDate: new Date().toISOString().split("T")[0],
+                    endDate: new Date().toISOString().split("T")[0],
                     startHour: "",
                     endHour: ""
                 });
-                api.getAll().then(() => {
-                    setSelectedWarning(null);
-                }); // Actualizar datos después de la actualización
-
-
+                api.getAll().then(() => setSelectedWarning(null));
             })
             .catch((error) => {
                 console.error("Error al realizar el PUT:", error);
@@ -102,9 +89,7 @@ const FormalitiesDesktop: React.FC = () => {
 
     const handleDelete = (id: Id) => {
         api.delete(id)
-            .then(() => {
-                api.getAll(); // Actualizar datos después de eliminar
-            })
+            .then(() => api.getAll())
             .catch((error) => {
                 console.error("Error al eliminar el trámite:", error);
                 alert("Hubo un error al intentar eliminar el trámite.");
@@ -113,7 +98,7 @@ const FormalitiesDesktop: React.FC = () => {
 
     const handleEdit = (warnings: Warning) => {
         setSelectedWarning(warnings);
-        setFormState(warnings); // Establecer los datos del trámite en el formulario para editar
+        setFormState(warnings);
     };
 
     // if (warning.state === FetchState.Loading) return <p>Cargando...</p>;
@@ -125,10 +110,11 @@ const FormalitiesDesktop: React.FC = () => {
             <div className="formalities__content">
                 <div className="formalities__makeForm">
                     <div className="formalitiesForm__title">
-                        <h2>Trámites Desktop</h2>
+                        <h2>Realizar Trámites</h2>
                     </div>
                     <div className="formalities__form">
                         <form
+                            data-testid="warning-test-form"
                             onSubmit={e => {
                                 e.preventDefault();
                                 selectedWarning ? handleUpdate() : handleCreate();
@@ -169,25 +155,31 @@ const FormalitiesDesktop: React.FC = () => {
                             <label>
                                 <p>Fecha de Inicio</p>
                                 <DatePicker
-                                    id="datepicker"
-                                    selected={startDate} onChange={(date: any) =>
-                                        setStartDate(date)}
+                                    selected={startDate}
+                                    onChange={(date: Date | null) => {
+                                        if (date) {
+                                            setStartDate(date);
+                                            setFormState(prev => ({ ...prev, startDate: date.toISOString().split("T")[0] }));
+                                        }
+                                    }}
                                     placeholderText='00/20/2000'
-                                    dateFormat="dd/MM/yyyy"
                                 />
                             </label>
                             <label>
                                 <p>Fecha de Fin</p>
                                 <DatePicker
-                                    id="datepicker"
-                                    selected={endDate} onChange={(date: any) =>
-                                        setEndDate(date)}
+                                    selected={endDate}
+                                    onChange={(date: Date | null) => {
+                                        if (date) {
+                                            setEndDate(date);
+                                            setFormState(prev => ({ ...prev, endDate: date.toISOString().split("T")[0] }));
+                                        }
+                                    }}
                                     placeholderText='06/20/2000'
-                                    dateFormat="dd/MM/yyyy"
                                 />
                             </label>
                             <button type="submit" className="formalities__button">
-                                {selectedWarning ? "Modificar" : "Crear"}
+                                {selectedWarning ? "Editar" : "Crear"}
                             </button>
                             {selectedWarning && <button onClick={() => setSelectedWarning(null)} className="formalities__Cancelbutton">Cancelar</button>}
                         </form>

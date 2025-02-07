@@ -56,7 +56,7 @@ describe("assets/page/Login/LoginPage.tsx - LoginPageForm", () => {
     const passwordInput = screen.getByLabelText("Contraseña") as HTMLInputElement;
     fireEvent.change(passwordInput, { target: { value: mockAuth.user.password } });
     expect(passwordInput.value).toBe(mockAuth.user.password);
-    
+
     vi.spyOn(window, "fetch").mockImplementation(() => {
       return Promise.resolve({
         json: () => Promise.resolve(mockAuth),

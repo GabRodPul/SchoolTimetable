@@ -1,6 +1,6 @@
 import { vi, expect } from "vitest"
 // import { beforeAll, describe, test } from "@jest/globals";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react"
+import { act, fireEvent, render, screen } from "@testing-library/react"
 import { TestApp } from "../_utils";
 import { AuthData, Id, WarningData } from "#common/@types/models";
 import { UserRole } from "#common/@enums/models";
@@ -9,8 +9,8 @@ const mockWrning: WarningData & Id = {
   id: 1134,
   teacherId: 123,
   description: "Existing Warning",
-  startDate: "",
-  endDate: "",
+  startDate: "00/20/2000",
+  endDate: "09/20/2000",
   startHour: "09:00",
   endHour: "11:00",
 };
@@ -37,7 +37,7 @@ describe("assets/componets/FormalitiesCopms/Desktop/FormalitiesDesktop.tsx - for
     localStorage.setItem("currentUser", JSON.stringify(mockAuth));
     render(<TestApp init="/formalities" />);
 
-    expect(screen.getByText("Trámites Desktop")).toBeInTheDocument();
+    expect(screen.getByText("Realizar Trámites")).toBeInTheDocument();
 
   });
 
@@ -74,7 +74,7 @@ describe("assets/componets/FormalitiesCopms/Desktop/FormalitiesDesktop.tsx - for
 
     // Verificación de los valores
     expect(descriptionInput).toHaveValue("Falta por enfermedad");
-    expect(startHourInput).toHaveValue("08:00");
+    expect(startHourInput).toHaveValue("08:00"); 
     expect(endHourInput).toHaveValue("09:00");
 
     // Verifica si las fechas están correctamente seleccionadas
@@ -100,43 +100,55 @@ describe("assets/componets/FormalitiesCopms/Desktop/FormalitiesDesktop.tsx - for
     alertSpy.mockRestore();
   });
 
-  // test("4 - Should create a new warning", async () => {
-  //   localStorage.setItem("currentUser", JSON.stringify(mockAuth));
-  //   render(<TestApp init="/formalities" />);
+  test("4 - Should create a new warning", async () => {
+    localStorage.setItem("currentUser", JSON.stringify(mockAuth));
 
-  //   // Rellenar el campo "Motivo"
-  //   const descriptionInput = screen.getByPlaceholderText("Motivo de la ausencia");
-  //   fireEvent.change(descriptionInput, { target: { value: "Falta por enfermedad" } });
+    render(<TestApp init="/formalities" />);
 
-  //   // Rellenar la hora de inicio
-  //   const startHourInput = screen.getByPlaceholderText("Hora de inicio");
-  //   fireEvent.change(startHourInput, { target: { value: "08:00" } });
+    // Simulando el cambio en el input de descripción
+    const descriptionInput = screen.getByPlaceholderText("Motivo de la ausencia");
+    fireEvent.input(descriptionInput, { target: { value: "Falta por enfermedad" } });
 
-  //   // Rellenar la hora de fin
-  //   const endHourInput = screen.getByPlaceholderText("Hora de fin");
-  //   fireEvent.change(endHourInput, { target: { value: "09:00" } });
+    // Simulando el cambio en los inputs de horas
+    const startHourInput = screen.getByPlaceholderText("Hora de inicio");
+    fireEvent.input(startHourInput, { target: { value: "08:00" } });
 
-  //   // Rellenar la fecha de inicio
-  //   const startDatePicker = screen.getByPlaceholderText("00/20/2000");
-  //   fireEvent.click(startDatePicker);
-  //   const startDay = screen.getByText("15"); // Simulamos que seleccionamos el día 15
-  //   fireEvent.click(startDay);
+    const endHourInput = screen.getByPlaceholderText("Hora de fin");
+    fireEvent.input(endHourInput, { target: { value: "09:00" } });
 
-  //   // Rellenar la fecha de fin
-  //   const endDatePicker = screen.getByPlaceholderText("06/20/2000");
-  //   fireEvent.click(endDatePicker);
-  //   const endDay = screen.getByText("17"); // Simulamos que seleccionamos el día 17
-  //   fireEvent.click(endDay);
+    // Simulando la selección de fechas
+    const startDatePicker = screen.getByPlaceholderText("00/20/2000");
+    fireEvent.click(startDatePicker);
 
-  //   // Enviar el formulario
-  //   const submitButton = screen.getByText(/Crear/i);
-  //   fireEvent.click(submitButton);
+    // Espera que el calendario se haya abierto
+    const startDay = screen.getByText("15"); // Simulamos que seleccionamos el día 15
+    fireEvent.click(startDay);
 
-  //   // Espera a que el texto "Falta por enfermedad" aparezca en el DOM
-  //   await waitFor(() => {
-  //     expect(screen.getByText(/Falta por enfermedad/i)).toBeInTheDocument();
-  //   });
-  // });
+    // Abre el calendario para la fecha de fin
+    const endDatePicker = screen.getByPlaceholderText("06/20/2000");
+    fireEvent.click(endDatePicker);
+
+    // Espera que el calendario se haya abierto
+    const endDay = screen.getByText("17"); // Simulamos que seleccionamos el día 17
+    fireEvent.click(endDay);
+
+    //despesu
+    vi.spyOn(window, "fetch").mockImplementation(() => {
+      return Promise.resolve({
+        json: () => Promise.resolve(mockWrning),
+      } as Response);
+    });
+
+    const submitButton = screen.getByTestId("warning-test-form");
+
+    await act(async () =>{
+      fireEvent.submit(submitButton);
+    });
+
+    expect(window.fetch).toHaveBeenCalledTimes(2);
+    expect(await (window.fetch("/api/warnings")).then(d => d.json())).toEqual(mockWrning);
+
+  });
 
 
 });
