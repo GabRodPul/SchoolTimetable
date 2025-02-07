@@ -16,6 +16,24 @@ const mConfig = {
   folder:    `${__dirname}/../migrations`,
 }
 
+type Migration = {
+  name: string,
+  date: Date
+}
+
+const MigrationModel = {
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+  },
+  date: {
+    type: DataTypes.DATE,
+    defaultValue: sequelize.literal("CURRENT_TIMESTAMP"),
+    allowNull: false,
+  },
+}
+
 enum MigArgs {
   Migrate = "migrate",
   MigrateAll = "migrate:all",
@@ -44,50 +62,53 @@ const migrate = async () => {
   await sequelize.query(`CREATE DATABASE IF NOT EXISTS ${dbConfig.DB}`);
   
   await sequelize.query(`USE ${dbConfig.DB}`);
-  await queryInterface.createTable(mConfig.tableName, {
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-    },
-    date: {
-      type: DataTypes.DATE,
-      defaultValue: sequelize.literal("CURRENT_TIMESTAMP"),
-      allowNull: false,
-    },
-  });
+  await queryInterface.createTable(mConfig.tableName, MigrationModel);
 
   const mFiles = readdirSync(mConfig.folder).map(f => f.replace(".ts", ""));
   if (mFiles.length === 0) 
     throw new Error(`No migration files found.`);
 
-  const mCurrent = await sequelize.query(
+  let mCurrent = ((await sequelize.query(
     `SELECT * FROM ${mConfig.tableName} ORDER BY date DESC`
-  );
+  ))[0] as Migration[])
+    .map(m => m.name);
 
   switch (arg) {
     case MigArgs.Undo: {
-      const last = mCurrent[0];
-      const { down } = require(`${mConfig.folder}/${last}.ts`)
-      await down(queryInterface, DataTypes);
-    } break;
+      // ORDER BY DESC returns last migration at index 0.
+      mCurrent = [ mCurrent[0] ];
+    } // Fallthrough
 
     case MigArgs.UndoAll: {
+      // This comes from the database. It is safe to compare with undefined.
+      if (mCurrent[0] === undefined) {
+        console.log(`[${arg}]: Nothing to undo.`);
+        break;
+      }
+
       mCurrent.forEach(async (f) => {
         const { down } = require(`${mConfig.folder}/${f}.ts`)
         await down(queryInterface, DataTypes);
+
+        await sequelize.query(
+          `DELETE FROM ${mConfig.tableName} WHERE name = "${f}"`
+        );
       });
     } break;
 
     default: {
-      mFiles
-      .filter(f => !mCurrent.includes(f))
-      .forEach(async (f) => {
+      const pending = mFiles.filter(f => !mCurrent.includes(f));
+      if (pending.length === 0) {
+        console.log(`[${arg}]: Nothing to migrate.`)
+      }
+
+      pending.forEach(async (f) => {
         const { up } = require(`${mConfig.folder}/${f}.ts`);
         await up(queryInterface, DataTypes);
-        queryInterface.insert(null, mConfig.tableName, {
-          name: f
-        });
+
+        await sequelize.query(
+          `INSERT INTO ${mConfig.tableName} (name) VALUES ("${f}")`
+        );
       });
     } break;
   }

@@ -1,31 +1,11 @@
-import { Sequelize, DataTypes, Model } from "sequelize";
-import { Id, SessionData } from "../../../common/@types/models"
-import { isBeforeStart } from "../utils/validation";
-import { defineId, fkId, namedFkId } from "../utils/data";
-import { WorkDay } from "../../../common/@enums/models" 
-
-// The only purpose of extending Model is getting
-// warnings when types are modified, as to keep our
-// models updated.
-// & Id is required to pass id to where.
-// Omit = avoid having to define "courseId"
-interface SessionInstance extends 
-    Model<SessionData & Id> {}
-
-const DayVals = { values: Object.values(WorkDay) } as const;
-
+import { Sequelize } from "sequelize";
+import { SessionTable } from "./table/session.table";
+import { SessionInstance } from "./table/session.table";
 
 // https://sequelize.org/docsSessionDatav6/core-concepts/validations-and-constraints/
 const SessionModel = { init: (sequelize: Sequelize) =>
-    sequelize.define<SessionInstance>("session", {
-        ...defineId,
-        classHourId: fkId,
-        igtModuleId: fkId,
-        day: {
-            type: DataTypes.ENUM(DayVals),
-            allowNull: false,
-        },
-    }),
+    // Missing foreign keys will be created through relationships
+    sequelize.define<SessionInstance>(SessionTable.name, SessionTable.cols as any),
 };
 
 export { SessionModel };
