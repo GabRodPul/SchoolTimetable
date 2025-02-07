@@ -14,9 +14,9 @@ const SessionChangedCrud: React.FC = () => {
 
     const [selectedSession, setSelectedSession] = useState<SessionChanged | null>(null);
     const [formState, setFormState] = useState<SessionChanged>({
-        id: 0,
-        sessionId: 0,
-        classHourId: 0,
+        id: 1,
+        sessionId: 2,
+        classHourId: 2,
         day: WorkDay.Monday,
         startDate: "",
         endDate: "",
@@ -85,6 +85,7 @@ const SessionChangedCrud: React.FC = () => {
             <div className="crud__form">
                 <h2>{selectedSession ? "Editar" : "Crear"} Cambio de Sesión</h2>
                 <form
+                    data-testid="session-change-form"
                     onSubmit={(e) => {
                         e.preventDefault();
                         selectedSession ? handleUpdate() : handleCreate();
@@ -107,10 +108,11 @@ const SessionChangedCrud: React.FC = () => {
                         className="crud__input"
                     />
                     <select
-                        name="day"
+                        name="Day"
                         value={formState.day}
                         onChange={handleInputChange}
                         className="crud__input"
+                        aria-label="WorkDay"
                     >
                         {Object.values(WorkDay).map(day => (
                             <option key={day} value={day}>{translate.workDay(day)}</option>
@@ -132,8 +134,8 @@ const SessionChangedCrud: React.FC = () => {
                         onChange={handleInputChange}
                         className="crud__input"
                     />
-                    <button type="submit" className="crud__button">
-                        {selectedSession ? "Editar" : "Crear"}
+                    <button type="submit" className="crud__button" data-testid="ButtonTest" >
+                        {selectedSession ? "Editar" : "Crear cambio"}
                     </button>
                     {selectedSession && (
                         <button

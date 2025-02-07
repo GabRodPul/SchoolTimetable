@@ -126,7 +126,7 @@ const WarningCrud: React.FC = () => {
                     <input
                         type="date"
                         name="startDate"
-                        placeholder="Fecha de Inicio"
+                        placeholder="Fecha Inicio"
                         value={formState.startDate}
                         onChange={handleInputChange}
                         className="crud__input"
@@ -135,7 +135,7 @@ const WarningCrud: React.FC = () => {
                     <input
                         type="date"
                         name="endDate"
-                        placeholder="Fecha de Finalización"
+                        placeholder="Fecha Fin"
                         value={formState.endDate}
                         onChange={handleInputChange}
                         className="crud__input"
