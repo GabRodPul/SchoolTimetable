@@ -1,6 +1,6 @@
 import { config } from "dotenv";
 // import * as path from "path"
-import { getEnv } from "#common/get-envs"
+import { getEnv } from "#common/get-env"
 import { enumStrVals } from "./utils/data";
 import { Envvars, NodeEnv } from "#common/@types/env"
 

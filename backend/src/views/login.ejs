@@ -1,0 +1,66 @@
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+</head>
+
+<body>
+  <header>
+    <% include ('header.ejs') %> 
+  </header>
+  <h1>Login</h1>
+  <div class="LoginMainContainer">
+    <div class="LoginImgContainer">
+      <img src="/img/LoginImg.png" alt="" />
+    </div>
+    <div class="LoginPageContainer">
+      <div class="LoginPageContainerContent">
+        <h2>Inicia sesión con tu cuenta</h2>
+
+        <button class="LoginGoogleButton">
+          <img src="/img/LogoGoogle.png" alt="Google logo" />
+          <p>Continuar con Google</p>
+        </button>
+        
+        <div class="divider">o Inicia sesión con su usuario</div>
+
+        <form class="loginPageForm" onSubmit="handleLogin">
+          <label class="LoginInputText">
+            <p>Email</p>
+            <input type="email" value={email} onChange="(e) => setEmail(e.target.value)" placeholder="Email" required
+            />
+          </label>
+
+          <label class="LoginInputText">
+            <p>Contraseña</p>
+            <input type="password" value={password} onChange="(e) => setPassword(e.target.value)" placeholder="*****************" required/>
+          </label>
+
+          <div class="LoginRememberForgot">
+            <label class="LoginRememberForgot__checkbox">
+              <input
+                type="checkbox"
+                checked={rememberMe}
+                onChange="(e) => setRememberMe(e.target.checked)"
+              />
+              <p>Recuérdame</p>
+            </label>
+            <a href="/ForgotPasswordPage" class="ForgotPassword">
+              ¿Olvidó la contraseña?
+            </a>
+          </div>
+          <button
+            type="submit"
+            class="LoginPageButton"
+            onClick="() => handleLogin()"
+          >
+            Entrar
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -21,7 +21,7 @@ const updatedTestData: ClassHourData & Id = {
 
 };
 
-let classHourId: number;
+// let classHourId: number;
 
 beforeAll(async () => {
     // Limpiar la tabla antes de las pruebas
