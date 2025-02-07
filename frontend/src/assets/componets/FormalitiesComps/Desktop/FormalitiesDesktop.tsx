@@ -179,7 +179,7 @@ const FormalitiesDesktop: React.FC = () => {
                                 />
                             </label>
                             <button type="submit" className="formalities__button">
-                                {selectedWarning ? "Editar" : "Crear"}
+                                {selectedWarning ? "Editar Trámite" : "Crear"}
                             </button>
                             {selectedWarning && <button onClick={() => setSelectedWarning(null)} className="formalities__Cancelbutton">Cancelar</button>}
                         </form>

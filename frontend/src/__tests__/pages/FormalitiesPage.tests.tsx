@@ -1,6 +1,6 @@
 import { vi, expect } from "vitest"
 // import { beforeAll, describe, test } from "@jest/globals";
-import { act, fireEvent, render, screen } from "@testing-library/react"
+import { act, fireEvent, render, screen, waitFor } from "@testing-library/react"
 import { TestApp } from "../_utils";
 import { AuthData, Id, WarningData } from "#common/@types/models";
 import { UserRole } from "#common/@enums/models";
@@ -74,7 +74,7 @@ describe("assets/componets/FormalitiesCopms/Desktop/FormalitiesDesktop.tsx - for
 
     // Verificación de los valores
     expect(descriptionInput).toHaveValue("Falta por enfermedad");
-    expect(startHourInput).toHaveValue("08:00"); 
+    expect(startHourInput).toHaveValue("08:00");
     expect(endHourInput).toHaveValue("09:00");
 
     // Verifica si las fechas están correctamente seleccionadas
@@ -141,7 +141,7 @@ describe("assets/componets/FormalitiesCopms/Desktop/FormalitiesDesktop.tsx - for
 
     const submitButton = screen.getByTestId("warning-test-form");
 
-    await act(async () =>{
+    await act(async () => {
       fireEvent.submit(submitButton);
     });
 
@@ -149,6 +149,73 @@ describe("assets/componets/FormalitiesCopms/Desktop/FormalitiesDesktop.tsx - for
     expect(await (window.fetch("/api/warnings")).then(d => d.json())).toEqual(mockWrning);
 
   });
+
+test("5 - Should create and update a warning", async () => {
+  localStorage.setItem("currentUser", JSON.stringify(mockAuth));
+
+    render(<TestApp init="/formalities" />);
+
+    // Crear un nuevo warning
+    const descriptionInput = screen.getByPlaceholderText("Motivo de la ausencia");
+    fireEvent.input(descriptionInput, { target: { value: "Falta por enfermedad" } });
+
+    const startHourInput = screen.getByPlaceholderText("Hora de inicio");
+    fireEvent.input(startHourInput, { target: { value: "08:00" } });
+
+    const endHourInput = screen.getByPlaceholderText("Hora de fin");
+    fireEvent.input(endHourInput, { target: { value: "09:00" } });
+
+    const startDatePicker = screen.getByPlaceholderText("00/20/2000");
+    fireEvent.click(startDatePicker);
+    const startDay = screen.getByText("15"); // Simulamos que seleccionamos el día 15
+    fireEvent.click(startDay);
+
+    const endDatePicker = screen.getByPlaceholderText("06/20/2000");
+    fireEvent.click(endDatePicker);
+    const endDay = screen.getByText("17"); // Simulamos que seleccionamos el día 17
+    fireEvent.click(endDay);
+
+    const submitButton = screen.getByTestId("warning-test-form");
+    await waitFor(() => {
+        fireEvent.submit(submitButton);
+    });
+
+    // Verifica que el warning se haya creado
+    expect(window.fetch).toHaveBeenCalledTimes(3);
+    expect(await (window.fetch("/api/warnings")).then(d => d.json())).toEqual([mockWrning]);
+
+    // Ahora busca el warning y edítalo
+    const editButton = screen.getByText("Editar");
+    fireEvent.click(editButton);
+
+    // Cambia los valores de los campos
+    fireEvent.change(screen.getByPlaceholderText("Motivo de la ausencia"), { target: { value: "Falta por vacaciones" } });
+    fireEvent.change(screen.getByPlaceholderText("Hora de inicio"), { target: { value: "09:00" } });
+    fireEvent.change(screen.getByPlaceholderText("Hora de fin"), { target: { value: "10:00" } });
+
+    // Simula la selección de nuevas fechas
+    fireEvent.change(screen.getByPlaceholderText('00/20/2000'), { target: { value: '2000-01-03' } });
+    fireEvent.change(screen.getByPlaceholderText('06/20/2000'), { target: { value: '2000-01-04' } });
+
+    // Envía el formulario para actualizar
+    await waitFor(() => {
+        fireEvent.submit(submitButton);
+    });
+
+    // Verifica que el warning se haya actualizado
+    expect(window.fetch).toHaveBeenCalledTimes(3);
+    expect(await (window.fetch("/api/warnings/1")).then(d => d.json())).toEqual({
+        ...mockWrning,
+        description: "Falta por vacaciones",
+        startHour: "09:00",
+        endHour: "10:00",
+        startDate: "2000-01-03",
+        endDate: "2000-01-04",
+    });
+
+    // Limpia el mock de fetch
+    vi.restoreAllMocks();
+});
 
 
 });
