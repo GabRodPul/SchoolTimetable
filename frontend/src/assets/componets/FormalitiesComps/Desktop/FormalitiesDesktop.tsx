@@ -125,7 +125,7 @@ const FormalitiesDesktop: React.FC = () => {
             <div className="formalities__content">
                 <div className="formalities__makeForm">
                     <div className="formalitiesForm__title">
-                        <h2>Trámites</h2>
+                        <h2>Trámites Desktop</h2>
                     </div>
                     <div className="formalities__form">
                         <form
@@ -169,20 +169,25 @@ const FormalitiesDesktop: React.FC = () => {
                             <label>
                                 <p>Fecha de Inicio</p>
                                 <DatePicker
+                                    id="datepicker"
                                     selected={startDate} onChange={(date: any) =>
                                         setStartDate(date)}
+                                    placeholderText='00/20/2000'
+                                    dateFormat="dd/MM/yyyy"
                                 />
                             </label>
                             <label>
                                 <p>Fecha de Fin</p>
                                 <DatePicker
+                                    id="datepicker"
                                     selected={endDate} onChange={(date: any) =>
                                         setEndDate(date)}
-
+                                    placeholderText='06/20/2000'
+                                    dateFormat="dd/MM/yyyy"
                                 />
                             </label>
                             <button type="submit" className="formalities__button">
-                                {selectedWarning ? "Editar" : "Crear"}
+                                {selectedWarning ? "Modificar" : "Crear"}
                             </button>
                             {selectedWarning && <button onClick={() => setSelectedWarning(null)} className="formalities__Cancelbutton">Cancelar</button>}
                         </form>

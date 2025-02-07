@@ -125,7 +125,7 @@ const FormalitiesMobile: React.FC = () => {
             <div className="formalitiesMobile__content">
                 <div className="formalitiesMobile__makeForm">
                     <div className="formalitiesMobileForm__title">
-                        <h2>Trámites</h2>
+                        <h2>Tramites</h2>
                     </div>
                     <div className="formalitiesMobile__form">
                         <form
@@ -140,7 +140,7 @@ const FormalitiesMobile: React.FC = () => {
                                 <input
                                     type="text"
                                     name="description"
-                                    placeholder="Motivo de la ausencia"
+                                    placeholder="Ausencia"
                                     value={formState.description}
                                     onChange={handleInputChange}
                                     required
@@ -151,7 +151,7 @@ const FormalitiesMobile: React.FC = () => {
                                 <input
                                     type="text"
                                     name="startHour"
-                                    placeholder="Hora de inicio"
+                                    placeholder="Hora inicio"
                                     value={formState.startHour}
                                     onChange={handleInputChange}
                                     required
@@ -163,7 +163,7 @@ const FormalitiesMobile: React.FC = () => {
                                 <input
                                     type="text"
                                     name="endHour"
-                                    placeholder="Hora de fin"
+                                    placeholder="Hora fin"
                                     value={formState.endHour}
                                     onChange={handleInputChange}
                                     required
@@ -186,7 +186,7 @@ const FormalitiesMobile: React.FC = () => {
                             </label>
 
                             <button type="submit" className="formalitiesMobile__button">
-                                {selectedWarning ? "Editar" : "Crear"}
+                                {selectedWarning ? "Cambiar" : "Realizar"}
                             </button>
                             {selectedWarning && <button onClick={() => setSelectedWarning(null)} className="formalitiesMobile__Cancelbutton">Cancelar</button>}
                         </form>
@@ -212,7 +212,7 @@ const FormalitiesMobile: React.FC = () => {
                                         {warningListed.startHour} - {warningListed.endHour}
                                     </p>
                                     <div className="buttons">
-                                        <button onClick={() => handleEdit(warningListed)} className='Edit'>Editar</button>
+                                        <button onClick={() => handleEdit(warningListed)} className='Edit'>Cambiar</button>
                                         <button onClick={() => handleDelete({ id: warningListed.id })} className='Delete'>Eliminar</button>
                                     </div>
                                 </div>
