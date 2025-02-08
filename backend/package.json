@@ -5,11 +5,16 @@
   "main": "../dist/index.js",
   "scripts": {
     "start": "ts-node -r tsconfig-paths/register src/index.ts",
+    "test": "cross-env NODE_ENV=TEST jest --testTimeout=10000 --detectOpenHandles",
     "db:migrate": "ts-node -r tsconfig-paths/register scripts/migrate.ts migrate",
     "db:migrate:all": "ts-node -r tsconfig-paths/register scripts/migrate.ts migrate:all",
     "db:migrate:undo": "ts-node -r tsconfig-paths/register scripts/migrate.ts migrate:undo",
     "db:migrate:undo:all": "ts-node -r tsconfig-paths/register scripts/migrate.ts migrate:undo:all",
-    "test": "cross-env NODE_ENV=TEST jest --testTimeout=10000 --detectOpenHandles"
+    "db:seed": "ts-node -r tsconfig-paths/register scripts/migrate.ts seed",
+    "db:seed:all": "ts-node -r tsconfig-paths/register scripts/migrate.ts seed:all",
+    "db:seed:undo": "ts-node -r tsconfig-paths/register scripts/migrate.ts seed:undo",
+    "db:seed:undo:all": "ts-node -r tsconfig-paths/register scripts/migrate.ts seed:undo:all",
+    "db:pretest": "cross-env NODE_ENV=TEST npm run db:migrate:all && cross-env NODE_ENV=TEST npm run db:seed:all"
   },
   "author": "",
   "license": "ISC",

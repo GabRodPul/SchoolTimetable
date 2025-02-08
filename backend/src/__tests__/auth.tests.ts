@@ -34,21 +34,26 @@ let apiApp = initApp(false);  // api
 // let viewsApp = initApp(true); // views
 
 beforeAll(async () => {
-  const aData = await DB.users.findOne({ 
+  try {
+    const aData = await DB.users.findOne({ 
       where: { email: envvars.ADMIN_EMAIL },
       raw: true
     });
-  ADMIN_TOKEN = utils.generateToken(aData);
-  
-  const uData = await DB.users.create({
-    ...mwTestData,
-    password: bcrypt.hashSync(mwTestData.password, 10)
-  } as any);
-  MIDWR_TOKEN = utils.generateToken(uData);
+    ADMIN_TOKEN = utils.generateToken(aData);
+    
+    const uData = await DB.users.create({
+      ...mwTestData,
+      password: bcrypt.hashSync(mwTestData.password, 10)
+    } as any);
+    MIDWR_TOKEN = utils.generateToken(uData);
+  } catch (err: any) {
+    console.log(err);
+  }
 });
 
 describe("controllers/auth.ts - Endpoints", () => {
   test("POST /api/signin - Empty body", async () => {
+    console.log("what");
     const res = await request(apiApp)
       .post("/api/signin")
       .send({})

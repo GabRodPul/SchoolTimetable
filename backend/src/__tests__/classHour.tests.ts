@@ -3,7 +3,7 @@ import { Turn } from "#common/@enums/models";
 import { ClassHourData, Id } from "#common/@types/models";
 import request from "supertest"
 import { DB } from "#src/models";
-import { app } from "../index";
+import { app, initApp } from "../index";
 
 const mwTestData: ClassHourData & Id = {
     id: 11111,
@@ -21,17 +21,21 @@ const updatedTestData: ClassHourData & Id = {
 
 };
 
-// let classHourId: number;
+let classHourId: number;
+const viewsApp = initApp(true);
 
 beforeAll(async () => {
     // Limpiar la tabla antes de las pruebas
 
-    await DB.classHour.destroy({ where: {} });
-
-    const data = await DB.classHour.bulkCreate([
-        mwTestData,
-        updatedTestData
-    ]);
+    try {
+        await DB.classHour.destroy({ where: {} });
+        const data = await DB.classHour.bulkCreate([
+            mwTestData,
+            updatedTestData
+        ]);
+    } catch (err: any) {
+        console.log(err);
+    }
 });
 
 export const validateClassHour = (): boolean => {
@@ -52,12 +56,12 @@ describe("controllers/classHour.controller.ts - Validate Hours", () => {
 describe("controllers/classHour.controller.ts - Endpoints", () => {
 
     test("GET /classHour/create - Should show create form", async () => {
-        const res = await request(app).get("/classHours/create");
+        const res = await request(viewsApp).get("/classHours/create");
         expect(res.status).toEqual(200);
     });
 
     test("POST /classHour - Should create a new class hour", async () => {
-        const res = await request(app)
+        const res = await request(viewsApp)
             .post("/classHours")
             .send(mwTestData)
             .set("Access-Control-Allow-Origin", "*")
@@ -67,7 +71,7 @@ describe("controllers/classHour.controller.ts - Endpoints", () => {
     });
 
     test("POST /classHour - Empty body", async () => {
-        const res = await request(app)
+        const res = await request(viewsApp)
             .post("/classHours")
             .send({})
             .set("Access-Control-Allow-Origin", "*")
@@ -77,14 +81,14 @@ describe("controllers/classHour.controller.ts - Endpoints", () => {
     });
 
     test("GET /classHour/edit/1 - Should show edit form for a class hour", async () => {
-        const res = await request(app).get(`/classHours/edit/${mwTestData.id}`)
+        const res = await request(viewsApp).get(`/classHours/edit/${mwTestData.id}`)
             .set("Access-Control-Allow-Origin", "*")
             .set("Content-Type", "application/json");
         expect(res.status).toEqual(200);
     });
 
     test("POST /classHour/update/1 - Should update a class hour", async () => {
-        const res = await request(app)
+        const res = await request(viewsApp)
             // .post(`/classHours/update/${mwTestData.id}`)
             .post(`/classHours/update/11111`)
             .send(updatedTestData)
@@ -98,7 +102,7 @@ describe("controllers/classHour.controller.ts - Endpoints", () => {
     });
 
     test("GET /classHour/edit/1 - Fail uptate/unvalid Id", async () => {
-        const res = await request(app).get("/classHours/update/10500")
+        const res = await request(viewsApp).get("/classHours/update/10500")
             .send(updatedTestData)
             .set("Access-Control-Allow-Origin", "*")
             .set("Content-Type", "application/json");
@@ -106,7 +110,7 @@ describe("controllers/classHour.controller.ts - Endpoints", () => {
     });
 
     test("POST /classHour/update/1 - Update Empty Body", async () => {
-        const res = await request(app)
+        const res = await request(viewsApp)
             .post(`/classHours/update/${mwTestData.id}`)
             .send({})
             .set("Access-Control-Allow-Origin", "*")
@@ -115,14 +119,14 @@ describe("controllers/classHour.controller.ts - Endpoints", () => {
     });
 
     test("POST /classHour/delete/1 - Should delete a class hour", async () => {
-        const res = await request(app).post(`/classHours/delete/${mwTestData.id}`)
+        const res = await request(viewsApp).post(`/classHours/delete/${mwTestData.id}`)
             .set("Access-Control-Allow-Origin", "*")
             .set("Content-Type", "application/json");
         expect(res.status).toEqual(302);
     });
 
     test("POST /classHour/delete/1 - Delete unvalid Id", async () => {
-        const res = await request(app).post("/classHours/delete/")
+        const res = await request(viewsApp).post("/classHours/delete/")
             .set("Access-Control-Allow-Origin", "*")
             .set("Content-Type", "application/json");
         expect(res.status).toEqual(404); // Redirección después de eliminar

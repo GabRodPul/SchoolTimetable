@@ -29,7 +29,7 @@ const DB = Object.freeze({
     store: new SequelizeStore({ db: sequelize }),
     users:           UserModel.init(sequelize),
     groups:          GroupModel.init(sequelize),
-    courses:         CourseModel.init(sequelize),
+    // courses:         CourseModel.init(sequelize),
     modules:         ModuleModel.init(sequelize),
     igt_modules:     IGTModuleModel.init(sequelize),
     enrollments:     EnrollmentModel.init(sequelize),
