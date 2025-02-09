@@ -1,6 +1,7 @@
 import { hashSync } from "bcrypt";
 import { Turn, UserRole, WorkDay } from "../../../common/@enums/models";
 import { DB } from "../models";
+import { TxStatus } from "#common/@enums/ws";
 
 export const dbInit = async (debug: boolean) => {
     await DB.sequelize.sync({ force: debug, alter: debug });
@@ -469,9 +470,37 @@ export const dbInit = async (debug: boolean) => {
     ]);
 
     await DB.warnings.bulkCreate([
-        { id: 1, teacherId: 1, description: "Baja", startDate: "2024-12-12", endDate: "2024-12-12", startHour: "15:00:01", endHour: "18:00:01", },
-        { id: 2, teacherId: 1, description: "Ausencia", startDate: "2024-12-12", endDate: "2024-12-12", startHour: "08:00:01", endHour: "18:00:01", },
-        { id: 3, teacherId: 1, description: "Baja", startDate: "2024-12-12", endDate: "2024-12-12", startHour: "18:00:01", endHour: "18:00:01", }
+        { 
+            id: 1, 
+            teacherId: 1, 
+            description: "Baja", 
+            startDate: "2024-12-12", 
+            endDate: "2024-12-12", 
+            startHour: "15:00:01", 
+            endHour: "18:00:01", 
+            status: TxStatus.Pending, // Ajoutez ceci
+        },
+        { 
+            id: 2, 
+            teacherId: 1, 
+            description: "Ausencia", 
+            startDate: "2024-12-12", 
+            endDate: "2024-12-12", 
+            startHour: "08:00:01", 
+            endHour: "18:00:01", 
+            status: TxStatus.Approved, // Ajoutez ceci
+        },
+        { 
+            id: 3, 
+            teacherId: 1, 
+            description: "Baja", 
+            startDate: "2024-12-12", 
+            endDate: "2024-12-12", 
+            startHour: "18:00:01", 
+            endHour: "18:00:01", 
+            status: TxStatus.Denied, // Ajoutez ceci
+        },
+        
     ]);
 
     await DB.sessionsChanged.bulkCreate([

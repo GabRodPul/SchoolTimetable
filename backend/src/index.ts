@@ -12,6 +12,7 @@ import bodyParser from "body-parser";
 
 import session from "express-session"
 import { NodeEnv } from "#common/@types/env";
+import { WsRoutes } from "./routes/websocket.routes";
 
 export const initApp = (views: boolean) => {
     const furl = `http://${envvars.BEND_DB_HOST}:${envvars.FEND_PORT}`;
@@ -67,6 +68,7 @@ export const initApp = (views: boolean) => {
 
     // Avoid open handles
     if (envvars.NODE_ENV !== NodeEnv.Testing) {
+        WsRoutes.init(app)
         dbInit(true).then();
         const PORT = process.env.PORT ?? 8080;
         app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));

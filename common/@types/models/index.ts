@@ -1,4 +1,5 @@
 import { Turn, WorkDay } from "../../@enums/models"
+import { TxStatus } from "#common/@enums/ws";
 
 // Each model will have an ID in the database but
 // not all data received will have an "id" field inside
@@ -121,4 +122,5 @@ export type WarningData = {
     endDate:        string,
     startHour:      string, // MySQL TIME
     endHour:        string, // MySQL TIME
+    status: TxStatus;
 } 

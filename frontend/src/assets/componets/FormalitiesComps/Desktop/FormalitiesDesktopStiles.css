@@ -1,13 +1,13 @@
 .formalities {
     display: flex;
     flex-direction: row;
-    margin-left: 25%;
+    margin-left: 22%;
 }
 
 .formalities__content {
     display: flex;
     flex-direction: row;
-    gap: 55%;
+    gap: 25%;
 }
 
 .formalities__form {
@@ -41,6 +41,28 @@
     color: #6c757d;
 }
 
+.formalities__makeForm{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: left;
+    margin-bottom: 40px;
+}
+.formalities__makeForm label {
+    font-size: 1.1rem;
+    color: #333;
+}
+.formalities__makeForm select,
+.formalities__makeForm input {
+    width: 100%;
+    padding: 8px;
+    border: 0px;
+    border-bottom: 1px solid #e0e0e0;
+    font-family: MerriweatherSans, sans-serif;
+    font-size: 16px;
+    color: #6c757d;
+}
+
 .formalities__button {
     padding: 10px;
     background-color: #004B84;
@@ -51,6 +73,7 @@
     font-family: MerriweatherSans, sans-serif;
     font-size: 16px;
     width: 200px;
+    margin-top: 20px;
     margin-bottom: 20px;
 }
 
@@ -77,6 +100,7 @@
     margin-top: 20px;
     gap: 3%;
     width: 550px;
+    /* margin-right: 1%; */
 }
 
 /* Tarjeta individual de cada trámite */
@@ -159,5 +183,16 @@
     /* Color de hover */
     background-color: rgba(0, 75, 132, 0.1);
     /* Añade un fondo suave al hacer hover */
+}
+.status.pending {
+    color: orange;
+}
+
+.status.approved {
+    color: green;
+}
+
+.status.denied {
+    color: red;
 }
 

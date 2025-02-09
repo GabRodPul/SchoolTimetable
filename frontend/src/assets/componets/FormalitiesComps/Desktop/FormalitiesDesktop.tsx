@@ -1,224 +1,171 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './FormalitiesDesktopStiles.css';
-import { Id, WarningData } from '#common/@types/models';
-import { useApi } from '#src/api/ApiContext';
-import { ApiRts } from '#common/@enums/http';
-import { FetchState } from '#src/types/api';
-import { useNavigate } from 'react-router';
+import { TxStatus } from '#common/@enums/ws';
 import DatePicker from 'react-datepicker';
 
-type Warning = WarningData & Id;
+interface Request {
+    id: number;
+    description: string;
+    startDate: string;
+    endDate: string;
+    startHour: string;
+    endHour: string;
+    status: TxStatus;
+}
 
-const FormalitiesDesktop: React.FC = () => {
-    const navigate = useNavigate();
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
+interface FormalitiesProps {
+    requests: Request[];
+    updateStatus: (id: number, newStatus: TxStatus) => void;
+    createRequest: (request: Omit<Request, 'id' | 'status'>) => void;
+}
 
-    const [warning, api] = useApi<Warning>(ApiRts.Warnings);
-    const [selectedWarning, setSelectedWarning] = useState<Warning | null>(null);
-    const [formState, setFormState] = useState<Warning>({
-        id: 9,
-        teacherId: 1,
-        description: "",
-        startDate: "",
-        endDate: "",
-        startHour: "",
-        endHour: ""
+const FormalitiesDesktop: React.FC<FormalitiesProps> = ({ requests, updateStatus, createRequest }) => {
+    const [startDate, setStartDate] = useState<Date | null>(new Date());
+    const [endDate, setEndDate] = useState<Date | null>(new Date());
+    const [formState, setFormState] = useState({
+        description: '',
+        startHour: '',
+        endHour: '',
     });
-
-    useEffect(() => {
-        api.getAll();
-    }, []);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        setFormState(prevState => ({ ...prevState, [name]: value }));
+        setFormState((prevState) => ({ ...prevState, [name]: value }));
     };
 
-    // Validación de campos antes de hacer el POST
     const validateForm = () => {
-        const { description, startDate, endDate, startHour, endHour } = formState;
-        if (!description || !startDate || !endDate || !startHour || !endHour) {
-            alert("Todos los campos son obligatorios.");
+        const { description, startHour, endHour } = formState;
+        if (!description || !startHour || !endHour) {
+            alert('Tous les champs sont obligatoires.');
+            return false;
+        }
+        if (!startDate || !endDate || startDate > endDate) {
+            alert('La date de début ne peut pas être postérieure à la date de fin.');
             return false;
         }
         return true;
     };
 
-    const handleCreate = () => {
-        // Validamos el formulario antes de realizar el POST
+    const handleCreate = (e: React.FormEvent) => {
+        e.preventDefault();
         if (!validateForm()) return;
-        console.log("Enviando datos al backend:", formState);
-        api.post(formState)
-            .then(() => {
-                console.log("POST exitoso:", formState);
-                // Asumimos que el backend devuelve el nuevo objeto creado
-                const newWarning = formState; // Asegúrate de que esto contenga la ID generada
-                setFormState({
-                    id: newWarning.id, // Actualiza el estado con la ID generada
-                    teacherId: 1,
-                    description: "",
-                    startDate: "",
-                    endDate: "",
-                    startHour: "",
-                    endHour: ""
-                });
-                api.getAll(); // Actualizar datos después del POST
-                // navigate('/formalities')
-            })
-            .catch((error) => {
-                console.error("Error al realizar el POST:", error);
-                alert("Hubo un error al intentar crear el trámite.");
-            });
+
+        // Création de la requête
+        createRequest({
+            description: formState.description,
+            startHour: formState.startHour,
+            endHour: formState.endHour,
+            startDate: startDate!.toISOString().split('T')[0],
+            endDate: endDate!.toISOString().split('T')[0],
+        });
+
+        // Réinitialisation du formulaire
+        setFormState({ description: '', startHour: '', endHour: '' });
+        setStartDate(new Date());
+        setEndDate(new Date());
+        alert('Demande créée avec succès !');
     };
-
-    const handleUpdate = () => {
-        if (!selectedWarning) return;
-        // Validación de formulario antes de actualizar
-        if (!validateForm()) return;
-        api.put({ body: formState, id: selectedWarning.id })
-            .then(() => {
-                console.log("PUT exitoso:", formState);
-                setFormState({
-                    id: selectedWarning.id,
-                    teacherId: 1,
-                    description: "",
-                    startDate: "",
-                    endDate: "",
-                    startHour: "",
-                    endHour: ""
-                });
-                api.getAll().then(() => {
-                    setSelectedWarning(null);
-                }); // Actualizar datos después de la actualización
-
-
-            })
-            .catch((error) => {
-                console.error("Error al realizar el PUT:", error);
-                alert("Hubo un error al intentar actualizar el trámite.");
-            });
-    };
-
-    const handleDelete = (id: Id) => {
-        api.delete(id)
-            .then(() => {
-                api.getAll(); // Actualizar datos después de eliminar
-            })
-            .catch((error) => {
-                console.error("Error al eliminar el trámite:", error);
-                alert("Hubo un error al intentar eliminar el trámite.");
-            });
-    };
-
-    const handleEdit = (warnings: Warning) => {
-        setSelectedWarning(warnings);
-        setFormState(warnings); // Establecer los datos del trámite en el formulario para editar
-    };
-
-    // if (warning.state === FetchState.Loading) return <p>Cargando...</p>;
-    // if (warning.state === FetchState.Error) return <p>Error: {warning.error?.message}</p>;
 
     return (
-
         <div className="formalities">
             <div className="formalities__content">
+                {/* Formulaire de création */}
                 <div className="formalities__makeForm">
-                    <div className="formalitiesForm__title">
-                        <h2>Trámites</h2>
-                    </div>
-                    <div className="formalities__form">
-                        <form
-                            onSubmit={e => {
-                                e.preventDefault();
-                                selectedWarning ? handleUpdate() : handleCreate();
-                            }}
-                            className='formalitiesForm__data'
-                        >
-                            <label>
-                                <p>Motivo</p>
-                                <input
-                                    type="text"
-                                    name="description"
-                                    placeholder="Motivo de la ausencia"
-                                    value={formState.description}
-                                    onChange={handleInputChange}
-                                />
-                            </label>
-                            <label>
-                                <p>Hora Inicio</p>
-                                <input
-                                    type="text"
-                                    name="startHour"
-                                    placeholder="Hora de inicio"
-                                    value={formState.startHour}
-                                    onChange={handleInputChange}
-                                />
-                            </label>
-
-                            <label>
-                                <p>Hora Fin</p>
-                                <input
-                                    type="text"
-                                    name="endHour"
-                                    placeholder="Hora de fin"
-                                    value={formState.endHour}
-                                    onChange={handleInputChange}
-                                />
-                            </label>
-                            <label>
-                                <p>Fecha de Inicio</p>
-                                <DatePicker
-                                    selected={startDate} onChange={(date: any) =>
-                                        setStartDate(date)}
-                                />
-                            </label>
-                            <label>
-                                <p>Fecha de Fin</p>
-                                <DatePicker
-                                    selected={endDate} onChange={(date: any) =>
-                                        setEndDate(date)}
-
-                                />
-                            </label>
-                            <button type="submit" className="formalities__button">
-                                {selectedWarning ? "Editar" : "Crear"}
-                            </button>
-                            {selectedWarning && <button onClick={() => setSelectedWarning(null)} className="formalities__Cancelbutton">Cancelar</button>}
-                        </form>
-                    </div>
+                    <h2>Créer un Trámite</h2>
+                    <form onSubmit={handleCreate} className="formalitiesForm__data">
+                        <label>
+                            <p>Motif</p>
+                            <input
+                                type="text"
+                                name="description"
+                                placeholder="Motif de l'absence"
+                                value={formState.description}
+                                onChange={handleInputChange}
+                            />
+                        </label>
+                        <label>
+                            <p>Heure de Début</p>
+                            <input
+                                type="time"
+                                name="startHour"
+                                value={formState.startHour}
+                                onChange={handleInputChange}
+                            />
+                        </label>
+                        <label>
+                            <p>Heure de Fin</p>
+                            <input
+                                type="time"
+                                name="endHour"
+                                value={formState.endHour}
+                                onChange={handleInputChange}
+                            />
+                        </label>
+                        <label>
+                            <p>Date de Début</p>
+                            <DatePicker
+                                selected={startDate}
+                                onChange={(date: Date | null) => setStartDate(date)}
+                                dateFormat="yyyy-MM-dd"
+                            />
+                        </label>
+                        <label>
+                            <p>Date de Fin</p>
+                            <DatePicker
+                                selected={endDate}
+                                onChange={(date: Date | null) => setEndDate(date)}
+                                dateFormat="yyyy-MM-dd"
+                            />
+                        </label>
+                        <button type="submit" className="formalities__button">
+                            Créer
+                        </button>
+                    </form>
                 </div>
 
+                {/* Affichage des transactions */}
                 <div className="formalities__info">
-                    <div className="formalitiesInfo__title">
-                        <h2>Tus Trámites</h2>
-                    </div>
-                    {(warning.state === FetchState.Success || warning.state === FetchState.SuccessMany) &&
-                        Array.isArray(warning.data) && warning.data.map((warning) => {
-                            const warningListed = warning as Warning;
-                            return (
-                                <div key={warningListed.id} className='formalirties__card'>
-                                    <p>
-                                        {warningListed.description}
-                                    </p>
-                                    <p>
-                                        {warningListed.startDate} - {warningListed.endDate}
-                                    </p>
-                                    <p>
-                                        {warningListed.startHour} - {warningListed.endHour}
-                                    </p>
+                    <h2>Vos Trámites</h2>
+                    {requests.length > 0 ? (
+                        requests.map((request) => (
+                            <div key={request.id} className="formalities__card">
+                                <p><strong>Motif :</strong> {request.description}</p>
+                                <p>
+                                    <strong>État :</strong>{' '}
+                                    <span className={`status ${request.status.toLowerCase()}`}>
+                                        {request.status}
+                                    </span>
+                                </p>
+                                <p>
+                                    <strong>Du :</strong> {request.startDate} à {request.startHour}
+                                </p>
+                                <p>
+                                    <strong>Au :</strong> {request.endDate} à {request.endHour}
+                                </p>
+                                {request.status === TxStatus.Pending && (
                                     <div className="buttons">
-                                        <button onClick={() => handleEdit(warningListed)} className='Edit'>Editar</button>
-                                        <button onClick={() => handleDelete({ id: warningListed.id })} className='Delete'>Eliminar</button>
+                                        <button
+                                            className="approve-btn"
+                                            onClick={() => updateStatus(request.id, TxStatus.Approved)}
+                                        >
+                                            Approuver
+                                        </button>
+                                        <button
+                                            className="deny-btn"
+                                            onClick={() => updateStatus(request.id, TxStatus.Denied)}
+                                        >
+                                            Rejeter
+                                        </button>
                                     </div>
-                                </div>
-                            );
-                        })
-                    }
+                                )}
+                            </div>
+                        ))
+                    ) : (
+                        <p>Aucun trámite disponible.</p>
+                    )}
                 </div>
             </div>
         </div>
-
     );
 };
 

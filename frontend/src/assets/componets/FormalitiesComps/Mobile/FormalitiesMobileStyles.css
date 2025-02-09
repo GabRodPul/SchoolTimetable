@@ -158,3 +158,14 @@
     border-radius: 50%;
     /* Forma circular */
 }
+.status.pending {
+    color: orange;
+}
+
+.status.approved {
+    color: green;
+}
+
+.status.denied {
+    color: red;
+}
