@@ -11,7 +11,7 @@ import { Turn } from "#common/@enums/models";
 export interface ClassHourInstance extends Model<ClassHourData & Id> {}
 
 export const ClassHourTable = {
-    name: "classHour",
+    name: "classHours",
     cols: {
         ...defineId,
         turn: {

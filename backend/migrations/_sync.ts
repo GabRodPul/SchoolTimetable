@@ -1,4 +1,5 @@
 'use strict';
+// OG filename: 20250125213823-base.ts
 import { UserRole } from '#common/@enums/models';
 import { ClassHourTable } from '#src/models/table/classHour.table';
 import { EnrollmentTable } from '#src/models/table/enrollment.table';
@@ -42,9 +43,20 @@ module.exports = {
     //   { name: SessionTable.name       , cols: { ...timestamps, ...SessionTable.cols         }},
     //   { name: SessionChangedTable.name, cols: { ...timestamps, ...SessionChangedTable.cols  }},
     // ].forEach(async t => await queryInterface.createTable(t.name, t.cols as any));
-    Object
-      .entries(DB).filter(([k, _]) => ["sequelize", "store"].includes(k))
-      .forEach(async ([name, model]) => await queryInterface.createDatabase(name, model));
+    
+    [
+      DB.users,
+      DB.groups,
+      DB.modules,
+      DB.igt_modules,
+      DB.enrollments,
+      DB.warnings,
+      DB.classHour,
+      DB.sessions,
+      DB.sessionsChanged,
+    ].forEach(async m => await m.sync({ force: true, alter: true }));
+
+    // await DB.sequelize.sync({ force: true, alter: true });
   },
 
   async down (queryInterface: QueryInterface, Sequelize: typeof DataTypes) {
