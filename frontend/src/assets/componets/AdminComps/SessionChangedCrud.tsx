@@ -42,13 +42,16 @@ const SessionChangedCrud: React.FC = () => {
 
     const handleCreate = () => {
         if (!validateForm()) return;
+    
         api.post(formState).then(() => {
-            setFormState({ id: 0, sessionId: 0, classHourId: 0, day: WorkDay.Monday, startDate: "", endDate: "" });
+            console.log("✅ Sesión creada, llamando a getAll()"); // 🔍 Depuración
             api.getAll();
         }).catch((error) => {
-            console.error("Error al crear la sesión cambiada:", error);
+            console.error("❌ Error al crear la sesión:", error);
         });
     };
+    
+    
 
     const handleUpdate = () => {
         if (!validateForm()) return;
@@ -108,7 +111,7 @@ const SessionChangedCrud: React.FC = () => {
                         className="crud__input"
                     />
                     <select
-                        name="Day"
+                        name="day"
                         value={formState.day}
                         onChange={handleInputChange}
                         className="crud__input"
@@ -134,8 +137,8 @@ const SessionChangedCrud: React.FC = () => {
                         onChange={handleInputChange}
                         className="crud__input"
                     />
-                    <button type="submit" className="crud__button" data-testid="ButtonTest" >
-                        {selectedSession ? "Editar" : "Crear cambio"}
+                    <button type="submit" className="crud__button" data-testid="ButtonTest-edit" >
+                        {selectedSession ? "Editar cambio" : "Crear cambio"}
                     </button>
                     {selectedSession && (
                         <button
@@ -163,6 +166,7 @@ const SessionChangedCrud: React.FC = () => {
                                         <button
                                             className="crud__button--edit"
                                             onClick={() => handleEdit(session)}
+                                            data-testid="button-edit-list"
                                         >
                                             Editar
                                         </button>
