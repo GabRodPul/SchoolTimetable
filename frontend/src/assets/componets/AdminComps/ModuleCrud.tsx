@@ -73,8 +73,8 @@ const ModuleCrud: React.FC = () => {
     if (modules.state === FetchState.Error) return <p>Error: {modules.error?.message}</p>;
 
     return (
-        <div className="crud__container">
-            <h1 className="crud__title">Gestión de Módulos</h1>
+        <div className="crud__container animation">
+            <h1 className="crud__title animation">Gestión de Módulos</h1>
 
             <div className="crud__form">
                 <h2>{selectedModule ? "Editar" : "Crear"} Módulo</h2>
@@ -108,8 +108,8 @@ const ModuleCrud: React.FC = () => {
             </div>
 
             <div>
-                <h2>Listado de Módulos</h2>
-                <div className="crud__list">
+                <h2 className="crud__list_title animation">Listado de Módulos</h2>
+                <div className="crud__list animation">
                     {(modules.state === FetchState.Success || modules.state === FetchState.SuccessMany) &&
                         Array.isArray(modules.data) &&
                         modules.data.map((module) => (

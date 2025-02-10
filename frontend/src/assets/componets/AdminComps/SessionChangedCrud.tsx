@@ -4,12 +4,14 @@ import { SessionChangeData, Id } from "#common/@types/models";
 import { FetchState } from "../../../types/api";
 import { ApiRts } from "#common/@enums/http";
 import { WorkDay } from "#common/@enums/models";
+import { useScrollAnimation } from "./animationFade";
 import './CrudsStyles.css';
 import { translate } from "#src/_translation";
 
 type SessionChanged = SessionChangeData & Id;
 
 const SessionChangedCrud: React.FC = () => {
+    const ref = useScrollAnimation();
     const [sessions, api] = useApi<SessionChanged>(ApiRts.SessionChanged);
 
     const [selectedSession, setSelectedSession] = useState<SessionChanged | null>(null);
@@ -80,9 +82,9 @@ const SessionChangedCrud: React.FC = () => {
 
     return (
         <div className="crud__container">
-            <h1 className="crud__title">Gestión de Cambios de Sesión</h1>
+            <h1 ref={ref} className="crud__title animation">Gestión de Cambios de Sesión</h1>
 
-            <div className="crud__form">
+            <div ref={ref} className="crud__form animation">
                 <h2>{selectedSession ? "Editar" : "Crear"} Cambio de Sesión</h2>
                 <form
                     onSubmit={(e) => {
@@ -148,9 +150,9 @@ const SessionChangedCrud: React.FC = () => {
                 </form>
             </div>
 
-            <div>
-                <h2>Listado de Cambios de Sesión</h2>
-                <div className="crud__list">
+            <div ref={ref}>
+                <h2 className="crud__list_title animation">Listado de Cambios de Sesión</h2>
+                <div className="crud__list animation">
                     {(sessions.state === FetchState.Success || sessions.state === FetchState.SuccessMany) &&
                         Array.isArray(sessions.data) && sessions.data.map((session) => {
                             return (

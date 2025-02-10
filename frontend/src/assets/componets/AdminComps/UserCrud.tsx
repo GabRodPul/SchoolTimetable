@@ -3,11 +3,13 @@ import { useApi } from "../../../api/ApiContext";
 import { UserData, Id } from "#common/@types/models";
 import { FetchState } from "../../../types/api";
 import { ApiRts } from "#common/@enums/http";
+import { useScrollAnimation } from "./animationFade";
 import './CrudsStyles.css';
 
 type User = UserData & Id;
 
 const UserCrud: React.FC = () => {
+    const ref = useScrollAnimation();
     const [users, api] = useApi<User>(ApiRts.Users);
 
     const [selectedUser, setSelectedUser] = useState<User | null>(null);
@@ -78,9 +80,9 @@ const UserCrud: React.FC = () => {
 
     return (
         <div className="crud__container">
-            <h1 className="crud__title">Formulario de Usuarios</h1>
+            <h1 ref={ref} className="crud__title animation">Formulario de Usuarios</h1>
 
-            <div className="crud__form">
+            <div ref={ref} className="crud__form animation">
                 <h2>{selectedUser ? "Editar" : "Crear"} Usuario</h2>
                 <form
                     onSubmit={e => {
@@ -126,10 +128,10 @@ const UserCrud: React.FC = () => {
                     )}
                 </form>
             </div>
-            
-            <h2>Listado de Usuarios</h2>
-            <div className="crud__list">
-                
+
+            <h2 className="crud__list_title animation">Listado de Usuarios</h2>
+            <div className="crud__list animation">
+
                 {(users.state === FetchState.Success || users.state === FetchState.SuccessMany) &&
                     Array.isArray(users.data) &&
                     users.data.map((user) => {

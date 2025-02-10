@@ -78,9 +78,9 @@ const EnrollmentCrud: React.FC = () => {
 
     return (
         <div className="crud__container">
-            <h1 className="crud__title">Gestión de Matrículas</h1>
+            <h1 className="crud__title animation">Gestión de Matrículas</h1>
 
-            <div className="crud__form">
+            <div className="crud__form animation">
                 <h2>{selectedEnrollment ? "Editar" : "Crear"} Matrícula</h2>
                 <form
                     onSubmit={(e) => {
@@ -133,8 +133,8 @@ const EnrollmentCrud: React.FC = () => {
                 </form>
             </div>
 
-            <h2>Listado de Matrículas</h2>
-            <div className="crud__list">
+            <h2 className="crud__list_title animation">Listado de Matrículas</h2>
+            <div className="crud__list animation">
                 {(enrollments.state === FetchState.Success || enrollments.state === FetchState.SuccessMany) &&
                     Array.isArray(enrollments.data) && enrollments.data.map((enrollment) => {
                         return (

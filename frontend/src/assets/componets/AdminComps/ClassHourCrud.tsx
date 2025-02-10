@@ -4,11 +4,14 @@ import { ClassHourData, Id, SessionHour } from "#common/@types/models";
 import { FetchState } from "../../../types/api";
 import { ApiRts } from "#common/@enums/http";
 import { Turn } from "#common/@enums/models";
+import { useScrollAnimation } from "./animationFade";
 import './CrudsStyles.css';
 
 type ClassHour = ClassHourData & Id;
 
 const ClassHourCrud: React.FC = () => {
+
+    const ref = useScrollAnimation();
     const [classHours, api] = useApi<ClassHour>(ApiRts.ClassHour);
 
     const [selectedClassHour, setSelectedClassHour] = useState<ClassHour | null>(null);
@@ -92,9 +95,9 @@ const ClassHourCrud: React.FC = () => {
 
     return (
         <div className="crud__container">
-            <h1 className="crud__title">Gestión de Horas de Clase</h1>
+            <h1 ref={ref} className="crud__title animation">Gestión de Horas de Clase</h1>
 
-            <div className="crud__form">
+            <div ref={ref} className="crud__form animation">
                 <h2>{selectedClassHour ? "Editar Class Hour" : "Crear Class Hour"}</h2>
                 <form
                     onSubmit={(e) => {
@@ -161,8 +164,8 @@ const ClassHourCrud: React.FC = () => {
                 </form>
             </div>
 
-            <div className="crud__list">
-                <h2>Listado de Horas de Clase</h2>
+            <h2 ref={ref} className="crud__list_title animation">Listado de Horas de Clase</h2>
+            <div ref={ref} className="crud__list animation animation">
                 {(classHours.state === FetchState.Success || classHours.state === FetchState.SuccessMany) &&
                     Array.isArray(classHours.data) && classHours.data.map((classHour) => (
                         <div key={classHour.id} className="crud__item">

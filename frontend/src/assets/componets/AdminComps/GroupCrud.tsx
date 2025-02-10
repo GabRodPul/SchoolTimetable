@@ -3,11 +3,13 @@ import { useApi } from "../../../api/ApiContext";
 import { GroupData, Id } from "#common/@types/models";
 import { FetchState } from "../../../types/api";
 import { ApiRts } from "#common/@enums/http";
+import { useScrollAnimation } from "./animationFade";
 import './CrudsStyles.css';
 
 type Group = GroupData & Id;
 
 const GroupCrud: React.FC = () => {
+    const ref = useScrollAnimation();
     const [groups, api] = useApi<Group>(ApiRts.Groups);
 
     const [selectedGroup, setSelectedGroup] = useState<Group | null>(null);
@@ -78,9 +80,9 @@ const GroupCrud: React.FC = () => {
 
     return (
         <div className="crud__container">
-            <h1 className="crud__title">Gestión de Grupos</h1>
+            <h1 ref={ref} className="crud__title animation">Gestión de Grupos</h1>
 
-            <div className="crud__form">
+            <div ref={ref} className="crud__form animation">
                 <h2>{selectedGroup ? "Editar Grupo" : "Crear Grupo"}</h2>
                 <form
                     onSubmit={(e) => {
@@ -112,8 +114,8 @@ const GroupCrud: React.FC = () => {
             </div>
 
             <div>
-                <h2>Listado de Grupos</h2>
-                <div className="crud__list">
+                <h2 ref={ref} className="crud__list_title animation">Listado de Grupos</h2>
+                <div ref={ref} className="crud__list animation">
                     {(groups.state === FetchState.Success || groups.state === FetchState.SuccessMany) &&
                         Array.isArray(groups.data) &&
                         groups.data.map((group) => (
