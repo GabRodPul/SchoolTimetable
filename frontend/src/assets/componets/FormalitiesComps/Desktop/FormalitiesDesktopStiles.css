@@ -51,13 +51,13 @@
     color: #6c757d;
 }
 
-@keyframes colorChange {
+@keyframes createColorChange {
     0% {
         background-color: #004B84;
     }
 
     50% {
-        background-color: #0064cf;
+        background-color: #016ada;
     }
 
     100% {
@@ -65,7 +65,7 @@
     }
 }
 
-.formalities__Deskbutton {
+.create-mode {
     padding: 10px;
     background-color: #004B84;
     color: #ffffff;
@@ -76,15 +76,37 @@
     font-size: 16px;
     width: 200px;
     margin-bottom: 20px;
-    animation: colorChange 6s infinite alternate;
+    animation: createColorChange 6s infinite alternate;
     transition: transform 0.5s ease;
 }
 
-.formalities__Deskbutton:hover {
+.create-mode:hover {
     transform: scale(1.1);
 }
 
-.formalities__Cancelbutton {
+.formalities__button:hover {
+    background-color: #0056b3;
+}
+
+.edit-mode {
+    padding: 10px;
+    background-color: #268014;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: MerriweatherSans, sans-serif;
+    font-size: 16px;
+    width: 200px;
+    margin-bottom: 20px;
+    transition: transform 0.5s ease;
+}
+
+.edit-mode:hover {
+    transform: scale(1.1);
+}
+
+.cancel-mode {
     padding: 10px;
     background-color: #ad0000;
     color: #ffffff;
@@ -95,11 +117,14 @@
     font-size: 16px;
     width: 200px;
     margin-bottom: 20px;
+    transition: transform 0.5s ease;
 }
 
-.formalities__button:hover {
-    background-color: #0056b3;
+.cancel-mode:hover {
+    transform: scale(1.1);
 }
+
+
 
 .formalities__info_desktop {
     display: flex;
@@ -152,6 +177,11 @@
     cursor: pointer;
     font-family: MerriweatherSans, sans-serif;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.5s ease;
+}
+
+.Edit:hover {
+    transform: scale(1.1);
 }
 
 .buttons .Delete {
@@ -162,7 +192,13 @@
     cursor: pointer;
     font-family: MerriweatherSans, sans-serif;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.5s ease;
 }
+
+.Delete:hover {
+    transform: scale(1.1);
+}
+
 
 /* Tarjeta individual de cada trámite */
 .formalirties__card {

@@ -181,10 +181,13 @@ const FormalitiesDesktop: React.FC = () => {
 
                 />
               </label>
-              <button type="submit" className="formalities__Deskbutton">
+              <button type="submit" className={`formalities__Deskbutton ${selectedWarning ? "edit-mode" : "create-mode"}`} >
                 {selectedWarning ? "Editar" : "Crear"}
               </button>
-              {selectedWarning && <button onClick={() => setSelectedWarning(null)} className="formalities__Cancelbutton">Cancelar</button>}
+              {selectedWarning && 
+              <button onClick={() => setSelectedWarning(null)} className="cancel-mode">
+                Cancelar
+              </button>}
             </form>
           </div>
         </div>
