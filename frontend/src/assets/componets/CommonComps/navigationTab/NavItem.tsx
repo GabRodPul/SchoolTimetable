@@ -20,8 +20,10 @@ function NavItem(props: NavProps) {
             { role >= props.role &&
                 < Link className='navigationLink' to={props.route}>
                     <button className={`navigationTab__side-menuButton ${location.pathname === props.route ? "active" : ""}`}>
-                        <props.icon className={props.className} size={30}/> 
-                        {props.name}
+                        <div className="xd">
+                            <props.icon className={props.className} size={30}/>
+                            {props.name}
+                        </div>
                     </button>
                 </Link>
             }
