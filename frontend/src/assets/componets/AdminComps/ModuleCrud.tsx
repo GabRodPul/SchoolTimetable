@@ -33,7 +33,10 @@ const ModuleCrud: React.FC = () => {
 
     const handleCreate = () => {
         if (!validateForm()) return;
-        api.post(formState).then(() => {
+
+        const {id, ...newModule} = formState;
+
+        api.post(newModule as Module).then(() => {
             setFormState({ id: 0, name: "" });
             api.getAll();
         }).catch((error) => {

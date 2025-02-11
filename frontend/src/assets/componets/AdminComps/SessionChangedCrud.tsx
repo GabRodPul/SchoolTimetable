@@ -14,9 +14,9 @@ const SessionChangedCrud: React.FC = () => {
 
     const [selectedSession, setSelectedSession] = useState<SessionChanged | null>(null);
     const [formState, setFormState] = useState<SessionChanged>({
-        id: 1,
-        sessionId: 2,
-        classHourId: 2,
+        id: 0,
+        sessionId: 0,
+        classHourId: 0,
         day: WorkDay.Monday,
         startDate: "",
         endDate: "",
@@ -41,9 +41,14 @@ const SessionChangedCrud: React.FC = () => {
     };
 
     const handleCreate = () => {
+        console.log("llegué hasta aquí front")
         if (!validateForm()) return;
-    
-        api.post(formState).then(() => {
+
+        const {id, ...newSessionChanged} = formState;
+
+        console.log("llegué hasta aquí front 1")
+        api.post(newSessionChanged as SessionChanged).then(() => {
+            console.log("llegué hasta aquí front2")
             console.log("✅ Sesión creada, llamando a getAll()"); // 🔍 Depuración
             api.getAll();
         }).catch((error) => {

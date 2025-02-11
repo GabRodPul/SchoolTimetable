@@ -40,7 +40,10 @@ const UserCrud: React.FC = () => {
 
     const handleCreate = () => {
         if (!validateForm()) return;
-        api.post(formState).then(() => {
+
+        const {id, ...newUser} = formState
+
+        api.post(newUser as User).then(() => {
             setFormState({ id: 0, name: "", email: "", role: "", password: "", phoneNumber: "" });
             api.getAll();
         }).catch((error) => {

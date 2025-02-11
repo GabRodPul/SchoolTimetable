@@ -36,7 +36,10 @@ const SessionCrud: React.FC = () => {
 
     const handleCreate = () => {
         if (!validateForm()) return;
-        api.post(formState).then(() => {
+
+        const {id, ...newSession} = formState;
+
+        api.post(newSession as Session).then(() => {
             setFormState({ id: 0, day: WorkDay.Monday, classHourId: 0, igtModuleId: 0 });
             api.getAll();
         });

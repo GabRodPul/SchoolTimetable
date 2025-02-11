@@ -40,8 +40,15 @@ const EnrollmentCrud: React.FC = () => {
 
     const handleCreate = () => {
         if (!validateForm()) return;
-        api.post(formState).then(() => {
-            setFormState({ id: 0, studentId: 0, moduleId: 0 });
+
+        const {id, ...newEnrollment} = formState;
+
+        api.post(newEnrollment as Enrollment).then(() => {
+            setFormState({ 
+                id: 0, 
+                studentId: 0, 
+                moduleId: 0 
+            });
             api.getAll();
         }).catch((error) => {
             console.error("Error al crear la inscripción:", error);

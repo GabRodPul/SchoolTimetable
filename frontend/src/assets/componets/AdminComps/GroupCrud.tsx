@@ -33,9 +33,15 @@ const GroupCrud: React.FC = () => {
 
     const handleCreate = () => {
         if (!validateForm()) return;
-        api.post(formState)
+
+        const {id, ...newGroup} = formState;
+
+        api.post(newGroup as Group)
             .then(() => {
-                setFormState({ id: 0, name: "" });
+                setFormState({ 
+                    id: 0, 
+                    name: "" 
+                });
                 api.getAll();
             })
             .catch((error) => {

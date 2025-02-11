@@ -39,7 +39,10 @@ const IGTModuleCrud: React.FC = () => {
 
     const handleCreate = () => {
         if (!validateForm()) return;
-        api.post(formState)
+
+        const {id, ...newIGTModule} = formState;
+
+        api.post(newIGTModule as IGTModule)
             .then(() => {
                 setFormState({ id: 0, teacherId: 0, groupId: 0, moduleId: 0, weeklyHours: 1 });
                 api.getAll();

@@ -7,6 +7,7 @@ const SessionChanged = DB.sessionsChanged;
 const SessionChangedController = Object.freeze({
     create: async (req: Request, res: Response) => {
         try {
+            console.log("llegué hasta aquí")
             const data = await SessionChanged.create(req.body);
             res.send(data);
         } catch (err: any) {

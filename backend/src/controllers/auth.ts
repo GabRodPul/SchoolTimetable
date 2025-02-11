@@ -131,6 +131,7 @@ export const login = async (req: Request, res: Response) => {
     }
 }
 export const hasRolePermissions = (role: UserRole) => {
+    console.log("auth llegué hasat aquí")
     return async (req: Request, res: Response, next: NextFunction) => {
         const authHeader = req.headers.authorization;
         const token = authHeader && authHeader.split(' ')[1];

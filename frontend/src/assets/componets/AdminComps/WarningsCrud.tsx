@@ -41,22 +41,30 @@ const WarningCrud: React.FC = () => {
 
     const handleCreate = () => {
         if (!validateForm()) return;
-        api.post(formState).then(() => {
-            setFormState({
-                id: 0,
-                teacherId: 0,
-                description: "",
-                startDate: "",
-                endDate: "",
-                startHour: "",
-                endHour: "",
+    
+        // Eliminamos `id` del objeto antes de enviarlo
+        const { id, ...newWarning } = formState;
+    
+        api.post(newWarning as Warning) // Casteamos el objeto
+            .then(() => {
+                setFormState({
+                    id: 0, 
+                    teacherId: 0,
+                    description: "",
+                    startDate: "",
+                    endDate: "",
+                    startHour: "",
+                    endHour: "",
+                });
+                api.getAll();
+            })
+            .catch((error) => {
+                console.error("Error al crear la advertencia:", error);
+                alert("Hubo un error al crear la advertencia. Intenta nuevamente.");
             });
-            api.getAll();
-        }).catch((error) => {
-            console.error("Error al crear la advertencia:", error);
-            alert("Hubo un error al crear la advertencia. Intenta nuevamente.");
-        });
     };
+    
+
 
     const handleUpdate = () => {
         if (!validateForm()) return;
