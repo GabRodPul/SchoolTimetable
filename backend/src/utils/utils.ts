@@ -1,5 +1,6 @@
 import { EnumType } from "typescript";
 import { UserData } from "../../../common/@types/models";
+import { envvars } from "#src/env";
 
 var jwt = require('jsonwebtoken');
 
@@ -17,7 +18,7 @@ function generateToken(user: any) {
     };
 
     // Genera el token
-    return jwt.sign(u, process.env.JWT_SECRET as string, {
+    return jwt.sign(u, envvars.JWT_SECRET as string, {
         expiresIn: 60 * 60 * 24 // Expira en 24 horas
     });
 }
