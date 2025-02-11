@@ -44,14 +44,14 @@ const FormalitiesDesktop: React.FC<FormalitiesProps> = ({ }) => {
     const [startDate, setStartDate] = useState<Date | null>(new Date());
     const [endDate, setEndDate] = useState<Date | null>(new Date());
     const [formState, setFormState] = useState<Warning>({
-        id: 120,
+        id: 0,
         teacherId: 1,
         description: "",
         startDate: new Date().toISOString().split("T")[0],
         endDate: new Date().toISOString().split("T")[0],
         startHour: "",
         endHour: "",
-        status: TxStatus.Approved,
+        status: TxStatus.Pending,
     });
 
     useEffect(() => {
@@ -79,7 +79,7 @@ const FormalitiesDesktop: React.FC<FormalitiesProps> = ({ }) => {
     const handleCreate = () => {
         if (!validateForm()) return;
 
-        const {id, ...newWrning} = formState; 
+        const { id, ...newWrning } = formState;
 
         api.post(newWrning as Warning)
             .then(() => {
@@ -214,64 +214,30 @@ const FormalitiesDesktop: React.FC<FormalitiesProps> = ({ }) => {
                 {/* Affichage des transactions */}
                 <div className="formalities__info">
                     <h2>Vos Trámites</h2>
-                    {/* {requests.length > 0 ? (
-                        requests.map((request) => (
-                            <div key={request.id} className="formalities__card">
-                                <p><strong>Motif :</strong> {request.description}</p>
-                                <p>
-                                    <strong>État :</strong>{' '}
-                                    <span className={`status ${request.status.toLowerCase()}`}>
-                                        {request.status}
-                                    </span>
-                                </p>
-                                <p>
-                                    <strong>Du :</strong> {request.startDate} à {request.startHour}
-                                </p>
-                                <p>
-                                    <strong>Au :</strong> {request.endDate} à {request.endHour}
-                                </p>
-                                {request.status === TxStatus.Pending && (
-                                    <div className="buttons">
-                                        <button
-                                            className="approve-btn"
-                                            onClick={() => updateStatus(request.id, TxStatus.Approved)}
-                                        >
-                                            Approuver
-                                        </button>
-                                        <button
-                                            className="deny-btn"
-                                            onClick={() => updateStatus(request.id, TxStatus.Denied)}
-                                        >
-                                            Rejeter
-                                        </button>
-                                    </div>
-                                )}
-                            </div>
-                        ))
-                    ) : (
-                        <p>Aucun trámite disponible.</p>
-                    )} */}
-
                     {(warning.state === FetchState.Success || warning.state === FetchState.SuccessMany) &&
                         Array.isArray(warning.data) && warning.data.map((warning) => {
                             const warningListed = warning as Warning;
-                            return (
-                                <div key={warningListed.id} className='formalirties__card'>
-                                    <p>
-                                        {warningListed.description}
-                                    </p>
-                                    <p>
-                                        {warningListed.startDate} - {warningListed.endDate}
-                                    </p>
-                                    <p>
-                                        {warningListed.startHour} - {warningListed.endHour}
-                                    </p>
-                                    <div className="buttons">
-                                        <button onClick={() => handleEdit(warningListed)} className='Edit'>Editar</button>
-                                        <button onClick={() => handleDelete({ id: warningListed.id })} className='Delete'>Eliminar</button>
+                            const currentStatus = warning.status;
+                            if (currentStatus === TxStatus.Approved)
+                                return (
+                                    <div key={warningListed.id} className='formalirties__card'>
+                                        <p>
+                                            {warningListed.description}
+                                        </p>
+                                        <p>
+                                            {warningListed.startDate} - {warningListed.endDate}
+                                        </p>
+                                        <p>
+                                            {warningListed.startHour} - {warningListed.endHour}
+                                        </p>
+                                        <div className="buttons">
+                                            <button onClick={() => handleEdit(warningListed)} className='Edit'>Editar</button>
+                                            <button onClick={() => handleDelete({ id: warningListed.id })} className='Delete'>Eliminar</button>
+                                        </div>
                                     </div>
-                                </div>
-                            );
+
+                                );
+
                         })
                     }
 
