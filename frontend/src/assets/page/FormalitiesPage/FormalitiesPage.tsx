@@ -134,20 +134,23 @@ const Formalities: React.FC = () => {
             <div className="desktop">
                 <NavigationTab />
                 <RigthMenu />
-                    <FormalitiesDesktop
-                        requests={requests}
-                        updateStatus={updateRequestStatus} createRequest={function (request: Omit<Request, 'id' | 'status'>): void {
-                            throw new Error('Function not implemented.');
-                        }} />
+                {role !== 'UR2_HEAD' && (
+                <FormalitiesDesktop
+                    requests={requests}
+                    updateStatus={updateRequestStatus} createRequest={function (request: Omit<Request, 'id' | 'status'>): void {
+                        throw new Error('Function not implemented.');
+                    }} />
+                )}
 
-                {/* {role != 'UR1_TEACHER' &&
+                {role === 'UR2_HEAD' && (
                     <HeadStudiesDesk
                         requests={requests}
-                        updateStatus={updateRequestStatus} createRequest={function (request: Omit<Request, 'id' | 'status'>): void {
+                        updateStatus={updateRequestStatus}
+                        createRequest={function (request: Omit<Request, 'id' | 'status'>): void {
                             throw new Error('Function not implemented.');
-                        }} />
-                } */}
-
+                        }}
+                    />
+                )}
             </div>
         </div>
     );
