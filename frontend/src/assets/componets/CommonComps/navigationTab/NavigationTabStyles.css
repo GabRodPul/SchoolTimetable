@@ -1,3 +1,22 @@
+:root {
+    --btn-sel-margin: 10%;
+}
+
+/* Naby's gradient */
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes buttonHover {
+    0%   { margin-left: 0 }
+    100% { 
+        margin-left: var(--btn-sel-margin); 
+        /* margin-right: 50%; */
+    }
+}
+
 @media (max-width: 767px) {
     .navigationTab__body { display: none; }
 }
@@ -144,13 +163,42 @@
     background-color: #f8d7da;
 }
 
-.navigationTab__side-menuButton.active {
-    background-color: #0056b3;
+.navigationTab__side-menuButton.active,
+.navigationTab__side-menuButton:hover {
+    background: linear-gradient(35deg,#0693ff, #004B84);
+    background-size: 200% 200%;
+    animation: gradient 3s infinite linear;
     color: white;
+}
+
+.navigationTab__side-menuButton.active {
     font-weight: bold;
 }
 
-.navigationTab__side-menuButton:hover {
-    background-color: #0056b3;
-    color: white;
+.navigationTab__side-menuItem:hover {
+    /* background-color: #000000;     */
+    align-items: center;
+}
+
+.xd {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.navigationTab__side-menuButton:hover:not(.navigationTab__side-menuButton.active) .xd {
+    animation: buttonHover 0.5s;
+    animation-fill-mode: forwards;
+}
+
+.navigationTab__side-menuButton.active .xd {
+    margin-left: var(--btn-sel-margin);
+}
+
+/* { animation: none; } isn't working when I place it on App.css */
+@media(prefers-reduced-motion: reduce) {
+    .navigationTab__side-menuButton:hover:not(.navigationTab__side-menuButton.active),
+    .navigationTab__side-menuButton.active,
+    .navigationTab__side-menuButton:hover
+    { animation: none; }
 }
