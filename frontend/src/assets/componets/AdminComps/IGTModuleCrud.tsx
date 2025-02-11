@@ -85,10 +85,10 @@ const IGTModuleCrud: React.FC = () => {
     if (modules.state === FetchState.Error) return <p>Error: {modules.error?.message}</p>;
 
     return (
-        <div ref={ref} className="crud__container">
-            <h1 ref={ref} className="crud__title animation">Gestión de Módulos IGP</h1>
+        <div ref={ref} className="crud__container animation">
+            <h1 className="crud__title">Gestión de Módulos IGP</h1>
 
-            <div className="crud__form animation">
+            <div className="crud__form">
                 <h2>{selectedModule ? "Editar" : "Crear"} Módulo IGP</h2>
                 <form
                     onSubmit={(e) => {
@@ -144,8 +144,8 @@ const IGTModuleCrud: React.FC = () => {
             </div>
 
             <div>
-                <h2 ref={ref} className="crud__list_title animation">Listado de Módulos IGP</h2>
-                <div ref={ref} className="crud__list animation">
+                <h2 className="crud__list_title">Listado de Módulos IGP</h2>
+                <div className="crud__list">
                     {(modules.state === FetchState.Success || modules.state === FetchState.SuccessMany) &&
                         Array.isArray(modules.data) &&
                         modules.data.map((module) => (

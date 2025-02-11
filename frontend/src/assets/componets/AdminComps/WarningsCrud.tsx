@@ -97,10 +97,10 @@ const WarningCrud: React.FC = () => {
     };
 
     return (
-        <div className="crud__container">
-            <h1 ref={ref} className="crud__title animation">Formulario de Avisos</h1>
+        <div ref={ref} className="crud__container animation">
+            <h1 className="crud__title">Formulario de Avisos</h1>
 
-            <div ref={ref} className="crud__form animation">
+            <div className="crud__form">
                 <h2>{selectedWarning ? "Editar" : "Crear"} Aviso</h2>
                 <form
                     onSubmit={(e) => {
@@ -176,8 +176,8 @@ const WarningCrud: React.FC = () => {
                 </form>
             </div>
 
-            <h2 ref={ref} className="crud__list_title animation">Listado de Avisos</h2>
-            <div ref={ref} className="crud__list animation">
+            <h2 className="crud__list_title">Listado de Avisos</h2>
+            <div className="crud__list">
                 {(warnings.state === FetchState.Success || warnings.state === FetchState.SuccessMany) &&
                     Array.isArray(warnings.data) &&
                     warnings.data.map((warning) => (

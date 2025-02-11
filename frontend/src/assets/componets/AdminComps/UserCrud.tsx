@@ -79,10 +79,10 @@ const UserCrud: React.FC = () => {
     };
 
     return (
-        <div className="crud__container">
-            <h1 ref={ref} className="crud__title animation">Formulario de Usuarios</h1>
+        <div ref={ref} className="crud__container animation">
+            <h1 className="crud__title">Formulario de Usuarios</h1>
 
-            <div ref={ref} className="crud__form animation">
+            <div className="crud__form">
                 <h2>{selectedUser ? "Editar" : "Crear"} Usuario</h2>
                 <form
                     onSubmit={e => {
@@ -129,8 +129,8 @@ const UserCrud: React.FC = () => {
                 </form>
             </div>
 
-            <h2 className="crud__list_title animation">Listado de Usuarios</h2>
-            <div className="crud__list animation">
+            <h2 className="crud__list_title">Listado de Usuarios</h2>
+            <div className="crud__list">
 
                 {(users.state === FetchState.Success || users.state === FetchState.SuccessMany) &&
                     Array.isArray(users.data) &&

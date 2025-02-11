@@ -81,10 +81,10 @@ const SessionChangedCrud: React.FC = () => {
     if (sessions.state === FetchState.Error) return <p>Error: {sessions.error?.message}</p>;
 
     return (
-        <div className="crud__container">
-            <h1 ref={ref} className="crud__title animation">Gestión de Cambios de Sesión</h1>
+        <div ref={ref} className="crud__container animation">
+            <h1 className="crud__title">Gestión de Cambios de Sesión</h1>
 
-            <div ref={ref} className="crud__form animation">
+            <div className="crud__form">
                 <h2>{selectedSession ? "Editar" : "Crear"} Cambio de Sesión</h2>
                 <form
                     onSubmit={(e) => {
@@ -150,9 +150,9 @@ const SessionChangedCrud: React.FC = () => {
                 </form>
             </div>
 
-            <div ref={ref}>
-                <h2 className="crud__list_title animation">Listado de Cambios de Sesión</h2>
-                <div className="crud__list animation">
+            <div>
+                <h2 className="crud__list_title">Listado de Cambios de Sesión</h2>
+                <div className="crud__list">
                     {(sessions.state === FetchState.Success || sessions.state === FetchState.SuccessMany) &&
                         Array.isArray(sessions.data) && sessions.data.map((session) => {
                             return (

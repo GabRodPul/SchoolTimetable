@@ -4,12 +4,13 @@ import { EnrollmentData, Id } from "#common/@types/models";
 import { FetchState } from "../../../types/api";
 import { ApiRts } from "#common/@enums/http";
 import './CrudsStyles.css';
+import { useScrollAnimation } from "./animationFade";
 
 type Enrollment = EnrollmentData & Id;
 
 const EnrollmentCrud: React.FC = () => {
     const [enrollments, api] = useApi<Enrollment>(ApiRts.Enrollmet);
-
+    const ref = useScrollAnimation();
     const [selectedEnrollment, setSelectedEnrollment] = useState<Enrollment | null>(null);
     const [formState, setFormState] = useState<Enrollment>({
         id: 0,
@@ -77,10 +78,10 @@ const EnrollmentCrud: React.FC = () => {
     if (enrollments.state === FetchState.Error) return <p>Error: {enrollments.error?.message}</p>;
 
     return (
-        <div className="crud__container">
-            <h1 className="crud__title animation">Gestión de Matrículas</h1>
+        <div ref={ref} className="crud__container animation">
+            <h1 className="crud__title">Gestión de Matrículas</h1>
 
-            <div className="crud__form animation">
+            <div className="crud__form">
                 <h2>{selectedEnrollment ? "Editar" : "Crear"} Matrícula</h2>
                 <form
                     onSubmit={(e) => {
@@ -133,8 +134,8 @@ const EnrollmentCrud: React.FC = () => {
                 </form>
             </div>
 
-            <h2 className="crud__list_title animation">Listado de Matrículas</h2>
-            <div className="crud__list animation">
+            <h2 className="crud__list_title">Listado de Matrículas</h2>
+            <div className="crud__list">
                 {(enrollments.state === FetchState.Success || enrollments.state === FetchState.SuccessMany) &&
                     Array.isArray(enrollments.data) && enrollments.data.map((enrollment) => {
                         return (
