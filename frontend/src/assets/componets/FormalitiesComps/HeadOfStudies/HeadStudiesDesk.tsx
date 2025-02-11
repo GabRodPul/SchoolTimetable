@@ -55,44 +55,8 @@ const FormalitiesDesktop: React.FC<FormalitiesProps> = ({ }) => {
 
                 {/* Affichage des transactions */}
                 <div className="formalities__info">
-                    <h2>Vos Trámites HeadOf</h2>
-                    {/* {requests.length > 0 ? (
-                        requests.map((request) => (
-                            <div key={request.id} className="formalities__card">
-                                <p><strong>Motif :</strong> {request.description}</p>
-                                <p>
-                                    <strong>État :</strong>{' '}
-                                    <span className={`status ${request.status.toLowerCase()}`}>
-                                        {request.status}
-                                    </span>
-                                </p>
-                                <p>
-                                    <strong>Du :</strong> {request.startDate} à {request.startHour}
-                                </p>
-                                <p>
-                                    <strong>Au :</strong> {request.endDate} à {request.endHour}
-                                </p>
-                                {request.status === TxStatus.Pending && (
-                                    <div className="buttons">
-                                        <button
-                                            className="approve-btn"
-                                            onClick={() => updateStatus(request.id, TxStatus.Approved)}
-                                        >
-                                            Approuver
-                                        </button>
-                                        <button
-                                            className="deny-btn"
-                                            onClick={() => updateStatus(request.id, TxStatus.Denied)}
-                                        >
-                                            Rejeter
-                                        </button>
-                                    </div>
-                                )}
-                            </div>
-                        ))
-                    ) : (
-                        <p>Aucun trámite disponible.</p>
-                    )} */}
+                    <h2>Vos 
+                        Trámites HeadOf</h2>
 
                     {(warning.state === FetchState.Success || warning.state === FetchState.SuccessMany) &&
                         Array.isArray(warning.data) && warning.data.map((warning) => {
