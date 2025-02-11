@@ -18,7 +18,7 @@ const FormalitiesDesktop: React.FC = () => {
     const [warning, api] = useApi<Warning>(ApiRts.Warnings);
     const [selectedWarning, setSelectedWarning] = useState<Warning | null>(null);
     const [formState, setFormState] = useState<Warning>({
-        id: 9,
+        id: 19,
         teacherId: 1,
         description: "",
         startDate: new Date().toISOString().split("T")[0],
@@ -50,7 +50,7 @@ const FormalitiesDesktop: React.FC = () => {
         api.post(formState)
             .then(() => {
                 setFormState({
-                    id: 9,
+                    id: 0,
                     teacherId: 1,
                     description: "",
                     startDate: new Date().toISOString().split("T")[0],
