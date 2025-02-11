@@ -1,0 +1,198 @@
+.formalities {
+    display: flex;
+    flex-direction: row;
+    margin-left: 22%;
+}
+
+.formalities__content {
+    display: flex;
+    flex-direction: row;
+    gap: 25%;
+}
+
+.formalities__form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+    text-align: left;
+    margin-bottom: 40px;
+
+    .formalitiesForm__data {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+.formalities__form label {
+    font-size: 1rem;
+    color: #333;
+}
+
+.formalities__form select,
+.formalities__form input {
+    width: 100%;
+    padding: 8px;
+    border: 0px;
+    border-bottom: 1px solid #e0e0e0;
+    font-family: MerriweatherSans, sans-serif;
+    font-size: 16px;
+    color: #6c757d;
+}
+
+.formalities__makeForm{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: left;
+    margin-bottom: 40px;
+}
+.formalities__makeForm label {
+    font-size: 1.1rem;
+    color: #333;
+}
+.formalities__makeForm select,
+.formalities__makeForm input {
+    width: 100%;
+    padding: 8px;
+    border: 0px;
+    border-bottom: 1px solid #e0e0e0;
+    font-family: MerriweatherSans, sans-serif;
+    font-size: 16px;
+    color: #6c757d;
+}
+
+.formalities__button {
+    padding: 10px;
+    background-color: #004B84;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: MerriweatherSans, sans-serif;
+    font-size: 16px;
+    width: 200px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.formalities__Cancelbutton {
+    padding: 10px;
+    background-color: #ad0000;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: MerriweatherSans, sans-serif;
+    font-size: 16px;
+    width: 200px;
+    margin-bottom: 20px;
+}
+
+.formalities__button:hover {
+    background-color: #0056b3;
+}
+
+.formalities__info {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    gap: 3%;
+    width: 550px;
+    /* margin-right: 1%; */
+}
+
+/* Tarjeta individual de cada trámite */
+.formalirties__card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 250px;
+    height: 100px;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    font-size: 12px;
+    font-family: MerriweatherSans, sans-serif;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
+
+}
+
+.formalirties__card p {
+    margin: 0;
+    flex-grow: 1;
+    font-size: 12px;
+    color: #333;
+    line-height: 1.4;
+}
+
+.buttons{
+    display: flex;
+    margin-bottom: 5px;
+    gap: 2%;
+}
+
+.buttons .Edit {
+    background-color: #4b87b4;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: MerriweatherSans, sans-serif;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.buttons .Delete {
+    background-color: #fe7575;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: MerriweatherSans, sans-serif;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Contenedor para los botones de acción */
+.formalities__actions {
+    display: flex;
+    gap: 12px;
+}
+
+/* Botones de acción (editar y eliminar) */
+.formalities__actions button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.4rem;
+    /* Tamaño ajustado para hacerlos un poco más grandes */
+    color: #6c757d;
+    transition: color 0.2s;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    /* Forma circular */
+}
+
+.formalities__actions button:hover {
+    color: #004B84;
+    /* Color de hover */
+    background-color: rgba(0, 75, 132, 0.1);
+    /* Añade un fondo suave al hacer hover */
+}
+.status.pending {
+    color: orange;
+}
+
+.status.approved {
+    color: green;
+}
+
+.status.denied {
+    color: red;
+}
+

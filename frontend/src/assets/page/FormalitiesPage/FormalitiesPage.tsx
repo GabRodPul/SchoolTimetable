@@ -8,6 +8,8 @@ import FormalitiesMobile from '#src/assets/componets/FormalitiesComps/Mobile/For
 import NavigationTab from '#src/assets/componets/CommonComps/navigationTab/NavigationTab';
 import RigthMenu from '#src/assets/componets/CommonComps/rigthMenu/rigthMenu';
 import FormalitiesDesktop from '#src/assets/componets/FormalitiesComps/Desktop/FormalitiesDesktop';
+import { AuthData } from '#common/@types/models';
+import HeadStudiesDesk from '#src/assets/componets/FormalitiesComps/HeadOfStudies/HeadStudiesDesk'
 
 // Typage des requêtes
 interface Request {
@@ -24,6 +26,7 @@ const Formalities: React.FC = () => {
     const [requests, setRequests] = useState<Request[]>([]); // Stockage des demandes
     const [ws, setWs] = useState<WebSocket | null>(null); // Connexion WebSocket
     const [error, setError] = useState<string | null>(null); // Gestion des erreurs WebSocket
+    const { role } = (JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData).user; // Cambia 'currentuser' al nombre de la clave que usas en localStorage
 
     useEffect(() => {
         // Connexion au serveur WebSocket
@@ -58,6 +61,16 @@ const Formalities: React.FC = () => {
             socket.close(); // Fermer la connexion à la sortie
         };
     }, []);
+
+    const roleTextInfo = () => {
+        switch (role) {
+            case 'UR0_STUDENT': return 'Estudiante';
+            case 'UR1_TEACHER': return 'Profesor';
+            case 'UR2_HEAD': return 'Jefatura';
+            case 'UR3_ADMIN': return 'Administrador';
+            default: '';
+        }
+    }
 
     // Fonction pour gérer les messages entrants
     const handleIncomingMessage = (message: any) => {
@@ -121,11 +134,20 @@ const Formalities: React.FC = () => {
             <div className="desktop">
                 <NavigationTab />
                 <RigthMenu />
-                <FormalitiesDesktop
-                    requests={requests}
-                    updateStatus={updateRequestStatus} createRequest={function (request: Omit<Request, 'id' | 'status'>): void {
-                        throw new Error('Function not implemented.');
-                    } }                />
+                    <FormalitiesDesktop
+                        requests={requests}
+                        updateStatus={updateRequestStatus} createRequest={function (request: Omit<Request, 'id' | 'status'>): void {
+                            throw new Error('Function not implemented.');
+                        }} />
+
+                {/* {role != 'UR1_TEACHER' &&
+                    <HeadStudiesDesk
+                        requests={requests}
+                        updateStatus={updateRequestStatus} createRequest={function (request: Omit<Request, 'id' | 'status'>): void {
+                            throw new Error('Function not implemented.');
+                        }} />
+                } */}
+
             </div>
         </div>
     );

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './FormalitiesDesktopStiles.css';
+import './HeadStudiesDeskStyles.css';
 import { TxStatus } from '#common/@enums/ws';
 import DatePicker from 'react-datepicker';
 import { ApiRts } from '#common/@enums/http';
@@ -79,9 +79,7 @@ const FormalitiesDesktop: React.FC<FormalitiesProps> = ({ }) => {
     const handleCreate = () => {
         if (!validateForm()) return;
 
-        const {id, ...newWrning} = formState; 
-
-        api.post(newWrning as Warning)
+        api.post(formState)
             .then(() => {
                 setFormState({
                     id: 0,
