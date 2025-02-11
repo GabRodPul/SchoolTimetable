@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './FormalitiesDesktopStiles.css';
 import { TxStatus } from '#common/@enums/ws';
 import DatePicker from 'react-datepicker';
+import { ApiRts } from '#common/@enums/http';
+import { useApi } from '#src/api/ApiContext';
+import { Id, WarningData } from '#common/@types/models';
+import { FetchState } from '#src/types/api';
+
+type Warning = WarningData & Id;
 
 interface Request {
     id: number;
@@ -19,14 +25,38 @@ interface FormalitiesProps {
     createRequest: (request: Omit<Request, 'id' | 'status'>) => void;
 }
 
-const FormalitiesDesktop: React.FC<FormalitiesProps> = ({ requests, updateStatus, createRequest }) => {
+const fetchLastId = async (): Promise<number> => {
+    try {
+        const response = await fetch("/api/warnings/last-id"); // Ajusta la URL a tu endpoint real
+        const data = await response.json();
+        return data.lastId ?? 0; // Si no hay registros, usa 0 como base
+    } catch (error) {
+        console.error("Error fetching last ID:", error);
+        return 0;
+    }
+};
+
+const FormalitiesDesktop: React.FC<FormalitiesProps> = ({ }) => {
+
+    const [warning, api] = useApi<Warning>(ApiRts.Warnings);
+    const [selectedWarning, setSelectedWarning] = useState<Warning | null>(null);
+
     const [startDate, setStartDate] = useState<Date | null>(new Date());
     const [endDate, setEndDate] = useState<Date | null>(new Date());
-    const [formState, setFormState] = useState({
-        description: '',
-        startHour: '',
-        endHour: '',
+    const [formState, setFormState] = useState<Warning>({
+        id: 120,
+        teacherId: 1,
+        description: "",
+        startDate: new Date().toISOString().split("T")[0],
+        endDate: new Date().toISOString().split("T")[0],
+        startHour: "",
+        endHour: "",
+        status: TxStatus.Approved,
     });
+
+    useEffect(() => {
+        api.getAll();
+    }, []);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -46,24 +76,63 @@ const FormalitiesDesktop: React.FC<FormalitiesProps> = ({ requests, updateStatus
         return true;
     };
 
-    const handleCreate = (e: React.FormEvent) => {
-        e.preventDefault();
+    const handleCreate = () => {
         if (!validateForm()) return;
 
-        // Création de la requête
-        createRequest({
-            description: formState.description,
-            startHour: formState.startHour,
-            endHour: formState.endHour,
-            startDate: startDate!.toISOString().split('T')[0],
-            endDate: endDate!.toISOString().split('T')[0],
-        });
+        api.post(formState)
+            .then(() => {
+                setFormState({
+                    id: 0,
+                    teacherId: 1,
+                    description: "",
+                    startDate: new Date().toISOString().split("T")[0],
+                    endDate: new Date().toISOString().split("T")[0],
+                    startHour: "",
+                    endHour: "",
+                    status: TxStatus.Approved,
+                });
+                api.getAll();
+            })
+            .catch((error) => {
+                console.error("Error al realizar el POST:", error);
+                alert("Hubo un error al intentar crear el trámite.");
+            });
+    };
 
-        // Réinitialisation du formulaire
-        setFormState({ description: '', startHour: '', endHour: '' });
-        setStartDate(new Date());
-        setEndDate(new Date());
-        alert('Demande créée avec succès !');
+    const handleEdit = (warnings: Warning) => {
+        setSelectedWarning(warnings);
+        setFormState(warnings);
+    };
+
+    const handleUpdate = () => {
+        if (!selectedWarning || !validateForm()) return;
+        api.put({ body: formState, id: selectedWarning.id })
+            .then(() => {
+                setFormState({
+                    id: selectedWarning.id,
+                    teacherId: 1,
+                    description: "",
+                    startDate: new Date().toISOString().split("T")[0],
+                    endDate: new Date().toISOString().split("T")[0],
+                    startHour: "",
+                    endHour: "",
+                    status: TxStatus.Approved
+                });
+                api.getAll().then(() => setSelectedWarning(null));
+            })
+            .catch((error) => {
+                console.error("Error al realizar el PUT:", error);
+                alert("Hubo un error al intentar actualizar el trámite.");
+            });
+    };
+
+    const handleDelete = (id: Id) => {
+        api.delete(id)
+            .then(() => api.getAll())
+            .catch((error) => {
+                console.error("Error al eliminar el trámite:", error);
+                alert("Hubo un error al intentar eliminar el trámite.");
+            });
     };
 
     return (
@@ -72,7 +141,11 @@ const FormalitiesDesktop: React.FC<FormalitiesProps> = ({ requests, updateStatus
                 {/* Formulaire de création */}
                 <div className="formalities__makeForm">
                     <h2>Créer un Trámite</h2>
-                    <form onSubmit={handleCreate} className="formalitiesForm__data">
+                    <form onSubmit={e => {
+                        e.preventDefault();
+                        selectedWarning ? handleUpdate() : handleCreate();
+                    }}
+                        className="formalitiesForm__data">
                         <label>
                             <p>Motif</p>
                             <input
@@ -105,28 +178,41 @@ const FormalitiesDesktop: React.FC<FormalitiesProps> = ({ requests, updateStatus
                             <p>Date de Début</p>
                             <DatePicker
                                 selected={startDate}
-                                onChange={(date: Date | null) => setStartDate(date)}
-                                dateFormat="yyyy-MM-dd"
+                                onChange={(date: Date | null) => {
+                                    if (date) {
+                                        setStartDate(date);
+                                        setFormState(prev => ({ ...prev, startDate: date.toISOString().split("T")[0] }));
+                                    }
+                                }}
+                                placeholderText='00/20/2000'
+
                             />
                         </label>
                         <label>
                             <p>Date de Fin</p>
                             <DatePicker
                                 selected={endDate}
-                                onChange={(date: Date | null) => setEndDate(date)}
-                                dateFormat="yyyy-MM-dd"
+                                onChange={(date: Date | null) => {
+                                    if (date) {
+                                        setEndDate(date);
+                                        setFormState(prev => ({ ...prev, endDate: date.toISOString().split("T")[0] }));
+                                    }
+                                }}
+                                placeholderText='06/20/2000'
+
                             />
                         </label>
                         <button type="submit" className="formalities__button">
-                            Créer
+                            {selectedWarning ? "Editar Trámite" : "Crear"}
                         </button>
+                        {selectedWarning && <button onClick={() => setSelectedWarning(null)} className="formalities__Cancelbutton">Cancelar</button>}
                     </form>
                 </div>
 
                 {/* Affichage des transactions */}
                 <div className="formalities__info">
                     <h2>Vos Trámites</h2>
-                    {requests.length > 0 ? (
+                    {/* {requests.length > 0 ? (
                         requests.map((request) => (
                             <div key={request.id} className="formalities__card">
                                 <p><strong>Motif :</strong> {request.description}</p>
@@ -162,7 +248,31 @@ const FormalitiesDesktop: React.FC<FormalitiesProps> = ({ requests, updateStatus
                         ))
                     ) : (
                         <p>Aucun trámite disponible.</p>
-                    )}
+                    )} */}
+
+                    {(warning.state === FetchState.Success || warning.state === FetchState.SuccessMany) &&
+                        Array.isArray(warning.data) && warning.data.map((warning) => {
+                            const warningListed = warning as Warning;
+                            return (
+                                <div key={warningListed.id} className='formalirties__card'>
+                                    <p>
+                                        {warningListed.description}
+                                    </p>
+                                    <p>
+                                        {warningListed.startDate} - {warningListed.endDate}
+                                    </p>
+                                    <p>
+                                        {warningListed.startHour} - {warningListed.endHour}
+                                    </p>
+                                    <div className="buttons">
+                                        <button onClick={() => handleEdit(warningListed)} className='Edit'>Editar</button>
+                                        <button onClick={() => handleDelete({ id: warningListed.id })} className='Delete'>Eliminar</button>
+                                    </div>
+                                </div>
+                            );
+                        })
+                    }
+
                 </div>
             </div>
         </div>
