@@ -3,6 +3,6 @@ import { SessionChangedTable, SessionChangedInstance } from "./table/session-cha
 
 // https://sequelize.org/docsSessionDatav6/core-concepts/validations-and-constraints/
 const SessionChangedModel = { init: (sequelize: Sequelize) =>
-        sequelize.define<SessionChangedInstance>(SessionChangedTable.name, SessionChangedTable.cols, { timestamps: false })};;
+        sequelize.define<SessionChangedInstance>(SessionChangedTable.name, SessionChangedTable.cols, { timestamps: true })};;
 
 export { SessionChangedModel };

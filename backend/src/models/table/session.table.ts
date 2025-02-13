@@ -16,7 +16,7 @@ const DayVals = { values: Object.values(WorkDay) } as const;
 
 // https://sequelize.org/docsSessionDatav6/core-concepts/validations-and-constraints/
 export const SessionTable = {
-    name: "session",
+    name: "sessions",
     cols: {
         ...defineId,
         classHourId: fkId,

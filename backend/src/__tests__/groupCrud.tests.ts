@@ -17,7 +17,7 @@ const epTestUpdateData: GroupData & Id = {
   name: "DAW2T",
 };
 
-const viewsApp = initApp(false);
+const viewsApp = initApp(true);
 
 beforeAll(async () => {
 
