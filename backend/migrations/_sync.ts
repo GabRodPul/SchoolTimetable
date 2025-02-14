@@ -71,9 +71,9 @@ module.exports = {
       // studentId: referenceId(UserTable.name, "studentId"),
     // });
 
-    await db.sequelize.query("CREATE TABLE IF NOT EXISTS `users` (`id` INTEGER auto_increment , `name` VARCHAR(255), `email` VARCHAR(255) NOT NULL, `password` VARCHAR(255) NOT NULL, `phoneNumber` VARCHAR(15) NOT NULL, `role` ENUM('UR0_STUDENT', 'UR1_TEACHER', 'UR2_HEAD', 'UR3_ADMIN') NOT NULL, `image` VARCHAR(255), `createdAt` DATE DEFAULT NOW(), `updatedAt` DATE DEFAULT NOW(), PRIMARY KEY (`id`)) ENGINE=InnoDB");
-    await db.sequelize.query("CREATE TABLE IF NOT EXISTS `groups` (`id` INTEGER auto_increment , `name` VARCHAR(5) NOT NULL, `createdAt` DATE DEFAULT NOW(), `updatedAt` DATE DEFAULT NOW(), PRIMARY KEY (`id`)) ENGINE=InnoDB")
-    await db.sequelize.query("CREATE TABLE IF NOT EXISTS `modules` (`id` INTEGER auto_increment , `name` VARCHAR(3) NOT NULL, `createdAt` DATE DEFAULT NOW(), `updatedAt` DATE DEFAULT NOW(), PRIMARY KEY (`id`)) ENGINE=InnoDB")
+    await db.sequelize.query("CREATE TABLE IF NOT EXISTS `users` (`id` INTEGER auto_increment , `name` VARCHAR(255), `email` VARCHAR(255) NOT NULL, `password` VARCHAR(255) NOT NULL, `phoneNumber` VARCHAR(15) NOT NULL, `role` ENUM('UR0_STUDENT', 'UR1_TEACHER', 'UR2_HEAD', 'UR3_ADMIN') NOT NULL, `image` VARCHAR(255), `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, `updatedAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (`id`)) ENGINE=InnoDB");
+    await db.sequelize.query("CREATE TABLE IF NOT EXISTS `groups` (`id` INTEGER auto_increment , `name` VARCHAR(5) NOT NULL, `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, `updatedAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (`id`)) ENGINE=InnoDB")
+    await db.sequelize.query("CREATE TABLE IF NOT EXISTS `modules` (`id` INTEGER auto_increment , `name` VARCHAR(3) NOT NULL, `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, `updatedAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (`id`)) ENGINE=InnoDB")
     
     await db.sequelize.query(
       "CREATE TABLE IF NOT EXISTS `igt_modules` ( "             +
@@ -82,7 +82,7 @@ module.exports = {
         "`groupId` INTEGER NOT NULL,"                           +
         "`moduleId` INTEGER NOT NULL,"                          +
         "`weeklyHours` INTEGER NOT NULL,"                       +
-        "`createdAt` DATE DEFAULT NOW(), `updatedAt` DATE DEFAULT NOW()," +
+        "`createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, `updatedAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP," +
         "PRIMARY KEY (`id`), "                                  +
         "FOREIGN KEY (`teacherId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,"  +
         "FOREIGN KEY (`groupId`) REFERENCES `groups` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,"   +
@@ -95,15 +95,15 @@ module.exports = {
       "  `id` INTEGER auto_increment ,                        "+
       "  `studentId` INTEGER NOT NULL,                        "+
       "  `moduleId` INTEGER NOT NULL,                         "+
-      "`createdAt` DATE DEFAULT NOW(), `updatedAt` DATE DEFAULT NOW()," +
+      "`createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, `updatedAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP," +
       "  PRIMARY KEY (`id`),                                  "+
       "  FOREIGN KEY (`studentId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE, "+
       "  FOREIGN KEY (`moduleId`) REFERENCES `modules` (`id`) ON DELETE CASCADE ON UPDATE CASCADE" +
       ") ENGINE=InnoDB"
     );
 
-    await db.sequelize.query("CREATE TABLE IF NOT EXISTS `warnings` (`id` INTEGER auto_increment , `teacherId` INTEGER NOT NULL, `description` VARCHAR(255) NOT NULL, `startDate` VARCHAR(255) NOT NULL, `endDate` VARCHAR(255) NOT NULL, `startHour` TIME NOT NULL, `endHour` TIME NOT NULL, `createdAt` DATE DEFAULT NOW(), `updatedAt` DATE DEFAULT NOW(), PRIMARY KEY (`id`), FOREIGN KEY (`teacherId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE) ENGINE=InnoDB");
-    await db.sequelize.query("CREATE TABLE IF NOT EXISTS `classHours` (`id` INTEGER auto_increment , `turn` ENUM('MORNING', 'AFTERNOON', 'EVENING') NOT NULL, `sessionHour` INTEGER NOT NULL, `start` TIME NOT NULL, `end` TIME NOT NULL, `createdAt` DATE DEFAULT NOW(), `updatedAt` DATE DEFAULT NOW(), PRIMARY KEY (`id`)) ENGINE=InnoDB");
+    await db.sequelize.query("CREATE TABLE IF NOT EXISTS `warnings` (`id` INTEGER auto_increment , `teacherId` INTEGER NOT NULL, `description` VARCHAR(255) NOT NULL, `startDate` VARCHAR(255) NOT NULL, `endDate` VARCHAR(255) NOT NULL, `startHour` TIME NOT NULL, `endHour` TIME NOT NULL, `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, `updatedAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (`id`), FOREIGN KEY (`teacherId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE) ENGINE=InnoDB");
+    await db.sequelize.query("CREATE TABLE IF NOT EXISTS `classHours` (`id` INTEGER auto_increment , `turn` ENUM('MORNING', 'AFTERNOON', 'EVENING') NOT NULL, `sessionHour` INTEGER NOT NULL, `start` TIME NOT NULL, `end` TIME NOT NULL, `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, `updatedAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (`id`)) ENGINE=InnoDB");
 
     await db.sequelize.query(
       "CREATE TABLE IF NOT EXISTS `sessions` (" +
@@ -111,7 +111,7 @@ module.exports = {
         "`classHourId` INTEGER, "  +
         "`igtModuleId` INTEGER, " +
         "`day` ENUM('MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY') NOT NULL," + 
-        "`createdAt` DATE DEFAULT NOW(), `updatedAt` DATE DEFAULT NOW()," +
+        "`createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, `updatedAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP," +
         "PRIMARY KEY (`id`), " +
         "FOREIGN KEY (`classHourId`) REFERENCES `classHours` (`id`) ON DELETE CASCADE ON UPDATE CASCADE," + 
         "FOREIGN KEY (`igtModuleId`) REFERENCES `igt_modules` (`id`) ON DELETE CASCADE ON UPDATE CASCADE) ENGINE=InnoDB"
@@ -124,7 +124,7 @@ module.exports = {
       "  `sessionId` INTEGER NOT NULL,                                                 " +
       "  `day` ENUM('MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY') NOT NULL,  " +
       "  `startDate` DATETIME NOT NULL, `endDate` DATETIME NOT NULL,                   " +
-      "`createdAt` DATE DEFAULT NOW(), `updatedAt` DATE DEFAULT NOW()," +
+      "`createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, `updatedAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP," +
       "  PRIMARY KEY (`id`),                                                           " +
       "  FOREIGN KEY (`classHourId`) REFERENCES `classHours` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,                   " +
       "  FOREIGN KEY (`sessionId`) REFERENCES `sessions` (`id`) " +

@@ -5,7 +5,7 @@ import { enumStrVals } from "#src/utils/data";
 import { Metadata } from "./_types";
 import { envvars } from "#src/env";
 import { createConnection as mariaConn } from "mariadb"
-import { createConnection as mysqlConn } from "mysql2"
+import { Connection, ConnectionOptions, createConnection as mysqlConn } from "mysql2/promise"
 
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   host: dbConfig.HOST,
@@ -76,41 +76,24 @@ const migrations = async () => {
       user: dbConfig.USER,
       password: dbConfig.PASSWORD,
       connectionLimit: 5
-    };
+    } as ConnectionOptions;
 
-    switch (dbConfig.dialect) {
-      case "mariadb": {
-        const conn = await mariaConn(poolArgs);
-        try {
-          if (arg === Args.MigrateAll) {
-            await conn.query(`DROP DATABASE IF EXISTS ${dbConfig.DB}`);
-          }
+    let query = { 
+      "mariadb":  { connFn: mariaConn, execFn: "query"   },
+      "mysql":    { connFn: mysqlConn, execFn: "execute" }
+    }[dbConfig.dialect as "mariadb" | "mysql"]; 
 
-          await conn.query(`CREATE DATABASE IF NOT EXISTS ${dbConfig.DB}`);
-        } catch (err: any) {
-          console.log(err);
-        } finally {
-          if (conn) await conn.end();
-        }
-      } break;
+    const conn = await query.connFn(poolArgs as any);
+    try {
+      if (arg === Args.MigrateAll) {
+        await conn.query(`DROP DATABASE IF EXISTS ${dbConfig.DB}`);
+      }
 
-      case "mysql": {
-        const conn = mysqlConn(poolArgs);
-        conn.connect((err) => {
-          if (arg.includes("all")) {
-            conn.query(`DROP DATABASE IF EXISTS ${dbConfig.DB}`, (err, _) => {
-              if (err) throw err;
-            });
-          }
-
-          conn.query(`CREATE DATABASE IF NOT EXISTS ${dbConfig.DB}`, (err, _) => {
-            if (err) throw err;
-          });
-        });
-      } break;
-
-      default:
-        throw new Error(`Dialect not supported: ${dbConfig.dialect}`);
+      await conn.query(`CREATE DATABASE IF NOT EXISTS ${dbConfig.DB}`);
+    } catch (err: any) {
+      console.log(err);
+    } finally {
+      if (conn) await conn.end();
     }
   }
 
