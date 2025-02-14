@@ -17,6 +17,7 @@ import { Migration } from "sequelize-cli-ts-js";
 import { initDb } from '#src/models';
 import init from 'connect-session-sequelize';
 import { fstat, write, writeFileSync } from 'fs';
+import { TxStatus } from '#common/@enums/ws';
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -102,7 +103,10 @@ module.exports = {
       ") ENGINE=InnoDB"
     );
 
-    await db.sequelize.query("CREATE TABLE IF NOT EXISTS `warnings` (`id` INTEGER auto_increment , `teacherId` INTEGER NOT NULL, `description` VARCHAR(255) NOT NULL, `startDate` VARCHAR(255) NOT NULL, `endDate` VARCHAR(255) NOT NULL, `startHour` TIME NOT NULL, `endHour` TIME NOT NULL, `createdAt` DATE DEFAULT NOW(), `updatedAt` DATE DEFAULT NOW(), PRIMARY KEY (`id`), FOREIGN KEY (`teacherId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE) ENGINE=InnoDB");
+    await db.sequelize.query(
+      "CREATE TABLE IF NOT EXISTS `warnings` (`id` INTEGER auto_increment , `teacherId` INTEGER NOT NULL, `description` VARCHAR(255) NOT NULL, `startDate` VARCHAR(255) NOT NULL, `endDate` VARCHAR(255) NOT NULL, `startHour` TIME NOT NULL, `endHour` TIME NOT NULL, `status` ENUM(" +
+      enumStrVals(TxStatus).values.map(v => `'${v}'`).join(",") + 
+      ") NOT NULL, `createdAt` DATE DEFAULT NOW(), `updatedAt` DATE DEFAULT NOW(), PRIMARY KEY (`id`), FOREIGN KEY (`teacherId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE) ENGINE=InnoDB");
     await db.sequelize.query("CREATE TABLE IF NOT EXISTS `classHours` (`id` INTEGER auto_increment , `turn` ENUM('MORNING', 'AFTERNOON', 'EVENING') NOT NULL, `sessionHour` INTEGER NOT NULL, `start` TIME NOT NULL, `end` TIME NOT NULL, `createdAt` DATE DEFAULT NOW(), `updatedAt` DATE DEFAULT NOW(), PRIMARY KEY (`id`)) ENGINE=InnoDB");
 
     await db.sequelize.query(
