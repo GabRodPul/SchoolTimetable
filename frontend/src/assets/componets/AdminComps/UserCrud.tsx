@@ -64,19 +64,19 @@ const UserCrud: React.FC = () => {
         });
     };
 
-    const handleDelete = (id: Id) => {
-        api.delete(id).then(() => {
-            api.getAll();
-        }).catch((error) => {
-            console.error("Error deleting user:", error);
-            alert("Ocurrió un error al eliminar usuario. Por favor, inténtelo de nuevo.");
-        });
-    };
+    // const handleDelete = (id: Id) => {
+    //     api.delete(id).then(() => {
+    //         api.getAll();
+    //     }).catch((error) => {
+    //         console.error("Error deleting user:", error);
+    //         alert("Ocurrió un error al eliminar usuario. Por favor, inténtelo de nuevo.");
+    //     });
+    // };
 
-    const handleEdit = (user: User) => {
-        setSelectedUser(user);
-        setFormState(user);
-    };
+    // const handleEdit = (user: User) => {
+    //     setSelectedUser(user);
+    //     setFormState(user);
+    // };
 
     return (
         <div ref={ref} className="crud__container animation">
@@ -129,7 +129,7 @@ const UserCrud: React.FC = () => {
                 </form>
             </div>
 
-            <h2 className="crud__list_title">Listado de Usuarios</h2>
+            {/* <h2 className="crud__list_title">Listado de Usuarios</h2>
             <div className="crud__list">
 
                 {(users.state === FetchState.Success || users.state === FetchState.SuccessMany) &&
@@ -148,7 +148,7 @@ const UserCrud: React.FC = () => {
                             </div>
                         );
                     })}
-            </div>
+            </div> */}
         </div>
     );
 };

@@ -11,6 +11,46 @@
     margin-top: 40px;
 }
 
+
+.collapsible-section {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+  }
+  
+  .collapsible-section__header {
+    background-color: #f9f9f9;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .collapsible-section__header:hover {
+    background-color: #eef3fa;
+  }
+  
+  .collapsible-section__title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #0056b3;
+  }
+  
+  .collapsible-section__icon {
+    font-size: 24px;
+    color: #0056b3;
+  }
+  
+  .collapsible-section__content {
+    padding: 15px 20px;
+  }
+  
+
+
 @media (max-width: 1380px) {
     .mobileAdmin__nav{
         display: inherit;

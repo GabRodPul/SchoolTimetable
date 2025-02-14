@@ -76,19 +76,19 @@ const ClassHourCrud: React.FC = () => {
         });
     };
 
-    const handleDelete = (id: Id) => {
-        api.delete(id).then(() => {
-            api.getAll();
-        }).catch((error) => {
-            console.error("Error al borrar la clase:", error);
-            alert("Hubo un error al borrar la clase. Intenta nuevamente.");
-        });
-    };
+    // const handleDelete = (id: Id) => {
+    //     api.delete(id).then(() => {
+    //         api.getAll();
+    //     }).catch((error) => {
+    //         console.error("Error al borrar la clase:", error);
+    //         alert("Hubo un error al borrar la clase. Intenta nuevamente.");
+    //     });
+    // };
 
-    const handleEdit = (classHour: ClassHour) => {
-        setSelectedClassHour(classHour);
-        setFormState(classHour);
-    };
+    // const handleEdit = (classHour: ClassHour) => {
+    //     setSelectedClassHour(classHour);
+    //     setFormState(classHour);
+    // };
 
     if (classHours.state === FetchState.Loading) return <p>Cargando...</p>;
     if (classHours.state === FetchState.Error) return <p>Error: {classHours.error?.message}</p>;
@@ -164,7 +164,7 @@ const ClassHourCrud: React.FC = () => {
                 </form>
             </div>
 
-            <h2 className="crud__list_title">Listado de Horas de Clase</h2>
+            {/* <h2 className="crud__list_title">Listado de Horas de Clase</h2>
             <div className="crud__list">
                 {(classHours.state === FetchState.Success || classHours.state === FetchState.SuccessMany) &&
                     Array.isArray(classHours.data) && classHours.data.map((classHour) => (
@@ -189,7 +189,7 @@ const ClassHourCrud: React.FC = () => {
                         </div>
                     ))
                 }
-            </div>
+            </div> */}
         </div>
     );
 };

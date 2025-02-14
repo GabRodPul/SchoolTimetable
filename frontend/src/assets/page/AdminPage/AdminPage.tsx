@@ -9,12 +9,11 @@ import SessionCrud from "#src/assets/componets/AdminComps/SessionCrud";
 import UserCrud from "#src/assets/componets/AdminComps/UserCrud";
 import WarningCrud from "#src/assets/componets/AdminComps/WarningsCrud";
 import { AdminList } from "#src/assets/componets/AdminLists/AdminList";
-import UserList from "#src/assets/componets/AdminLists/UserList";
+import CollapsibleSection from "#src/assets/componets/AdminLists/CollapsibleSection";
 import Header from "#src/assets/componets/CommonComps/MenuheaderMobile/Header";
 import NavigationTab from "#src/assets/componets/CommonComps/navigationTab/NavigationTab";
 import RigthMenu from "#src/assets/componets/CommonComps/rigthMenu/rigthMenu";
-import "./AdminPageStyles.css"
-
+import "./AdminPageStyles.css";
 
 function Admin() {
     return (
@@ -24,68 +23,92 @@ function Admin() {
                 <RigthMenu />
             </div>
             <div className="mobileAdmin__nav">
-                <Header/>
+                <Header />
             </div>
             <div className="AdminPage__Cruds">
 
-                <UserCrud />
-                <AdminList 
-                    buttonName="User" 
-                    fields={["id", "name", "email", "phoneNumber", "role"]}
-                    route={ApiRts.Users}
-                />
+                <CollapsibleSection title="Usuarios">
+                    <AdminList
+                        buttonName="User"
+                        fields={["id", "name", "email", "phoneNumber", "role"]}
+                        route={ApiRts.Users}
+                        FormComponent={UserCrud}
+                    />
 
-                <GroupCrud />
-                <AdminList
-                    buttonName="Group"
-                    fields={["id", "name"]}
-                    route={ApiRts.Groups}
-                />
+                </CollapsibleSection>
 
-                <SessionCrud/>
-                <AdminList
-                    buttonName="Session"
-                    fields={["id", "classHourId", "igtModuleId","day"]}
-                    route={ApiRts.Session}
-                />
-                
-                <ModuleCrud/>
-                <AdminList
-                    buttonName="Module"
-                    fields={["id", "name"]}
-                    route={ApiRts.Modules}
-                />
+                <CollapsibleSection title="Grupos">
+                    <AdminList
+                        buttonName="Group"
+                        fields={["id", "name"]}
+                        route={ApiRts.Groups}
+                        FormComponent={GroupCrud}
+                    />
+                </CollapsibleSection>
 
-                <IGTModuleCrud />
-                <AdminList
-                    buttonName="IGT Module"
-                    fields={["id", "teacherId", "groupId", "moduleId" ,"weeklyHours"]}
-                    route={ApiRts.IGT_modules}
-                />
+                <CollapsibleSection title="Sesiones">
+                    <AdminList
+                        buttonName="Session"
+                        fields={["id", "classHourId", "igtModuleId", "day"]}
+                        route={ApiRts.Session}
+                        FormComponent={SessionCrud}
+                    />
+                </CollapsibleSection>
 
-                <ClassHourCrud/>
-                <AdminList
-                    buttonName="Class Hour"
-                    fields={["id", "turn", "sessionHour", "start", "end"]}
-                    route={ApiRts.ClassHour}
-                />
+                <CollapsibleSection title="Módulos">
+                    <AdminList
+                        buttonName="Module"
+                        fields={["id", "name"]}
+                        route={ApiRts.Modules}
+                        FormComponent={ModuleCrud}
+                    />
+                </CollapsibleSection>
 
-                <WarningCrud/>
-                <AdminList
-                    buttonName="Warning"
-                    fields={["id", "teacherId", "description", "startDate", "endDate", "startHour", "endHour"]}
-                    route={ApiRts.Warnings}
-                />
+                <CollapsibleSection title="IGT Módulos">
+                    <AdminList
+                        buttonName="IGT Module"
+                        fields={["id", "teacherId", "groupId", "moduleId", "weeklyHours"]}
+                        route={ApiRts.IGT_modules}
+                        FormComponent={IGTModuleCrud}
+                    />
+                </CollapsibleSection>
 
-                <SessionChangedCrud/>
-a               <AdminList
-                    buttonName="Session Changed"
-                    fields={["id", "sessionId", "classHourId", "day", "startDate", "endDate"]}
-                    route={ApiRts.SessionChanged}
-                />
+                <CollapsibleSection title="Horas de clase">
+                    <AdminList
+                        buttonName="Class Hour"
+                        fields={["id", "turn", "sessionHour", "start", "end"]}
+                        route={ApiRts.ClassHour}
+                        FormComponent={ClassHourCrud}
+                    />
+                </CollapsibleSection>
 
-                <EnrollmentCrud/>
-                
+                <CollapsibleSection title="Avisos">
+                    <AdminList
+                        buttonName="Warning"
+                        fields={["id", "teacherId", "description", "startDate", "endDate", "startHour", "endHour"]}
+                        route={ApiRts.Warnings}
+                        FormComponent={WarningCrud}
+                    />
+                </CollapsibleSection>
+
+                <CollapsibleSection title="Cambios de Sesion">
+                    <AdminList
+                        buttonName="Session Changed"
+                        fields={["id", "sessionId", "classHourId", "day", "startDate", "endDate"]}
+                        route={ApiRts.SessionChanged}
+                        FormComponent={SessionChangedCrud}
+                    />
+                </CollapsibleSection>
+
+                <CollapsibleSection title="Matriculas">
+                    <EnrollmentCrud />
+                    {/* <AdminList
+                        buttonName="Session Changed"
+                        fields={["id", "sessionId", "classHourId", "day", "startDate", "endDate"]}
+                        route={ApiRts.Enrollmet}
+                    /> */}
+                </CollapsibleSection>
+
             </div>
         </div>
     );
