@@ -69,7 +69,7 @@ export const initApp = (views: boolean) => {
     // Avoid open handles
     if (envvars.NODE_ENV !== NodeEnv.Testing) {
         WsRoutes.init(app)
-        dbInit(true).then();
+        // dbInit(true).then();
         const PORT = process.env.PORT ?? 8080;
         app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
     }

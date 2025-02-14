@@ -13,18 +13,18 @@
     <% data.forEach((m)=> { %>
       <div class="card">
         <%= m.name %>
-        <a href="/groups/edit/<%= m.id %>">Editar</a>
-            <form action="/groups/delete/<%= m.id %>" method="POST">
+        <a href="/groups2/edit/<%= m.id %>">Editar</a>
+            <form action="/groups2/delete/<%= m.id %>" method="POST">
               <input type="submit" value="Delete" />
             </form>
       </div>
       <% }) %>
-        <p><a href="/groups/create">Añadir grupo</a>.</p>
+        <p><a href="/groups2/create">Añadir grupo</a>.</p>
         <% } else { %>
-          <p>No se encontraron grupos <a href="/groups/create">Añadir grupo</a>.</p>
+          <p>No se encontraron grupos <a href="/groups2/create">Añadir grupo</a>.</p>
           <% } %>
             <div>
-              <form action="/users/logout" method="POST">
+              <form action="/groups2/logout" method="POST">
                 <button type="submit">Salir</button>
               </form>
             </div>

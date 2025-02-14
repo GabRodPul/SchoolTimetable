@@ -9,7 +9,7 @@
 
 <body>
   <h1>Edit Class Hour</h1>
-  <form action="/classHour/update/<%= classHour.id %>" method="POST">
+  <form action="/classHours/update/<%= classHour.id %>" method="POST">
     <label for="brand">Brand:</label>
     <input type="text" id="brand" name="brand" value="<%= classHour.turn %>" required>
 
@@ -24,7 +24,7 @@
 
     <button type="submit">Update</button>
   </form>
-  <a href="/classHour">Back to List</a>
+  <a href="/classHours">Back to List</a>
 </body>
 
 </html>
