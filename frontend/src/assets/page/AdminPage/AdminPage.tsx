@@ -29,7 +29,7 @@ function Admin() {
 
                 <CollapsibleSection title="Usuarios">
                     <AdminList
-                        buttonName="User"
+                        buttonName="Usuario"
                         fields={["id", "name", "email", "phoneNumber", "role"]}
                         route={ApiRts.Users}
                         FormComponent={UserCrud}
@@ -39,7 +39,7 @@ function Admin() {
 
                 <CollapsibleSection title="Grupos">
                     <AdminList
-                        buttonName="Group"
+                        buttonName="Grupo"
                         fields={["id", "name"]}
                         route={ApiRts.Groups}
                         FormComponent={GroupCrud}
@@ -48,7 +48,7 @@ function Admin() {
 
                 <CollapsibleSection title="Sesiones">
                     <AdminList
-                        buttonName="Session"
+                        buttonName="Sesión"
                         fields={["id", "classHourId", "igtModuleId", "day"]}
                         route={ApiRts.Session}
                         FormComponent={SessionCrud}
@@ -57,7 +57,7 @@ function Admin() {
 
                 <CollapsibleSection title="Módulos">
                     <AdminList
-                        buttonName="Module"
+                        buttonName="Módulo"
                         fields={["id", "name"]}
                         route={ApiRts.Modules}
                         FormComponent={ModuleCrud}
@@ -66,7 +66,7 @@ function Admin() {
 
                 <CollapsibleSection title="IGT Módulos">
                     <AdminList
-                        buttonName="IGT Module"
+                        buttonName="IGT Módulo"
                         fields={["id", "teacherId", "groupId", "moduleId", "weeklyHours"]}
                         route={ApiRts.IGT_modules}
                         FormComponent={IGTModuleCrud}
@@ -75,7 +75,7 @@ function Admin() {
 
                 <CollapsibleSection title="Horas de clase">
                     <AdminList
-                        buttonName="Class Hour"
+                        buttonName="Hora de clase"
                         fields={["id", "turn", "sessionHour", "start", "end"]}
                         route={ApiRts.ClassHour}
                         FormComponent={ClassHourCrud}
@@ -84,7 +84,7 @@ function Admin() {
 
                 <CollapsibleSection title="Avisos">
                     <AdminList
-                        buttonName="Warning"
+                        buttonName="Aviso"
                         fields={["id", "teacherId", "description", "startDate", "endDate", "startHour", "endHour"]}
                         route={ApiRts.Warnings}
                         FormComponent={WarningCrud}
@@ -93,7 +93,7 @@ function Admin() {
 
                 <CollapsibleSection title="Cambios de Sesion">
                     <AdminList
-                        buttonName="Session Changed"
+                        buttonName="Cambio de Sesion"
                         fields={["id", "sessionId", "classHourId", "day", "startDate", "endDate"]}
                         route={ApiRts.SessionChanged}
                         FormComponent={SessionChangedCrud}
