@@ -5,7 +5,7 @@ import { enumStrVals } from "#src/utils/data";
 import { Metadata } from "./_types";
 import { envvars } from "#src/env";
 import { createConnection as mariaConn } from "mariadb"
-import { createConnection as mysqlConn } from "mysql2"
+import { createConnection as mysqlConn } from "mysql2/promise"
 
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   host: dbConfig.HOST,
@@ -95,18 +95,16 @@ const migrations = async () => {
       } break;
 
       case "mysql": {
-        const conn = mysqlConn(poolArgs);
-        conn.connect((err) => {
+        const conn = await mysqlConn(poolArgs);
+        try {
           if (arg.includes("all")) {
-            conn.query(`DROP DATABASE IF EXISTS ${dbConfig.DB}`, (err, _) => {
-              if (err) throw err;
-            });
+            await conn.execute(`DROP DATABASE IF EXISTS ${dbConfig.DB}`);
           }
+          await conn.execute(`CREATE DATABASE IF NOT EXISTS ${dbConfig.DB}`);
+        } catch (err: any) {
+          if (conn) await conn.end();
+        }
 
-          conn.query(`CREATE DATABASE IF NOT EXISTS ${dbConfig.DB}`, (err, _) => {
-            if (err) throw err;
-          });
-        });
       } break;
 
       default:
