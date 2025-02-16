@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './FormalitiesDesktopStiles.css';
-import { TxStatus } from '#common/@enums/ws';
+import { TxStatus, WsMsgType } from '#common/@enums/ws';
 import DatePicker from 'react-datepicker';
 import { ApiRts } from '#common/@enums/http';
 import { useApi } from '#src/api/ApiContext';
 import { AuthData, Id, WarningData } from '#common/@types/models';
-import { FetchState } from '#src/types/api';
-import { envvars } from '#src/env';
+import { FetchData, FetchState } from '#src/types/api';
+// import { envvars } from '#src/env';
+const envvars = { BEND_DB_HOST: "localhost", BEND_PORT: "8080" };
 
 type Warning = WarningData & Id;
 
@@ -41,7 +42,6 @@ const FormalitiesDesktop: React.FC<FormalitiesProps> = ({ }) => {
     const currentUser = JSON.parse(localStorage.getItem("currentUser")!) as AuthData;
     // const [warning, api] = useApi<Warning>(ApiRts.Warnings);
     const [selectedWarning, setSelectedWarning] = useState<Warning | null>(null);
-
     const [startDate, setStartDate] = useState<Date | null>(new Date());
     const [endDate, setEndDate] = useState<Date | null>(new Date());
     const [formState, setFormState] = useState<Warning>({
@@ -54,20 +54,36 @@ const FormalitiesDesktop: React.FC<FormalitiesProps> = ({ }) => {
         endHour: "",
         status: TxStatus.Pending,
     });
-
+    
+    const [ warnings, setWarnings ] = useState<Warning[] | null>(null);
     const ws = useRef<WebSocket>();
+    const sendMsg = (type: WsMsgType, data: Warning) => {
+        ws.current!.send(JSON.stringify({ type, data }));
+    };
 
     useEffect(() => {
         // api.getAll();
         ws.current = new WebSocket(
-            `ws://${envvars.BEND_DB_HOST}:${envvars.BEND_PORT}`,
-            [ "accessToken", currentUser.accessToken ]
+            // `ws://${envvars.BEND_DB_HOST}:${envvars.BEND_PORT}`,
+            "ws//localhost",
+            [ "Authorization", `Bearer ${currentUser.accessToken}` ]
         );
 
         ws.current.onopen = () => {
             console.log("Connection established");
         }
-    }, []);
+
+        ws.current.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+            setWarnings(data);
+        }
+
+        return () => {
+            console.log("WS Cleanup");
+            if (ws.current)
+                ws.current.close(); 
+        }
+    }, [warnings]);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -90,26 +106,37 @@ const FormalitiesDesktop: React.FC<FormalitiesProps> = ({ }) => {
     const handleCreate = () => {
         if (!validateForm()) return;
 
-        const { id, ...newWrning } = formState;
+        const { id, ...newWarning } = formState;
+        sendMsg(WsMsgType.TxCreate, newWarning as any);
+        setFormState({
+            id: 0,
+            teacherId: 1,
+            description: "",
+            startDate: new Date().toISOString().split("T")[0],
+            endDate: new Date().toISOString().split("T")[0],
+            startHour: "",
+            endHour: "",
+            status: TxStatus.Approved,
+        });
 
-        api.post(newWrning as Warning)
-            .then(() => {
-                setFormState({
-                    id: 0,
-                    teacherId: 1,
-                    description: "",
-                    startDate: new Date().toISOString().split("T")[0],
-                    endDate: new Date().toISOString().split("T")[0],
-                    startHour: "",
-                    endHour: "",
-                    status: TxStatus.Approved,
-                });
-                api.getAll();
-            })
-            .catch((error) => {
-                console.error("Error al realizar el POST:", error);
-                alert("Hubo un error al intentar crear el trámite.");
-            });
+        // api.post(newWarning as Warning)
+        //     .then(() => {
+        //         setFormState({
+        //             id: 0,
+        //             teacherId: 1,
+        //             description: "",
+        //             startDate: new Date().toISOString().split("T")[0],
+        //             endDate: new Date().toISOString().split("T")[0],
+        //             startHour: "",
+        //             endHour: "",
+        //             status: TxStatus.Approved,
+        //         });
+        //         api.getAll();
+        //     })
+        //     .catch((error) => {
+        //         console.error("Error al realizar el POST:", error);
+        //         alert("Hubo un error al intentar crear el trámite.");
+        //     });
     };
 
     const handleEdit = (warnings: Warning) => {
@@ -119,33 +146,46 @@ const FormalitiesDesktop: React.FC<FormalitiesProps> = ({ }) => {
 
     const handleUpdate = () => {
         if (!selectedWarning || !validateForm()) return;
-        api.put({ body: formState, id: selectedWarning.id })
-            .then(() => {
-                setFormState({
-                    id: selectedWarning.id,
-                    teacherId: 1,
-                    description: "",
-                    startDate: new Date().toISOString().split("T")[0],
-                    endDate: new Date().toISOString().split("T")[0],
-                    startHour: "",
-                    endHour: "",
-                    status: TxStatus.Approved
-                });
-                api.getAll().then(() => setSelectedWarning(null));
-            })
-            .catch((error) => {
-                console.error("Error al realizar el PUT:", error);
-                alert("Hubo un error al intentar actualizar el trámite.");
-            });
+        sendMsg(WsMsgType.TxUpdate, { ...formState, id: selectedWarning.id });
+        setFormState({
+            id: selectedWarning.id,
+            teacherId: 1,
+            description: "",
+            startDate: new Date().toISOString().split("T")[0],
+            endDate: new Date().toISOString().split("T")[0],
+            startHour: "",
+            endHour: "",
+            status: TxStatus.Approved
+        });
+
+        // api.put({ body: formState, id: selectedWarning.id })
+        // .then(() => {
+        //         setFormState({
+        //             id: selectedWarning.id,
+        //             teacherId: 1,
+        //             description: "",
+        //             startDate: new Date().toISOString().split("T")[0],
+        //             endDate: new Date().toISOString().split("T")[0],
+        //             startHour: "",
+        //             endHour: "",
+        //             status: TxStatus.Approved
+        //         });
+        //         api.getAll().then(() => setSelectedWarning(null));
+        //     })
+        //     .catch((error) => {
+        //         console.error("Error al realizar el PUT:", error);
+        //         alert("Hubo un error al intentar actualizar el trámite.");
+        //     });
     };
 
     const handleDelete = (id: Id) => {
-        api.delete(id)
-            .then(() => api.getAll())
-            .catch((error) => {
-                console.error("Error al eliminar el trámite:", error);
-                alert("Hubo un error al intentar eliminar el trámite.");
-            });
+        sendMsg(WsMsgType.TxDelete, { id } as any)
+        // api.delete(id)
+        //     .then(() => api.getAll())
+        //     .catch((error) => {
+        //         console.error("Error al eliminar el trámite:", error);
+        //         alert("Hubo un error al intentar eliminar el trámite.");
+        //     });
     };
 
     return (
@@ -224,9 +264,9 @@ const FormalitiesDesktop: React.FC<FormalitiesProps> = ({ }) => {
 
                 {/* Affichage des transactions */}
                 <div className="formalities__info">
-                    <h2>Vos Trámites</h2>
-                    {(warning.state === FetchState.Success || warning.state === FetchState.SuccessMany) &&
-                        Array.isArray(warning.data) && warning.data.map((warning) => {
+                    <h2>Tus Trámites</h2>
+                    {warnings &&
+                        Array.isArray(warnings) && warnings.map((warning) => {
                             const warningListed = warning as Warning;
                             const currentStatus = warning.status;
                             if (currentStatus === TxStatus.Approved)

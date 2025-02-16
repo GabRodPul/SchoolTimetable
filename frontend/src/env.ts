@@ -2,14 +2,16 @@ import { config } from "dotenv";
 // import * as path from "path"
 import { getEnv } from "#common/get-env"
 import { Envvars, NodeEnv } from "#common/@types/env"
+import { dirname } from "path";
 
 const enumStrVals = <T extends {[key: number]: string}>(e: T) =>
     ({ values: Object.values(e) })
 
-const path = `${__dirname}/../../.env`
+
+const path = `${import.meta.url}/../../.env`
 
 config({ path });
-console.log( `Loading enviroment NODE_ENV="`+process.env.NODE_ENV+`"...` );
+console.log( `Loading enviroment NODE_ENV="`+(import.meta as any).NODE_ENV+`"...` );
 const _env: () => Envvars = () => {
     const e         = getEnv( import.meta as any );
     const NODE_ENV  = e.NODE_ENV!.toUpperCase() as NodeEnv;

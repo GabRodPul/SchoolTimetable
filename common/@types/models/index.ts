@@ -1,4 +1,4 @@
-import { Turn, WorkDay } from "../../@enums/models"
+import { Turn, UserRole, WorkDay } from "../../@enums/models"
 import { TxStatus } from "#common/@enums/ws";
 
 // Each model will have an ID in the database but
@@ -11,7 +11,7 @@ export type UserData = {
     email:          string,
     password:       string,
     phoneNumber:    string,
-    role:           string,
+    role:           UserRole,
     image?:         string,
 }
 export type UserDataResponse = {
