@@ -52,7 +52,8 @@ const WsRoutes = {
           status: TxStatus.Denied
         }] as WarningData[];
 
-        const token = req.headers.authorization && req.headers.authorization.split(' ')[1]
+        // const token = req.headers.authorization && req.headers.authorization.split(' ')[1]
+        const token = req.params.accessToken;
         if (!token) {
           ws.send(dummyWarning);
           return;

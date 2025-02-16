@@ -28,39 +28,39 @@ const Formalities: React.FC = () => {
     const [error, setError] = useState<string | null>(null); // Gestion des erreurs WebSocket
     const { role } = (JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData).user; // Cambia 'currentuser' al nombre de la clave que usas en localStorage
 
-    useEffect(() => {
-        // Connexion au serveur WebSocket
-        const socket = new WebSocket('ws://localhost:8080/ws');
-        setWs(socket);
-
-        // Gestion des événements WebSocket
-        socket.onopen = () => {
-            console.log('✅ Connexion WebSocket établie');
-        };
-
-        socket.onerror = (event) => {
-            console.error('❌ Erreur WebSocket :', event);
-            setError('Une erreur est survenue avec la connexion WebSocket.');
-        };
-
-        socket.onmessage = (event) => {
-            try {
-                const message = JSON.parse(event.data);
-                handleIncomingMessage(message);
-            } catch (err) {
-                console.error('Erreur de parsing du message WebSocket :', err);
-            }
-        };
-
-        socket.onclose = () => {
-            console.log('⚠️ Connexion WebSocket fermée');
-            setWs(null);
-        };
-
-        return () => {
-            socket.close(); // Fermer la connexion à la sortie
-        };
-    }, []);
+    // useEffect(() => {
+        // // Connexion au serveur WebSocket
+        // const socket = new WebSocket('ws://localhost:8080/ws');
+        // setWs(socket);
+// 
+        // // Gestion des événements WebSocket
+        // socket.onopen = () => {
+            // console.log('✅ Connexion WebSocket établie');
+        // };
+// 
+        // socket.onerror = (event) => {
+            // console.error('❌ Erreur WebSocket :', event);
+            // setError('Une erreur est survenue avec la connexion WebSocket.');
+        // };
+// 
+        // socket.onmessage = (event) => {
+            // try {
+                // const message = JSON.parse(event.data);
+                // handleIncomingMessage(message);
+            // } catch (err) {
+                // console.error('Erreur de parsing du message WebSocket :', err);
+            // }
+        // };
+// 
+        // socket.onclose = () => {
+            // console.log('⚠️ Connexion WebSocket fermée');
+            // setWs(null);
+        // };
+// 
+        // return () => {
+            // socket.close(); // Fermer la connexion à la sortie
+        // };
+    // }, []);
 
     const roleTextInfo = () => {
         switch (role) {

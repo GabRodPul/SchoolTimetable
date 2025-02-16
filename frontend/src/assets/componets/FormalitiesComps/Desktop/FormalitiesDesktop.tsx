@@ -55,7 +55,7 @@ const FormalitiesDesktop: React.FC<FormalitiesProps> = ({ }) => {
         status: TxStatus.Pending,
     });
     
-    const [ warnings, setWarnings ] = useState<Warning[] | null>(null);
+    const [warnings, setWarnings] = useState<Warning[] | null>(null);
     const ws = useRef<WebSocket>();
     const sendMsg = (type: WsMsgType, data: Warning) => {
         ws.current!.send(JSON.stringify({ type, data }));
@@ -64,9 +64,8 @@ const FormalitiesDesktop: React.FC<FormalitiesProps> = ({ }) => {
     useEffect(() => {
         // api.getAll();
         ws.current = new WebSocket(
-            // `ws://${envvars.BEND_DB_HOST}:${envvars.BEND_PORT}`,
-            "ws//localhost",
-            [ "Authorization", `Bearer ${currentUser.accessToken}` ]
+            `ws://${envvars.BEND_DB_HOST}:${envvars.BEND_PORT}/?accessToken=${currentUser.accessToken}`,
+            // [ "Authorization", `Bearer ${currentUser.accessToken}` ]
         );
 
         ws.current.onopen = () => {
@@ -74,7 +73,9 @@ const FormalitiesDesktop: React.FC<FormalitiesProps> = ({ }) => {
         }
 
         ws.current.onmessage = (event) => {
-            const data = JSON.parse(event.data);
+            console.log(event);
+            // const data = JSON.parse(event.data);
+            const data = event.data;
             setWarnings(data);
         }
 
@@ -83,7 +84,7 @@ const FormalitiesDesktop: React.FC<FormalitiesProps> = ({ }) => {
             if (ws.current)
                 ws.current.close(); 
         }
-    }, [warnings]);
+    }, []);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
