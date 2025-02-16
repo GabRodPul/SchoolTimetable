@@ -1,12 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './FormalitiesDesktopStiles.css';
 import { TxStatus } from '#common/@enums/ws';
 import DatePicker from 'react-datepicker';
 import { ApiRts } from '#common/@enums/http';
 import { useApi } from '#src/api/ApiContext';
-import { AuthData, Id, WarningData } from '#common/@types/models';
+import { Id, WarningData } from '#common/@types/models';
 import { FetchState } from '#src/types/api';
-import { envvars } from '#src/env';
 
 type Warning = WarningData & Id;
 
@@ -38,8 +37,8 @@ const fetchLastId = async (): Promise<number> => {
 };
 
 const FormalitiesDesktop: React.FC<FormalitiesProps> = ({ }) => {
-    const currentUser = JSON.parse(localStorage.getItem("currentUser")!) as AuthData;
-    // const [warning, api] = useApi<Warning>(ApiRts.Warnings);
+
+    const [warning, api] = useApi<Warning>(ApiRts.Warnings);
     const [selectedWarning, setSelectedWarning] = useState<Warning | null>(null);
 
     const [startDate, setStartDate] = useState<Date | null>(new Date());
@@ -55,18 +54,8 @@ const FormalitiesDesktop: React.FC<FormalitiesProps> = ({ }) => {
         status: TxStatus.Pending,
     });
 
-    const ws = useRef<WebSocket>();
-
     useEffect(() => {
-        // api.getAll();
-        ws.current = new WebSocket(
-            `ws://${envvars.BEND_DB_HOST}:${envvars.BEND_PORT}`,
-            [ "accessToken", currentUser.accessToken ]
-        );
-
-        ws.current.onopen = () => {
-            console.log("Connection established");
-        }
+        api.getAll();
     }, []);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

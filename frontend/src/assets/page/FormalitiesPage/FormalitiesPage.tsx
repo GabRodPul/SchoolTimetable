@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './FormalitiesPageStyles.css';
-import { WsMsgType, TxStatus } from '#common/@enums/ws';
+import { WsMsg, TxStatus } from '#common/@enums/ws';
 // Mobile
 import Header from '#src/assets/componets/CommonComps/MenuheaderMobile/Header';
 import FormalitiesMobile from '#src/assets/componets/FormalitiesComps/Mobile/FormalitiesMobile';
@@ -75,13 +75,13 @@ const Formalities: React.FC = () => {
     // Fonction pour gérer les messages entrants
     const handleIncomingMessage = (message: any) => {
         switch (message.type) {
-            case WsMsgType.TxCreate:
+            case WsMsg.TxCreate:
                 setRequests((prev) => [...prev, message.data]); // Ajoute une nouvelle demande
                 console.log('Nouvelle demande reçue :', message.data);
                 break;
 
-            case WsMsgType.TxApprove:
-            case WsMsgType.TxDeny:
+            case WsMsg.TxApprove:
+            case WsMsg.TxDeny:
                 setRequests((prev) =>
                     prev.map((req) =>
                         req.id === message.data.id
@@ -98,7 +98,7 @@ const Formalities: React.FC = () => {
     };
 
     // Fonction pour envoyer un message via WebSocket
-    const sendMessage = (type: WsMsgType, data: any) => {
+    const sendMessage = (type: WsMsg, data: any) => {
         if (ws && ws.readyState === WebSocket.OPEN) {
             const message = JSON.stringify({ type, data });
             ws.send(message);
@@ -112,7 +112,7 @@ const Formalities: React.FC = () => {
     // Fonction pour mettre à jour le statut d'une requête
     const updateRequestStatus = (id: number, newStatus: TxStatus) => {
         const messageType =
-            newStatus === TxStatus.Approved ? WsMsgType.TxApprove : WsMsgType.TxDeny;
+            newStatus === TxStatus.Approved ? WsMsg.TxApprove : WsMsg.TxDeny;
         sendMessage(messageType, { id });
     };
 
