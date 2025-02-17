@@ -113,11 +113,12 @@ const WarningCrud: React.FC = () => {
                         e.preventDefault();
                         selectedWarning ? handleUpdate() : handleCreate();
                     }}
+                    data-testid="warnings-crud-form"
                 >
                     <input
                         type="number"
                         name="teacherId"
-                        placeholder="ID Profe"
+                        placeholder="ID Profesor"
                         value={formState.teacherId}
                         onChange={handleInputChange}
                         className="crud__input"
@@ -152,7 +153,7 @@ const WarningCrud: React.FC = () => {
                     <input
                         type="time"
                         name="startHour"
-                        placeholder="Hora de Inicio"
+                        placeholder="Hora Inicio Asunto"
                         value={formState.startHour}
                         onChange={handleInputChange}
                         className="crud__input"
@@ -161,13 +162,14 @@ const WarningCrud: React.FC = () => {
                     <input
                         type="time"
                         name="endHour"
-                        placeholder="Hora de Finalización"
+                        placeholder="Hora Fin Asunto"
                         value={formState.endHour}
                         onChange={handleInputChange}
                         className="crud__input"
                     />
 
-                    <button type="submit" className="crud__button">
+                    <button type="submit" className="crud__button"
+                    data-testid="submit-buttom-warning">
                         {selectedWarning ? "Actualizar" : "Crear"}
                     </button>
                     {selectedWarning && (
@@ -202,6 +204,7 @@ const WarningCrud: React.FC = () => {
                                 <button
                                     className="crud__button--delete"
                                     onClick={() => handleDelete({ id: warning.id })}
+                                    data-testid="delete-button-warning"
                                 >
                                     Eliminar
                                 </button>
