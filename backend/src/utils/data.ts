@@ -28,7 +28,7 @@ export const reference = (type: DataType, model: string, key: string) => ({
     references: { model, key }
 })
 
-export const referenceId = (model: string) => reference(DataTypes.INTEGER, model, "id");
+export const referenceId = (model: string, key: string) => reference(DataTypes.INTEGER, model, "id");
 
 type ModelArr = [ModelStatic<Model>, ...ModelStatic<Model>[]]
 export const relationship = <T1 extends Model, T2 extends Model>(
