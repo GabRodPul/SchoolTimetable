@@ -1,11 +1,11 @@
-.userlist {
+/* .userlist {
     display: flex;
     justify-content: center;
     min-height: 10vh;
     margin: 0px 100px;
     border: 1px solid #ddd;
     border-radius: 6px;
-}
+} */
 
 .userlist__usertable {
     width: 70%;
@@ -84,8 +84,10 @@ table.userlist__usertable td .action-icon {
     background-color: whitesmoke;
 }
 
+
+
 .userlist__editbtn {
-    background-color: #ffc107;
+    background-color: #268014;
     color: white;
     padding: 6px 12px;
     margin-right: 15px;
@@ -94,14 +96,15 @@ table.userlist__usertable td .action-icon {
     cursor: pointer;
     font-size: 12px;
     transition: background-color 0.3s ease;
+    width: 90px;
 }
 
 .userlist__editbtn:hover {
-    background-color: #1976d2;
+    background-color: #1c6d0c;
 }
 
 .userlist__deletebtn {
-    background-color: #f44336;
+    background-color: #C11A36;
     color: white;
     padding: 6px 12px;
     border: none;
@@ -109,10 +112,11 @@ table.userlist__usertable td .action-icon {
     cursor: pointer;
     font-size: 12px;
     transition: background-color 0.3s ease;
+    width: 90px;
 }
 
 .userlist__deletebtn:hover {
-    background-color: #d32f2f;
+    background-color: #b10707;
 }
 
 table tr td.userlist__emptyerr {

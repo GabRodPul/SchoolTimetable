@@ -61,19 +61,19 @@ const GroupCrud: React.FC = () => {
             });
     };
 
-    const handleDelete = (id: Id) => {
-        api.delete(id)
-            .then(() => api.getAll())
-            .catch((error) => {
-                console.error("Error al borrar el grupo:", error);
-                alert("Hubo un error al borrar el grupo. Intenta nuevamente.");
-            });
-    };
+    // const handleDelete = (id: Id) => {
+    //     api.delete(id)
+    //         .then(() => api.getAll())
+    //         .catch((error) => {
+    //             console.error("Error al borrar el grupo:", error);
+    //             alert("Hubo un error al borrar el grupo. Intenta nuevamente.");
+    //         });
+    // };
 
-    const handleEdit = (group: Group) => {
-        setSelectedGroup(group);
-        setFormState(group);
-    };
+    // const handleEdit = (group: Group) => {
+    //     setSelectedGroup(group);
+    //     setFormState(group);
+    // };
 
     if (groups.state === FetchState.Loading) return <p>Cargando...</p>;
     if (groups.state === FetchState.Error) return <p>Error: {groups.error?.message}</p>;
@@ -113,7 +113,7 @@ const GroupCrud: React.FC = () => {
                 </form>
             </div>
 
-            <div>
+            {/* <div>
                 <h2 className="crud__list_title">Listado de Grupos</h2>
                 <div className="crud__list">
                     {(groups.state === FetchState.Success || groups.state === FetchState.SuccessMany) &&
@@ -138,7 +138,7 @@ const GroupCrud: React.FC = () => {
                             </div>
                         ))}
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 };

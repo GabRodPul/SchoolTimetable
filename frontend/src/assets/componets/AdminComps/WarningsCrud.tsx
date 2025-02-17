@@ -176,7 +176,7 @@ const WarningCrud: React.FC = () => {
                 </form>
             </div>
 
-            <h2 className="crud__list_title">Listado de Avisos</h2>
+            {/* <h2 className="crud__list_title">Listado de Avisos</h2>
             <div className="crud__list">
                 {(warnings.state === FetchState.Success || warnings.state === FetchState.SuccessMany) &&
                     Array.isArray(warnings.data) &&
@@ -202,7 +202,7 @@ const WarningCrud: React.FC = () => {
                             </div>
                         </div>
                     ))}
-            </div>
+            </div> */}
         </div>
     );
 };

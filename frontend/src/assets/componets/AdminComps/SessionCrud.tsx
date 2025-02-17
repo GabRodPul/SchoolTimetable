@@ -129,7 +129,7 @@ const SessionCrud: React.FC = () => {
                 </form>
             </div>
 
-            <h2 className="crud__list_title">Listado de Sesiones</h2>
+            {/* <h2 className="crud__list_title">Listado de Sesiones</h2>
             <div className="crud__list">
                 {(sessions.state === FetchState.Success || sessions.state === FetchState.SuccessMany) &&
                     Array.isArray(sessions.data) &&
@@ -154,7 +154,7 @@ const SessionCrud: React.FC = () => {
                             </div>
                         </div>
                     ))}
-            </div>
+            </div> */}
         </div>
     );
 };

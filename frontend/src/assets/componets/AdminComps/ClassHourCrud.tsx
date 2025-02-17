@@ -92,7 +92,7 @@ const ClassHourCrud: React.FC = () => {
     if (classHours.state === FetchState.Error) return <p>Error: {classHours.error?.message}</p>;
 
     return (
-        <div className="crud__container animation">
+        <div className="crud__container">
             <h1  className="crud__title ">Gestión de Horas de Clase</h1>
 
             <div className="crud__form">

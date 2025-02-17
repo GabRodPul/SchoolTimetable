@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useApi } from "#src/api/ApiContext";
 import { FetchState } from "#src/types/api";
 import { ApiRts } from "#common/@enums/http";
-import AdminModal from "../AdminComps/ModalForm"; // Asegúrate de importar el modal
+import AdminModal from "../AdminComps/ModalForm";
 import { AiOutlinePlus } from "react-icons/ai";
 
 export type AdminListProps<T> = {
@@ -44,7 +44,7 @@ export function AdminList<T>(props: AdminListProps<T>) {
             fetchData.data.map((d: T, index) => (
               <tr key={index}>
                 {props.fields.map((f) => <td key={f as string}>{d[f] as string}</td>)}
-                <td>
+                <td className="td__Buttons">
                   <button className="userlist__editbtn" onClick={() => {
                     setSelectedItem(d);
                     setIsModalOpen(true);
