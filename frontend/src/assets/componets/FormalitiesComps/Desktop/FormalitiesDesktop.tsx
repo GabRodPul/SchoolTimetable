@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './FormalitiesDesktopStiles.css';
+import './FormalitiesDesktopStyles.css';
 import { Id, WarningData } from '#common/@types/models';
 import { useApi } from '#src/api/ApiContext';
 import { ApiRts } from '#common/@enums/http';
@@ -107,7 +107,7 @@ const FormalitiesDesktop: React.FC = () => {
     return (
 
         <div className="formalities">
-            <div className="formalities__content">
+            <div className="formalities__content_desktop">
                 <div className="formalities__makeForm">
                     <div className="formalitiesForm__title">
                         <h2>Realizar Trámites</h2>
@@ -178,7 +178,7 @@ const FormalitiesDesktop: React.FC = () => {
                                     placeholderText='06/20/2000'
                                 />
                             </label>
-                            <button type="submit" className="formalities__button">
+                            <button type="submit" className={`formalities__Deskbutton ${selectedWarning ? "edit-mode" : "create-mode"}`}>
                                 {selectedWarning ? "Editar Trámite" : "Crear"}
                             </button>
                             {selectedWarning && <button onClick={() => setSelectedWarning(null)} className="formalities__Cancelbutton">Cancelar</button>}
