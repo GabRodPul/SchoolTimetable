@@ -1,0 +1,89 @@
+
+.noticesPage__Mobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.noticesPage__title {
+    display: flex;
+    flex-direction: row;
+    font-size: 10px;
+    padding: 0px 10px 0px 10px;
+    width: 250px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08);
+    background-color: #f9f9f9;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 5%;
+    margin-top: 10px; /* Ajusta el valor según sea necesario */
+    margin-bottom: 10px; 
+}
+
+.noticesPage__titleReminders {
+    display: flex;
+    flex-direction: row;
+    font-size: 10px;
+    padding: 0px 10px 0px 10px;
+    width: 250px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08);
+    background-color: #f9f9f9;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 5%;
+    margin-top: 10px; /* Ajusta el valor según sea necesario */
+    margin-bottom: 10px; 
+}
+
+.CardsMobile__Reminder,
+.CardMobile__Notification{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.notificationsMobile__entry,
+.remindersMobile__remEntry {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 250px;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    font-size: 12px;
+    font-family: MerriweatherSans, sans-serif;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.entryMobile__title {
+    color: #6A1B9A;
+    font-weight: 700;
+    margin-left: 1.7%;
+    margin-bottom: 0.5%;
+}
+
+.remEntryMobile__icon {
+    display: flex;
+    align-items: center;
+    margin: 10px 10px;
+}
+
+.remEntryMobile__color[kind="Exam"] {
+    color: #B22222;
+}
+
+.remEntryMobile__color[kind="Assignment"] {
+    color: #227C44;
+}
+
+.remEntryMobile__color[kind="Project"] {
+    color: #3D32B8;
+}

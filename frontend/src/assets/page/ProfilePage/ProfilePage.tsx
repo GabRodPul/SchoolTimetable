@@ -211,9 +211,10 @@ function profile() {
                   </div>
                 </div>
               </div>
+
               <div className="PflContent__GeneralInfo">
                 <div className="generalInfo__title">
-                  <h3>Información general</h3>
+                  <h3 className='Info'>Información general</h3>
                 </div>
                 <div className="generalInfo__titles">
                   <div className="titles_content">
@@ -292,7 +293,7 @@ function profile() {
                             onChange={handleInputChange}
                           />
                         </div>
-                        <button type="submit" className="formalities__button">
+                        <button type="submit" className="userData__formButton">
                           {selectedUser ? "Actualizar" : "Crear"}
                         </button>
                         {selectedUser && <button type="button" onClick={() => handleEdit()}>Cancelar</button>}
@@ -301,7 +302,7 @@ function profile() {
                   </div>
                 </div>
                 <div className="generalInfo__title">
-                  <h3>Mis Módulos</h3>
+                  <h3 className='Info'>Mis Módulos</h3>
                 </div>
                 <div className="generalInfo__data">
                   <div className="info__ModulesData">
