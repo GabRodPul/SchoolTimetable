@@ -13,3 +13,5 @@ npm-debug.log
 dist/
 
 src/config/db.congis.ts
+
+common

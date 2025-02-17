@@ -11,14 +11,14 @@ WORKDIR /usr/src/app
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
 COPY ./.env /usr/src
-COPY backend/package*.json /usr/src/app/
+COPY package*.json /usr/src/app/
 
 RUN npm install
 # If you are building your code for production
 # RUN npm ci --only=production
 
 # Bundle app source
-COPY ./backend /usr/src/app/
+COPY ./ /usr/src/app/
 
 EXPOSE 8080
 
