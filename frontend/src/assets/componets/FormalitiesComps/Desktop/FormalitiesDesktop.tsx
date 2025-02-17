@@ -178,7 +178,7 @@ const FormalitiesDesktop: React.FC = () => {
                                     placeholderText='06/20/2000'
                                 />
                             </label>
-                            <button type="submit" className="formalities__button">
+                            <button type="submit" className={`formalities__Deskbutton ${selectedWarning ? "edit-mode" : "create-mode"}`}>
                                 {selectedWarning ? "Editar Trámite" : "Crear"}
                             </button>
                             {selectedWarning && <button onClick={() => setSelectedWarning(null)} className="formalities__Cancelbutton">Cancelar</button>}
