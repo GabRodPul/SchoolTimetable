@@ -3,11 +3,13 @@ import { useApi } from "../../../api/ApiContext";
 import { Id, IGTModuleData } from "#common/@types/models";
 import { FetchState } from "../../../types/api";
 import { ApiRts } from "#common/@enums/http";
+import { useScrollAnimation } from "./animationFade";
 import './CrudsStyles.css';
 
 type IGTModule = IGTModuleData & Id;
 
 const IGTModuleCrud: React.FC = () => {
+    const ref = useScrollAnimation();
     const [modules, api] = useApi<IGTModule>(ApiRts.IGT_modules);
 
     const [selectedModule, setSelectedModule] = useState<IGTModule | null>(null);
@@ -83,7 +85,7 @@ const IGTModuleCrud: React.FC = () => {
     if (modules.state === FetchState.Error) return <p>Error: {modules.error?.message}</p>;
 
     return (
-        <div className="crud__container">
+        <div ref={ref} className="crud__container animation">
             <h1 className="crud__title">Gestión de Módulos IGP</h1>
 
             <div className="crud__form">
@@ -142,7 +144,7 @@ const IGTModuleCrud: React.FC = () => {
             </div>
 
             <div>
-                <h2>Listado de Módulos IGP</h2>
+                <h2 className="crud__list_title">Listado de Módulos IGP</h2>
                 <div className="crud__list">
                     {(modules.state === FetchState.Success || modules.state === FetchState.SuccessMany) &&
                         Array.isArray(modules.data) &&

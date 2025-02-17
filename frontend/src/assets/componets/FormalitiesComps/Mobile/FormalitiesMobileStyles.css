@@ -7,10 +7,34 @@
     width: 100%;
 }
 
+.formalitiesMobile__makeForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.formalitiesMobileForm__title {
+    display: flex;
+    flex-direction: row;
+    font-size: 10px;
+    padding: 0px 10px 0px 10px;
+    width: 70%;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08);
+    background-color: #f9f9f9;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 5%;
+    margin-top: 10px; /* Ajusta el valor según sea necesario */
+    margin-bottom: 10px; 
+}
+
+
 .formalitiesMobile__content {
     display: flex;
     flex-direction: column;
-    gap: 5%;
+    gap: 10px;
     height: 100%;
     width: 100%;
 }
@@ -44,7 +68,7 @@
     border: 0px;
     border-bottom: 1px solid #e0e0e0;
     font-family: MerriweatherSans, sans-serif;
-    font-size: 16px;
+    font-size: 12px;
     color: #6c757d;
 }
 
@@ -56,7 +80,7 @@
     border-radius: 4px;
     cursor: pointer;
     font-family: MerriweatherSans, sans-serif;
-    font-size: 16px;
+    font-size: 12px;
     width: 200px;
     margin-bottom: 20px;
 }
@@ -69,7 +93,7 @@
     border-radius: 4px;
     cursor: pointer;
     font-family: MerriweatherSans, sans-serif;
-    font-size: 16px;
+    font-size: 12px;
     width: 200px;
     margin-bottom: 20px;
 }
@@ -78,15 +102,37 @@
     background-color: #0056b3;
 }
 
-.formalitiesMobile__info {
-    width: 100%;
+
+.formalitiesMobile__title{
+    display: flex;
+    flex-direction: row;
+    font-size: 10px;
+    padding: 0px 10px 0px 10px;
+    width: 70%;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08);
+    background-color: #f9f9f9;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 5%;
+    margin-top: 10px; /* Ajusta el valor según sea necesario */
+    margin-bottom: 10px;  
+}
+
+
+.Cards__InfoFormalitiesMobile{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 3%;
+    gap: 10px;
 }
 
+.formalitiesMobile__info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 /* Tarjeta individual de cada trámite */
 .formalitiesMobile__card {
     display: flex;
@@ -111,7 +157,7 @@
     line-height: 1.4;
 }
 
-.formalitiesMobile__card .buttons{
+.formalitiesMobile__card .buttons {
     margin-bottom: 5px;
 }
 
@@ -123,6 +169,7 @@
     cursor: pointer;
     font-family: MerriweatherSans, sans-serif;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
+    font-size: 12px;
 }
 
 .formalitiesMobile__card .Delete {

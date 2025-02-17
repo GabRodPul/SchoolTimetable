@@ -3,7 +3,7 @@
     display: flex;
     justify-content: center; /* Centre horizontalement */
     min-height: 10vh; /* Prend toute la hauteur de la page */
-    margin-left: 16.5%;
+    margin: 0px 100px;
     overflow-y: auto;
     max-height: 300px;
     border: 1px solid #ddd;

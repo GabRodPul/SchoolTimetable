@@ -67,7 +67,7 @@ export const initApp = (views: boolean) => {
 
     // Avoid open handles
     if (envvars.NODE_ENV !== NodeEnv.Testing) {
-        dbInit(true).then();
+        // dbInit(true).then(); // We have migrations now
         const PORT = process.env.PORT ?? 8080;
         app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
     }

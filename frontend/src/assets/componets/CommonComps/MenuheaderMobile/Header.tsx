@@ -8,13 +8,14 @@ import { UserRole } from '#common/@enums/models';
 function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [role, setRole] = useState<string>("");
+    const authData = JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData;
+
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
     useEffect(() => {
-        const authData = JSON.parse(localStorage.getItem('currentUser') ?? "null") as AuthData;
         if (authData) {
             setRole(authData.user.role);
         } else {
@@ -23,6 +24,17 @@ function Header() {
         }
     }, []);
 
+    const pageTitle = () => {
+        switch (location.pathname) {
+          case '/timetable': return 'Mi Horario';
+          case '/notices': return 'Notificaciones';
+          case '/formalities': return 'Trámites';
+          case '/profile': return 'Mi Perfil';
+          case '/admin': return 'Configuración';
+          default: '';
+        }
+      };
+
     return (
         <div className='header'>
             <div className="header__content">
@@ -30,6 +42,7 @@ function Header() {
                     <FontAwesomeIcon icon={faCalendar} className="calendar-icon"/>
                 </a>
             </div>
+            <h1 className="navigationTab__currentPageMobile">{pageTitle()}</h1>
             <FontAwesomeIcon
                 icon={faBars}
                 onClick={toggleMenu}

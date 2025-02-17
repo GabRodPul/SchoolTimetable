@@ -1,13 +1,17 @@
 .formalities {
     display: flex;
     flex-direction: row;
-    margin-left: 25%;
+    margin-left: 13%;
+    padding-left: 150px;
+    margin-right: 15%;
+    padding-right: 200px;
 }
 
-.formalities__content {
+.formalities__content_desktop {
     display: flex;
     flex-direction: row;
-    gap: 55%;
+    justify-content: space-around;
+    width: 100%;
 }
 
 .formalities__form {
@@ -21,8 +25,14 @@
     .formalitiesForm__data {
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        align-items: center;
+        gap: 15px;
+        width: 280px;
     }
+}
+
+.formalities__makeForm {
+    margin-top: 20px;
 }
 
 .formalities__form label {
@@ -41,7 +51,21 @@
     color: #6c757d;
 }
 
-.formalities__button {
+@keyframes createColorChange {
+    0% {
+        background-color: #004B84;
+    }
+
+    50% {
+        background-color: #016ada;
+    }
+
+    100% {
+        background-color: #004B84;
+    }
+}
+
+.create-mode {
     padding: 10px;
     background-color: #004B84;
     color: #ffffff;
@@ -52,9 +76,37 @@
     font-size: 16px;
     width: 200px;
     margin-bottom: 20px;
+    animation: createColorChange 6s infinite alternate;
+    transition: transform 0.5s ease;
 }
 
-.formalities__Cancelbutton {
+.create-mode:hover {
+    transform: scale(1.1);
+}
+
+.formalities__button:hover {
+    background-color: #0056b3;
+}
+
+.edit-mode {
+    padding: 10px;
+    background-color: #268014;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: MerriweatherSans, sans-serif;
+    font-size: 16px;
+    width: 200px;
+    margin-bottom: 20px;
+    transition: transform 0.5s ease;
+}
+
+.edit-mode:hover {
+    transform: scale(1.1);
+}
+
+.cancel-mode {
     padding: 10px;
     background-color: #ad0000;
     color: #ffffff;
@@ -65,18 +117,20 @@
     font-size: 16px;
     width: 200px;
     margin-bottom: 20px;
+    transition: transform 0.5s ease;
 }
 
-.formalities__button:hover {
-    background-color: #0056b3;
+.cancel-mode:hover {
+    transform: scale(1.1);
 }
 
-.formalities__info {
+
+
+.formalities__info_desktop {
     display: flex;
     flex-direction: column;
     margin-top: 20px;
     gap: 3%;
-    width: 550px;
 }
 
 /* Tarjeta individual de cada trámite */
@@ -88,12 +142,17 @@
     height: 100px;
     align-items: center;
     background-color: #fff;
+    cursor: pointer;
     border-radius: 8px;
     border: 1px solid #e0e0e0;
     font-size: 12px;
     font-family: MerriweatherSans, sans-serif;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.5s ease;
+}
 
+.formalirties__card:hover {
+    transform: scale(1.1);
 }
 
 .formalirties__card p {
@@ -104,7 +163,7 @@
     line-height: 1.4;
 }
 
-.buttons{
+.buttons {
     display: flex;
     margin-bottom: 5px;
     gap: 2%;
@@ -118,6 +177,11 @@
     cursor: pointer;
     font-family: MerriweatherSans, sans-serif;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.5s ease;
+}
+
+.Edit:hover {
+    transform: scale(1.1);
 }
 
 .buttons .Delete {
@@ -128,36 +192,81 @@
     cursor: pointer;
     font-family: MerriweatherSans, sans-serif;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.5s ease;
 }
 
-/* Contenedor para los botones de acción */
-.formalities__actions {
-    display: flex;
-    gap: 12px;
+.Delete:hover {
+    transform: scale(1.1);
 }
 
-/* Botones de acción (editar y eliminar) */
-.formalities__actions button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 1.4rem;
-    /* Tamaño ajustado para hacerlos un poco más grandes */
-    color: #6c757d;
-    transition: color 0.2s;
-    width: 30px;
-    height: 30px;
+.Content__CrdsDesktop{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-radius: 50%;
-    /* Forma circular */
+    gap: 10px;
 }
 
-.formalities__actions button:hover {
-    color: #004B84;
-    /* Color de hover */
-    background-color: rgba(0, 75, 132, 0.1);
-    /* Añade un fondo suave al hacer hover */
+/* Tarjeta individual de cada trámite */
+.formalirties__card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 320px;
+    height: 120px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+    font-size: 14px;
+    font-family: MerriweatherSans, sans-serif;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
+.formalirties__card p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #333;
+    line-height: 1.5;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.buttons .Edit {
+    background-color: #268014;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: MerriweatherSans, sans-serif;
+    font-size: 14px;
+    padding: 8px 16px;
+    transition: background-color 0.3s;
+}
+
+.buttons .Edit:hover {
+    background-color: #1f6a10;
+}
+
+.buttons .Delete {
+    background-color: #C11A36;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: MerriweatherSans, sans-serif;
+    font-size: 14px;
+    padding: 8px 16px;
+    transition: background-color 0.3s;
+}
+
+.buttons .Delete:hover {
+    background-color: #b10707;
+}
