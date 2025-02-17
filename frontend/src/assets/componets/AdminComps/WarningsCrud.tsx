@@ -198,6 +198,7 @@ const WarningCrud: React.FC = () => {
                                 <button
                                     className="crud__button--edit"
                                     onClick={() => handleEdit(warning)}
+                                    data-testid="button-edit-warnings-list"
                                 >
                                     Editar
                                 </button>
