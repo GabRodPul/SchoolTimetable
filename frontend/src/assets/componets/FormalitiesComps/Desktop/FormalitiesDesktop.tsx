@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './FormalitiesDesktopStiles.css';
+import './FormalitiesDesktopStyles.css';
 import { Id, WarningData } from '#common/@types/models';
 import { useApi } from '#src/api/ApiContext';
 import { ApiRts } from '#common/@enums/http';
