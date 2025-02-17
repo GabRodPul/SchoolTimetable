@@ -199,6 +199,13 @@
     transform: scale(1.1);
 }
 
+.Content__CrdsDesktop{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
 
 /* Tarjeta individual de cada trámite */
 .formalirties__card {

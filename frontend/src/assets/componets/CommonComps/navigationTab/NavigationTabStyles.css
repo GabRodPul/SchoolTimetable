@@ -41,6 +41,7 @@
     color: #6c757d;
     border-bottom: 1px solid #e0e0e0;
     margin-left: 250px;
+    /* position: absolute; */
 }
 
 .navigationTab__currentPage {

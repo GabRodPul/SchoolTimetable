@@ -184,10 +184,10 @@ const FormalitiesDesktop: React.FC = () => {
               <button type="submit" className={`formalities__Deskbutton ${selectedWarning ? "edit-mode" : "create-mode"}`} >
                 {selectedWarning ? "Editar" : "Crear"}
               </button>
-              {selectedWarning && 
-              <button onClick={() => setSelectedWarning(null)} className="cancel-mode">
-                Cancelar
-              </button>}
+              {selectedWarning &&
+                <button onClick={() => setSelectedWarning(null)} className="cancel-mode">
+                  Cancelar
+                </button>}
             </form>
           </div>
         </div>
@@ -196,28 +196,30 @@ const FormalitiesDesktop: React.FC = () => {
           <div className="formalitiesInfo__title">
             <h2>Trámites Realizados</h2>
           </div>
-          {(warning.state === FetchState.Success || warning.state === FetchState.SuccessMany) &&
-            Array.isArray(warning.data) && warning.data.map((warning) => {
-              const warningListed = warning as Warning;
-              return (
-                <div key={warningListed.id} className='formalirties__card'>
-                  <p>
-                    {warningListed.description}
-                  </p>
-                  <p>
-                    {warningListed.startDate} - {warningListed.endDate}
-                  </p>
-                  <p>
-                    {warningListed.startHour} - {warningListed.endHour}
-                  </p>
-                  <div className="buttons">
-                    <button onClick={() => handleEdit(warningListed)} className='Edit'>Editar</button>
-                    <button onClick={() => handleDelete({ id: warningListed.id })} className='Delete'>Eliminar</button>
+          <div className='Content__CrdsDesktop'>
+            {(warning.state === FetchState.Success || warning.state === FetchState.SuccessMany) &&
+              Array.isArray(warning.data) && warning.data.map((warning) => {
+                const warningListed = warning as Warning;
+                return (
+                  <div key={warningListed.id} className='formalirties__card'>
+                    <p>
+                      {warningListed.description}
+                    </p>
+                    <p>
+                      {warningListed.startDate} - {warningListed.endDate}
+                    </p>
+                    <p>
+                      {warningListed.startHour} - {warningListed.endHour}
+                    </p>
+                    <div className="buttons">
+                      <button onClick={() => handleEdit(warningListed)} className='Edit'>Editar</button>
+                      <button onClick={() => handleDelete({ id: warningListed.id })} className='Delete'>Eliminar</button>
+                    </div>
                   </div>
-                </div>
-              );
-            })
-          }
+                );
+              })
+            }
+          </div>
         </div>
       </div>
     </div>
