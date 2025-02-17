@@ -107,7 +107,7 @@ const FormalitiesDesktop: React.FC = () => {
     return (
 
         <div className="formalities">
-            <div className="formalities__content">
+            <div className="formalities__content_desktop">
                 <div className="formalities__makeForm">
                     <div className="formalitiesForm__title">
                         <h2>Realizar Trámites</h2>
