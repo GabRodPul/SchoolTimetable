@@ -74,7 +74,7 @@ describe("assets/componets/FormalitiesCopms/Desktop/FormalitiesDesktop.tsx - for
     fireEvent.input(endDatePicker, { target: { value: "06/20/2000" } });
   });
 
-  test(" 3- Should display an alert if any required field is missing", () => {
+  test(" 3- Should display an alert if any required field is missing", async () => {
     // Configuramos el espía para window.alert
     const alertSpy = vi.spyOn(window, "alert").mockImplementation(() => { });
 
@@ -82,8 +82,11 @@ describe("assets/componets/FormalitiesCopms/Desktop/FormalitiesDesktop.tsx - for
     render(<TestApp init="/formalities" />);
 
     // Simula el envío del formulario sin completar los campos
-    const submitButton = screen.getByText(/Crear/i);
-    fireEvent.click(submitButton);
+    const submitButton = screen.getByTestId("warning-test-form");
+
+    await act(async () => {
+      fireEvent.submit(submitButton);
+    });
 
     // Verifica que se haya llamado a window.alert con el mensaje esperado
     expect(alertSpy).toHaveBeenCalledWith("Todos los campos son obligatorios.");
