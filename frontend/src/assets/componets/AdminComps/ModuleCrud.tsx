@@ -4,12 +4,13 @@ import { ModuleData, Id } from "#common/@types/models";
 import { FetchState } from "../../../types/api";
 import { ApiRts } from "#common/@enums/http";
 import './CrudsStyles.css';
+import { useScrollAnimation } from "./animationFade";
 
 type Module = ModuleData & Id;
 
 const ModuleCrud: React.FC = () => {
     const [modules, api] = useApi<Module>(ApiRts.Modules);
-
+    const ref = useScrollAnimation();
     const [selectedModule, setSelectedModule] = useState<Module | null>(null);
     const [formState, setFormState] = useState<Module>({ id: 0, name: "" });
 
@@ -73,7 +74,7 @@ const ModuleCrud: React.FC = () => {
     if (modules.state === FetchState.Error) return <p>Error: {modules.error?.message}</p>;
 
     return (
-        <div className="crud__container">
+        <div ref={ref} className="crud__container animation">
             <h1 className="crud__title">Gestión de Módulos</h1>
 
             <div className="crud__form">
@@ -108,7 +109,7 @@ const ModuleCrud: React.FC = () => {
             </div>
 
             <div>
-                <h2>Listado de Módulos</h2>
+                <h2 className="crud__list_title">Listado de Módulos</h2>
                 <div className="crud__list">
                     {(modules.state === FetchState.Success || modules.state === FetchState.SuccessMany) &&
                         Array.isArray(modules.data) &&

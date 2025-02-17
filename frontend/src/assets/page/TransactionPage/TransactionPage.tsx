@@ -96,7 +96,7 @@ function TransactionsPage() {
                 { transactShown && <RiArrowRightSLine />}
                 </button>
               </div>
-                <h2>Trámites</h2>
+                <h2 className="H2__Transcition">Trámites</h2>
                 <div className="transactions__entries" ref={transactRef}>
                 { 
                   transactions.map(t => (

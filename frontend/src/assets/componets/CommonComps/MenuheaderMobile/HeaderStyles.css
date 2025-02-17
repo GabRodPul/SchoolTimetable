@@ -16,6 +16,13 @@
     color: #000000;
 }
 
+.navigationTab__currentPageMobile{
+    margin-left: 20px;
+    font-size: 22px;
+    font-family: Lexend, sans-serif;
+    color: #000000;
+}
+
 .dropdown-menu {
     position: absolute;
     top: 100%;

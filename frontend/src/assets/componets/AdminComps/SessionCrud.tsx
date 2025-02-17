@@ -4,12 +4,14 @@ import { SessionData, Id } from "#common/@types/models";
 import { FetchState } from "../../../types/api";
 import { ApiRts } from "#common/@enums/http";
 import { WorkDay } from "../../../../../common/@enums/models/index";
+import { useScrollAnimation } from "./animationFade";
 import './CrudsStyles.css';
 import { translate } from "../../../_translation";
 
 type Session = SessionData & Id;
 
 const SessionCrud: React.FC = () => {
+    const ref = useScrollAnimation();
     const [sessions, api] = useApi<Session>(ApiRts.Session);
 
     const [selectedSession, setSelectedSession] = useState<Session | null>(null);
@@ -71,7 +73,7 @@ const SessionCrud: React.FC = () => {
     }, []);
 
     return (
-        <div className="crud__container">
+        <div ref={ref} className="crud__container animation">
             <h1 className="crud__title">Gestión de Sesiones</h1>
 
             <div className="crud__form">
@@ -127,7 +129,7 @@ const SessionCrud: React.FC = () => {
                 </form>
             </div>
 
-            <h2>Listado de Sesiones</h2>
+            <h2 className="crud__list_title">Listado de Sesiones</h2>
             <div className="crud__list">
                 {(sessions.state === FetchState.Success || sessions.state === FetchState.SuccessMany) &&
                     Array.isArray(sessions.data) &&

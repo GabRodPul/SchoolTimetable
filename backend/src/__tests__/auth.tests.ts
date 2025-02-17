@@ -2,7 +2,7 @@ import { describe, expect, test } from "@jest/globals";
 import { hasRolePermissions, isAuthenticated, login, signin } from "../controllers/auth";
 // import { envvars } from "../env";
 import request from "supertest"
-import { app } from "../index";
+import { initApp } from "../index";
 import { UserData } from "#common/@types/models";
 import { UserRole } from "#common/@enums/models";
 import { envvars } from "#src/env";
@@ -30,24 +30,31 @@ const epTestData: UserData = {
 
 let MIDWR_TOKEN = "";
 let ADMIN_TOKEN = "";
+let apiApp = initApp(false);  // api
+// let viewsApp = initApp(true); // views
 
-beforeAll(async () => {{
-    const data = await DB.users.findOne({ 
+beforeAll(async () => {
+  try {
+    const aData = await DB.users.findOne({ 
       where: { email: envvars.ADMIN_EMAIL },
       raw: true
     });
-    ADMIN_TOKEN = utils.generateToken(data);
-  } {
-    const data = await DB.users.create({
+    ADMIN_TOKEN = utils.generateToken(aData);
+    
+    const uData = await DB.users.create({
       ...mwTestData,
       password: bcrypt.hashSync(mwTestData.password, 10)
     } as any);
-    MIDWR_TOKEN = utils.generateToken(data);
-}});
+    MIDWR_TOKEN = utils.generateToken(uData);
+  } catch (err: any) {
+    console.log(err);
+  }
+});
 
 describe("controllers/auth.ts - Endpoints", () => {
   test("POST /api/signin - Empty body", async () => {
-    const res = await request(app)
+    console.log("what");
+    const res = await request(apiApp)
       .post("/api/signin")
       .send({})
       .set("Access-Control-Allow-Origin", "*")
@@ -58,7 +65,7 @@ describe("controllers/auth.ts - Endpoints", () => {
   });
 
   test("POST /api/signin - Missing more than 1 field", async () => {
-    const res = await request(app)
+    const res = await request(apiApp)
       .post("/api/signin")
       .send({ email: epTestData.email, password: epTestData.password })
       .set("Access-Control-Allow-Origin", "*")
@@ -70,7 +77,7 @@ describe("controllers/auth.ts - Endpoints", () => {
   });
 
   test("POST /api/signin - Should sign up", async () => {
-    const res = await request(app)
+    const res = await request(apiApp)
       .post("/api/signin")
       .send(epTestData)
       .set("Access-Control-Allow-Origin", "*")
@@ -81,7 +88,7 @@ describe("controllers/auth.ts - Endpoints", () => {
   });
 
   test("POST /api/login - Empty body", async () => {
-    const res = await request(app)
+    const res = await request(apiApp)
       .post("/api/login")
       .send({})
       .set("Access-Control-Allow-Origin", "*")
@@ -92,7 +99,7 @@ describe("controllers/auth.ts - Endpoints", () => {
   });
 
   test("POST /api/login - Wrong password", async () => {
-    const res = await request(app)
+    const res = await request(apiApp)
       .post("/api/login")
       .send({ email: epTestData.email, password: "___asdfghjkl" })
       .set("Access-Control-Allow-Origin", "*")
@@ -103,7 +110,7 @@ describe("controllers/auth.ts - Endpoints", () => {
   });
 
   test("POST /api/login - Should log in", async () => {
-    const res = await request(app)
+    const res = await request(apiApp)
       .post("/api/login")
       .send({
         email:    epTestData.email,

@@ -1,9 +1,14 @@
+.AdminPage__Cruds{
+    margin-left: 200px;
+    margin-right: 300px;
+}
+
 .mobileAdmin__nav{
     display: none;
 }
 
 .AdminPage__Cruds{
-    margin-top: 80px;
+    margin-top: 40px;
 }
 
 @media (max-width: 1380px) {

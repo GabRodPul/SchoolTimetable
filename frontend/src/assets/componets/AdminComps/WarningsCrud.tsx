@@ -3,11 +3,13 @@ import { useApi } from "../../../api/ApiContext";
 import { WarningData, Id } from "#common/@types/models";
 import { FetchState } from "../../../types/api";
 import { ApiRts } from "#common/@enums/http";
+import { useScrollAnimation } from "./animationFade";
 import './CrudsStyles.css';
 
 type Warning = WarningData & Id;
 
 const WarningCrud: React.FC = () => {
+    const ref = useScrollAnimation();
     const [warnings, api] = useApi<Warning>(ApiRts.Warnings);
 
     const [selectedWarning, setSelectedWarning] = useState<Warning | null>(null);
@@ -95,7 +97,7 @@ const WarningCrud: React.FC = () => {
     };
 
     return (
-        <div className="crud__container">
+        <div ref={ref} className="crud__container animation">
             <h1 className="crud__title">Formulario de Avisos</h1>
 
             <div className="crud__form">
@@ -174,7 +176,7 @@ const WarningCrud: React.FC = () => {
                 </form>
             </div>
 
-            <h2>Listado de Avisos</h2>
+            <h2 className="crud__list_title">Listado de Avisos</h2>
             <div className="crud__list">
                 {(warnings.state === FetchState.Success || warnings.state === FetchState.SuccessMany) &&
                     Array.isArray(warnings.data) &&

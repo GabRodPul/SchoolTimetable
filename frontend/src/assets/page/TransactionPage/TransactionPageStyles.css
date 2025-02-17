@@ -112,7 +112,7 @@
         color: red;
         font-family: 'Lexend', sans-serif;
     } */
-    h2 { display: none; }
+    .H2__Transcition { display: none; }
 
     .toggle { 
         display: block;

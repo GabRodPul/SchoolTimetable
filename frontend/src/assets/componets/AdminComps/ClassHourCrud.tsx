@@ -4,11 +4,14 @@ import { ClassHourData, Id, SessionHour } from "#common/@types/models";
 import { FetchState } from "../../../types/api";
 import { ApiRts } from "#common/@enums/http";
 import { Turn } from "#common/@enums/models";
+import { useScrollAnimation } from "./animationFade";
 import './CrudsStyles.css';
 
 type ClassHour = ClassHourData & Id;
 
 const ClassHourCrud: React.FC = () => {
+
+    const ref = useScrollAnimation();
     const [classHours, api] = useApi<ClassHour>(ApiRts.ClassHour);
 
     const [selectedClassHour, setSelectedClassHour] = useState<ClassHour | null>(null);
@@ -91,8 +94,8 @@ const ClassHourCrud: React.FC = () => {
     if (classHours.state === FetchState.Error) return <p>Error: {classHours.error?.message}</p>;
 
     return (
-        <div className="crud__container">
-            <h1 className="crud__title">Gestión de Horas de Clase</h1>
+        <div ref={ref} className="crud__container animation">
+            <h1  className="crud__title ">Gestión de Horas de Clase</h1>
 
             <div className="crud__form">
                 <h2>{selectedClassHour ? "Editar Class Hour" : "Crear Class Hour"}</h2>
@@ -107,6 +110,7 @@ const ClassHourCrud: React.FC = () => {
                         value={formState.turn}
                         onChange={handleTurnChange}
                         className="crud__select"
+                        aria-label="DayPicker"
                     >
                         <option value={Turn.Morning}>Mañana</option>
                         <option value={Turn.Afternoon}>Tarde</option>
@@ -118,6 +122,7 @@ const ClassHourCrud: React.FC = () => {
                         value={formState.sessionHour}
                         onChange={handleSessionHourChange}
                         className="crud__select"
+                        aria-label="HourPicker"
                     >
                         {[1, 2, 3, 4, 5, 6].map((hour) => (
                             <option key={hour} value={hour}>
@@ -159,8 +164,8 @@ const ClassHourCrud: React.FC = () => {
                 </form>
             </div>
 
+            <h2 className="crud__list_title">Listado de Horas de Clase</h2>
             <div className="crud__list">
-                <h2>Listado de Horas de Clase</h2>
                 {(classHours.state === FetchState.Success || classHours.state === FetchState.SuccessMany) &&
                     Array.isArray(classHours.data) && classHours.data.map((classHour) => (
                         <div key={classHour.id} className="crud__item">
