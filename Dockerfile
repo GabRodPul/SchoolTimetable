@@ -10,6 +10,7 @@ WORKDIR /usr/src/app
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
+COPY ./.env /usr/src
 COPY backend/package*.json /usr/src/app/
 
 RUN npm install
@@ -31,6 +32,8 @@ EXPOSE 8080
 # ENTRYPOINT [ "npm", "start" ]
 
 # CMD [ "node", "start"  ]
+RUN [ "npm", "run", "db:migrate:all" ]
+RUN [ "npm", "run", "db:seed:all" ]
 CMD ["npm", "run", "start" ]
 # ENTRYPOINT [ "node", "--es-module-specifier-resolution=node", "dist/backend/src/index.js" ]
 

@@ -2,7 +2,7 @@ import { Dialect } from "sequelize";
 import { envvars } from "../env";
 
 const dbConfig = Object.freeze({
-    HOST:       "localhost",
+    HOST:       envvars.BEND_DB_HOST!,
     USER:       envvars.BEND_DB_USERNAME!,
     PASSWORD:   envvars.BEND_DB_PASSWORD!,
     DB:         envvars.BEND_DB_NAME!,
