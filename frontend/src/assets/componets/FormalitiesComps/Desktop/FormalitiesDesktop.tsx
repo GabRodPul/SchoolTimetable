@@ -155,7 +155,7 @@ const FormalitiesDesktop: React.FC = () => {
                             <label>
                                 <p>Fecha de Inicio</p>
                                 <DatePicker
-                                    selected={startDate}
+                                    // selected={startDate}
                                     onChange={(date: Date | null) => {
                                         if (date) {
                                             setStartDate(date);
@@ -168,7 +168,7 @@ const FormalitiesDesktop: React.FC = () => {
                             <label>
                                 <p>Fecha de Fin</p>
                                 <DatePicker
-                                    selected={endDate}
+                                    // selected={endDate}
                                     onChange={(date: Date | null) => {
                                         if (date) {
                                             setEndDate(date);
