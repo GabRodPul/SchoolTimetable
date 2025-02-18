@@ -30,7 +30,7 @@ export const ClassHourViewsController = Object.freeze({
 
             const newClassHour = { ...req.body };
             await ClassHours.create(newClassHour);
-            res.redirect('/classHours/index');
+            res.redirect('/classHours');
         } catch (err: any) {
             res.render("error", computeError(err, "Some error occurred while creating the User."));
         }
@@ -91,7 +91,9 @@ export const ClassHourViewsController = Object.freeze({
             }
 
             console.log("ClassHour successfully updated.");
+            
             res.status(200).send({ message: "ClassHour successfully updated." });
+            res.redirect('/classHours');
         } catch (err: any) {
             console.error("Error during update:", err);
             res.status(500).send({ error: err.message });
