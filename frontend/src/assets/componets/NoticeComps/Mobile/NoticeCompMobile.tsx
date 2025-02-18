@@ -111,7 +111,7 @@ const NoticeMobile: React.FC = () => {
         <div>
             <div className="noticesPage__Mobile">
                 <div className="noticesPageMobile__notifications">
-                    <div className="noticesPage__title">
+                    <div className="formalitiesMobileForm__title">
                         <h2 className='title__NoticesTitle'>Notificaciones</h2>
                         <CiMenuKebab onClick={toggleMenu1} className="menu-icon" />
                     </div>
