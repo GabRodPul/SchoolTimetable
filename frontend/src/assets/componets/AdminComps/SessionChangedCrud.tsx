@@ -99,6 +99,7 @@ const SessionChangedCrud: React.FC = () => {
                         value={formState.sessionId}
                         onChange={handleInputChange}
                         className="crud__input"
+                        required
                     />
                     <input
                         type="number"
@@ -107,6 +108,7 @@ const SessionChangedCrud: React.FC = () => {
                         value={formState.classHourId}
                         onChange={handleInputChange}
                         className="crud__input"
+                        required
                     />
                     <select
                         name="day"
@@ -114,6 +116,7 @@ const SessionChangedCrud: React.FC = () => {
                         onChange={handleInputChange}
                         className="crud__input"
                         aria-label="DayPicker"
+                        required
                     >
                         {Object.values(WorkDay).map(day => (
                             <option key={day} value={day}>{translate.workDay(day)}</option>
@@ -126,6 +129,7 @@ const SessionChangedCrud: React.FC = () => {
                         value={formState.startDate}
                         onChange={handleInputChange}
                         className="crud__input"
+                        required
                     />
                     <input
                         type="date"
@@ -134,6 +138,7 @@ const SessionChangedCrud: React.FC = () => {
                         value={formState.endDate}
                         onChange={handleInputChange}
                         className="crud__input"
+                        required
                     />
                     <button type="submit" className="crud__button">
                         {selectedSession ? "Editar" : "Crear"}

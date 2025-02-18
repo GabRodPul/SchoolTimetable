@@ -97,6 +97,7 @@ const UserCrud: React.FC = () => {
                         value={formState.name}
                         onChange={handleInputChange}
                         className="crud__input"
+                        required
                     />
                     <input
                         type="email"
@@ -105,6 +106,7 @@ const UserCrud: React.FC = () => {
                         value={formState.email}
                         onChange={handleInputChange}
                         className="crud__input"
+                        required
                     />
                     <input
                         type="text"
@@ -113,6 +115,7 @@ const UserCrud: React.FC = () => {
                         value={formState.phoneNumber}
                         onChange={handleInputChange}
                         className="crud__input"
+                        required
                     />
                     <button type="submit" className="crud__button">
                         {selectedUser ? "Editar" : "Crear"}
