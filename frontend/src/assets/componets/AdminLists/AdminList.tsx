@@ -4,6 +4,7 @@ import { FetchState } from "#src/types/api";
 import { ApiRts } from "#common/@enums/http";
 import AdminModal from "../AdminComps/ModalForm";
 import { AiOutlinePlus } from "react-icons/ai";
+import { fieldTranslations } from "./fieldTranslations";
 
 export type AdminListProps<T> = {
   buttonName: string;
@@ -27,8 +28,10 @@ export function AdminList<T>(props: AdminListProps<T>) {
         <thead>
           <tr>
             {props.fields.map((f, index) => {
-              const firstLetter = (f as string)[0].toUpperCase();
-              const rest = (f as string).substring(1);
+              // Usamos fieldTranslations para obtener la traducción de cada campo
+              const translatedField = fieldTranslations[f as keyof typeof fieldTranslations] || (f as string);
+              const firstLetter = translatedField[0].toUpperCase();
+              const rest = translatedField.substring(1);
               return (
                 <th key={f as string} className={`col-index-${index}`}>
                   {firstLetter + rest}
@@ -64,8 +67,6 @@ export function AdminList<T>(props: AdminListProps<T>) {
               </tr>
             ))}
         </tbody>
-
-
       </table>
 
       <AdminModal<T>
