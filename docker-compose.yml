@@ -30,7 +30,7 @@ services:
       - app-network
   api:
     image: school_api
-    build: ./  #aquí iría backend
+    build: ./backend  #aquí iría backend
     env_file:
       - .env
     ports: 
@@ -49,7 +49,7 @@ services:
   app:
     image: bluecity_app
     tty: true
-    build: ./  #aquí iría frontend
+    build: ./frontend  #aquí iría frontend
     env_file:
       - .env
     ports: 

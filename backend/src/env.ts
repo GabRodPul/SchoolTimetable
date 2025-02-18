@@ -4,7 +4,8 @@ import { getEnv } from "#common/get-env"
 import { enumStrVals } from "./utils/data";
 import { Envvars, NodeEnv } from "#common/@types/env"
 
-const path = `${__dirname}/../../.env`
+// const path = `${__dirname}/../../.env`
+const path = `${__dirname}/../.env`
 
 config({ path });
 console.log( `Loading enviroment NODE_ENV="`+process.env.NODE_ENV+`"...` );

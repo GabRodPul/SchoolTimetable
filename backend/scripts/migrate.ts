@@ -83,17 +83,32 @@ const migrations = async () => {
       "mysql":    { connFn: mysqlConn, execFn: "execute" }
     }[dbConfig.dialect as "mariadb" | "mysql"]; 
 
-    const conn = await query.connFn(poolArgs as any);
-    try {
-      if (arg === Args.MigrateAll) {
-        await conn.query(`DROP DATABASE IF EXISTS ${dbConfig.DB}`);
-      }
+    if (dbConfig.dialect === "mariadb") {
+      const conn = await mariaConn(poolArgs as any);
+      try {
+        if (arg === Args.MigrateAll) {
+          await conn.query(`DROP DATABASE IF EXISTS ${dbConfig.DB}`);
+        }
 
-      await conn.query(`CREATE DATABASE IF NOT EXISTS ${dbConfig.DB}`);
-    } catch (err: any) {
-      console.log(err);
-    } finally {
-      if (conn) await conn.end();
+        await conn.query(`CREATE DATABASE IF NOT EXISTS ${dbConfig.DB}`);
+      } catch (err: any) {
+        console.log(err);
+      } finally {
+        if (conn) await conn.end();
+      }
+    } else {
+      const conn = await mysqlConn(poolArgs as any);
+      try {
+        if (arg === Args.MigrateAll) {
+          await conn.query(`DROP DATABASE IF EXISTS ${dbConfig.DB}`);
+        }
+
+        await conn.query(`CREATE DATABASE IF NOT EXISTS ${dbConfig.DB}`);
+      } catch (err: any) {
+        console.log(err);
+      } finally {
+        if (conn) await conn.end();
+      }
     }
   }
 
