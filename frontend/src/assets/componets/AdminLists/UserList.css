@@ -128,3 +128,19 @@ table tr td.userlist__emptyerr {
     border: 1px solid #f5c6cb;
     border-radius: 4px;
 }
+
+@media (max-width: 1600px) {
+
+    .userlist__usertable th[class*="col-index-"]:not(.col-index-0):not(.col-index-1),
+    .userlist__usertable td[class*="col-index-"]:not(.col-index-0):not(.col-index-1) {
+        display: none;
+    }
+}
+
+@media (max-width: 1070px) {
+
+    .userlist__usertable th[class*="col-index-"]:not(.col-index-1),
+    .userlist__usertable td[class*="col-index-"]:not(.col-index-1) {
+        display: none;
+    }
+}

@@ -26,12 +26,16 @@ export function AdminList<T>(props: AdminListProps<T>) {
       <table className="userlist__usertable">
         <thead>
           <tr>
-            {props.fields.map((f) => {
+            {props.fields.map((f, index) => {
               const firstLetter = (f as string)[0].toUpperCase();
               const rest = (f as string).substring(1);
-              return <th key={f as string}>{firstLetter + rest}</th>;
+              return (
+                <th key={f as string} className={`col-index-${index}`}>
+                  {firstLetter + rest}
+                </th>
+              );
             })}
-            <th>
+            <th className="col-actions">
               <button className="userlist__addbtn" onClick={() => setIsModalOpen(true)}>
                 <AiOutlinePlus /> Añadir {props.buttonName}
               </button>
@@ -43,8 +47,12 @@ export function AdminList<T>(props: AdminListProps<T>) {
             Array.isArray(fetchData.data) &&
             fetchData.data.map((d: T, index) => (
               <tr key={index}>
-                {props.fields.map((f) => <td key={f as string}>{d[f] as string}</td>)}
-                <td className="td__Buttons">
+                {props.fields.map((f, i) => (
+                  <td key={f as string} className={`col-index-${i}`}>
+                    {d[f] as string}
+                  </td>
+                ))}
+                <td className="td__Buttons col-actions">
                   <button className="userlist__editbtn" onClick={() => {
                     setSelectedItem(d);
                     setIsModalOpen(true);
@@ -56,14 +64,16 @@ export function AdminList<T>(props: AdminListProps<T>) {
               </tr>
             ))}
         </tbody>
+
+
       </table>
 
       <AdminModal<T>
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         selectedItem={selectedItem}
-        onCreate={(formState) => {/* lógica para crear */}}
-        onUpdate={(formState) => {/* lógica para actualizar */}}
+        onCreate={(formState) => {/* lógica para crear */ }}
+        onUpdate={(formState) => {/* lógica para actualizar */ }}
       >
         <props.FormComponent /> {/* El formulario dinámico */}
       </AdminModal>
