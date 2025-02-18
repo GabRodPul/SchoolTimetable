@@ -4,14 +4,12 @@ import { ClassHourData, Id, SessionHour } from "#common/@types/models";
 import { FetchState } from "../../../types/api";
 import { ApiRts } from "#common/@enums/http";
 import { Turn } from "#common/@enums/models";
-import { useScrollAnimation } from "./animationFade";
 import './CrudsStyles.css';
 
 type ClassHour = ClassHourData & Id;
 
 const ClassHourCrud: React.FC = () => {
 
-    const ref = useScrollAnimation();
     const [classHours, api] = useApi<ClassHour>(ApiRts.ClassHour);
 
     const [selectedClassHour, setSelectedClassHour] = useState<ClassHour | null>(null);
@@ -76,25 +74,25 @@ const ClassHourCrud: React.FC = () => {
         });
     };
 
-    const handleDelete = (id: Id) => {
-        api.delete(id).then(() => {
-            api.getAll();
-        }).catch((error) => {
-            console.error("Error al borrar la clase:", error);
-            alert("Hubo un error al borrar la clase. Intenta nuevamente.");
-        });
-    };
+    // const handleDelete = (id: Id) => {
+    //     api.delete(id).then(() => {
+    //         api.getAll();
+    //     }).catch((error) => {
+    //         console.error("Error al borrar la clase:", error);
+    //         alert("Hubo un error al borrar la clase. Intenta nuevamente.");
+    //     });
+    // };
 
-    const handleEdit = (classHour: ClassHour) => {
-        setSelectedClassHour(classHour);
-        setFormState(classHour);
-    };
+    // const handleEdit = (classHour: ClassHour) => {
+    //     setSelectedClassHour(classHour);
+    //     setFormState(classHour);
+    // };
 
     if (classHours.state === FetchState.Loading) return <p>Cargando...</p>;
     if (classHours.state === FetchState.Error) return <p>Error: {classHours.error?.message}</p>;
 
     return (
-        <div ref={ref} className="crud__container animation">
+        <div className="crud__container">
             <h1  className="crud__title ">Gestión de Horas de Clase</h1>
 
             <div className="crud__form">
@@ -164,7 +162,7 @@ const ClassHourCrud: React.FC = () => {
                 </form>
             </div>
 
-            <h2 className="crud__list_title">Listado de Horas de Clase</h2>
+            {/* <h2 className="crud__list_title">Listado de Horas de Clase</h2>
             <div className="crud__list">
                 {(classHours.state === FetchState.Success || classHours.state === FetchState.SuccessMany) &&
                     Array.isArray(classHours.data) && classHours.data.map((classHour) => (
@@ -189,7 +187,7 @@ const ClassHourCrud: React.FC = () => {
                         </div>
                     ))
                 }
-            </div>
+            </div> */}
         </div>
     );
 };

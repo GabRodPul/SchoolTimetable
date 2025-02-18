@@ -1,25 +1,21 @@
-/* Style général pour un thème clair */
-.userlist {
+/* .userlist {
     display: flex;
-    justify-content: center; /* Centre horizontalement */
-    min-height: 10vh; /* Prend toute la hauteur de la page */
+    justify-content: center;
+    min-height: 10vh;
     margin: 0px 100px;
-    overflow-y: auto;
-    max-height: 300px;
     border: 1px solid #ddd;
     border-radius: 6px;
-}
+} */
 
-/* Table de la liste */
 .userlist__usertable {
-    width: 70%; /* Ajustez la largeur de la table */
+    width: 70%;
     border-collapse: collapse;
-    background-color: #ffffff; /* Couleur de fond de la table */
-    border-radius: 8px; /* Coins arrondis */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Ombre pour un effet moderne */
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
 }
-/* Table générale */
+
 table.userlist__usertable {
     width: 98%;
     border-collapse: collapse;
@@ -30,19 +26,17 @@ table.userlist__usertable {
     overflow: hidden;
 }
 
-/* En-tête de la table */
 table.userlist__usertable th {
-    background-color:  #0056b3; /* Bleu clair */
+    background-color: #0056b3;
     color: #ffffff;
-    text-align: center; /* Aligne le texte au centre */
-    padding: 16px; /* Ajoute un espacement uniforme */
+    text-align: center;
+    padding: 16px;
     font-size: 16px;
     font-weight: bold;
-    white-space: nowrap; /* Empêche le texte de s'étirer ou de se casser sur plusieurs lignes */
-    border-bottom: 2px solid #e0e0e0; /* Ligne de séparation pour plus de lisibilité */
+    white-space: nowrap;
+    border-bottom: 2px solid #e0e0e0;
 }
 
-/* Corps de la table */
 .userlist__usertable td {
     padding: 16px;
     border-bottom: 1px solid #e0e0e0;
@@ -51,18 +45,15 @@ table.userlist__usertable th {
     text-align: center;
 }
 
-/* Lignes alternées */
 table.userlist__usertable tr:nth-child(even) {
-    background-color: #f9fbfc; /* Gris très clair */
+    background-color: #f9fbfc;
 }
 
-/* Animation au survol */
 table.userlist__usertable tr:hover {
-    background-color: #eef3fa; /* Bleu très léger */
+    background-color: #eef3fa;
     transition: background-color 0.3s ease;
 }
 
-/* Style des rôles (dernière colonne) */
 table.userlist__usertable td {
     font-weight: bold;
     text-transform: capitalize;
@@ -70,7 +61,6 @@ table.userlist__usertable td {
     color: #4a90e2;
 }
 
-/* Boutons d'action (édition, suppression) */
 table.userlist__usertable td .action-icon {
     cursor: pointer;
     margin: 0 5px;
@@ -91,11 +81,13 @@ table.userlist__usertable td .action-icon {
 }
 
 .userlist__addbtn:hover {
-    background-color:whitesmoke;
+    background-color: whitesmoke;
 }
 
+
+
 .userlist__editbtn {
-    background-color: #ffc107;
+    background-color: #268014;
     color: white;
     padding: 6px 12px;
     margin-right: 15px;
@@ -104,14 +96,15 @@ table.userlist__usertable td .action-icon {
     cursor: pointer;
     font-size: 12px;
     transition: background-color 0.3s ease;
+    width: 90px;
 }
 
 .userlist__editbtn:hover {
-    background-color: #1976d2;
+    background-color: #1c6d0c;
 }
 
 .userlist__deletebtn {
-    background-color: #f44336;
+    background-color: #C11A36;
     color: white;
     padding: 6px 12px;
     border: none;
@@ -119,35 +112,35 @@ table.userlist__usertable td .action-icon {
     cursor: pointer;
     font-size: 12px;
     transition: background-color 0.3s ease;
+    width: 90px;
 }
 
 .userlist__deletebtn:hover {
-    background-color: #d32f2f;
+    background-color: #b10707;
 }
-table tr td.userlist__emptyerr{
-    color: #721c24; /* Text color */
-    background-color: #f8d7da; /* Light red background */
+
+table tr td.userlist__emptyerr {
+    color: #721c24;
+    background-color: #f8d7da;
     font-weight: bold;
-    text-align: center; /* Center-align the text */
-    padding: 12px; /* Add some padding */
-    border: 1px solid #f5c6cb; /* Border color matching the background */
-    border-radius: 4px; /* Optional: Rounded corners */
-}
-
-
-.userlist::-webkit-scrollbar {
-    width: 10px;
-}
-
-.userlist::-webkit-scrollbar-thumb {
-    background-color: #ccc;
+    text-align: center;
+    padding: 12px;
+    border: 1px solid #f5c6cb;
     border-radius: 4px;
 }
 
-.userlist::-webkit-scrollbar-thumb:hover {
-    background-color: #aaa;
+@media (max-width: 1600px) {
+
+    .userlist__usertable th[class*="col-index-"]:not(.col-index-0):not(.col-index-1),
+    .userlist__usertable td[class*="col-index-"]:not(.col-index-0):not(.col-index-1) {
+        display: none;
+    }
 }
 
-.userlist::-webkit-scrollbar-track {
-    background-color: #f9f9f9;
+@media (max-width: 1070px) {
+
+    .userlist__usertable th[class*="col-index-"]:not(.col-index-1),
+    .userlist__usertable td[class*="col-index-"]:not(.col-index-1) {
+        display: none;
+    }
 }

@@ -67,19 +67,19 @@ const IGTModuleCrud: React.FC = () => {
             });
     };
 
-    const handleDelete = (id: Id) => {
-        api.delete(id)
-            .then(() => api.getAll())
-            .catch((error) => {
-                console.error("Error al borrar el módulo:", error);
-                alert("Hubo un error al borrar el módulo. Intenta nuevamente.");
-            });
-    };
+    // const handleDelete = (id: Id) => {
+    //     api.delete(id)
+    //         .then(() => api.getAll())
+    //         .catch((error) => {
+    //             console.error("Error al borrar el módulo:", error);
+    //             alert("Hubo un error al borrar el módulo. Intenta nuevamente.");
+    //         });
+    // };
 
-    const handleEdit = (module: IGTModule) => {
-        setSelectedModule(module);
-        setFormState(module);
-    };
+    // const handleEdit = (module: IGTModule) => {
+    //     setSelectedModule(module);
+    //     setFormState(module);
+    // };
 
     if (modules.state === FetchState.Loading) return <p>Cargando...</p>;
     if (modules.state === FetchState.Error) return <p>Error: {modules.error?.message}</p>;
@@ -143,7 +143,7 @@ const IGTModuleCrud: React.FC = () => {
                 </form>
             </div>
 
-            <div>
+            {/* <div>
                 <h2 className="crud__list_title">Listado de Módulos IGP</h2>
                 <div className="crud__list">
                     {(modules.state === FetchState.Success || modules.state === FetchState.SuccessMany) &&
@@ -173,7 +173,7 @@ const IGTModuleCrud: React.FC = () => {
                             </div>
                         ))}
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 };

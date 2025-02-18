@@ -150,7 +150,7 @@ const SessionChangedCrud: React.FC = () => {
                 </form>
             </div>
 
-            <div>
+            {/* <div>
                 <h2 className="crud__list_title">Listado de Cambios de Sesión</h2>
                 <div className="crud__list">
                     {(sessions.state === FetchState.Success || sessions.state === FetchState.SuccessMany) &&
@@ -178,7 +178,7 @@ const SessionChangedCrud: React.FC = () => {
                             );
                         })}
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 };

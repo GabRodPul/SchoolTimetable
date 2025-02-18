@@ -129,7 +129,7 @@ const UserCrud: React.FC = () => {
                 </form>
             </div>
 
-            <h2 className="crud__list_title">Listado de Usuarios</h2>
+            {/* <h2 className="crud__list_title">Listado de Usuarios</h2>
             <div className="crud__list">
 
                 {(users.state === FetchState.Success || users.state === FetchState.SuccessMany) &&
@@ -148,7 +148,7 @@ const UserCrud: React.FC = () => {
                             </div>
                         );
                     })}
-            </div>
+            </div> */}
         </div>
     );
 };
