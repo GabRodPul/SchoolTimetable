@@ -103,6 +103,7 @@ const IGTModuleCrud: React.FC = () => {
                         value={formState.teacherId}
                         onChange={handleInputChange}
                         className="crud__input"
+                        required
                     />
                     <input
                         type="number"
@@ -111,6 +112,7 @@ const IGTModuleCrud: React.FC = () => {
                         value={formState.groupId}
                         onChange={handleInputChange}
                         className="crud__input"
+                        required
                     />
                     <input
                         type="number"
@@ -119,6 +121,7 @@ const IGTModuleCrud: React.FC = () => {
                         value={formState.moduleId}
                         onChange={handleInputChange}
                         className="crud__input"
+                        required
                     />
                     <input
                         type="number"
@@ -127,6 +130,7 @@ const IGTModuleCrud: React.FC = () => {
                         value={formState.weeklyHours}
                         onChange={handleInputChange}
                         className="crud__input"
+                        required
                     />
                     <button type="submit" className="crud__button">
                         {selectedModule ? "Editar" : "Crear"}

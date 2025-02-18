@@ -90,6 +90,7 @@ const SessionCrud: React.FC = () => {
                         onChange={handleInputChange}
                         className="crud__input"
                         aria-label="DayPicker"
+                        required
                     >
                         <option value="MONDAY">Lunes</option>
                         <option value="TUESDAY">Martes</option>
@@ -105,6 +106,7 @@ const SessionCrud: React.FC = () => {
                         value={formState.classHourId}
                         onChange={handleInputChange}
                         className="crud__input"
+                        required
                     />
                     <input
                         type="number"
@@ -113,6 +115,7 @@ const SessionCrud: React.FC = () => {
                         value={formState.igtModuleId}
                         onChange={handleInputChange}
                         className="crud__input"
+                        required
                     />
                     <button type="submit" className="crud__button">
                         {selectedSession ? "Editar" : "Crear"}

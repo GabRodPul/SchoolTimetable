@@ -109,6 +109,7 @@ const ClassHourCrud: React.FC = () => {
                         onChange={handleTurnChange}
                         className="crud__select"
                         aria-label="DayPicker"
+                        required
                     >
                         <option value={Turn.Morning}>Mañana</option>
                         <option value={Turn.Afternoon}>Tarde</option>
@@ -121,6 +122,7 @@ const ClassHourCrud: React.FC = () => {
                         onChange={handleSessionHourChange}
                         className="crud__select"
                         aria-label="HourPicker"
+                        required
                     >
                         {[1, 2, 3, 4, 5, 6].map((hour) => (
                             <option key={hour} value={hour}>
@@ -136,6 +138,7 @@ const ClassHourCrud: React.FC = () => {
                         value={formState.start}
                         onChange={handleInputChange}
                         className="crud__input"
+                        required
                     />
 
                     <input
@@ -145,6 +148,7 @@ const ClassHourCrud: React.FC = () => {
                         value={formState.end}
                         onChange={handleInputChange}
                         className="crud__input"
+                        required
                     />
 
                     <button type="submit" className="crud__button">

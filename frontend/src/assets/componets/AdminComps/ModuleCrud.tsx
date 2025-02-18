@@ -92,6 +92,7 @@ const ModuleCrud: React.FC = () => {
                         value={formState.name}
                         onChange={handleInputChange}
                         className="crud__input"
+                        required
                     />
                     <button type="submit" className="crud__button">
                         {selectedModule ? "Editar" : "Crear"}
