@@ -93,7 +93,7 @@ export const ClassHourViewsController = Object.freeze({
             console.log("ClassHour successfully updated.");
             
             res.status(200).send({ message: "ClassHour successfully updated." });
-            res.redirect('/classHours');
+            // res.redirect('/classHours');
         } catch (err: any) {
             console.error("Error during update:", err);
             res.status(500).send({ error: err.message });

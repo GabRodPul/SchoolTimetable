@@ -129,6 +129,7 @@ const FormalitiesDesktop: React.FC = () => {
                                     placeholder="Motivo de la ausencia"
                                     value={formState.description}
                                     onChange={handleInputChange}
+                                    required
                                 />
                             </label>
                             <label>
@@ -139,6 +140,7 @@ const FormalitiesDesktop: React.FC = () => {
                                     placeholder="Hora de inicio"
                                     value={formState.startHour}
                                     onChange={handleInputChange}
+                                    required
                                 />
                             </label>
 
@@ -150,6 +152,7 @@ const FormalitiesDesktop: React.FC = () => {
                                     placeholder="Hora de fin"
                                     value={formState.endHour}
                                     onChange={handleInputChange}
+                                    required
                                 />
                             </label>
                             <label>
@@ -163,6 +166,7 @@ const FormalitiesDesktop: React.FC = () => {
                                         }
                                     }}
                                     placeholderText='00/20/2000'
+                                    required
                                 />
                             </label>
                             <label>
@@ -176,6 +180,7 @@ const FormalitiesDesktop: React.FC = () => {
                                         }
                                     }}
                                     placeholderText='06/20/2000'
+                                    required
                                 />
                             </label>
                             <button type="submit" className={`formalities__Deskbutton ${selectedWarning ? "edit-mode" : "create-mode"}`}>

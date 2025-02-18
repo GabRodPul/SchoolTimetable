@@ -102,7 +102,7 @@ function NavigationTab() {
                             
                             <NavItem
                                 route="/profile"
-                                name="Profil"
+                                name="Perfil"
                                 icon={FaRegUser}
                                 role={UserRole.Admin}
                                 className="profileIcon"
@@ -110,7 +110,7 @@ function NavigationTab() {
 
                             <NavItem
                                 route="/admin"
-                                name="Configuration"
+                                name="Configuración"
                                 icon={GoGear}
                                 role={UserRole.Admin}
                                 className="settingsIcon"

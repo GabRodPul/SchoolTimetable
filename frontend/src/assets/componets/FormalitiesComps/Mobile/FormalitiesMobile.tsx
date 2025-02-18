@@ -184,16 +184,28 @@ const FormalitiesMobile: React.FC = () => {
                 <label>
                   <p>Fecha de Inicio</p>
                   <DatePicker
-                    selected={startDate} onChange={(date: any) =>
-                      setStartDate(date)}
+                    onChange={(date: Date | null) => {
+                      if (date) {
+                        setStartDate(date);
+                        setFormState(prev => ({ ...prev, startDate: date.toISOString().split("T")[0] }));
+                      }
+                    }}
+                    placeholderText='00/20/2000'
+                    required
                   />
                 </label>
                 <label>
                   <p>Fecha de Fin</p>
                   <DatePicker
-                    selected={endDate} onChange={(date: any) =>
-                      setEndDate(date)}
-
+                    // selected={endDate}
+                    onChange={(date: Date | null) => {
+                      if (date) {
+                        setEndDate(date);
+                        setFormState(prev => ({ ...prev, endDate: date.toISOString().split("T")[0] }));
+                      }
+                    }}
+                    placeholderText='06/20/2000'
+                    required
                   />
                 </label>
 
@@ -212,30 +224,30 @@ const FormalitiesMobile: React.FC = () => {
             <CiMenuKebab onClick={toggleMenu2} className="menu-icon" />
           </div>
           {/* {isFormalitiesForm && ( */}
-            <div className='Cards__InfoFormalitiesMobile'>
-              {(warning.state === FetchState.Success || warning.state === FetchState.SuccessMany) &&
-                Array.isArray(warning.data) && warning.data.map((warning) => {
-                  const warningListed = warning as Warning;
-                  return (
-                    <div key={warningListed.id} className='formalitiesMobile__card'>
-                      <p>
-                        {warningListed.description}
-                      </p>
-                      <p>
-                        {warningListed.startDate} - {warningListed.endDate}
-                      </p>
-                      <p>
-                        {warningListed.startHour} - {warningListed.endHour}
-                      </p>
-                      <div className="buttons">
-                        <button onClick={() => handleEdit(warningListed)} className='Edit'>Editar</button>
-                        <button onClick={() => handleDelete({ id: warningListed.id })} className='Delete'>Eliminar</button>
-                      </div>
+          <div className='Cards__InfoFormalitiesMobile'>
+            {(warning.state === FetchState.Success || warning.state === FetchState.SuccessMany) &&
+              Array.isArray(warning.data) && warning.data.map((warning) => {
+                const warningListed = warning as Warning;
+                return (
+                  <div key={warningListed.id} className='formalitiesMobile__card'>
+                    <p>
+                      {warningListed.description}
+                    </p>
+                    <p>
+                      {warningListed.startDate} - {warningListed.endDate}
+                    </p>
+                    <p>
+                      {warningListed.startHour} - {warningListed.endHour}
+                    </p>
+                    <div className="buttons">
+                      <button onClick={() => handleEdit(warningListed)} className='Edit'>Editar</button>
+                      <button onClick={() => handleDelete({ id: warningListed.id })} className='Delete'>Eliminar</button>
                     </div>
-                  );
-                })
-              }
-            </div>
+                  </div>
+                );
+              })
+            }
+          </div>
           {/* )} */}
         </div>
       </div>
