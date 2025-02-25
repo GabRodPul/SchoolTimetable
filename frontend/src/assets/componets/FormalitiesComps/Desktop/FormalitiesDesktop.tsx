@@ -38,7 +38,7 @@ const fetchLastId = async (): Promise<number> => {
     }
 };
 
-const FormalitiesDesktop: React.FC<FormalitiesProps> = ({ }) => {
+const FormalitiesDesktop: React.FC<FormalitiesProps> = (props) => {
     const currentUser = JSON.parse(localStorage.getItem("currentUser")!) as AuthData;
     // const [warning, api] = useApi<Warning>(ApiRts.Warnings);
     const [selectedWarning, setSelectedWarning] = useState<Warning | null>(null);
@@ -55,36 +55,40 @@ const FormalitiesDesktop: React.FC<FormalitiesProps> = ({ }) => {
         status: TxStatus.Pending,
     });
     
-    const [warnings, setWarnings] = useState<Warning[] | null>(null);
+    const [warnings, setWarnings] = useState<Request[]>(props.requests);
     const ws = useRef<WebSocket>();
     const sendMsg = (type: WsMsgType, data: Warning) => {
         ws.current!.send(JSON.stringify({ type, data }));
     };
 
-    useEffect(() => {
-        // api.getAll();
-        ws.current = new WebSocket(
-            `ws://${envvars.BEND_DB_HOST}:${envvars.BEND_PORT}/?accessToken=${currentUser.accessToken}`,
+    useEffect(() => { 
+        console.log("XD");
+        setWarnings(props.requests) 
+    }, [props.requests])
+
+    // useEffect(() => {
+        // ws.current = new WebSocket(
+            // `ws://${envvars.BEND_DB_HOST}:${envvars.BEND_PORT}/ws?accessToken=${currentUser.accessToken}`,
             // [ "Authorization", `Bearer ${currentUser.accessToken}` ]
-        );
-
-        ws.current.onopen = () => {
-            console.log("Connection established");
-        }
-
-        ws.current.onmessage = (event) => {
-            console.log(event);
+        // );
+// 
+        // ws.current.onopen = () => {
+            // console.log("Connection established");
+            // ws.current!.send(JSON.stringify({ type: WsMsgType.GetAll }))
+        // }
+// 
+        // ws.current.onmessage = (event) => {
+            // console.log(event);
             // const data = JSON.parse(event.data);
-            const data = event.data;
-            setWarnings(data);
-        }
-
-        return () => {
-            console.log("WS Cleanup");
-            if (ws.current)
-                ws.current.close(); 
-        }
-    }, []);
+            // setWarnings(data);
+        // }
+// 
+        // return () => {
+            // console.log("WS Cleanup");
+            // if (ws.current)
+                // ws.current.close(); 
+        // }
+    // }, []);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -266,8 +270,9 @@ const FormalitiesDesktop: React.FC<FormalitiesProps> = ({ }) => {
                 {/* Affichage des transactions */}
                 <div className="formalities__info">
                     <h2>Tus Trámites</h2>
-                    {warnings &&
-                        Array.isArray(warnings) && warnings.map((warning) => {
+                    {
+                        warnings && Array.isArray(warnings) && 
+                        warnings.map((warning) => {
                             const warningListed = warning as Warning;
                             const currentStatus = warning.status;
                             if (currentStatus === TxStatus.Approved)
@@ -291,6 +296,10 @@ const FormalitiesDesktop: React.FC<FormalitiesProps> = ({ }) => {
                                 );
 
                         })
+                    }
+                    {
+                        warnings && Array.isArray(warnings) &&
+                        <div>No hay trámites</div>
                     }
 
                 </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './FormalitiesMobileStyles.css';
 import { TxStatus } from '#common/@enums/ws';
 
@@ -21,14 +21,15 @@ interface FormalitiesMobileProps {
 
 
 // Define the FormalitiesMobile functional component
-const FormalitiesMobile: React.FC<FormalitiesMobileProps> = ({ requests, updateStatus }) => {
+const FormalitiesMobile: React.FC<FormalitiesMobileProps> = ({ _requests, updateStatus }) => {
+    const [requests, setRequests] = useState<Request[] | null>();
     return (
         <div className="formalitiesMobile">
             <div className="formalitiesMobile__content">
                 <h2>Trámites (Mobile View)</h2>
                 
                 {/* Display each request */}
-                {requests.map((request) => (
+                {requests && requests.map((request) => (
                     <div key={request.id} className="formalitiesMobile__card">
                         <p><strong>Motivo:</strong> {request.description}</p>
                         <p>

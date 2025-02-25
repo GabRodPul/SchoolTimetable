@@ -10,6 +10,7 @@ import { JwtPayload, verify } from "jsonwebtoken";
 import { envvars } from "#src/env";
 import { UserViewsController } from "#src/controllers/views_controllers/user.views.controller";
 // import { WarningModel } from "#src/models/warning.model"; // Import du modèle Warning
+import { URL } from "url"
 
 const WsRoutes = {
   init: (app: Express) => {
@@ -17,6 +18,10 @@ const WsRoutes = {
     expressWs(app);
     const router = Router();
     const clients: Map<WebSocket, { role: UserRole } & Id> = new Map(); // client -> user 
+    const send = (ws: WebSocket, payload: WarningData[]) => ws.send(
+      JSON.stringify(payload)
+      // payload
+    );
     const broadcast = async (teacherId: number) => {
       try {
         const data = await DB.warnings.findAll();
@@ -26,12 +31,13 @@ const WsRoutes = {
             return;
 
           if (u.role >= UserRole.Head) {
-            ws.send(data);
+            send(ws, data);
+            console.log("sending data")
             return;
           }
 
           if (u.id === teacherId)
-            ws.send(data.filter(w => w.teacherId === teacherId));
+            send(ws, data.filter(w => w.teacherId === teacherId));
         });
       } catch (err: any) {
         console.log(err);
@@ -44,7 +50,7 @@ const WsRoutes = {
       {
         const dummyWarning = [{ 
           teacherId: 0, 
-          description: "[ERROR]: Invalid token", 
+          description: "[ERROR]: Missing token", 
           startDate: "1970-1-1",
           endDate: "1970-1-1", 
           startHour: "00:00",
@@ -53,22 +59,25 @@ const WsRoutes = {
         }] as WarningData[];
 
         // const token = req.headers.authorization && req.headers.authorization.split(' ')[1]
-        const token = req.params.accessToken;
+        console.log(req.url);
+        const token = new URL(req.url, `http://${req.headers.host}/`)
+                    .searchParams
+                    .get("accessToken");
         if (!token) {
-          ws.send(dummyWarning);
+          send(ws, dummyWarning);
           return;
         }
 
         verify(token, envvars.JWT_SECRET as string, async (err: any, decoded: any) => {
           if (err || !decoded) {
-            ws.send(dummyWarning);
+            send(ws, dummyWarning);
             return;
           }
 
           const user = decoded as JwtPayload;
           if (!user.email) {
             dummyWarning[0].description = "Invalid token payload."
-            ws.send(dummyWarning);
+            send(ws, dummyWarning);
             return;
           }
 
@@ -76,14 +85,14 @@ const WsRoutes = {
             const data = (await DB.users.findOne({ where: { email: user.email }, raw: true })) as (UserData & Id) | null;
             if (!data) {
               dummyWarning[0].description = `Invalid user.`;
-              ws.send(dummyWarning);
+              send(ws, dummyWarning);
               return;
             }
-
+            console.log(data);
             clients.set(ws, { role: data.role, id: data.id });
           } catch (err: any) {
             dummyWarning[0].description = `Error retrieving User with email=${user.email}.`;
-            ws.send(dummyWarning);
+            send(ws, dummyWarning);
           }
         });
       }
@@ -127,6 +136,11 @@ const WsRoutes = {
               }
             } break;
 
+            case WsMsgType.GetAll: {
+              console.log("GET ALL");
+              broadcast(clients.get(ws)!.id);
+            } break;
+
             default:
               console.error("Message inconnu :", req);
           }
@@ -135,10 +149,13 @@ const WsRoutes = {
         }
       });
 
-      ws.on("close", () => { clients.delete(ws); });
+      ws.on("close", () => { 
+        console.log("❌ Connection closed")
+        clients.delete(ws); 
+      });
     });
 
-    app.use("/", router);
+    app.use("/ws", router);
     console.log("🔗 Route WebSocket `/ws` ajoutée à Express");
   },
 };
