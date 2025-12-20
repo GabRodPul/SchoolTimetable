@@ -1,6 +1,6 @@
 # School Timetable 🏫
 > [!NOTE]
-> This project was the main team project for the Web App Development 2024/25 course in [IES El Rincón](ieselrincon.es).
+> This project was the main team project for the Web App Development 2024/25 course from [IES El Rincón](https://ieselrincon.es).
 > <br/> It wouldn't have been completed without the work of all team members, so please make sure to check commits to get a general idea of what each of us did.
 > <br/> The only modification done to this project since February 2025 has been the addition of this note the 20th of December 2025.
 
@@ -105,6 +105,7 @@ You can find documentation about all endpoints [here](https://documenter.getpost
 * ![imagen](https://github.com/user-attachments/assets/7d41f02b-e7d3-4f46-b944-f277a8fcb1b7)
 * Diagrama de Entidad Relacion
 * ![imagen](https://github.com/user-attachments/assets/2af93a33-c79a-4f86-9fdf-2a5bea458fb2)
+
 
 
 
