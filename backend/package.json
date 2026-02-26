@@ -4,7 +4,7 @@
   "description": "\"# School Timetable\"",
   "main": "../dist/index.js",
   "scripts": {
-    "start": "npx tsc && tsc-alias -p tsconfig.json && node --es-module-specifier-resolution=node dist/backend/src/index.js",
+    "start": "ts-node -r tsconfig-paths/register src/index.ts",
     "db:makemigrations": "node ./backend/node_modules/@top-gg/sequelize-typescript-auto-migrations/dist/bin/sequelize-ts.js",
     "test": "cross-env NODE_ENV=TEST jest --testTimeout=10000 --detectOpenHandles"
   },
@@ -28,9 +28,11 @@
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
     "tsc-alias": "^1.8.10",
+    "tsconfig-paths": "^4.2.0",
     "tsconfig-paths-jest": "^0.0.1"
   },
   "dependencies": {
+    "@jest/types": "^29.6.3",
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.3",
     "connect-session-sequelize": "^7.1.7",
@@ -42,6 +44,7 @@
     "jsonwebtoken": "^9.0.2",
     "mariadb": "^3.4.0",
     "mysql2": "^3.11.4",
+    "net": "^1.0.2",
     "sequelize": "^6.37.5",
     "typescript": "^5.6.2"
   }

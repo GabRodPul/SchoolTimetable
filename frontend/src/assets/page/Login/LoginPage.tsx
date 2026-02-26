@@ -19,6 +19,12 @@ function LoginPageForm() {
     console.log(fetchRsrc)
 
     switch (fetchRsrc.state) {
+      case FetchState.NotStarted: {
+        console.log(localStorage.getItem("currentUser"))
+        if (localStorage.getItem("currentUser"))
+          navigate("/Home");
+      } break;
+
       case FetchState.Success: {
         const data = fetchRsrc.data as any;
         if (data.code) {
@@ -48,6 +54,7 @@ function LoginPageForm() {
         alert("Por favor, complete todos los campos."); // Muestra un mensaje de alerta
         return; // Detiene la ejecución si hay campos vacíos
     }
+    
     if (fetchRsrc.state === FetchState.NotStarted) {
         api.login!({ email, password });
     }
@@ -57,9 +64,6 @@ function LoginPageForm() {
     console.log('Recuérdame:', rememberMe);
     // navigate('/Home'); // Esta línea se puede dejar comentada, ya que la navegación se maneja en el useEffect
 };
-
-  if (localStorage.getItem("currentUser"))
-    navigate("/Home");
 
   return (
     <div className="LoginMainContainer">

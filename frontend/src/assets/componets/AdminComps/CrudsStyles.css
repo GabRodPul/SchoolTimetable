@@ -5,19 +5,23 @@
     padding: 20px;
 }
 
+.crud__select{
+    padding: 20px;
+    margin-right: 10px;
+}
+
 .crud__title {
-    font-size: 24px;
+    font-size: 28px;
     text-align: center;
     margin-bottom: 20px;
-    color: #333;
 }
 
 .crud__form {
     width: 750px;
     padding: 20px;
-    border: 1px solid #ddd;
+    border: 1px solid #707070;
     border-radius: 8px;
-    background-color: #f9f9f9;
+    background-color: #E8E8E8;
 }
 
 .crud__input {
@@ -26,7 +30,7 @@
     padding: 10px;
     width: 100%;
     box-sizing: border-box;
-    border: 1px solid #ccc;
+    border: 1px solid #707070;
     border-radius: 4px;
     font-size: 14px;
 }
@@ -34,7 +38,7 @@
 .crud__button {
     padding: 10px 15px;
     margin-right: 10px;
-    background-color: #0056b3;
+    background-color: #0C730E;
     color: #fff;
     border: none;
     cursor: pointer;
@@ -43,7 +47,7 @@
 }
 
 .crud__button:hover {
-    background-color: #004b9b;
+    background-color: #015521;
 }
 
 .crud__button--cancel {
@@ -54,7 +58,7 @@
     cursor: pointer;
     border-radius: 4px;
     font-size: 14px;
-    background-color: #e63754;
+    background-color: #BC0120;
 }
 
 .crud__button--cancel:hover {
@@ -65,7 +69,7 @@
     width: 800px;
     max-height: 300px;
     overflow-y: auto;
-    border: 1px solid #ddd;
+    border: 1px solid #707070;
     border-radius: 4px;
     padding: 10px;
 }
@@ -91,11 +95,11 @@
     display: flex;
     margin-bottom: 10px;
     padding: 15px;
-    border: 1px solid #ddd;
+    border: 1px solid #707070;
     border-radius: 4px;
     justify-content: space-between;
     align-items: center;
-    background-color: #f9f9f9;
+    background-color: #E8E8E8;
 }
 
 .crud__item:last-child {
@@ -116,11 +120,11 @@
     cursor: pointer;
     border-radius: 4px;
     font-size: 14px;
-    background-color: #ffc107;
+    background-color: #0056b3;
 }
 
 .crud__button--edit:hover {
-    background-color: #e0a800;
+    background-color: #004288;
 }
 
 .crud__button--delete {
@@ -131,11 +135,11 @@
     cursor: pointer;
     border-radius: 4px;
     font-size: 14px;
-    background-color: #e63754;
+    background-color: #BC0120;
 }
 
 .crud__button--delete:hover {
-    background-color: #c82333;
+    background-color: #ce0000;
 }
 
 .main-content {

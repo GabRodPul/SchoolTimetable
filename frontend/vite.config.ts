@@ -12,6 +12,13 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, path.resolve(__dirname, './../'), "");
   return {
     plugins: [react()],
+    test: {
+      globals: true,
+      environment: "jsdom",
+      include: ['**/*.{test,tests,spec}.?(c|m)[jt]s?(x)'],
+      setupFiles: ["./src/__tests__/_setup.ts"],
+      mockReset: false, // vitest-localstorage-mock
+    },
     resolve: {
       // alias: [ { find: '#common', replacement: fileURLToPath(new URL('../common', import.meta.url)) } ]
       alias: { 
